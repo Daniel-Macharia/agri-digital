@@ -9,10 +9,16 @@ class Login extends Component{
     {
         return (
             <>
-                <div id="login-content">
+                <div>
                     <h1>
-                        Login page here..
+                        Login
                     </h1>
+                    <div id="login-content">
+                        <p>Enter details to login.</p>
+                        <form>
+                            <label></label>
+                        </form>
+                    </div>
                 </div>
             </>
         );

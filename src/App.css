@@ -47,6 +47,11 @@ h2{
   margin-top: 4px;
 }
 
+#create-account-button-container{
+  align-self: end;
+  margin-right: 18%;
+}
+
 #create-account-button{
   align-self: end;
   font-size: large;
@@ -56,7 +61,7 @@ h2{
   border-radius: 4px;
   background-color: white;
   color: rgb(16, 187, 0);
-  margin-right: 18%;
+  
 }
 
 #create-account-button:hover
@@ -91,6 +96,34 @@ h2{
 
 .input-label{
   font-size: small;
+}
+
+
+#login-div{
+
+}
+
+#login-label{
+  font-size: small;
+  color: black;
+}
+
+#login-button{
+  background-color: whitesmoke;
+  border-style: none;
+  color: blue;
+  font-size: small;
+  padding: 0px;
+  margin: 0px;
+}
+
+#login-button:hover
+{
+  border-style: none;
+}
+
+#login-button:active{
+  border-style: none;
 }
 
 @media screen and (orientation:portrait) {
