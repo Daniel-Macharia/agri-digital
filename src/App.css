@@ -1,0 +1,113 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  height: 100%;
+}
+
+h2{
+  color: rgb(16, 187, 0);
+  font-size: xx-large;
+}
+
+#sign-up-content-div{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 90vw;
+  height: 80vh;
+}
+
+#sign-up-content-div img{
+  width: 40%;
+}
+
+#sign-up-form-div{
+  padding: 4px;
+  margin: 4px;
+  border-radius: 4px;
+  box-shadow: 2px;
+  background-color: whitesmoke;
+  width: 40%;
+}
+
+#sign-up-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  padding: 4px;
+}
+
+#sign-up-form-title{
+  margin-bottom: 0px;
+  margin-top: 4px;
+}
+
+#create-account-button{
+  align-self: end;
+  font-size: large;
+  border-style: solid;
+  border-color: rgb(16, 187, 0);
+  border-width: 1px;
+  border-radius: 4px;
+  background-color: white;
+  color: rgb(16, 187, 0);
+  margin-right: 18%;
+}
+
+#create-account-button:hover
+{
+  opacity: 0.6;
+}
+
+#create-account-button:active{
+  background-color: rgb(16, 187, 0);
+  color: white;
+  border-color: white;
+}
+
+#sign-up-form-title{
+  color: rgb(16, 187, 0);
+  font-size: large;
+  font-weight: bold;
+}
+
+.input-field{
+  background-color: white;
+  border-style: solid;
+  border-color: gray;
+  border-width: 1px;
+  border-radius: 4px;
+  font-size: medium;
+  width: 80%;
+  margin-bottom: 8px;
+  padding: 4px;
+  color: rgb(16, 187, 0);
+}
+
+.input-label{
+  font-size: small;
+}
+
+@media screen and (orientation:portrait) {
+  #sign-up-content-div img{
+    min-width: 90%;
+    display: none;
+  }
+
+  #sign-up-form-div{
+    min-width: 90%;
+    background-image: url("vite.svg");
+    background-repeat: repeat;
+    background-size: 100% 100%;
+    background-blend-mode: luminosity;
+  }
+
+  #create-account-button{
+    margin-right: 18%;
+  }
+}
