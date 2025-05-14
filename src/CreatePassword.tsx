@@ -23,7 +23,7 @@ export default function CreatePassword(){
             let userData = state;
             console.log(userData);
             alert(`Data: ${userData} \n\nPassword: ${pass}`);
-            //navigate("/login");
+            navigate("/login");
         }
         
     }

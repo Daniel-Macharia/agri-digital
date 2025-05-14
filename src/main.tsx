@@ -11,6 +11,7 @@ import Login from './Login.tsx';
 import NotFound from './NotFound.tsx';
 import LoginWithOtp from './LoginWithOtp.tsx';
 import Home from "./Home.tsx";
+import EnterPassword from './EnterPassword.tsx';
 
 
 const router = createBrowserRouter([
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
   {path:'/login', element: <Login /> },
   {path: "/login-with-otp", element: <LoginWithOtp />},
   {path: '/enter-otp', element: <Otp />},
+  {path: "/enter-password", element: <EnterPassword />},
   {path: "/home", element: <Home />},
   {path: '*', element: <NotFound />}
 ]);

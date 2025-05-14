@@ -57,7 +57,7 @@ h2{
 }
 
 #create-account-button{
-  align-self: end;
+  align-self: start;
   font-size: medium;
   border-style: solid;
   border-color: rgb(30, 141, 20);
@@ -130,6 +130,7 @@ h2{
   font-size: small;
   padding: 0px;
   margin: 0px;
+  align-self: flex-start;
 }
 
 #login-button:hover

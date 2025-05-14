@@ -17,7 +17,7 @@ function Login(){
 
         alert(`Phone or Email: ${phoneOrEmail}\nPassword: ${password}`);
 
-        navigate("/home");
+        navigate("/enter-password");
     }
 
     let render = ()=>{
@@ -32,24 +32,8 @@ function Login(){
                                 <label className="input-label" htmlFor='email'>Email address/Phone number *</label>
                                 <input name="phone-or-email" className='input-field' type='text' id='email' placeholder='example@gmail.com/+254712345678' />
 
-                                <label className="input-label" htmlFor='password'>Password *</label>
-                                <input name="password" className='input-field' type='password' id='password' autoComplete="true" placeholder='********' />
-
-                                <label className="input-label" id="remember-me-div">
-                                    <span>
-                                        <input className="check-box-input" type="checkbox" />
-                                        Remember me 
-                                    </span>
-
-                                    <span>
-                                        <Link to="#" className="react-link">
-                                            Forgot password ?
-                                        </Link>
-                                    </span>
-                                </label>
-
                                 {/* <Link id='create-account-button-container' to={'/home'}> */}
-                                <input type='submit' name="create-button" id="create-account-button" value={"Login"}/>
+                                <input type='submit' name="create-button" id="create-account-button" value={"Login with password"}/>
                                 {/* </Link> */}
 
                             </form>
@@ -60,7 +44,7 @@ function Login(){
                                 <hr className="horizontal-rule"/>
                             </span>
 
-                            <Link id='login-with-otp-button-container' to={'/login-with-otp'}>
+                            <Link id='login-with-otp-button-container' to={'/enter-otp'}>
                                 <input type='button' name="login-with-otp-button" id="login-with-otp-button" value={"Login with O.T.P"}/>
                             </Link>
 
