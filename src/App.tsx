@@ -1,28 +1,33 @@
-import { Component, useState, type FormEvent } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Link, Navigate } from 'react-router-dom';
+import { Component, useState, type FormEvent } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
+import { Link, useNavigate } from 'react-router-dom';
 
 //const navigate = useNavigate();
 
-class App extends Component {
+function App(){
   //const state[count, setCount] = useState(0);
-  public state = {count:20};
+  let state = {count:20};
 
-  private navigate = Navigate;
+  let navigate = useNavigate();
 
-  private createUserAccount(event:FormEvent):boolean{
-    event.stopPropagation();
-    console.log("Submiting form");
-    alert("submiting form");
+  function createUserAccount(data:FormData):void{
 
-    //Navigate("/otp");
-  
-    return false;
+    let d = {
+      "Full name": data.get("full-name"),
+      "Phone": data.get("phone-number"),
+      "Email": data.get("email"),
+      "Role": data.get("user-role")
+    };
+
+    alert(`Collected data: \n\n ${d}`);
+
+    navigate("/create-password");
+
   }
-  render()
-  {
+
+  let render = ()=>{
     return (
       <>
         <div>
@@ -30,19 +35,23 @@ class App extends Component {
             <div id='sign-up-form-div'>
               <p id='sign-up-form-title'>Create your account.</p>
               <p id='sign-up-form-sub-title'>Join the Future of Farming - Easy, Fast and Reliable.</p>
-              <form id='sign-up-form' onSubmit={this.createUserAccount}>
+              <form id='sign-up-form' action={createUserAccount}>
                 <label className="input-label" htmlFor='full-name'>Full Name</label>
-                <input className='input-field' type='text' id='full-name' placeholder='Kelvin Mutuku' />
+                <input required name='full-name' className='input-field' type='text' id='full-name' placeholder='Kelvin Mutuku' />
                 <label className="input-label" htmlFor='email'>Email</label>
-                <input className='input-field' type='email' id='email' placeholder='example@gmail.com' />
+                <input required name='email' className='input-field' type='email' id='email' placeholder='example@gmail.com' />
                 <label className="input-label" htmlFor='phone-number'>Phone number</label>
-                <input className='input-field' type='telephone' id='phone-number' placeholder='+254712345678' />
+                <input required name='phone-number' className='input-field' type='telephone' id='phone-number' placeholder='+254712345678' />
                 <label className="input-label" htmlFor='user-role'>Role *</label>
-                <select className='input-field' id='user-role' value={`["Farmer", "Visitor"]`} />
+                <select required className='input-field' name='user-role' id='user-role' >
+                  <option id='select-place-holder' value={""}>I am a ..</option>
+                  <option value={"farmer"}>Farmer</option>
+                  <option value={"visitor"}>Visitor</option>
+                </select>
                 
-                <Link id='create-account-button-container' to={'/create-password'}>
+                {/* <Link id='create-account-button-container' to={'/create-password'}> */}
                   <input type='submit' name="create-button" id="create-account-button" value={"Continue"}/>
-                </Link>
+                {/* </Link> */}
 
               </form>
 
@@ -58,6 +67,8 @@ class App extends Component {
       </>
     );
   }
+
+  return render();
 }
 
 export default App;

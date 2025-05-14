@@ -195,3 +195,19 @@ h2{
   padding: 4px;
 }
 
+
+#remember-me-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+  width: 80%;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+
+#select-place-holder{
+  color: gray;
+}

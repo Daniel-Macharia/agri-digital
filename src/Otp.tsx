@@ -1,19 +1,53 @@
-import {Component} from "react";
-import "./Otp.css"
+import {Component, useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-class Otp extends Component{
-    public state = {};
 
-    render()
-    {
+import "./App.css";
+import "./Otp.css";
+
+function Otp(){
+    let state = useState();
+    let navigate = useNavigate();
+
+    function verifyOtp( data: FormData ):void{
+        let enteredOtp = data.get("otp");
+
+        alert(`Entered OTP: ${enteredOtp}`);
+
+        navigate("/home");
+    }
+    let render = () => {
         return (
             <>
-            <div id="otp-content">
-                <h1>Check your otp here</h1>
-            </div>
+            <div>
+                    <div id='sign-up-content-div'>
+                        <div id='sign-up-form-div'>
+                            <p id='sign-up-form-title'>Enter Verification Code</p>
+                            <p id='sign-up-form-sub-title'>We've sent you the one-time password (O.T.P)</p>
+                            <form id='sign-up-form' action={verifyOtp}>
+                                <label className="input-label" htmlFor='otp'>One-time Pin(O.T.P)</label>
+                                <input tabIndex={0} name="otp" className='input-field' type='text' id='otp' />
+                                
+                                {/* <Link id='send-otp-button-container' to={'/home'}> */}
+                                <input type='submit' name="create-button" id="send-otp-button" value={"Verify"}/>
+                                {/* </Link> */}
+
+                            </form>
+                            
+                            <div id='login-div'>
+                                <Link to="#">
+                                <label htmlFor='login-button' id='login-label'>Didn't receive the OTP ?  <span id='login-button' >Resend</span></label>
+                                </Link>
+                            </div> 
+                        </div>
+                        <img src='vite.svg' alt='image here'/>
+                    </div>
+                </div>
             </>
         );
     }
+
+    return render();
 }
 
 export default Otp;

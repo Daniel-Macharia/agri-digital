@@ -1,9 +1,8 @@
 import { Component, useState } from "react";
-import { Link } from "react-router-dom";
 
+import "./Home.css";
 
-export default function NotFound()
-{
+export default function Home() {
     let state = useState();
 
     let render = ()=>{
@@ -11,12 +10,8 @@ export default function NotFound()
             <>
                 <div>
                     <h1>
-                        404 Page Not Found.
+                        Welcome to the home page!
                     </h1>
-
-                    <Link to={'/login'}>
-                        <button>Go back Home</button>
-                    </Link>
                 </div>
             </>
         );
@@ -24,4 +19,3 @@ export default function NotFound()
 
     return render();
 }
-

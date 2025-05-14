@@ -1,12 +1,34 @@
-import { Component } from "react";
-import { Link } from "react-router-dom";
-import "./App.css"
+import { Component, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-export default class CreatePassword extends Component
-{
-    public state = {};
 
-    render(){
+import "./App.css";
+import "./CreatePassword.css";
+
+export default function CreatePassword(){
+    let state = useState();
+    let navigate = useNavigate();
+
+    function completeUserCreation(data:FormData):void{
+        let pass, confirm;
+        pass = data.get("password");
+        confirm = data.get("confirm-password");
+
+        if( pass !== confirm )
+        {
+            alert("the password and confirm password do not match!");
+
+        }
+        else{
+            let userData = state[1];
+            console.log(userData);
+            alert(`Password: ${pass}`);
+            navigate("/login");
+        }
+        
+    }
+
+    let render = ()=>{
         return (
             <>
                 <div>
@@ -14,19 +36,19 @@ export default class CreatePassword extends Component
                         <div id='sign-up-form-div'>
                         <p id='sign-up-form-title'>Create your account.</p>
                         <p id='sign-up-form-sub-title'>Join the Future of Farming - Easy, Fast and Reliable.</p>
-                        <form id='sign-up-form' >
+                        <form id='sign-up-form' action={completeUserCreation}>
                             <label className="input-label" htmlFor='password'>Password *</label>
-                            <input className='input-field' type='password' id='password' placeholder='********' />
+                            <input name="password" className='input-field' type='password' id='password' placeholder='********' />
 
                             <p className="input-label" id="password-specs">
                                 The password should be atleast 8 characters long
                             </p>
 
                             <label className="input-label" htmlFor='confirm-password'>Confirm Password *</label>
-                            <input className='input-field' type='password' id='confirm-password' placeholder='********' />
+                            <input name="confirm-password" className='input-field' type='password' id='confirm-password' placeholder='********' />
 
                             <label className="input-label" id="agree-to-terms-div">
-                                <input className="check-box-input" type="checkbox" />
+                                <input id="agree-to-terms-checkbox" className="check-box-input" type="checkbox" />
                                 <span>
                                     I agree to the 
                                     <Link to="#" className="react-link" > Terms of Service </Link>
@@ -35,17 +57,17 @@ export default class CreatePassword extends Component
                                 </span>
                             </label>
 
-                            <Link id='create-account-button-container' to={'/login'}>
+                            {/* <Link id='create-account-button-container' to={'/login'}> */}
                             <input type='submit' name="create-button" id="create-account-button" value={"Create account"}/>
-                            </Link>
+                            {/* </Link> */}
 
                         </form>
 
-                        {/* <div id='login-div'>
+                        <div id='login-div'>
                             <Link to="/login">
                             <label htmlFor='login-button' id='login-label'>Already have an account ?  <span id='login-button'>Login</span></label>
                             </Link>
-                        </div> */}
+                        </div>
                         </div>
                         <img src='vite.svg' alt='image here'/>
                     </div>
@@ -53,4 +75,6 @@ export default class CreatePassword extends Component
             </>
         );
     }
+
+    return render();
 }
