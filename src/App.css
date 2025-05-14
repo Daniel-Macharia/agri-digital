@@ -65,7 +65,7 @@ h2{
   border-radius: 4px;
   background-color: rgb(30, 141, 20);
   color: white;
-  width: 100%;
+  width: 82%;
   padding: 8px;
 }
 
@@ -149,10 +149,12 @@ h2{
 
   #sign-up-form-div{
     min-width: 90%;
-    background-image: url("vite.svg");
+    /* background-image: url('vite.svg'); */
+    /* background-color: rgba(245, 245, 245, 1); */
     background-repeat: repeat;
     background-size: 100% 100%;
     background-blend-mode: luminosity;
+    
   }
 
   #create-account-button{
@@ -206,7 +208,6 @@ h2{
   margin-top: 8px;
   margin-bottom: 8px;
 }
-
 
 #select-place-holder{
   color: gray;

@@ -32,8 +32,8 @@ function Login(){
                                 <label className="input-label" htmlFor='email'>Email address/Phone number *</label>
                                 <input name="phone-or-email" className='input-field' type='text' id='email' placeholder='example@gmail.com/+254712345678' />
 
-                                <label className="input-label" htmlFor='confirm-password'>Password *</label>
-                                <input name="password" className='input-field' type='password' id='password' placeholder='********' />
+                                <label className="input-label" htmlFor='password'>Password *</label>
+                                <input name="password" className='input-field' type='password' id='password' autoComplete="true" placeholder='********' />
 
                                 <label className="input-label" id="remember-me-div">
                                     <span>
@@ -66,7 +66,7 @@ function Login(){
 
                             <div id='login-div'>
                                 <Link to="/">
-                                <label htmlFor='login-button' id='login-label'>Do not have an account ?  <span id='login-button'>Sign up</span></label>
+                                <label id='login-label'>Do not have an account ?  <span id='login-button'>Sign up</span></label>
                                 </Link>
                             </div> 
                         </div>

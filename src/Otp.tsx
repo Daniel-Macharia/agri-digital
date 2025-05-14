@@ -36,7 +36,7 @@ function Otp(){
                             
                             <div id='login-div'>
                                 <Link to="#">
-                                <label htmlFor='login-button' id='login-label'>Didn't receive the OTP ?  <span id='login-button' >Resend</span></label>
+                                <label id='login-label'>Didn't receive the OTP ?  <span id='login-button' >Resend</span></label>
                                 </Link>
                             </div> 
                         </div>

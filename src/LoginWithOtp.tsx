@@ -37,7 +37,7 @@ export default function LoginWithOtp(){
                             
                             <div id='login-div'>
                                 <Link to="/">
-                                <label htmlFor='login-button' id='login-label'>Do not have an account ?  <span id='login-button'>Sign up</span></label>
+                                <label id='login-label'>Do not have an account ?  <span id='login-button'>Sign up</span></label>
                                 </Link>
                             </div> 
                         </div>

@@ -1,12 +1,12 @@
 import { Component, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 
 import "./App.css";
 import "./CreatePassword.css";
 
 export default function CreatePassword(){
-    let state = useState();
+    let state = useLocation().state;
     let navigate = useNavigate();
 
     function completeUserCreation(data:FormData):void{
@@ -20,10 +20,10 @@ export default function CreatePassword(){
 
         }
         else{
-            let userData = state[1];
+            let userData = state;
             console.log(userData);
-            alert(`Password: ${pass}`);
-            navigate("/login");
+            alert(`Data: ${userData} \n\nPassword: ${pass}`);
+            //navigate("/login");
         }
         
     }
@@ -38,14 +38,14 @@ export default function CreatePassword(){
                         <p id='sign-up-form-sub-title'>Join the Future of Farming - Easy, Fast and Reliable.</p>
                         <form id='sign-up-form' action={completeUserCreation}>
                             <label className="input-label" htmlFor='password'>Password *</label>
-                            <input name="password" className='input-field' type='password' id='password' placeholder='********' />
+                            <input name="password" className='input-field' type='password' id='password' autoComplete="true" placeholder='********' />
 
                             <p className="input-label" id="password-specs">
                                 The password should be atleast 8 characters long
                             </p>
 
                             <label className="input-label" htmlFor='confirm-password'>Confirm Password *</label>
-                            <input name="confirm-password" className='input-field' type='password' id='confirm-password' placeholder='********' />
+                            <input name="confirm-password" className='input-field' type='password' id='confirm-password' autoComplete="true" placeholder='********' />
 
                             <label className="input-label" id="agree-to-terms-div">
                                 <input id="agree-to-terms-checkbox" className="check-box-input" type="checkbox" />
@@ -65,7 +65,7 @@ export default function CreatePassword(){
 
                         <div id='login-div'>
                             <Link to="/login">
-                            <label htmlFor='login-button' id='login-label'>Already have an account ?  <span id='login-button'>Login</span></label>
+                            <label id='login-label'>Already have an account ?  <span id='login-button'>Login</span></label>
                             </Link>
                         </div>
                         </div>

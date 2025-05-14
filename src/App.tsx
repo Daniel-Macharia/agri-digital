@@ -23,7 +23,7 @@ function App(){
 
     alert(`Collected data: \n\n ${d}`);
 
-    navigate("/create-password");
+    navigate("/create-password", {state : d});
 
   }
 
@@ -57,7 +57,7 @@ function App(){
 
               <div id='login-div'>
                 <Link to="/login">
-                  <label htmlFor='login-button' id='login-label'>Already have an account ?  <span id='login-button'>Login</span></label>
+                  <label id='login-label'>Already have an account ?  <span id='login-button'>Login</span></label>
                 </Link>
               </div>
             </div>
