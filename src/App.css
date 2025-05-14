@@ -29,9 +29,11 @@ h2{
   padding: 4px;
   margin: 4px;
   border-radius: 4px;
-  box-shadow: 2px;
-  background-color: whitesmoke;
   width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
 }
 
 #sign-up-form{
@@ -40,6 +42,7 @@ h2{
   justify-content: center;
   align-items: start;
   padding: 4px;
+  width: 96%;
 }
 
 #sign-up-form-title{
@@ -48,20 +51,22 @@ h2{
 }
 
 #create-account-button-container{
-  align-self: end;
-  margin-right: 18%;
+  width: 82%;
+  padding: 0px;
+  margin: 0px;
 }
 
 #create-account-button{
   align-self: end;
-  font-size: large;
+  font-size: medium;
   border-style: solid;
-  border-color: rgb(16, 187, 0);
+  border-color: rgb(30, 141, 20);
   border-width: 1px;
   border-radius: 4px;
-  background-color: white;
-  color: rgb(16, 187, 0);
-  
+  background-color: rgb(30, 141, 20);
+  color: white;
+  width: 100%;
+  padding: 8px;
 }
 
 #create-account-button:hover
@@ -70,20 +75,28 @@ h2{
 }
 
 #create-account-button:active{
-  background-color: rgb(16, 187, 0);
-  color: white;
-  border-color: white;
+  background-color: white;
+  color: rgb(30, 141, 20);
+  border-color: rgb(30, 141, 20);
 }
 
 #sign-up-form-title{
-  color: rgb(16, 187, 0);
+  color: black;
   font-size: large;
   font-weight: bold;
 }
 
+#sign-up-form-sub-title
+{
+  font-size: small;
+  margin-top: 0px;
+  margin-bottom: 32px;
+  color: black;
+}
+
 .input-field{
   background-color: white;
-  border-style: solid;
+  border-style: none;
   border-color: gray;
   border-width: 1px;
   border-radius: 4px;
@@ -91,7 +104,7 @@ h2{
   width: 80%;
   margin-bottom: 8px;
   padding: 4px;
-  color: rgb(16, 187, 0);
+  color: rgb(30, 141, 20);
 }
 
 .input-label{
@@ -100,7 +113,9 @@ h2{
 
 
 #login-div{
-
+  display: flex;
+  justify-content: center;
+  width: 96%;
 }
 
 #login-label{
@@ -111,7 +126,7 @@ h2{
 #login-button{
   background-color: whitesmoke;
   border-style: none;
-  color: blue;
+  color: rgb(30, 141, 20);
   font-size: small;
   padding: 0px;
   margin: 0px;
@@ -144,3 +159,39 @@ h2{
     margin-right: 18%;
   }
 }
+
+
+
+#password-specs{
+  margin-top: 0px;
+  color: gray;
+  margin-bottom: 24px;
+}
+
+
+#check-box-input{
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  border-color: gray;
+}
+
+.react-link{
+  color: rgb(30, 141, 20);
+}
+
+#agree-to-terms-div{
+  padding: 0px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#agree-to-terms-div span{
+  align-items: center;
+  padding: 4px;
+}
+
