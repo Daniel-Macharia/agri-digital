@@ -11,6 +11,9 @@ import Login from './pages/auth/sign-in/components/Login.tsx';
 import NotFound from './NotFound.tsx';
 import Home from "./pages/farmers-module/dashboard/components/Home.tsx";
 import EnterPassword from './pages/auth/sign-in/components/EnterPassword.tsx';
+import Content from './pages/farmers-module/dashboard/components/content/index.tsx';
+import SideBar from './pages/farmers-module/dashboard/components/side-bar/index.tsx';
+import TopBar from './pages/farmers-module/dashboard/components/top-bar/index.tsx';
 
 
 const router = createBrowserRouter([
@@ -20,6 +23,11 @@ const router = createBrowserRouter([
   {path: '/enter-otp', element: <Otp />},
   {path: "/enter-password", element: <EnterPassword />},
   {path: "/home", element: <Home />},
+
+  {path: "/top", element: <TopBar />},
+  {path: "/side", element: <SideBar />},
+  {path: "/content", element: <Content />},
+
   {path: '*', element: <NotFound />}
 ]);
 
