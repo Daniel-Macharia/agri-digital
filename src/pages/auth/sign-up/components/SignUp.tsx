@@ -1,10 +1,5 @@
-import { Component, useState, type FormEvent } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import '/src/pages/auth/style.css';
 import { Link, useNavigate } from 'react-router-dom';
-
-//const navigate = useNavigate();
 
 function App(){
   //const state[count, setCount] = useState(0);
@@ -61,7 +56,7 @@ function App(){
                 </Link>
               </div>
             </div>
-            <img src='vite.svg' alt='image here'/>
+            <img src='/src/assets/shamba_bot_logo.png' alt='image here'/>
           </div>
         </div>
       </>

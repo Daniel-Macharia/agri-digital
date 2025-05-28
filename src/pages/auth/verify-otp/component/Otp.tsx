@@ -2,7 +2,7 @@ import {Component, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 
-import "./App.css";
+import "/src/pages/auth/style.css";
 import "./Otp.css";
 
 function Otp(){
@@ -40,7 +40,7 @@ function Otp(){
                                 </Link>
                             </div> 
                         </div>
-                        <img src='vite.svg' alt='image here'/>
+                        <img src='/src/assets/shamba_bot_logo.png' alt='image here'/>
                     </div>
                 </div>
             </>

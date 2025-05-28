@@ -2,7 +2,9 @@ import { Component, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import "./Login.css";
-import "./App.css";
+import "/src/pages/auth/style.css";
+
+import {useAuthData} from '../hooks/GetUserData.ts';
 
 
 function Login(){
@@ -10,7 +12,7 @@ function Login(){
 
     let navigate = useNavigate();
 
-    function loginUser(data:FormData):void
+    function loginWithPassword(data:FormData):void
     {
         let phoneOrEmail = data.get("phone-or-email");
         let password = data.get("password");
@@ -21,6 +23,8 @@ function Login(){
     }
 
     let render = ()=>{
+        console.log(useAuthData());
+        //useData();
         return (
             <>
                 <div>
@@ -28,7 +32,7 @@ function Login(){
                         <div id='sign-up-form-div'>
                             <p id='sign-up-form-title'>Login to your account.</p>
                             <p id='sign-up-form-sub-title'>Join the Future of Farming - Easy, Fast and Reliable.</p>
-                            <form id='sign-up-form' action={loginUser} >
+                            <form id='sign-up-form' action={loginWithPassword} >
                                 <label className="input-label" htmlFor='email'>Email address/Phone number *</label>
                                 <input name="phone-or-email" className='input-field' type='text' id='email' placeholder='example@gmail.com/+254712345678' />
 
@@ -54,7 +58,7 @@ function Login(){
                                 </Link>
                             </div> 
                         </div>
-                        <img src='vite.svg' alt='image here'/>
+                        <img src='/src/assets/shamba_bot_logo.png' alt='image here'/>
                     </div>
                 </div>
             </>

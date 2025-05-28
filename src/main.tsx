@@ -4,21 +4,19 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import './index.css';
-import App from './App.tsx';
-import CreatePassword from './CreatePassword.tsx';
-import Otp from './Otp.tsx';
-import Login from './Login.tsx';
+import App from './pages/auth/sign-up/components/SignUp.tsx';
+import CreatePassword from './pages/auth/sign-up/components/CreatePassword.tsx';
+import Otp from './pages/auth/verify-otp/component/Otp.tsx';
+import Login from './pages/auth/sign-in/components/Login.tsx';
 import NotFound from './NotFound.tsx';
-import LoginWithOtp from './LoginWithOtp.tsx';
-import Home from "./Home.tsx";
-import EnterPassword from './EnterPassword.tsx';
+import Home from "./pages/farmers-module/dashboard/components/Home.tsx";
+import EnterPassword from './pages/auth/sign-in/components/EnterPassword.tsx';
 
 
 const router = createBrowserRouter([
   {path: "/", element: <App /> },
   {path: "/create-password", element: <CreatePassword /> },
   {path:'/login', element: <Login /> },
-  {path: "/login-with-otp", element: <LoginWithOtp />},
   {path: '/enter-otp', element: <Otp />},
   {path: "/enter-password", element: <EnterPassword />},
   {path: "/home", element: <Home />},

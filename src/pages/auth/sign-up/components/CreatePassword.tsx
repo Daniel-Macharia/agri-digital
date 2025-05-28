@@ -2,7 +2,7 @@ import { Component, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 
-import "./App.css";
+import "/src/pages/auth/style.css";
 import "./CreatePassword.css";
 
 export default function CreatePassword(){
@@ -69,7 +69,7 @@ export default function CreatePassword(){
                             </Link>
                         </div>
                         </div>
-                        <img src='vite.svg' alt='image here'/>
+                        <img src='/src/assets/shamba_bot_logo.png' alt='image here'/>
                     </div>
                 </div>
             </>
