@@ -1,29 +1,54 @@
-import { Component, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+import * as Yup from 'yup';
 
 import "./Login.css";
 import "/src/pages/auth/style.css";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 import {useAuthData} from '../hooks/GetUserData.ts';
+import { Formik, Form, Field, ErrorMessage} from "formik";
 
 
-function Login(){
-    let state = useState();
+const Login: React.FC = () => {
+    const initialValues = {
+        userEmail:'',
+    };
+
+    const validationSchema = Yup.object({
+        userEmail: Yup.string().email('Invalid email format!').required('Required'),
+    });
+
+    const [ submitType, setSubmitType ] = useState('');
 
     let navigate = useNavigate();
 
-    function loginWithPassword(data:FormData):void
-    {
-        let phoneOrEmail = data.get("phone-or-email");
-        let password = data.get("password");
+    const handleLogin = (values: typeof initialValues, {setSubmitting}: any) =>    {
+        let phoneOrEmail = values.userEmail;
 
-        alert(`Phone or Email: ${phoneOrEmail}\nPassword: ${password}`);
+        console.log(phoneOrEmail);
 
-        navigate("/enter-password");
-    }
+        let link = "#";
+
+        if( submitType == 'pass' )
+        {
+            console.log("login with password");
+            link = '/enter-password';
+        }
+        else if( submitType == 'otp' )
+        {
+            console.log("login with otp");
+           link = '/enter-otp';
+        }
+
+        navigate(link, {state:{ phoneOrEmail }});
+    };
 
     let render = ()=>{
-        console.log(useAuthData());
+        //console.log(useAuthData());
         //useData();
         return (
             <>
@@ -32,25 +57,80 @@ function Login(){
                         <div id='sign-up-form-div'>
                             <p id='sign-up-form-title'>Login to your account.</p>
                             <p id='sign-up-form-sub-title'>Join the Future of Farming - Easy, Fast and Reliable.</p>
-                            <form id='sign-up-form' action={loginWithPassword} >
+
+                            <Formik 
+                            
+                            initialValues={initialValues}
+                            validationSchema={validationSchema}
+                            onSubmit={handleLogin}
+                            >
+                                {
+                                    ({isSubmitting}) =>(
+
+
+                                        <Form className='sign-up-form'>
+                                            <label className="input-label" htmlFor='email'>Email address/Phone number *</label>
+                                            
+                                            <div className="text-danger small">
+                                                <ErrorMessage name="userEmail" />
+                                            </div>
+                                            <Field 
+                                            name="userEmail" 
+                                            className='input-field' 
+                                            type='text' 
+                                            id='email' 
+                                            placeholder='example@gmail.com/+254712345678' />
+
+                                            <button 
+
+                                            type='submit' 
+                                            name="pass" 
+                                            id="create-account-button" 
+                                            value={"pass"}
+
+                                            onClick={ ()=>{ setSubmitType("pass") } }
+                                            >
+                                                Login with password
+                                            </button>
+
+                                            <span id="horizontal-rule-span">
+                                                <hr className="horizontal-rule"/>
+                                                <p>or</p>
+                                                <hr className="horizontal-rule"/>
+                                            </span>
+
+                                            <button 
+
+                                            type="submit"
+                                            name="otp" 
+                                            id="login-with-otp-button" 
+                                            value={"otp"}
+
+                                            onClick={ ()=>{setSubmitType("otp")} }
+                                            >
+                                                Login with O.T.P
+                                            </button>
+                                        </Form>
+
+                                    )
+                                }
+                                
+                            </Formik>
+                            {/* <form id='sign-up-form' >
                                 <label className="input-label" htmlFor='email'>Email address/Phone number *</label>
                                 <input name="phone-or-email" className='input-field' type='text' id='email' placeholder='example@gmail.com/+254712345678' />
 
-                                {/* <Link id='create-account-button-container' to={'/home'}> */}
                                 <input type='submit' name="create-button" id="create-account-button" value={"Login with password"}/>
-                                {/* </Link> */}
+                                
+                                <span id="horizontal-rule-span">
+                                    <hr className="horizontal-rule"/>
+                                    <p>or</p>
+                                    <hr className="horizontal-rule"/>
+                                </span>
 
-                            </form>
-
-                            <span id="horizontal-rule-span">
-                                <hr className="horizontal-rule"/>
-                                <p>or</p>
-                                <hr className="horizontal-rule"/>
-                            </span>
-
-                            <Link id='login-with-otp-button-container' to={'/enter-otp'}>
-                                <input type='button' name="login-with-otp-button" id="login-with-otp-button" value={"Login with O.T.P"}/>
-                            </Link>
+                                <input type='submit' name="login-with-otp-button" id="login-with-otp-button" value={"Login with O.T.P"}/>
+                            
+                            </form> */}
 
                             <div id='login-div'>
                                 <Link to="/">
@@ -63,7 +143,7 @@ function Login(){
                 </div>
             </>
         );
-    }
+    };
 
     return render();
 }

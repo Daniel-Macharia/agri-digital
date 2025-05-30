@@ -30,7 +30,7 @@ function App(){
             <div id='sign-up-form-div'>
               <p id='sign-up-form-title'>Create your account.</p>
               <p id='sign-up-form-sub-title'>Join the Future of Farming - Easy, Fast and Reliable.</p>
-              <form id='sign-up-form' action={createUserAccount}>
+              <form className='sign-up-form' action={createUserAccount}>
                 <label className="input-label" htmlFor='full-name'>Full Name</label>
                 <input required name='full-name' className='input-field' type='text' id='full-name' placeholder='Kelvin Mutuku' />
                 <label className="input-label" htmlFor='email'>Email</label>

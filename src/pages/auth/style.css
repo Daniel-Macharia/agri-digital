@@ -36,7 +36,7 @@ h2{
   align-items: start;
 }
 
-#sign-up-form{
+.sign-up-form{
   display: flex;
   flex-direction: column;
   justify-content: center;

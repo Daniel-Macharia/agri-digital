@@ -43,7 +43,7 @@ export function useAuthData()
 export function useRightGroupData()
 {
     let rightGroupData = useData()[1];
-
+ 
     return rightGroupData;
 }
 

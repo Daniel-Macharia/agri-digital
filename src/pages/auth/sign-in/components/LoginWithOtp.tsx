@@ -25,7 +25,7 @@ export default function LoginWithOtp(){
                         <div id='sign-up-form-div'>
                             <p id='sign-up-form-title'>Login with O.T.P.</p>
                             <p id='sign-up-form-sub-title'>We will send you a one-time password (O.T.P)</p>
-                            <form id='sign-up-form' action={loginWithOtp} >
+                            <form className='sign-up-form' action={loginWithOtp} >
                                 <label className="input-label" htmlFor='email'>Email address/Phone number *</label>
                                 <input name="phone-or-email" className='input-field' type='text' id='email' placeholder='example@gmail.com/+254712345678' />
                                 

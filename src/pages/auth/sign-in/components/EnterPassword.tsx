@@ -1,14 +1,67 @@
-import { Link, useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "/src/pages/auth/style.css"
 
-export default function EnterPassword()
-{
-    let navigate = useNavigate();
+import * as Yup from 'yup';
+import { Formik, Form, Field, ErrorMessage} from "formik";
+import axios from "axios";
+import { storagePut } from "../StorageUtils";
+
+const EnterPassword : React.FC = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const [error, setError] = useState('');
+
+    const {phoneOrEmail} = location.state || {};
 
     function goToHome(data: FormData):void{
         navigate("/home");
-    }
-    let render = () => {
+    };
+
+    const initialValues = {
+        userPassword: '',
+    };
+
+    const validationSchema = Yup.object({
+        userPassword: Yup.string().required("Required"),
+    });
+
+    const completeLogin = async ( values: typeof initialValues, {setSubmitting} : any) =>{
+        let pass = values.userPassword;
+        console.log(`logging in as ${phoneOrEmail} with password ${pass}`);
+
+        try{
+            const response = await axios.post('https://api.shambabot.com/auth/login', {
+                username: phoneOrEmail,
+                password: pass
+            });
+
+
+            if( response.data && response.data.data )
+            {
+                //navigate("/home");
+                console.log(`Access token: ${response.data.data.accessToken}`);
+                storagePut("access-token", response.data.data);
+                navigate('/home');
+                setError('');
+            }else{
+                setError("Failed to login. Please retry..");
+            }
+
+
+        }catch( error: any)
+        {
+            console.error(error);
+            setError("Invalid credentials!\nCheck your username and password.");
+        }
+        finally{
+            setSubmitting(false);
+        }
+
+    };
+
+    const render = () => {
         return (
             <>
                 <div>
@@ -16,7 +69,55 @@ export default function EnterPassword()
                         <div id='sign-up-form-div'>
                             <p id='sign-up-form-title'>Login to your account.</p>
                             <p id='sign-up-form-sub-title'>Join the Future of Farming - Easy, Fast and Reliable.</p>
-                            <form action={goToHome}>
+
+                            <Formik
+                            initialValues={initialValues}
+                            validationSchema={validationSchema}
+                            onSubmit={completeLogin}
+                            >
+                                { ( {isSubmitting} ) => (
+                                    <Form className='sign-up-form'>
+                                        <label className="input-label" htmlFor='password'>Password *</label>
+                                        
+                                        <div className="text-danger small">
+                                            <ErrorMessage name="userPassword"/>
+                                        </div>
+
+                                        <Field 
+                                        name="userPassword" 
+                                        className='input-field' 
+                                        type='password' 
+                                        id='userPassword' 
+                                        autoComplete="true" 
+                                        placeholder='enter password here'
+                                        />
+
+                                        <label className="input-label" id="remember-me-div">
+                                            <span>
+                                                <input className="check-box-input" type="checkbox" />
+                                                Remember me 
+                                            </span>
+
+                                            <span>
+                                                <Link to="#" className="react-link">
+                                                    Forgot password ?
+                                                </Link>
+                                            </span>
+                                        </label>
+
+                                        <button 
+                                        type='submit' 
+                                        name="create-button" 
+                                        id="create-account-button" 
+                                        value={"Login"}
+                                        >
+                                            {isSubmitting ? 'Logging in ...' : 'Login'}
+                                        </button>
+
+                                    </Form>
+                                ) }
+                            </Formik>
+                            {/* <form action={goToHome}>
                                 <label className="input-label" htmlFor='password'>Password *</label>
                                 <input name="password" className='input-field' type='password' id='password' autoComplete="true" placeholder='********' />
 
@@ -33,17 +134,7 @@ export default function EnterPassword()
                                     </span>
                                 </label>
                                 <input type='submit' name="create-button" id="create-account-button" value={"Login"}/>
-                            </form>
-
-                            {/* <span id="horizontal-rule-span">
-                                <hr className="horizontal-rule"/>
-                                <p>or</p>
-                                <hr className="horizontal-rule"/>
-                            </span>
-
-                            <Link id='login-with-otp-button-container' to={'/login-with-otp'}>
-                                <input type='button' name="login-with-otp-button" id="login-with-otp-button" value={"Login with O.T.P"}/>
-                            </Link> */}
+                            </form> */}
 
                             <div id='login-div'>
                                 <Link to="/">
@@ -56,8 +147,11 @@ export default function EnterPassword()
                 </div>
             </>
         );
-    }
+    };
 
 
     return render();
 }
+
+
+export default EnterPassword;

@@ -25,7 +25,7 @@ h1{
 #login-with-otp-button{
     background-color: white;
     color: black;
-    width: 100%;
+    width: 80%;
     border-style: solid;
     border-color: white;
     border-radius: 4px;
@@ -33,6 +33,20 @@ h1{
     font-size: medium;
 }
 
-#login-with-otp-button-container{
-    width: 80%;
+
+#login-with-otp-button :hover{
+    opacity: 0.8;
+}
+
+#login-with-otp-button :active{
+    color: white;
+    background-color: black;
+}
+
+
+button{
+    padding: 4px;
+    margin: 4px;
+    font-size: medium;
+
 }
