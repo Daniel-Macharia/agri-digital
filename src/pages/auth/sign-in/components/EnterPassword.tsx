@@ -9,9 +9,8 @@ import { storageDelete, storageGet, storagePut } from "../StorageUtils";
 
 const EnterPassword : React.FC = () => {
     const navigate = useNavigate();
-    const location = useLocation();
 
-    const [error, setError] = useState('');
+    const [ setError] = useState('');
 
     //const {phoneOrEmail} = location.state || {};
     const phoneOrEmail = storageGet("phoneOrEmail");

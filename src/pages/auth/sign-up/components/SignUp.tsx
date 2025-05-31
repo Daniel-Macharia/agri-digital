@@ -2,9 +2,6 @@ import '/src/pages/auth/style.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 function App(){
-  //const state[count, setCount] = useState(0);
-  let state = {count:20};
-
   let navigate = useNavigate();
 
   function createUserAccount(data:FormData):void{

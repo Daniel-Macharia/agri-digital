@@ -1,4 +1,3 @@
-import {Component, useState} from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 
@@ -16,8 +15,6 @@ import { storageDelete, storageGet, storagePut } from "../../sign-in/StorageUtil
 const Otp : React.FC = () => {
     let navigate = useNavigate();
 
-    let location = useLocation();
-
     const initialValues = {
         enteredOtp: '',
     };
@@ -30,7 +27,7 @@ const Otp : React.FC = () => {
     const phoneOrEmail = storageGet("phoneOrEmail");
 
 
-    const verifyOtp = async ( values: typeof initialValues, {isSubmitting}: any ) => {
+    const verifyOtp = async ( values: typeof initialValues, {}: any ) => {
         let enteredOtp = values.enteredOtp;
 
         try{

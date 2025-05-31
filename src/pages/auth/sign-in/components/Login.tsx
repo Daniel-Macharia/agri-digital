@@ -26,7 +26,7 @@ const Login: React.FC = () => {
 
     let navigate = useNavigate();
 
-    const handleLogin = (values: typeof initialValues, {setSubmitting}: any) =>    {
+    const handleLogin = (values: typeof initialValues, {}: any) =>    {
         let phoneOrEmail = values.userEmail;
 
         console.log(phoneOrEmail);
@@ -66,7 +66,7 @@ const Login: React.FC = () => {
                             onSubmit={handleLogin}
                             >
                                 {
-                                    ({isSubmitting}) =>(
+                                    ({}) =>(
 
 
                                         <Form className='sign-up-form'>

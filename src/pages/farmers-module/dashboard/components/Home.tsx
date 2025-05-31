@@ -1,13 +1,9 @@
-import { Component, useState } from "react";
-
 import "./Home.css";
 import TopBar from "./top-bar";
 import SideBar from "./side-bar";
 import Content from "./content";
 
 export default function Home() {
-    let state = useState();
-
     let render = ()=>{
         return (
             <div id="home-content">

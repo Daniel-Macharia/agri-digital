@@ -16,7 +16,7 @@ export default function TopBar()
         searchItem: Yup.string().required('Required'),
     });
 
-    const searchForItem = async ( values: typeof initialValues, {setSubmitting}: any) => {
+    const searchForItem = async ( values: typeof initialValues, {}: any) => {
         let value = values.searchItem;
       console.log("searching item ", value);  
     };
@@ -52,7 +52,7 @@ export default function TopBar()
                     onSubmit={searchForItem}
                     >
 
-                        {({isSubmitting}) => (
+                        {({}) => (
                             <Form>
                                 <Field
                                 name='searchItem'
