@@ -139,7 +139,7 @@ const Login: React.FC = () => {
                                 </Link>
                             </div> 
                         </div>
-                        <img src='/src/assets/shamba_bot_logo.svg' alt='image here'/>
+                        <img src='/shamba_bot_logo.svg' alt='image here'/>
                     </div>
                 </div>
             </>
