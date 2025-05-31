@@ -7,7 +7,7 @@ export default function Product()
         return (<>
         <div id="product-div">
             <p><b>Sample product</b></p>
-            <img src="/src/assets/shamba_bot_logo.png" />
+            <img src="/src/assets/shamba_bot_logo.svg" />
             
             <p>some description here...</p>
         </div>

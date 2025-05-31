@@ -1,9 +1,37 @@
 
 
+import { Formik, Form, Field } from "formik";
+
+import * as Yup from 'yup';
+
 import "./index.css";
 
 export default function TopBar()
 {
+    const initialValues = {
+        searchItem: '',
+    };
+
+    const validationSchema = Yup.object({
+        searchItem: Yup.string().required('Required'),
+    });
+
+    const searchForItem = async ( values: typeof initialValues, {setSubmitting}: any) => {
+        let value = values.searchItem;
+      console.log("searching item ", value);  
+    };
+
+    const loadNotifications = ()=>{
+        console.log("loading notifications...");
+    };
+
+    const showMoreActions = ()=>{
+        console.log("Here are more actions...");
+    };
+
+    const loadProfile = ()=>{
+        console.log("loading profile...");
+    };
 
     let render = ()=>{
         return (
@@ -15,8 +43,33 @@ export default function TopBar()
                 </p>
             </div>
             <div id="profile-div">
-                <h3>profile</h3>
-                <img id="profile-icon" src="/src/assets/shamba_bot_logo.png" />
+                <div id="search-div">
+                    <img src="/src/assets/search_icon.svg" />
+                    
+                    <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={searchForItem}
+                    >
+
+                        {({isSubmitting}) => (
+                            <Form>
+                                <Field
+                                name='searchItem'
+                                type='text'
+                                id="search-item"
+                                placeholder='search'
+                                ></Field>
+                            </Form>
+                        )}
+                        
+                    </Formik>
+                </div>
+                <div id="icons-div">
+                    <img onClick={loadNotifications} className="profile-icon" src="/src/assets/notification_icon.svg" />
+                    <img onClick={loadProfile} id="profile-icon" className="profile-icon" src="/src/assets/profile_icon.svg" />
+                    <img onClick={showMoreActions} className="profile-icon" src="/src/assets/more_icon.svg" />
+                </div>
             </div>
         </div>
         );
