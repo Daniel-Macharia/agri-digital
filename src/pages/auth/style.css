@@ -7,7 +7,7 @@
 }
 
 h2{
-  color: rgb(16, 187, 0);
+  color: #457900;
   font-size: xx-large;
 }
 
@@ -60,13 +60,14 @@ h2{
   align-self: start;
   font-size: medium;
   border-style: solid;
-  border-color: rgb(30, 141, 20);
+  background: #457900;
   border-width: 1px;
   border-radius: 4px;
-  background-color: rgb(30, 141, 20);
+  border-color:#457900;
   color: white;
   width: 82%;
   padding: 8px;
+  margin: 0px;
 }
 
 #create-account-button:hover
@@ -76,8 +77,8 @@ h2{
 
 #create-account-button:active{
   background-color: white;
-  color: rgb(30, 141, 20);
-  border-color: rgb(30, 141, 20);
+  color: #457900;
+  border-color: #457900;
 }
 
 #sign-up-form-title{
@@ -104,7 +105,7 @@ h2{
   width: 80%;
   margin-bottom: 8px;
   padding: 4px;
-  color: rgb(30, 141, 20);
+  color: #457900;
 }
 
 .input-label{
@@ -126,7 +127,7 @@ h2{
 #login-button{
   background-color: whitesmoke;
   border-style: none;
-  color: rgb(30, 141, 20);
+  color: #457900;
   font-size: small;
   padding: 0px;
   margin: 0px;
@@ -180,7 +181,7 @@ h2{
 }
 
 .react-link{
-  color: rgb(30, 141, 20);
+  color: #457900;
 }
 
 #agree-to-terms-div{

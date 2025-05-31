@@ -5,7 +5,7 @@ import "/src/pages/auth/style.css"
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage} from "formik";
 import axios from "axios";
-import { storagePut } from "../StorageUtils";
+import { storageDelete, storageGet, storagePut } from "../StorageUtils";
 
 const EnterPassword : React.FC = () => {
     const navigate = useNavigate();
@@ -13,11 +13,8 @@ const EnterPassword : React.FC = () => {
 
     const [error, setError] = useState('');
 
-    const {phoneOrEmail} = location.state || {};
-
-    function goToHome(data: FormData):void{
-        navigate("/home");
-    };
+    //const {phoneOrEmail} = location.state || {};
+    const phoneOrEmail = storageGet("phoneOrEmail");
 
     const initialValues = {
         userPassword: '',
@@ -43,6 +40,7 @@ const EnterPassword : React.FC = () => {
                 //navigate("/home");
                 console.log(`Access token: ${response.data.data.accessToken}`);
                 storagePut("access-token", response.data.data);
+                storageDelete("phoneOrEmail");
                 navigate('/home');
                 setError('');
             }else{
@@ -142,7 +140,7 @@ const EnterPassword : React.FC = () => {
                                 </Link>
                             </div> 
                         </div>
-                        <img src='/src/assets/shamba_bot_logo.png' alt='image here'/>
+                        <img src='/src/assets/shamba_bot_logo.svg' alt='image here'/>
                     </div>
                 </div>
             </>

@@ -36,7 +36,7 @@ export default function CreatePassword(){
                         <div id='sign-up-form-div'>
                         <p id='sign-up-form-title'>Create your account.</p>
                         <p id='sign-up-form-sub-title'>Join the Future of Farming - Easy, Fast and Reliable.</p>
-                        <form id='sign-up-form' action={completeUserCreation}>
+                        <form className='sign-up-form' action={completeUserCreation}>
                             <label className="input-label" htmlFor='password'>Password *</label>
                             <input name="password" className='input-field' type='password' id='password' autoComplete="true" placeholder='********' />
 
@@ -69,7 +69,7 @@ export default function CreatePassword(){
                             </Link>
                         </div>
                         </div>
-                        <img src='/src/assets/shamba_bot_logo.png' alt='image here'/>
+                        <img src='/src/assets/shamba_bot_logo.svg' alt='image here'/>
                     </div>
                 </div>
             </>

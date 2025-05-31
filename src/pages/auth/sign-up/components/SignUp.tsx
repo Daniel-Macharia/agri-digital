@@ -56,7 +56,7 @@ function App(){
                 </Link>
               </div>
             </div>
-            <img src='/src/assets/shamba_bot_logo.png' alt='image here'/>
+            <img src='/src/assets/shamba_bot_logo.svg' alt='image here'/>
           </div>
         </div>
       </>

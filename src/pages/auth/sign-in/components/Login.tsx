@@ -8,9 +8,9 @@ import "/src/pages/auth/style.css";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-import {useAuthData} from '../hooks/GetUserData.ts';
 import { Formik, Form, Field, ErrorMessage} from "formik";
+import sendOtpUtil from "../sendOtpUtil.ts";
+import { storagePut } from "../StorageUtils.ts";
 
 
 const Login: React.FC = () => {
@@ -41,9 +41,10 @@ const Login: React.FC = () => {
         else if( submitType == 'otp' )
         {
             console.log("login with otp");
-           link = '/enter-otp';
+            sendOtpUtil(phoneOrEmail);
+            link = '/enter-otp';
         }
-
+        storagePut("phoneOrEmail", phoneOrEmail);
         navigate(link, {state:{ phoneOrEmail }});
     };
 
@@ -138,7 +139,7 @@ const Login: React.FC = () => {
                                 </Link>
                             </div> 
                         </div>
-                        <img src='/src/assets/shamba_bot_logo.png' alt='image here'/>
+                        <img src='/src/assets/shamba_bot_logo.svg' alt='image here'/>
                     </div>
                 </div>
             </>

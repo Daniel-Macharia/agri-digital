@@ -34,11 +34,11 @@ h1{
 }
 
 
-#login-with-otp-button :hover{
+#login-with-otp-button:hover{
     opacity: 0.8;
 }
 
-#login-with-otp-button :active{
+#login-with-otp-button:active{
     color: white;
     background-color: black;
 }

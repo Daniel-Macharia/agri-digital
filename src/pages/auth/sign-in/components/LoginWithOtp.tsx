@@ -1,16 +1,19 @@
 import { Component, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "/src/pages/auth/style.css";
 import "./LoginWithOtp.css";
 
 
 export default function LoginWithOtp(){
-    let state = useState();
+    const location = useLocation();
     let navigate = useNavigate();
 
-    function loginWithOtp( data: FormData ): void{
-        let phoneOrEmail = data.get("phone-or-email");
+    const {phoneOrEmail} = location.state || {};
+
+    
+
+    function loginWithOtp( values: typeof initialValues, {isSubmitting}: any ): void{
 
         alert(`Phone or email: ${phoneOrEmail}`);
 
@@ -41,7 +44,7 @@ export default function LoginWithOtp(){
                                 </Link>
                             </div> 
                         </div>
-                        <img src='/src/assets/shamba_bot_logo.png' alt='image here'/>
+                        <img src='/src/assets/shamba_bot_logo.svg' alt='image here'/>
                     </div>
                 </div>
             </>
