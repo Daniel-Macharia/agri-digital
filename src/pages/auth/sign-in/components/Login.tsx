@@ -9,7 +9,7 @@ import "/src/pages/auth/style.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Formik, Form, Field, ErrorMessage} from "formik";
-import sendOtpUtil from "../sendOtpUtil.ts";
+import sendOtpUtil from "../SendOtpUtil.ts";
 import { storagePut } from "../StorageUtils.ts";
 
 
