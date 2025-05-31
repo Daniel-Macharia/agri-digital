@@ -1,11 +1,8 @@
-import { Component, useState } from "react";
+
 import { Link } from "react-router-dom";
 
 
-export default function NotFound()
-{
-    let state = useState();
-
+const NotFound : React.FC = ()=>{
     let render = ()=>{
         return (
             <>
@@ -25,3 +22,4 @@ export default function NotFound()
     return render();
 }
 
+export default NotFound;
