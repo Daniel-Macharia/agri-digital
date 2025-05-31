@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import React /*, {useState}*/ from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "/src/pages/auth/style.css"
 
 import * as Yup from 'yup';
@@ -10,7 +10,7 @@ import { storageDelete, storageGet, storagePut } from "../StorageUtils";
 const EnterPassword : React.FC = () => {
     const navigate = useNavigate();
 
-    const [ setError] = useState('');
+    //const [ Error, setError] = useState('');
 
     //const {phoneOrEmail} = location.state || {};
     const phoneOrEmail = storageGet("phoneOrEmail");
@@ -41,16 +41,16 @@ const EnterPassword : React.FC = () => {
                 storagePut("access-token", response.data.data);
                 storageDelete("phoneOrEmail");
                 navigate('/home');
-                setError('');
+                //setError('');
             }else{
-                setError("Failed to login. Please retry..");
+                //setError("Failed to login. Please retry..");
             }
 
 
         }catch( error: any)
         {
             console.error(error);
-            setError("Invalid credentials!\nCheck your username and password.");
+            //setError("Invalid credentials!\nCheck your username and password.");
         }
         finally{
             setSubmitting(false);
