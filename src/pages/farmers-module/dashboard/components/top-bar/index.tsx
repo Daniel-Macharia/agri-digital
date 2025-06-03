@@ -44,7 +44,7 @@ export default function TopBar()
             </div>
             <div id="profile-div">
                 <div id="search-div">
-                    <img src="/src/assets/search_icon.svg" />
+                    <img src="/assets/search_icon.svg" />
                     
                     <Formik
                     initialValues={initialValues}
@@ -66,9 +66,9 @@ export default function TopBar()
                     </Formik>
                 </div>
                 <div id="icons-div">
-                    <img onClick={loadNotifications} className="profile-icon" src="../../../../../assets/notification_icon.svg" />
-                    <img onClick={loadProfile} id="profile-icon" className="profile-icon" src="../../../../../assets/profile_icon.svg" />
-                    <img onClick={showMoreActions} className="profile-icon" src="../../../../../assets/more_icon.svg" />
+                    <img onClick={loadNotifications} className="profile-icon" src="/assets/notification_icon.svg" />
+                    <img onClick={loadProfile} id="profile-icon" className="profile-icon" src="/assets/profile_icon.svg" />
+                    <img onClick={showMoreActions} className="profile-icon" src="/assets/more_icon.svg" />
                 </div>
             </div>
         </div>
