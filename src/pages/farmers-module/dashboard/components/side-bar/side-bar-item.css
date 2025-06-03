@@ -15,8 +15,30 @@ p{
     flex-wrap: nowrap;
     justify-content: start;
     align-items: center;
-    width: 100%;
+    width: 90%;
     margin-top: 4px;
     margin-bottom: 4px;
     padding-left: 4px;
+}
+
+#side-bar-item-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-left: 8px;
+    padding-right: 0px;
+}
+
+#item-indicator-bar{
+    font-weight:800;
+    color: black;
+    margin-right: 0px;
+}
+
+#item-indicator-div{
+    padding: 0px;
+    margin-right: 0px;
+    width: fit-content;
 }

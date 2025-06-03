@@ -13,20 +13,20 @@ export default function SideBar()
             </div>
             <hr/>
             <div id="side-bar-items">
-                <SideBarItem name="Home" iconUrl ="/assets/home.svg"/>
-                <SideBarItem name="Projects" iconUrl ="/assets/journey.svg"/>
-                <SideBarItem name="My Products" iconUrl ="/assets/group.svg"/>
-                <SideBarItem name="Market Place" iconUrl ="/assets/marketplace.svg"/>
-                <SideBarItem name="Banks" iconUrl ="/assets/bank.svg"/>
-                <SideBarItem name="Insurance" iconUrl ="/assets/bank.svg"/>
-                <SideBarItem name="Sponsors" iconUrl ="/assets/success.svg"/>
-                <SideBarItem name="Wallets" iconUrl ="/assets/wallet.svg"/>
-                <SideBarItem name="Packages" iconUrl ="/assets/package.svg"/>
-                <SideBarItem name="Quality Score" iconUrl ="/assets/quality_score.svg"/>
-                <SideBarItem name="Weather" iconUrl ="/assets/sunny.svg"/>
-                <SideBarItem name="Training & Resources" iconUrl ="/assets/articles.svg"/>
-                <SideBarItem name="Settings" iconUrl ="/assets/settings.svg"/>
-                <SideBarItem name="Invite a Friend" iconUrl ="/assets/invite.svg"/>
+                <SideBarItem name="Home" iconUrl ="/assets/home.svg" contentUrl="/home"/>
+                <SideBarItem name="Projects" iconUrl ="/assets/journey.svg" contentUrl="/projects"/>
+                <SideBarItem name="My Products" iconUrl ="/assets/group.svg" contentUrl="/products"/>
+                <SideBarItem name="Market Place" iconUrl ="/assets/marketplace.svg" contentUrl="/market-place"/>
+                <SideBarItem name="Banks" iconUrl ="/assets/bank.svg" contentUrl="/banks"/>
+                <SideBarItem name="Insurance" iconUrl ="/assets/bank.svg" contentUrl="/insurance"/>
+                <SideBarItem name="Sponsors" iconUrl ="/assets/success.svg" contentUrl="/sponsors"/>
+                <SideBarItem name="Wallets" iconUrl ="/assets/wallet.svg" contentUrl="/wallet"/>
+                <SideBarItem name="Packages" iconUrl ="/assets/package.svg" contentUrl="/package"/>
+                <SideBarItem name="Quality Score" iconUrl ="/assets/quality_score.svg" contentUrl="/quality-score"/>
+                <SideBarItem name="Weather" iconUrl ="/assets/sunny.svg" contentUrl="/weather"/>
+                <SideBarItem name="Training & Resources" iconUrl ="/assets/articles.svg" contentUrl="/resources"/>
+                <SideBarItem name="Settings" iconUrl ="/assets/settings.svg" contentUrl="/settings"/>
+                <SideBarItem name="Invite a Friend" iconUrl ="/assets/invite.svg" contentUrl="/invite"/>
             </div>
 
             <div id="assistance-div">
