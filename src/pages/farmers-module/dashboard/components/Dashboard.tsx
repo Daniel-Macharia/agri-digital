@@ -31,7 +31,7 @@ export default function Dashboard() {
                     <TopBar />
                     <Content >
                         <Routes>
-                            <Route path="/home" element={<Home />} />
+                            <Route path="/" element={<Home />} />
                             <Route path="/projects" element={<Journey />} />
                             <Route path="/products" element={<Products />} />
                             <Route path="/market-place" element={<MarketPlace />} />

@@ -13,7 +13,7 @@ export default function SideBar()
             </div>
             <hr/>
             <div id="side-bar-items">
-                <SideBarItem name="Home" iconUrl ="/assets/home.svg" contentUrl="/dashboard/home" />
+                <SideBarItem name="Home" iconUrl ="/assets/home.svg" contentUrl="/dashboard/" />
                 <SideBarItem name="Projects" iconUrl ="/assets/journey.svg" contentUrl="/dashboard/projects" />
                 <SideBarItem name="My Products" iconUrl ="/assets/group.svg" contentUrl="/dashboard/products"/>
                 <SideBarItem name="Market Place" iconUrl ="/assets/marketplace.svg" contentUrl="/dashboard/market-place" />

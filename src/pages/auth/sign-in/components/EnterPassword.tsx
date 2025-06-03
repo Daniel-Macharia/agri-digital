@@ -40,7 +40,7 @@ const EnterPassword : React.FC = () => {
                 console.log(`Access token: ${response.data.data.accessToken}`);
                 storagePut("access-token", response.data.data);
                 storageDelete("phoneOrEmail");
-                navigate('/home');
+                navigate('/dashboard');
                 //setError('');
             }else{
                 //setError("Failed to login. Please retry..");

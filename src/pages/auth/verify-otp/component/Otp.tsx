@@ -46,7 +46,7 @@ const Otp : React.FC = () => {
                 console.log(`Verification successful. Access Token: ${response.data.data.accessToken}`);
                 storagePut("access-token", response.data.data.accessToken);
                 storageDelete("phoneOrEmail");
-                navigate("/home");
+                navigate("/dashboard");
             }
             else
             {
