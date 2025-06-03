@@ -20,32 +20,18 @@ import Settings from "./content/settings";
 import Invite from "./content/invite";
 
 export default function Dashboard() {
-    function scrollEventHandler(event: UIEvent): import("react").UIEventHandler<HTMLDivElement> | undefined {
-        //throw new Error("Function not implemented.");
-        try{
-            event.stopPropagation();
-            console.log("stop scroll event propagation..");
-
-            
-
-            return undefined;
-        }catch(error: any)
-        {
-            return undefined;
-        }
-    }
-
+    
     let render = ()=>{
         return (
             <div id="home-content">
                 <div id="left-div" >
                     <SideBar />
                 </div>
-                <div id="right-div" onScroll={scrollEventHandler}>
+                <div id="right-div" >
                     <TopBar />
                     <Content >
                         <Routes>
-                            <Route path="/" element={<Home />} />
+                            <Route path="/home" element={<Home />} />
                             <Route path="/projects" element={<Journey />} />
                             <Route path="/products" element={<Products />} />
                             <Route path="/market-place" element={<MarketPlace />} />

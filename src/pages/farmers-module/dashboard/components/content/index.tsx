@@ -1,8 +1,10 @@
 import "./index.css"
 
-export default function Content( {children} ){
+interface DashboardLayoutProps{
+    children: React.ReactNode
+}
 
-
+export default function Content( {children}: DashboardLayoutProps){
     let render = () =>
     {
         return (<>
