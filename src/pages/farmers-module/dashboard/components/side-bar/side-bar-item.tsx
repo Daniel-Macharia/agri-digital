@@ -1,7 +1,6 @@
-
-
-import type { MouseEventHandler } from "react";
 import "./side-bar-item.css";
+
+import { useNavigate } from "react-router-dom";
 
 interface SideBarItemDetailProps{
     name: string,
@@ -14,15 +13,29 @@ export default function SideBarItem({name, iconUrl, contentUrl} : SideBarItemDet
     //let name = "Item";
     //let icon = "/src/assets/shamba_bot_logo.png";
 
-    const itemClickHandler = (clickEvent: MouseEvent) => {
-        console.log("handling click event");
+    const navigate = useNavigate();
 
-        let element: EventTarget | null = clickEvent.currentTarget;
+    const highlight = ()=>{
 
-        if( element !== null )
+    };
+
+    const itemClickHandler = (clickEvent: MouseEvent): boolean => {
+        try{
+            console.log("handling click event");
+
+            let element: EventTarget | null = clickEvent.currentTarget;
+
+            if( element !== null )
+            {
+                console.log(`target for click event found: ${element}`);
+                console.log(`Content Url: ${contentUrl}`);
+                navigate(contentUrl);
+            }
+
+            return true;
+        }catch(error: any)
         {
-            console.log(`target for click event found: ${element}`);
-            console.log(`Content Url: ${contentUrl}`);
+            return false;
         }
         
     };

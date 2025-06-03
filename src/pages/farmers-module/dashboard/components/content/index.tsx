@@ -1,18 +1,15 @@
-import Product from "../../../product/components/product";
-
 import "./index.css"
 
-export default function Content(){
+export default function Content( {children} ){
 
 
     let render = () =>
     {
         return (<>
         <div id="content-div">
-            <Product/>
-            <Product/>
-            <Product/>
-            <Product/>
+            <main >
+                {children}
+            </main>
         </div>
         </>);
     };

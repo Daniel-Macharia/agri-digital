@@ -66,9 +66,9 @@ export default function TopBar()
                     </Formik>
                 </div>
                 <div id="icons-div">
-                    <img onClick={loadNotifications} className="profile-icon" src="/assets/notification_icon.svg" />
+                    <img onClick={loadNotifications} id="notification-icon" className="profile-icon" src="/assets/notification_icon.svg" />
                     <img onClick={loadProfile} id="profile-icon" className="profile-icon" src="/assets/profile_icon.svg" />
-                    <img onClick={showMoreActions} className="profile-icon" src="/assets/more_icon.svg" />
+                    <img onClick={showMoreActions} id="more-icon" className="profile-icon" src="/assets/more_icon.svg" />
                 </div>
             </div>
         </div>
