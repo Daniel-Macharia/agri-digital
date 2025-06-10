@@ -1,10 +1,14 @@
-const HomePageLayout: React.FC<{ element: React.ReactNode }> = ({
-  element,
-}) => {
+import { Route, Routes } from "react-router-dom";
+import Dashboard from "../../farmer/dashboard/components/farmer-dashboard";
+import NotFound from "../exceptions/NotFound";
+
+const HomePageLayout: React.FC = () => {
   return (
     <div>
-      <h1>prepare home layout here.</h1>
-      {element}
+      <Routes>
+        <Route path="/farmer/*" element={ <Dashboard />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 };
