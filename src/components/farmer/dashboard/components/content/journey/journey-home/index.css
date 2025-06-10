@@ -1,0 +1,45 @@
+#journey-home-content{
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+.content-background{
+    background-color: white;
+    border-radius: 8px;
+    border-style: none;
+
+    margin: 4px;
+}
+
+#projects-home-content-main{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    align-items: flex-start;
+    width: 100%;
+}
+
+#projects-home-content-main-left{
+    display: flex;
+    flex-direction: column;
+
+    width: 70%;
+}
+
+#projects-home-content-main-right{
+    display: flex;
+    flex-direction: column;
+
+    width: 30%;
+}
+
+.content-main-title{
+    font-size: medium;
+    color: black;
+    font-weight: bold;
+
+    align-self: flex-start;
+}
