@@ -215,7 +215,7 @@ const Type$BreedForm = () => {
                 id="age"
                 name="age"
                 type="text"
-                placeholder="Enter Age in months"
+                placeholder="Enter Age in months" 
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.age}
