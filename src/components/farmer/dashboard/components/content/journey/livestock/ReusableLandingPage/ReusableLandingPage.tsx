@@ -14,7 +14,7 @@ interface LandingPageProps {
   text: string;
 }
 
-const LandingPage: React.FC<LandingPageProps> = ({ title, text }) => {
+const ReusableLandingPage: React.FC<LandingPageProps> = ({ title, text }) => {
   return (
     <Container 
       fluid 
@@ -49,4 +49,4 @@ const LandingPage: React.FC<LandingPageProps> = ({ title, text }) => {
   );
 };
 
-export default LandingPage;
+export default ReusableLandingPage;
