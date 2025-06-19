@@ -2,7 +2,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { LuUpload } from "react-icons/lu";
 import { Button } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 

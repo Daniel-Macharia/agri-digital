@@ -1,6 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import "./index.css";
-import HousingNutrition from "./Feeds&Nuitrition";
+import Health from "./Health-Management";
+import Housing from "./Housing";
+import TypesBreeds from "./Type&Breed";
+import FeedsNutrition from "./Feeds&Nuitrition/Index";
+
+
+
 
 export default function Livestock(){
 
@@ -8,9 +13,11 @@ export default function Livestock(){
         return (<>
         <div id="livestock-content-div" >
             <Routes>
-                <Route path="" element={<HousingNutrition />} />
-                <Route path="housing" element={<HousingNutrition />} />
-                <Route path="nutrition" element={<HousingNutrition />} />
+                <Route path="feeds" element={<FeedsNutrition />} />
+                <Route path="health" element={<Health />} />
+                <Route path="housing" element={<Housing />} />
+                <Route path="types" element={<TypesBreeds />} />       
+               
             </Routes>
         </div>
         </>);

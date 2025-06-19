@@ -2,33 +2,39 @@ import { useState } from 'react';
 import FeedingSchedule from './FeedingSchedule';
 import Feeds from './Feeds';
 import Weight from './Weight';
+import FeedingLandingPage from '../ReusableLandingPage/ReusableLandingPage';
+import Navigation from './Navigation';
 
-const HousingNutrition = (props: any) => {
+const FeedsNutrition = (props: any) => {
   const [activeTab, setActiveTab] = useState('feeding');
 
   const renderContent = () => {
     switch (activeTab) {
+      case 'stock':
+        return <Feeds {...props} />;
       case 'feeding':
         return <FeedingSchedule {...props} />;
-      case 'feeds':
-        return <Feeds {...props} />;
       case 'weight':
         return <Weight {...props} />;
       default:
-        return <FeedingSchedule {...props} />;
+        return <FeedingLandingPage {...props} />;
     }
   };
 
   return (
-    <div>
-      <div style={{ marginBottom: '1rem', borderBottom: '1px solid #ccc', paddingBottom: '0.5rem' }}>
-        <button onClick={() => setActiveTab('feeding')} style={{ marginRight: '1rem', fontWeight: activeTab === 'feeding' ? 'bold' : 'normal', cursor: 'pointer', background: 'none', border: 'none', fontSize: '1rem' }}>Feeding Schedule</button>
-        <button onClick={() => setActiveTab('feeds')} style={{ marginRight: '1rem', fontWeight: activeTab === 'feeds' ? 'bold' : 'normal', cursor: 'pointer', background: 'none', border: 'none', fontSize: '1rem' }}>Feeds</button>
-        <button onClick={() => setActiveTab('weight')} style={{ fontWeight: activeTab === 'weight' ? 'bold' : 'normal', cursor: 'pointer', background: 'none', border: 'none', fontSize: '1rem' }}>Weight</button>
+    <div className="container-fluid p-3 p-md-4 p-lg-5">
+      <Navigation
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        onBack={() => {}}
+      />
+      <div className="tab-content">
+        <div className="tab-pane active">
+          {renderContent()}
+        </div>
       </div>
-      {renderContent()}
     </div>
   );
 };
 
-export default HousingNutrition;
+export default FeedsNutrition;

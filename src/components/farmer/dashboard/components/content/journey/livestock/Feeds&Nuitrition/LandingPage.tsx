@@ -1,13 +1,22 @@
-import ReusableLandingPage from "../ReusableLandingPage/ReusableLandingPage";
+import { useNavigate } from 'react-router-dom';
+import LandingPage from '../ReusableLandingPage/ReusableLandingPage';
 
 
-const LandingPage = () => {
+const FeedingLandingPage = () => {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    navigate('/feeds'); 
+  };
+
   return (
-    <ReusableLandingPage
-      title="Set Up Livestock Nutrition"
-      text="Track and Manage Your Livestock Nutrition Easily."
+    <LandingPage
+      title="No Records Yet"
+      text="Start by registering your livestock."
+      buttonText="Get Started"
+      onButtonClick={handleGetStarted}
     />
   );
 };
 
-export default LandingPage;
+export default FeedingLandingPage;

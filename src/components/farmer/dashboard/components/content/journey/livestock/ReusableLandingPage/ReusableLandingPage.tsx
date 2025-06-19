@@ -1,20 +1,23 @@
 import React from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const FolderIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="73" height="73" viewBox="0 0 73 73" fill="none">
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M70.4892 49.8795C70.4892 62.5869 63.0009 70.0751 50.2936 70.0751H22.6421C9.90233 70.0751 2.41406 62.5869 2.41406 49.8795V22.1956C2.41406 9.48826 7.08207 2 19.7894 2H26.8887C29.4395 2 31.8415 3.20099 33.372 5.24167L36.6137 9.5531C38.1476 11.5898 40.5474 12.7897 43.097 12.7948H53.1462C65.886 12.7948 70.5864 19.2781 70.5864 32.2448L70.4892 49.8795Z" stroke="#333333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M19.4023 45.3728H53.4723" stroke="#333333" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <svg xmlns="http://www.w3.org/2000/svg" width="58" height="58" fill="green" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.97 11.03a.75.75 0 0 0 1.07 0l3.992-3.992a.75.75 0 1 0-1.06-1.06L7.5 9.439 5.53 7.47a.75.75 0 0 0-1.06 1.06l2.5 2.5z"/>
 </svg>
 );
 
-interface LandingPageProps {
+
+
+interface ReusableLandingPageProps {
   title: string;
   text: string;
+  buttonText: string;
+  onButtonClick: () => void;
 }
 
-const ReusableLandingPage: React.FC<LandingPageProps> = ({ title, text }) => {
+const LandingPage: React.FC<ReusableLandingPageProps> = ({ title, text, buttonText, onButtonClick }) => {
   return (
     <Container 
       fluid 
@@ -33,15 +36,16 @@ const ReusableLandingPage: React.FC<LandingPageProps> = ({ title, text }) => {
             {title}
           </Card.Title>
           <Card.Text className="mb-4 text-muted body-medium">
-            {text}
+           {text} 
           </Card.Text>
           <Button 
             variant="success" 
             className="body-bold"
             size="lg" 
             style={{ backgroundColor: '#457900', borderColor: '#457900', padding: '0.75rem 1.5rem' }}
+            onClick={onButtonClick}
           >
-            Get Started
+            {buttonText}
           </Button>
         </Card.Body>
       </Card>
@@ -49,4 +53,4 @@ const ReusableLandingPage: React.FC<LandingPageProps> = ({ title, text }) => {
   );
 };
 
-export default ReusableLandingPage;
+export default LandingPage;
