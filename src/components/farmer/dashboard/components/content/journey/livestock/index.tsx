@@ -15,13 +15,7 @@ export default function LivestockRoutes() {
       <Route path="typebreed/*" element={<TypeBreed />} />
       <Route path="housing/*" element={<Housing />} />
       <Route path="health/*" element={<Health />} />
-      <Route path="feeds/*" element={<FeedsNutrition />} />
-
-      
-      
-
-      
-     
+      <Route path="feeds/*" element={<FeedsNutrition />} />         
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
