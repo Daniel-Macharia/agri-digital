@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const validationSchema = Yup.object({
   identification: Yup.string().required("Identification is required"),

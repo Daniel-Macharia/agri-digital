@@ -1,9 +1,11 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Button } from 'react-bootstrap';
+import Saved from '../../Shared/Saved';
 
 const Space = () => {
+  const [showSaved, setShowSaved] = useState(false);
   const formik = useFormik({
     initialValues: {
       area: '',
@@ -17,13 +19,27 @@ const Space = () => {
       density: Yup.string().required('Density is required'),
       notes: Yup.string(),
     }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: (values, { resetForm }) => {
+      setShowSaved(true);
+      resetForm();
     },
   });
 
   return (
     <>
+      {showSaved && (
+        <div style={{
+          position: 'fixed',
+          top: 0, left: 0, right: 0, bottom: 0,
+          background: 'rgba(0,0,0,0.2)',
+          zIndex: 9999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <Saved onDone={() => setShowSaved(false)} />
+        </div>
+      )}
       <div
         className="d-flex flex-column p-4 rounded-4"
         style={{

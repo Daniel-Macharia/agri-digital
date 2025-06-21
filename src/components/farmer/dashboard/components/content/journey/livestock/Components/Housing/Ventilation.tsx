@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Button } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Saved from "../../Shared/Saved";
+
 
 interface VentilationFormValues {
   type: string;
@@ -36,6 +37,8 @@ const validationSchema = Yup.object({
 });
 
 const Ventilation: React.FC = () => {
+  const [showSaved, setShowSaved] = useState(false);
+
   return (
     <>
       <div
@@ -52,7 +55,7 @@ const Ventilation: React.FC = () => {
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
+              setShowSaved(true);
               setSubmitting(false);
             }, 400);
           }}
@@ -262,6 +265,19 @@ const Ventilation: React.FC = () => {
           )}
         </Formik>
       </div>
+      {showSaved && (
+        <div style={{
+          position: "fixed",
+          top: 0, left: 0, right: 0, bottom: 0,
+          background: "rgba(0,0,0,0.2)",
+          zIndex: 9999,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}>
+          <Saved onDone={() => setShowSaved(false)} />
+        </div>
+      )}
     </>
   );
 };

@@ -1,5 +1,5 @@
 import "./farmer-dashboard.css";
-import "/src/index.css";
+
 import TopBar from "./top-bar";
 import SideBar from "./side-bar";
 import Content from "./content";

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const FolderIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="58" height="58" fill="green" viewBox="0 0 16 16">
@@ -8,9 +8,11 @@ const FolderIcon = () => (
 </svg>
 );
 
+interface SavedProps {
+  onDone?: () => void;
+}
 
-
-const RequestSuccessful: React.FC = () => {
+const Saved: React.FC<SavedProps> = ({ onDone }) => {
   return (
     <Container 
       fluid 
@@ -26,16 +28,17 @@ const RequestSuccessful: React.FC = () => {
             <FolderIcon />
           </div>
           <Card.Title as="h3" className="mb-3 fw-semibold">
-            Request Successfull
+            Saved
           </Card.Title>
           <Card.Text className="mb-4 text-muted body-medium">
-           Your request was successfull. You can track the progress. 
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
           </Card.Text>
           <Button 
             variant="success" 
             className="body-bold"
             size="lg" 
             style={{ backgroundColor: '#457900', borderColor: '#457900', padding: '0.75rem 1.5rem' }}
+            onClick={onDone}
           >
             Done
           </Button>
@@ -45,4 +48,4 @@ const RequestSuccessful: React.FC = () => {
   );
 };
 
-export default RequestSuccessful;
+export default Saved;

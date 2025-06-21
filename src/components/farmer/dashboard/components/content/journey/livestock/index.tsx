@@ -1,28 +1,30 @@
-import { Route, Routes } from "react-router-dom";
-import Health from "./Health-Management";
-import Housing from "./Housing";
-import TypesBreeds from "./Type&Breed";
-import FeedsNutrition from "./Feeds&Nuitrition/Index";
+import { Routes, Route } from "react-router-dom";
+
+import NotFound from "../../../../../../common/exceptions/NotFound";
+import TypeBreed from "./Components/Type&Breed";
+import Housing from "./Components/Housing";
+import Health from "./Components/Health-Management";
+import FeedsNutrition from "./Components/Feeds&Nuitrition/Index";
 
 
 
+export default function LivestockRoutes() {
+  return (
+    <Routes>
+      
+      <Route path="typebreed/*" element={<TypeBreed />} />
+      <Route path="housing/*" element={<Housing />} />
+      <Route path="health/*" element={<Health />} />
+      <Route path="feeds/*" element={<FeedsNutrition />} />
 
-export default function Livestock(){
+      
+      
 
-    const render = ()=>{
-        return (<>
-        <div id="livestock-content-div" >
-            <Routes>
-                <Route path="feeds" element={<FeedsNutrition />} />
-                <Route path="health" element={<Health />} />
-                <Route path="housing" element={<Housing />} />
-                <Route path="types" element={<TypesBreeds />} />       
-               
-            </Routes>
-        </div>
-        </>);
-    };
-
-
-    return render();
+      
+     
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
 }
+
+

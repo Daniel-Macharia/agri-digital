@@ -1,10 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Button } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-
+import Saved from '../../Shared/Saved';
 
 const validationSchema = Yup.object({
   livestockType: Yup.string().required("Livestock Type is required"),
@@ -23,8 +21,22 @@ const initialValues = {
 };
 
 const LivestockProtection: React.FC = () => {
+  const [showSaved, setShowSaved] = useState(false);
   return (
     <>
+      {showSaved && (
+        <div style={{
+          position: 'fixed',
+          top: 0, left: 0, right: 0, bottom: 0,
+          background: 'rgba(0,0,0,0.2)',
+          zIndex: 9999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <Saved onDone={() => setShowSaved(false)} />
+        </div>
+      )}
       <div
         className="d-flex flex-column p-4 rounded-4"
         style={{
@@ -37,9 +49,10 @@ const LivestockProtection: React.FC = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            alert(JSON.stringify(values, null, 2));
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            setShowSaved(true);
             setSubmitting(false);
+            resetForm();
           }}
         >
           {({ isSubmitting, resetForm }) => (
@@ -171,7 +184,7 @@ const LivestockProtection: React.FC = () => {
                   type="submit"
                   disabled={isSubmitting}
                 >
-                  Request Service
+                  Save
                 </Button>
               </div>
             </Form>

@@ -1,8 +1,10 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { LuUpload } from "react-icons/lu";
+import { FaArrowLeft } from "react-icons/fa"; 
 import { Button } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from 'react-router-dom';
+
 
 type FormValues = {
   livestockName: string;
@@ -17,7 +19,8 @@ type FormValues = {
   longDescription: string;
 };
 
-const Type$BreedForm = () => {
+const TypeBreedForm = () => {
+  const navigate = useNavigate();
   const validationSchema = Yup.object({
     livestockName: Yup.string()
       .max(100, 'Must be 100 characters or less')
@@ -81,13 +84,25 @@ const Type$BreedForm = () => {
 
   return (
     <>
+      {/* Header for arrow and button */}
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <FaArrowLeft size={24} color="#333" style={{ cursor: 'pointer' }} onClick={() => navigate("../")}/>
+        <Button
+          variant="success"
+          style={{ padding: '0.625rem 1rem', borderRadius: '0.375rem', background: 'var(--Primary, #457900)' }}
+          onClick={() => navigate("request")}
+        >
+          Request for service
+        </Button>
+      </div>
+
       <div
         className="p-4 rounded-4"
         style={{
           background: '#FFF',
         }}
       >
-        <h3 className="h3-semibold mb-4" style={{ color: 'var(--Primary-Text, #333)' }}>Type & Breed</h3>
+        <h3 className="h3-semibold mb-4" style={{ color: 'var(--Primary-Text, #333)' }}>Type & Breed Selection</h3>
         <form onSubmit={formik.handleSubmit} className="w-100">
           {/* Livestock Name */}
           <div className="row mb-3 align-items-center">
@@ -99,7 +114,7 @@ const Type$BreedForm = () => {
                 id="livestockName"
                 name="livestockName"
                 type="text"
-                placeholder="Enter Livestock Name"
+                placeholder="Lorem Ipsum"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.livestockName}
@@ -122,7 +137,7 @@ const Type$BreedForm = () => {
                 id="breed"
                 name="breed"
                 type="text"
-                placeholder="Enter Breed"
+                placeholder="Lorem Ipsum"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.breed}
@@ -215,7 +230,7 @@ const Type$BreedForm = () => {
                 id="age"
                 name="age"
                 type="text"
-                placeholder="Enter Age in months" 
+                placeholder="Enter Age in months"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.age}
@@ -355,6 +370,7 @@ const Type$BreedForm = () => {
               style={{ padding: '0.625rem 1rem', borderRadius: '0.375rem', background: 'var(--Primary, #457900)' }}
               type="submit"
               disabled={!formik.isValid || !formik.dirty}
+              
             >
               Save
             </Button>
@@ -365,4 +381,4 @@ const Type$BreedForm = () => {
   );
 };
 
-export default Type$BreedForm;
+export default TypeBreedForm;

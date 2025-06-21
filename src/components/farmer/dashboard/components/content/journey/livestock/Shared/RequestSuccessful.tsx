@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const FolderIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="58" height="58" fill="green" viewBox="0 0 16 16">
@@ -10,7 +10,7 @@ const FolderIcon = () => (
 
 
 
-const Saved: React.FC = () => {
+const RequestSuccessful: React.FC = () => {
   return (
     <Container 
       fluid 
@@ -26,10 +26,10 @@ const Saved: React.FC = () => {
             <FolderIcon />
           </div>
           <Card.Title as="h3" className="mb-3 fw-semibold">
-            Saved
+            Request Successfull
           </Card.Title>
           <Card.Text className="mb-4 text-muted body-medium">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+           Your request was successfull. You can track the progress. 
           </Card.Text>
           <Button 
             variant="success" 
@@ -45,4 +45,4 @@ const Saved: React.FC = () => {
   );
 };
 
-export default Saved;
+export default RequestSuccessful;
