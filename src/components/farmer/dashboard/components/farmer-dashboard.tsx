@@ -1,4 +1,5 @@
 import "./farmer-dashboard.css";
+import { useState } from "react";
 
 import TopBar from "./top-bar";
 import SideBar from "./side-bar";
@@ -23,14 +24,20 @@ import NotFound from "../../../common/exceptions/NotFound";
 
 export default function Dashboard() {
     
+    const [isSidebarVisible, setSidebarVisible] = useState(false);
+
+    const toggleSidebar = () => {
+        setSidebarVisible(!isSidebarVisible);
+    };
+
     let render = ()=>{
         return (
             <div id="home-content">
-                <div id="left-div" >
-                    <SideBar />
+                <div id="left-div" className={isSidebarVisible ? "show" : ""}>
+                    <SideBar toggleSidebar={toggleSidebar} />
                 </div>
                 <div id="right-div" >
-                    <TopBar />
+                    <TopBar toggleSidebar={toggleSidebar} />
                     <Content >
                         <Routes>
                             <Route path="/home" element={<Home />} />
@@ -38,7 +45,6 @@ export default function Dashboard() {
                             <Route path="/products" element={<Products />} />
                             <Route path="/market-place" element={<MarketPlace />} />
                             <Route path="/banks" element={<Banks />} />
-                            <Route path="/insurance" element={<Insurance />} />
                             <Route path="/sponsors" element={<Sponsors />} />
                             <Route path="/wallet" element={<Wallet />} />
                             <Route path="/package" element={<Package />} />

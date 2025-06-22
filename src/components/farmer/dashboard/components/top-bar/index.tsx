@@ -1,12 +1,10 @@
-
-
 import { Formik, Form, Field } from "formik";
 
 import * as Yup from 'yup';
 
 import "./index.css";
 
-export default function TopBar()
+export default function TopBar({ toggleSidebar }: { toggleSidebar: () => void })
 {
     const initialValues = {
         searchItem: '',
@@ -36,6 +34,11 @@ export default function TopBar()
     let render = ()=>{
         return (
         <div id="top-bar">
+            <div className="d-lg-none">
+                <button className="btn btn-link text-dark" onClick={toggleSidebar}>
+                    <i className="fas fa-bars"></i>
+                </button>
+            </div>
             <div id="details-div">
                 <h3>Welcome, full name</h3>
                 <p>
