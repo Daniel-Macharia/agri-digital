@@ -1,16 +1,14 @@
-import "./farmer-dashboard.css";
 import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 
 import TopBar from "./top-bar";
 import SideBar from "./side-bar";
 import Content from "./content";
-import { Route, Routes } from "react-router-dom";
 
 import Home from "./content/home-content";
 import Journey from "./content/journey";
 import MarketPlace from "./content/market-place";
 import Products from "./content/products";
-import Insurance from "./content/insurance";
 import Banks from "./content/banks";
 import Sponsors from "./content/sponsors";
 import Package from "./content/package";
@@ -23,22 +21,29 @@ import Invite from "./content/invite";
 import NotFound from "../../../common/exceptions/NotFound";
 
 export default function Dashboard() {
-    
     const [isSidebarVisible, setSidebarVisible] = useState(false);
 
     const toggleSidebar = () => {
         setSidebarVisible(!isSidebarVisible);
     };
 
-    let render = ()=>{
-        return (
-            <div id="home-content">
-                <div id="left-div" className={isSidebarVisible ? "show" : ""}>
+    return (
+        <div className="container-fluid position-absolute top-0 start-0 h-100">
+            <div className="row h-100">
+                {/* Sidebar - collapsible on small screens */}
+                <div
+                    className={`col-12 col-lg-3 col-xl-2 bg-white h-100 p-0 ${
+                        isSidebarVisible ? "position-fixed start-0 top-0 z-3 shadow" : "d-none d-lg-block"
+                    }`}
+                    style={{ width: isSidebarVisible ? "280px" : undefined }}
+                >
                     <SideBar toggleSidebar={toggleSidebar} />
                 </div>
-                <div id="right-div" >
+
+                {/* Main content area */}
+                <div className="col-12 col-lg-9 col-xl-10 d-flex flex-column align-items-center px-0">
                     <TopBar toggleSidebar={toggleSidebar} />
-                    <Content >
+                    <Content>
                         <Routes>
                             <Route path="/home" element={<Home />} />
                             <Route path="/projects/*" element={<Journey />} />
@@ -53,14 +58,11 @@ export default function Dashboard() {
                             <Route path="/resources" element={<Resources />} />
                             <Route path="/settings" element={<Settings />} />
                             <Route path="/invite" element={<Invite />} />
-
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </Content>
                 </div>
             </div>
-        );
-    }
-
-    return render();
+        </div>
+    );
 }

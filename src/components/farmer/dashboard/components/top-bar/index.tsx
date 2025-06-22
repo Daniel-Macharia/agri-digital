@@ -2,7 +2,7 @@ import { Formik, Form, Field } from "formik";
 
 import * as Yup from 'yup';
 
-import "./index.css";
+
 
 export default function TopBar({ toggleSidebar }: { toggleSidebar: () => void })
 {
@@ -33,51 +33,46 @@ export default function TopBar({ toggleSidebar }: { toggleSidebar: () => void })
 
     let render = ()=>{
         return (
-        <div id="top-bar">
-            <div className="d-lg-none">
-                <button className="btn btn-link text-dark" onClick={toggleSidebar}>
-                    <i className="fas fa-bars"></i>
+        <div className="d-flex justify-content-between align-items-center p-3 w-100 bg-white shadow-sm">
+            <div className="d-flex align-items-center">
+                <button className="btn btn-link text-dark d-lg-none me-3" onClick={toggleSidebar}>
+                    <i className="fas fa-bars fa-fw"></i>
                 </button>
+            
+                <div className="d-none d-lg-block">
+                    <h3 className="h5 mb-0 fw-bold">Welcome, full name</h3> 
+                    <p className="mb-0 small text-muted">
+                        Farm name, Location
+                    </p>
+                </div>
             </div>
-            <div id="details-div">
-                <h3>Welcome, full name</h3>
-                <p>
-                    Farm name<span>, Location</span><span></span>
-                </p>
-            </div>
-            <div id="profile-div-container">
-                <div id="profile-div">
-                    <div>
-                        <Formik
-                        initialValues={initialValues}
-                        validationSchema={validationSchema}
-                        onSubmit={searchForItem}
-                        >
-
-                            {({}) => (
-                                <Form id="search-div" >
-                                    <Field 
-                                    type="image" 
-                                    id="search-icon" 
-                                    src="/assets/images/search_icon.svg" 
-                                    />
-                                    
-                                    <Field
-                                    name='searchItem'
-                                    type='text'
-                                    id="search-item"
-                                    placeholder='search'
-                                    ></Field>
-                                </Form>
-                            )}
-                            
-                        </Formik>
-                    </div>
-                    <div id="icons-div">
-                        <img onClick={loadNotifications} id="notification-icon" className="profile-icon" src="/assets/images/notification_icon.svg" />
-                        <img onClick={loadProfile} id="profile-icon" className="profile-icon" src="/assets/images/profile_icon.svg" />
-                        <img onClick={showMoreActions} id="more-icon" className="profile-icon" src="/assets/images/more_icon.svg" />
-                    </div>
+            <div className="d-flex align-items-center">
+                <div className="d-none d-md-block me-3">
+                    <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={searchForItem}
+                    >
+                        {({}) => (
+                            <Form className="input-group">
+                                <Field
+                                name='searchItem'
+                                type='text'
+                                className="form-control"
+                                placeholder='search'
+                                />
+                                <button className="btn btn-light border" type="submit">
+                                    <img src="/assets/images/search_icon.svg" alt="search" style={{ height: '1rem' }}/>
+                                </button>
+                            </Form>
+                        )}
+                        
+                    </Formik>
+                </div>
+                <div className="d-flex align-items-center">
+                    <img onClick={loadNotifications} style={{ cursor: 'pointer' }} className="me-3" alt="notifications" src="/assets/images/notification_icon.svg" />
+                    <img onClick={loadProfile} style={{ cursor: 'pointer' }} className="me-3" alt="profile" src="/assets/images/profile_icon.svg" />
+                    <img onClick={showMoreActions} style={{ cursor: 'pointer' }} alt="more actions" src="/assets/images/more_icon.svg" />
                 </div>
             </div>
         </div>
