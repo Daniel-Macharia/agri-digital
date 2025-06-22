@@ -27,8 +27,8 @@ export default function Dashboard() {
         setSidebarVisible(!isSidebarVisible);
     };
 
-    return (
-        <div className="container-fluid position-absolute top-0 start-0 h-100">
+    return ( 
+        <div className="bg-background container-fluid position-absolute top-0 start-0 h-100">
             <div className="row h-100">
                 {/* Sidebar - collapsible on small screens */}
                 <div

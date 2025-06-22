@@ -4,12 +4,31 @@ export default function SideBar({ toggleSidebar }: { toggleSidebar: () => void }
     return (
         <div className="container-fluid d-flex flex-column align-items-center p-0">
             {/* Logo and close button */}
-            <div className="w-100 bg-white text-center py-3 position-relative">
-                <img src="/assets/images/app_name.svg" className="img-fluid w-75" alt="App Logo" />
-                <button className="btn btn-link text-dark position-absolute top-0 end-0 d-lg-none" onClick={toggleSidebar} style={{ fontSize: '1.5rem' }}>
-                    <i className="fas fa-times"></i>
-                </button>
-            </div>
+            <div
+  className="w-100 bg-white text-center d-flex align-items-center justify-content-center position-relative"
+  style={{
+    maxWidth: "14.4375rem",
+    height: "4.375rem",
+    flexShrink: 0,
+    aspectRatio: "33 / 10",
+    background: "lightgray 50% / cover no-repeat",
+  }}
+>
+  <img
+    src="/assets/images/app_name.svg"
+    className="img-fluid w-75"
+    alt="App Logo"
+    style={{ maxHeight: "100%", objectFit: "contain" }}
+  />
+  <button
+    className="btn btn-link text-dark position-absolute top-0 end-0 d-lg-none"
+    onClick={toggleSidebar}
+    style={{ fontSize: "1.5rem" }}
+  >
+    <i className="fas fa-times"></i>
+  </button>
+</div>
+
 
             <hr className="w-100 my-2" />
 
