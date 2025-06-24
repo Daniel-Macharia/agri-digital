@@ -41,7 +41,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Main content area */}
-                <div className="col-12 col-lg-9 col-xl-10 d-flex flex-column align-items-center px-0">
+                <div className="col-12 col-lg-9 col-xl-10 d-flex flex-column flex-grow-1 px-0">
                     <TopBar toggleSidebar={toggleSidebar} />
                     <Content>
                         <Routes>

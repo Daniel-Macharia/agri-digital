@@ -32,76 +32,69 @@ export default function TopBar({ toggleSidebar }: { toggleSidebar: () => void })
 
     let render = () => {
         return (
-            <div className="container d-flex justify-content-between align-items-center">
-                <div className="d-flex flex-column align-items-start gap-1 flex-shrink-0 col-3 col-sm-2 col-md-2">
-                    <button className="btn btn-link text-dark d-lg-none me-3" onClick={toggleSidebar}>
-                        <i className="fas fa-bars fa-fw"></i>
+            <nav
+                className="navbar navbar-light bg-white shadow-sm w-100 position-sticky top-0 px-3 px-lg-4"
+                style={{ zIndex: 2 }} // z-index lower than sidebar (z-3) so sidebar overlays in mobile
+            >
+                {/* Left : Menu toggle + greeting */}
+                <div className="d-flex align-items-center flex-grow-1">
+                    {/* Mobile menu toggle */}
+                    <button
+                        className="btn btn-link text-dark d-lg-none me-3 p-0"
+                        type="button"
+                        aria-label="Toggle sidebar"
+                        onClick={toggleSidebar}
+                    >
+                        <i className="fas fa-bars fa-fw fs-4"></i>
                     </button>
 
-                    <div className="d-none d-lg-block">
-                        <h3 className="h2-bold">Welcome, full name</h3>
-                        <div className="d-flex align-items-center gap-2">
-                            <p className="small-regular mb-0">
-                                Farm name, Location
-                            </p>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="5" viewBox="0 0 9 5" fill="none">
-                                <path d="M7.94141 0.757812L4.47041 4.24381L0.999406 0.757813" stroke="#777777" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
+                    {/* Greeting – hidden on mobile for space */}
+                    <div className="d-none d-lg-flex flex-column">
+                        <h6 className="mb-0 fw-semibold">Welcome, John Doe</h6>
+                        <div className="d-flex align-items-center gap-1">
+                            <small className="text-muted">Mugutha Farm, Ruiru</small>
+                            <i className="fas fa-chevron-down small text-muted"></i>
                         </div>
-
                     </div>
                 </div>
-                <div className="d-flex align-items-center gap-3 flex-shrink-0 px-4 py-2 rounded-pill bg-white w-100" style={{ maxWidth: '23.9375rem' }}>
-                    <div
-                        className="d-flex flex-column justify-content-center align-items-start gap-2 flex-shrink-0 px-4 py-3 rounded bg-light"
-                        style={{ width: '13.375rem', height: '2.5rem', borderRadius: '1.25rem', background: 'var(--Background, #F5F5F5)' }}
+
+                {/* Right : Search + icons */}
+                <div className="d-flex align-items-center gap-3">
+                    {/* Search */}
+                    <Formik
+                        initialValues={initialValues}
+                        validationSchema={validationSchema}
+                        onSubmit={searchForItem}
                     >
+                        {() => (
+                            <Form className="input-group rounded-pill overflow-hidden bg-light" style={{ maxWidth: "15rem" }}>
+                                <span className="input-group-text bg-transparent border-0 py-0 ps-3 pe-0">
+                                    <img src="/assets/images/search_icon.svg" alt="search" style={{ height: "1rem" }} />
+                                </span>
+                                <Field
+                                    name="searchItem"
+                                    type="text"
+                                    className="form-control border-0 bg-transparent small-regular"
+                                    placeholder="Search"
+                                />
+                            </Form>
+                        )}
+                    </Formik>
 
-                        <div className="d-flex align-items-center gap-3">
-                            <Formik
-                                initialValues={initialValues}
-                                validationSchema={validationSchema}
-                                onSubmit={searchForItem}
-                            >
-                                {({ }) => (
-                                    <Form className="input-group">
-                                        <button className="btn btn-light " type="submit">
-                                            <img src="/assets/images/search_icon.svg" alt="search" style={{ height: '1rem' }} />
-                                        </button>
-                                        <Field
-                                            name='searchItem'
-                                            type='text'
-                                            className="form-control small-regular"
-                                            placeholder='Search'
-                                        />
+                    {/* Icons */}
+                    <button className="btn btn-link position-relative p-0" onClick={loadNotifications}>
+                        <img src="/assets/images/notification_icon.svg" alt="notifications" />
+                    </button>
 
-                                    </Form>
-                                )}
+                    <button className="btn btn-link p-0" onClick={loadProfile}>
+                        <img src="/assets/images/profile_icon.svg" alt="profile" />
+                    </button>
 
-                            </Formik>
-                        </div>
-
-
-
-                    </div>
-
-
-                    <div className="d-flex align-items-center gap-4">
-                        <div
-                            className="d-inline-block"
-                            style={{ width: '1.5rem', height: '1.5rem' }}
-                        >
-                            <img onClick={loadNotifications} style={{ cursor: 'pointer' }} className="me-3" alt="notifications" src="/assets/images/notification_icon.svg" />
-                        </div>
-                        
-
-
-
-                        <img onClick={loadProfile} style={{ cursor: 'pointer' }} className="me-3" alt="profile" src="/assets/images/profile_icon.svg" />
-                        <img onClick={showMoreActions} style={{ cursor: 'pointer' }} alt="more actions" src="/assets/images/more_icon.svg" />
-                    </div>
+                    <button className="btn btn-link p-0" onClick={showMoreActions}>
+                        <img src="/assets/images/more_icon.svg" alt="more actions" />
+                    </button>
                 </div>
-            </div>
+            </nav>
         );
     };
 
