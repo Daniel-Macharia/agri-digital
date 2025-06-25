@@ -20,7 +20,7 @@ const ReusableLandingPage: React.FC<ReusableLandingPageProps> = ({ title, text, 
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100">
       <Card
-        className="text-center p-4 shadow-sm"
+        className="text-center p-4 shadow-sm "
         style={{ maxWidth: '21.8125rem', borderRadius: '1rem', border: 'none' }}
       >
         <Card.Body className="d-flex flex-column align-items-center gap-4">

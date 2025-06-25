@@ -35,7 +35,7 @@ export default function Dashboard() {
                     className={`col-12 col-lg-3 col-xl-2 bg-white h-100 p-0 ${
                         isSidebarVisible ? "position-fixed start-0 top-0 z-3 shadow" : "d-none d-lg-block"
                     }`}
-                    style={{ width: isSidebarVisible ? "280px" : undefined }}
+                    style={{ width: isSidebarVisible ? "280px" : undefined, zIndex: isSidebarVisible ? 1200 : undefined }}
                 >
                     <SideBar toggleSidebar={toggleSidebar} />
                 </div>
