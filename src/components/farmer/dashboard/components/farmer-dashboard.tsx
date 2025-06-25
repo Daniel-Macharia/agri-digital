@@ -43,7 +43,7 @@ export default function Dashboard() {
                 {/* Main content area */}
                 <div className="col-12 col-lg-9 col-xl-10 d-flex flex-column flex-grow-1 px-0">
                     <TopBar toggleSidebar={toggleSidebar} />
-                    <Content>
+                    <Content> 
                         <Routes>
                             <Route path="/home" element={<Home />} />
                             <Route path="/projects/*" element={<Journey />} />

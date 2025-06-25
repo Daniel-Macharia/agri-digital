@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import "./index.css"
 import Projects from "./projects";
 import ProjectInfo from "./project-info";
 import JourneyHome from "./journey-home";
