@@ -2,10 +2,10 @@ import SideBarItem from "./side-bar-item";
 
 export default function SideBar({ toggleSidebar }: { toggleSidebar: () => void }) {
     return (
-        <div className="container-fluid d-flex flex-column align-items-center p-0">
+        <div className="container-fluid d-flex flex-column align-items-center p-0 bg-white">
             {/* Logo and close button */}
             <div
-  className="w-100 bg-white text-center d-flex align-items-center justify-content-center position-relative"
+  className="w-100 bg-white text-center d-flex align-items-center justify-content-center position-relative "
   style={{
     maxWidth: "14.4375rem",
     height: "4.375rem",

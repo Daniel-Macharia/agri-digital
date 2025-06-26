@@ -28,7 +28,7 @@ export default function Dashboard() {
     };
 
     return ( 
-        <div className="bg-background container-fluid position-absolute top-0 start-0 h-100">
+        <div className="container-fluid position-absolute top-0 start-0 h-100" style={{ backgroundColor: '#ececec' }}>
             <div className="row h-100">
                 {/* Sidebar - collapsible on small screens */}
                 <div
