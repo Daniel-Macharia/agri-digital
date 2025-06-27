@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Button } from "react-bootstrap";
-import Saved from '../../Shared/Saved';
+import Saved from "../../Shared/Saved";
 
 const validationSchema = Yup.object({
   disposalMethod: Yup.string().required("Disposal Method is required"),
@@ -11,13 +10,13 @@ const validationSchema = Yup.object({
     .typeError("Volume must be a number")
     .required("Volume is required"),
   notes: Yup.string(),
-}); 
+});
 
 const initialValues = {
-  disposalMethod: "Biogas Production",
+  disposalMethod: "",
   frequency: "",
-  volume: 120000,
-  notes: "Lorem Ipsum",
+  volume: "",
+  notes: "",
 };
 
 const frequencyOptions = [
@@ -29,30 +28,31 @@ const frequencyOptions = [
 
 const WasteManagement: React.FC = () => {
   const [showSaved, setShowSaved] = useState(false);
+
   return (
     <>
       {showSaved && (
-        <div style={{
-          position: 'fixed',
-          top: 0, left: 0, right: 0, bottom: 0,
-          background: 'rgba(0,0,0,0.2)',
-          zIndex: 9999,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(0,0,0,0.2)",
+            zIndex: 9999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <Saved onDone={() => setShowSaved(false)} />
         </div>
       )}
-      <div
-        className="d-flex flex-column p-4 rounded-4"
-        style={{
-          background: "#FFF",
-        }}
-      >
-        <h3 className="h3-semibold mb-4" style={{ color: 'var(--Primary-Text, #333)' }}>
+      <div className="w-100 rounded-4 bg-white border mt-3 p-4">
+        <h5 className="mb-4 text-start" style={{ color: "#333" }}>
           Waste Management
-        </h3>
+        </h5>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -63,20 +63,22 @@ const WasteManagement: React.FC = () => {
           }}
         >
           {({ isSubmitting, resetForm }) => (
-            <Form className="w-100">
+            <Form>
               {/* Disposal Method */}
               <div className="row mb-3 align-items-center">
-                <label htmlFor="disposalMethod" className="col-md-3 col-form-label body-regular" style={{ color: 'var(--Primary-Text, #333)' }}>
+                <label
+                  htmlFor="disposalMethod"
+                  className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
+                >
                   Disposal Method
                 </label>
-                <div className="col-md-9">
+                <div className="col-md-10">
                   <Field
+                    type="text"
                     id="disposalMethod"
                     name="disposalMethod"
-                    type="text"
-                    placeholder="Biogas Production"
                     className="form-control bg-light"
-                    style={{ height: '2.5rem', borderRadius: '0.5rem' }}
+                    placeholder="Biogas Production"
                   />
                   <ErrorMessage
                     name="disposalMethod"
@@ -88,16 +90,18 @@ const WasteManagement: React.FC = () => {
 
               {/* Frequency */}
               <div className="row mb-3 align-items-center">
-                <label htmlFor="frequency" className="col-md-3 col-form-label body-regular" style={{ color: 'var(--Primary-Text, #333)' }}>
+                <label
+                  htmlFor="frequency"
+                  className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
+                >
                   Frequency
                 </label>
-                <div className="col-md-9">
+                <div className="col-md-10">
                   <Field
+                    as="select"
                     id="frequency"
                     name="frequency"
-                    as="select"
                     className="form-select bg-light"
-                    style={{ height: '2.5rem', borderRadius: '0.5rem' }}
                   >
                     {frequencyOptions.map((opt) => (
                       <option key={opt.value} value={opt.value}>
@@ -115,17 +119,19 @@ const WasteManagement: React.FC = () => {
 
               {/* Volume */}
               <div className="row mb-3 align-items-center">
-                <label htmlFor="volume" className="col-md-3 col-form-label body-regular" style={{ color: 'var(--Primary-Text, #333)' }}>
+                <label
+                  htmlFor="volume"
+                  className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
+                >
                   Volume in (kg)
                 </label>
-                <div className="col-md-9">
+                <div className="col-md-10">
                   <Field
+                    type="text"
                     id="volume"
                     name="volume"
-                    type="text"
-                    placeholder="120000kg"
                     className="form-control bg-light"
-                    style={{ height: '2.5rem', borderRadius: '0.5rem' }}
+                    placeholder="120000"
                   />
                   <ErrorMessage
                     name="volume"
@@ -137,18 +143,20 @@ const WasteManagement: React.FC = () => {
 
               {/* Notes */}
               <div className="row mb-3 align-items-start">
-                <label htmlFor="notes" className="col-md-3 col-form-label body-regular" style={{ color: 'var(--Primary-Text, #333)' }}>
+                <label
+                  htmlFor="notes"
+                  className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
+                >
                   Notes
                 </label>
-                <div className="col-md-9">
+                <div className="col-md-10">
                   <Field
+                    as="textarea"
                     id="notes"
                     name="notes"
-                    as="textarea"
                     rows={5}
-                    placeholder="Lorem Ipsum"
                     className="form-control bg-light"
-                    style={{ borderRadius: '0.5rem' }}
+                    placeholder="Lorem Ipsum"
                   />
                   <ErrorMessage
                     name="notes"
@@ -159,23 +167,21 @@ const WasteManagement: React.FC = () => {
               </div>
 
               {/* Buttons */}
-              <div className="d-flex justify-content-between align-items-center mt-4">
-                <Button
-                  variant="outline-warning"
-                  style={{ padding: '0.625rem 1rem', borderRadius: '0.375rem' }}
+              <div className="d-flex justify-content-between mt-4">
+                <button
                   type="button"
+                  className="btn btn-outline-warning"
                   onClick={() => resetForm()}
                 >
                   Cancel
-                </Button>
-                <Button
-                  variant="success"
-                  style={{ padding: '0.625rem 1rem', borderRadius: '0.375rem', background: 'var(--Primary, #457900)' }}
+                </button>
+                <button
                   type="submit"
+                  style={{ backgroundColor: "#457900", color: "white" }}
                   disabled={isSubmitting}
                 >
-                  Save
-                </Button>
+                  Continue
+                </button>
               </div>
             </Form>
           )}

@@ -1,80 +1,84 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Button } from "react-bootstrap";
 import Saved from "../../Shared/Saved";
-
-
-interface VentilationFormValues {
-  type: string;
-  quality: string;
-  photo: File | null;
-  notes: string;
-}
-
-const initialValues: VentilationFormValues = {
-  type: "",
-  quality: "",
-  photo: null,
-  notes: "",
-};  
 
 const validationSchema = Yup.object({
   type: Yup.string().required("Type is required"),
   quality: Yup.string().required("Quality is required"),
   photo: Yup.mixed()
-    .test("fileSize", "File too large", (value) => {
-      if (!value) return true;
-      return (value as File).size <= 10 * 1024 * 1024;
-    })
-    .test("fileType", "Unsupported file format", (value) => {
-      if (!value) return true;
-      return ["application/pdf", "image/png", "image/jpeg"].includes(
-        (value as File).type
-      );
-    }),
+    .test("fileSize", "File too large", (value) =>
+      !value || value.size <= 10 * 1024 * 1024
+    )
+    .test("fileType", "Unsupported file format", (value) =>
+      !value ||
+      ["application/pdf", "image/png", "image/jpeg"].includes(value.type)
+    ),
   notes: Yup.string(),
 });
+
+const initialValues = {
+  type: "",
+  quality: "",
+  photo: null,
+  notes: "",
+};
 
 const Ventilation: React.FC = () => {
   const [showSaved, setShowSaved] = useState(false);
 
   return (
     <>
-      <div
-        className="d-flex flex-column p-4 rounded-4"
-        style={{
-          background: '#FFF',
-        }}
-      >
-        <h3 className="h3-semibold mb-4" style={{ color: 'var(--Primary-Text, #333)' }}>
+      {showSaved && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(0,0,0,0.2)",
+            zIndex: 9999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Saved onDone={() => setShowSaved(false)} />
+        </div>
+      )}
+      <div className="w-100 rounded-4 bg-white border mt-3 p-4">
+        <h5 className="mb-4 text-start" style={{ color: "#333" }}>
           Ventilation
-        </h3>
+        </h5>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting }) => {
+          onSubmit={(values, { setSubmitting, resetForm }) => {
             setTimeout(() => {
               setShowSaved(true);
               setSubmitting(false);
+              resetForm();
             }, 400);
           }}
         >
-          {({ isSubmitting, setFieldValue }) => (
+          {({ isSubmitting, resetForm, setFieldValue, values }) => (
             <Form>
               {/* Type */}
               <div className="row mb-3 align-items-center">
-                <label htmlFor="type" className="col-md-3 col-form-label body-regular" style={{ color: 'var(--Primary-Text, #333)' }}>
+                <label
+                  htmlFor="type"
+                  className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
+                >
                   Type
                 </label>
-                <div className="col-md-9">
+                <div className="col-md-10">
                   <Field
+                    type="text"
                     id="type"
                     name="type"
-                    type="text"
-                    placeholder="Lorem Ipsum"
                     className="form-control bg-light"
-                    style={{ height: '2.5rem', borderRadius: '0.5rem' }}
+                    placeholder="Lorem Ipsum"
                   />
                   <ErrorMessage
                     name="type"
@@ -86,17 +90,19 @@ const Ventilation: React.FC = () => {
 
               {/* Quality */}
               <div className="row mb-3 align-items-center">
-                <label htmlFor="quality" className="col-md-3 col-form-label body-regular" style={{ color: 'var(--Primary-Text, #333)' }}>
+                <label
+                  htmlFor="quality"
+                  className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
+                >
                   Quality
                 </label>
-                <div className="col-md-9">
+                <div className="col-md-10">
                   <Field
+                    type="text"
                     id="quality"
                     name="quality"
-                    type="text"
-                    placeholder="Lorem Ipsum"
                     className="form-control bg-light"
-                    style={{ height: '2.5rem', borderRadius: '0.5rem' }}
+                    placeholder="Lorem Ipsum"
                   />
                   <ErrorMessage
                     name="quality"
@@ -108,19 +114,22 @@ const Ventilation: React.FC = () => {
 
               {/* Photo */}
               <div className="row mb-3 align-items-start">
-                <label htmlFor="photo" className="col-md-3 col-form-label body-regular" style={{ color: 'var(--Primary-Text, #333)' }}>
+                <label
+                  htmlFor="photo"
+                  className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
+                >
                   Photo
                 </label>
-                <div className="col-md-9">
+                <div className="col-md-10">
                   <label
                     htmlFor="photo"
-                    className="d-flex flex-column align-items-center justify-content-center bg-light"
+                    className="d-flex flex-column align-items-center justify-content-center p-3"
                     style={{
-                      height: '10rem',
-                      border: '2px dashed #ECECEC',
-                      borderRadius: '0.5rem',
-                      cursor: 'pointer',
-                      width: '100%',
+                      border: "2px dashed var(--Border, #ECECEC)",
+                      borderRadius: "0.5rem",
+                      background: "#f8f9fa",
+                      minHeight: "10rem",
+                      cursor: "pointer",
                     }}
                   >
                     <input
@@ -128,82 +137,80 @@ const Ventilation: React.FC = () => {
                       name="photo"
                       type="file"
                       accept=".pdf,.png,.jpg,.jpeg"
-                      className="d-none"
-                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      className="position-absolute w-100 h-100 opacity-0"
+                      style={{ cursor: "pointer", top: 0, left: 0 }}
+                      onChange={(event) => {
                         setFieldValue("photo", event.currentTarget.files?.[0]);
                       }}
                     />
-                    <div
-                      style={{
-                        width: '2.5rem',
-                        height: '2.5rem',
-                        borderRadius: '50%',
-                        background: '#F5F5F5',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginBottom: '0.5rem',
-                      }}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="25"
-                        height="25"
-                        viewBox="0 0 25 25"
-                        fill="none"
-                      >
-                        <g clipPath="url(#clip0_436_94702)">
-                          <path
-                            d="M20.5 16.0508V20.0508C20.5 20.5812 20.2893 21.0906 19.9142 21.4657C19.5391 21.8408 19.0297 22.0508 18.5 22.0508H6.5C5.97029 22.0508 5.46086 21.8408 5.08579 21.4657C4.71071 21.0906 4.5 20.5812 4.5 20.0508V16.0508"
-                            stroke="#457900"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M12.5 14.0508V3.55078"
-                            stroke="#457900"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M8.75 7.30078L12.5 3.55078L16.25 7.30078"
-                            stroke="#457900"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_436_94702">
-                            <rect
-                              width="24"
-                              height="24"
-                              fill="white"
-                              transform="translate(0.5 0.550781)"
+                    {values.photo ? (
+                      <span className="body-regular" style={{ color: "#333" }}>
+                        {values.photo.name}
+                      </span>
+                    ) : (
+                      <div className="d-flex flex-column align-items-center justify-content-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="25"
+                          height="25"
+                          viewBox="0 0 25 25"
+                          fill="none"
+                        >
+                          <g clipPath="url(#clip0_436_94702)">
+                            <path
+                              d="M20.5 16.0508V20.0508C20.5 20.5812 20.2893 21.0906 19.9142 21.4657C19.5391 21.8408 19.0297 22.0508 18.5 22.0508H6.5C5.97029 22.0508 5.46086 21.8408 5.08579 21.4657C4.71071 21.0906 4.5 20.5812 4.5 20.0508V16.0508"
+                              stroke="#457900"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
                             />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                    </div>
-                    <p
-                      className="body-regular mb-1"
-                      style={{
-                        color: "var(--Secondary-Text, #777)",
-                      }}
-                    >
-                      Upload Photos
-                    </p>
-                    <p
-                      className="body-regular text-center"
-                      style={{
-                        color: "var(--Secondary-Text, #777)",
-                        fontSize: "0.875rem",
-                      }}
-                    >
-                      PDF, PNG, JPG up to 10MB
-                    </p>
+                            <path
+                              d="M12.5 14.0508V3.55078"
+                              stroke="#457900"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M8.75 7.30078L12.5 3.55078L16.25 7.30078"
+                              stroke="#457900"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_436_94702">
+                              <rect
+                                width="24"
+                                height="24"
+                                fill="white"
+                                transform="translate(0.5 0.550781)"
+                              />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                        <p
+                          className="body-regular mb-1"
+                          style={{
+                            color: "#457900",
+                            fontWeight: 500,
+                            fontSize: "1rem",
+                          }}
+                        >
+                          Upload Photos
+                        </p>
+                        <p
+                          className="body-regular text-center"
+                          style={{
+                            color: "var(--Secondary-Text, #777)",
+                            fontSize: "0.875rem",
+                          }}
+                        >
+                          PDF, PNG, JPG up to 10MB
+                        </p>
+                      </div>
+                    )}
                   </label>
                   <ErrorMessage
                     name="photo"
@@ -215,18 +222,20 @@ const Ventilation: React.FC = () => {
 
               {/* Notes */}
               <div className="row mb-3 align-items-start">
-                <label htmlFor="notes" className="col-md-3 col-form-label body-regular" style={{ color: 'var(--Primary-Text, #333)' }}>
+                <label
+                  htmlFor="notes"
+                  className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
+                >
                   Notes
                 </label>
-                <div className="col-md-9">
+                <div className="col-md-10">
                   <Field
+                    as="textarea"
                     id="notes"
                     name="notes"
-                    as="textarea"
                     rows={5}
-                    placeholder="Lorem Ipsum"
                     className="form-control bg-light"
-                    style={{ borderRadius: '0.5rem' }}
+                    placeholder="Lorem Ipsum"
                   />
                   <ErrorMessage
                     name="notes"
@@ -237,47 +246,26 @@ const Ventilation: React.FC = () => {
               </div>
 
               {/* Buttons */}
-              <div className="d-flex justify-content-between align-items-center mt-4">
-                <Button
-                  variant="outline-warning"
-                  style={{ padding: '0.625rem 1rem', borderRadius: '0.375rem' }}
+              <div className="d-flex justify-content-between mt-4">
+                <button
                   type="button"
-                  onClick={() => {
-                    // Reset form
-                    setFieldValue("type", "");
-                    setFieldValue("quality", "");
-                    setFieldValue("photo", null);
-                    setFieldValue("notes", "");
-                  }}
+                  className="btn btn-outline-warning"
+                  onClick={() => resetForm()}
                 >
                   Cancel
-                </Button>
-                <Button
-                  variant="success"
-                  style={{ padding: '0.625rem 1rem', borderRadius: '0.375rem', background: 'var(--Primary, #457900)' }}
+                </button>
+                <button
                   type="submit"
+                  style={{ backgroundColor: "#457900", color: "white" }}
                   disabled={isSubmitting}
                 >
-                  Save
-                </Button>
+                  Continue
+                </button>
               </div>
             </Form>
           )}
         </Formik>
       </div>
-      {showSaved && (
-        <div style={{
-          position: "fixed",
-          top: 0, left: 0, right: 0, bottom: 0,
-          background: "rgba(0,0,0,0.2)",
-          zIndex: 9999,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }}>
-          <Saved onDone={() => setShowSaved(false)} />
-        </div>
-      )}
     </>
   );
 };

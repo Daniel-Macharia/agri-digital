@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Button } from "react-bootstrap";
-import Saved from '../../Shared/Saved';
+import Saved from "../../Shared/Saved";
 
 const validationSchema = Yup.object({
   livestockType: Yup.string().required("Livestock Type is required"),
@@ -22,30 +21,31 @@ const initialValues = {
 
 const LivestockProtection: React.FC = () => {
   const [showSaved, setShowSaved] = useState(false);
+
   return (
     <>
       {showSaved && (
-        <div style={{
-          position: 'fixed',
-          top: 0, left: 0, right: 0, bottom: 0,
-          background: 'rgba(0,0,0,0.2)',
-          zIndex: 9999,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(0,0,0,0.2)",
+            zIndex: 9999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <Saved onDone={() => setShowSaved(false)} />
         </div>
       )}
-      <div
-        className="d-flex flex-column p-4 rounded-4"
-        style={{
-          background: "#FFF",
-        }}
-      >
-        <h3 className="h3-semibold mb-4" style={{ color: 'var(--Primary-Text, #333)' }}>
+      <div className="w-100 rounded-4 bg-white border mt-3 p-4">
+        <h5 className="mb-4 text-start" style={{ color: "#333" }}>
           Livestock Protection
-        </h3>
+        </h5>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -56,20 +56,22 @@ const LivestockProtection: React.FC = () => {
           }}
         >
           {({ isSubmitting, resetForm }) => (
-            <Form className="w-100">
+            <Form>
               {/* Livestock Type */}
               <div className="row mb-3 align-items-center">
-                <label htmlFor="livestockType" className="col-md-3 col-form-label body-regular" style={{ color: 'var(--Primary-Text, #333)' }}>
+                <label
+                  htmlFor="livestockType"
+                  className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
+                >
                   Livestock Type
                 </label>
-                <div className="col-md-9">
+                <div className="col-md-10">
                   <Field
+                    type="text"
                     id="livestockType"
                     name="livestockType"
-                    type="text"
-                    placeholder="Lorem"
                     className="form-control bg-light"
-                    style={{ height: '2.5rem', borderRadius: '0.5rem' }}
+                    placeholder="Lorem"
                   />
                   <ErrorMessage
                     name="livestockType"
@@ -81,17 +83,19 @@ const LivestockProtection: React.FC = () => {
 
               {/* Type of Material */}
               <div className="row mb-3 align-items-center">
-                <label htmlFor="typeOfMaterial" className="col-md-3 col-form-label body-regular" style={{ color: 'var(--Primary-Text, #333)' }}>
+                <label
+                  htmlFor="typeOfMaterial"
+                  className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
+                >
                   Type of Material
                 </label>
-                <div className="col-md-9">
+                <div className="col-md-10">
                   <Field
+                    type="text"
                     id="typeOfMaterial"
                     name="typeOfMaterial"
-                    type="text"
-                    placeholder="Lorem"
                     className="form-control bg-light"
-                    style={{ height: '2.5rem', borderRadius: '0.5rem' }}
+                    placeholder="Lorem"
                   />
                   <ErrorMessage
                     name="typeOfMaterial"
@@ -103,17 +107,19 @@ const LivestockProtection: React.FC = () => {
 
               {/* Size */}
               <div className="row mb-3 align-items-center">
-                <label htmlFor="size" className="col-md-3 col-form-label body-regular" style={{ color: 'var(--Primary-Text, #333)' }}>
+                <label
+                  htmlFor="size"
+                  className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
+                >
                   Size
                 </label>
-                <div className="col-md-9">
+                <div className="col-md-10">
                   <Field
+                    type="text"
                     id="size"
                     name="size"
-                    type="text"
-                    placeholder="Lorem"
                     className="form-control bg-light"
-                    style={{ height: '2.5rem', borderRadius: '0.5rem' }}
+                    placeholder="Lorem"
                   />
                   <ErrorMessage
                     name="size"
@@ -125,17 +131,19 @@ const LivestockProtection: React.FC = () => {
 
               {/* Number of Animals */}
               <div className="row mb-3 align-items-center">
-                <label htmlFor="numberOfAnimals" className="col-md-3 col-form-label body-regular" style={{ color: 'var(--Primary-Text, #333)' }}>
+                <label
+                  htmlFor="numberOfAnimals"
+                  className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
+                >
                   No. of Animals
                 </label>
-                <div className="col-md-9">
+                <div className="col-md-10">
                   <Field
+                    type="text"
                     id="numberOfAnimals"
                     name="numberOfAnimals"
-                    type="text"
-                    placeholder="Lorem"
                     className="form-control bg-light"
-                    style={{ height: '2.5rem', borderRadius: '0.5rem' }}
+                    placeholder="Lorem"
                   />
                   <ErrorMessage
                     name="numberOfAnimals"
@@ -147,18 +155,20 @@ const LivestockProtection: React.FC = () => {
 
               {/* Notes */}
               <div className="row mb-3 align-items-start">
-                <label htmlFor="notes" className="col-md-3 col-form-label body-regular" style={{ color: 'var(--Primary-Text, #333)' }}>
+                <label
+                  htmlFor="notes"
+                  className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
+                >
                   Notes
                 </label>
-                <div className="col-md-9">
+                <div className="col-md-10">
                   <Field
-                    id="notes"
                     as="textarea"
+                    id="notes"
                     name="notes"
-                    rows={4}
+                    rows={5}
                     className="form-control bg-light"
                     placeholder="Lorem Ipsum"
-                    style={{ borderRadius: '0.5rem' }}
                   />
                   <ErrorMessage
                     name="notes"
@@ -169,23 +179,21 @@ const LivestockProtection: React.FC = () => {
               </div>
 
               {/* Buttons */}
-              <div className="d-flex justify-content-between align-items-center mt-4">
-                <Button
-                  variant="outline-warning"
-                  style={{ padding: '0.625rem 1rem', borderRadius: '0.375rem' }}
+              <div className="d-flex justify-content-between mt-4">
+                <button
                   type="button"
+                  className="btn btn-outline-warning"
                   onClick={() => resetForm()}
                 >
                   Cancel
-                </Button>
-                <Button
-                  variant="success"
-                  style={{ padding: '0.625rem 1rem', borderRadius: '0.375rem', background: 'var(--Primary, #457900)' }}
+                </button>
+                <button
                   type="submit"
+                  style={{ backgroundColor: "#457900", color: "white" }}
                   disabled={isSubmitting}
                 >
-                  Save
-                </Button>
+                  Continue
+                </button>
               </div>
             </Form>
           )}

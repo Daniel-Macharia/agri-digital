@@ -36,13 +36,22 @@ export default function Dashboard() {
             <div className="row h-100">
                 {/* Sidebar - collapsible on small screens */}
                 <div
-                    className={`col-12 col-lg-3 col-xl-2 bg-white h-100 p-0 ${
+                    className={`col-9 col-sm-6 col-lg-3 col-xl-2 bg-white h-100 p-0 ${
                         isSidebarVisible ? "position-fixed start-0 top-0 z-3 shadow" : "d-none d-lg-block"
                     }`}
-                    style={{ minWidth: isSidebarVisible ? "280px" : undefined, zIndex: isSidebarVisible ? 1200 : undefined }}
+                    style={{ zIndex: isSidebarVisible ? 1200 : undefined }}
                 >
                     <SideBar toggleSidebar={toggleSidebar} />
                 </div>
+
+                {/* Overlay for mobile view */}
+                {isSidebarVisible && (
+                    <div
+                        className="position-fixed top-0 start-0 w-100 h-100 bg-dark d-lg-none"
+                        style={{ opacity: 0.5, zIndex: 1100 }}
+                        onClick={toggleSidebar}
+                    ></div>
+                )}
 
                 {/* Main content area */}
                 <div className="col-12 col-lg-9 col-xl-10 d-flex flex-column flex-grow-1 px-0">

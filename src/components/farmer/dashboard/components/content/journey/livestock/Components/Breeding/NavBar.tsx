@@ -26,7 +26,7 @@ const NavBar: React.FC = () => {
   >
   
       {/* Back Arrow */}
-      <div className="d-flex align-items-center" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
+      <div className="d-flex align-items-center" style={{ cursor: 'pointer' }} onClick={() => navigate(basePath)}>  
         <div className="d-inline-block" style={{ width: "1.25rem", height: "1.25rem", transform: "rotate(0deg)", flexShrink: 0 }}>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
             <g clipPath="url(#clip0_2_16669)">

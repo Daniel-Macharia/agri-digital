@@ -18,6 +18,8 @@ const Breeding = () => {
     <Routes>
       <Route path="" element={<LandingPage />} />
       <Route path="erus" element={WithNavBar(ErusDetection)} />
+    
+
 
  
     </Routes>
