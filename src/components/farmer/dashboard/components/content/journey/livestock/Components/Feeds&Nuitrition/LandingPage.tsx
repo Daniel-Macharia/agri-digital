@@ -7,7 +7,7 @@ const FeedingLandingPage = () => {
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate('/feeds'); 
+    navigate('feeds'); 
   };
 
   return (

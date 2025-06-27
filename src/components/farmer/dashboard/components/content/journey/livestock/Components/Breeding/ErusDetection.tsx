@@ -1,8 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+
 
 // Example livestock options (should be replaced with real data source if available)
 const identificationOptions = [
@@ -21,8 +20,8 @@ const detectionMethodOptions = [
 const initialValues = {
   identification: "",
   detectionMethod: "Visual",
-  startDate: null,
-  endDate: null,
+  startDate: "",
+  endDate: "",
   nextAction: "Lorem Ipsum",
   notes: "Lorem Ipsum",
 };
@@ -38,8 +37,8 @@ const validationSchema = Yup.object({
 
 const ErusDetection: React.FC = () => {
   return (
-    // <div className="container-fluid p-4 gap-5 bg-warning rounded-4 h-100">
-    <div className="w-100 rounded-4 bg-white border m-4 p-4">
+    
+    <div className="w-100 rounded-4 bg-white border m-4 p-4 ">
         <h5 className="mb-4 text-start" style={{ color: "#333" }}>Estrus Detection</h5>
         <Formik
           initialValues={initialValues}
@@ -48,7 +47,7 @@ const ErusDetection: React.FC = () => {
             alert(JSON.stringify(values, null, 2));
           }}
         >
-          {({ setFieldValue, values, isSubmitting }) => (
+          {({ isSubmitting, resetForm }) => ( 
             <Form>
               {/* Identification */}
               <div className="row mb-3 align-items-center">
@@ -90,13 +89,12 @@ const ErusDetection: React.FC = () => {
               <div className="row mb-3 align-items-center ">
                 <label htmlFor="startDate" className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular">Start Date</label>
                 <div className="col-md-10">
-                  <DatePicker
+                  <Field
+                    type="date"
                     id="startDate"
-                    selected={values.startDate}
-                    onChange={(date) => setFieldValue("startDate", date)}
+                    name="startDate"
                     className="form-control w-100 bg-light"
-                    placeholderText="Select Start Date"
-                    dateFormat="yyyy-MM-dd"
+                    placeholder="Select Start Date"
                   />
                   <ErrorMessage name="startDate" component="div" className="text-danger small w-100" />
                 </div>
@@ -106,13 +104,12 @@ const ErusDetection: React.FC = () => {
               <div className="row mb-3 align-items-center">
                 <label htmlFor="endDate" className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular">End Date</label>
                 <div className="col-md-10">
-                  <DatePicker
+                  <Field
+                    type="date"
                     id="endDate"
-                    selected={values.endDate}
-                    onChange={(date) => setFieldValue("endDate", date)}
+                    name="endDate"
                     className="form-control bg-light"
-                    placeholderText="Select End Date"
-                    dateFormat="yyyy-MM-dd"
+                    placeholder="Select End Date"
                   />
                   <ErrorMessage name="endDate" component="div" className="text-danger small w-100" />
                 </div>
@@ -151,14 +148,14 @@ const ErusDetection: React.FC = () => {
 
               {/* Buttons */}
               <div className="d-flex justify-content-between mt-4">
-                <button type="button" className="btn btn-outline-warning">Cancel</button>
-                <button type="submit" className="btn btn-success" disabled={isSubmitting}>Continue</button>
+                <button type="button" className="btn btn-outline-warning" onClick={() => resetForm()}>Cancel</button>
+                <button type="submit" style={{ backgroundColor: '#457900', color: 'white' }} disabled={isSubmitting}>Continue</button>
               </div>
             </Form>
           )}
         </Formik>
       </div>
-    // </div>
+    
   );
 };
 
