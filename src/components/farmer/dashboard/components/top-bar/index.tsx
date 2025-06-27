@@ -1,102 +1,73 @@
-import { Formik, Form, Field } from "formik";
-
-import * as Yup from 'yup';
 
 
+// This component assumes you have Font Awesome included in your project for icons.
+// It also uses a placeholder for the user avatar from i.pravatar.cc.
 
 export default function TopBar({ toggleSidebar }: { toggleSidebar: () => void }) {
-    const initialValues = {
-        searchItem: '',
-    };
-
-    const validationSchema = Yup.object({
-        searchItem: Yup.string().required('Required'),
-    });
-
-    const searchForItem = async (values: typeof initialValues, { }: any) => {
-        let value = values.searchItem;
-        console.log("searching item ", value);
-    };
-
-    const loadNotifications = () => {
-        console.log("loading notifications...");
-    };
-
-    const showMoreActions = () => {
-        console.log("Here are more actions...");
-    };
-
-    const loadProfile = () => {
-        console.log("loading profile...");
-    };
-
-    let render = () => {
-        return (
-            <nav
-                className="navbar navbar-light bg-white shadow-sm w-100 position-sticky top-0 px-3 px-lg-4"
-                style={{ zIndex: 2 }} // z-index lower than sidebar (z-3) so sidebar overlays in mobile
-            >
-                {/* Left : Menu toggle + greeting */}
-                <div className="d-flex align-items-center flex-grow-1">
-                    {/* Mobile menu toggle */}
-                    <button
-                        className="btn btn-link text-dark d-lg-none me-3 p-0"
-                        type="button"
-                        aria-label="Toggle sidebar"
-                        onClick={toggleSidebar}
-                    >
-                        <i className="fas fa-bars fa-fw fs-4"></i>
-                    </button>
-
-                    {/* Greeting – hidden on mobile for space */}
-                    <div className="d-none d-lg-flex flex-column">
-                        <h6 className="mb-0 fw-semibold">Welcome, John Doe</h6>
-                        <div className="d-flex align-items-center gap-1">
-                            <small className="text-muted">Mugutha Farm, Ruiru</small>
-                            <i className="fas fa-chevron-down small text-muted"></i>
-                        </div>
+    return (
+        <header
+            className="d-flex align-items-center justify-content-between w-100 position-sticky top-0 px-5  py-4"
+            style={{ zIndex: 1020, backgroundColor: '#ECECEC' }}
+        >
+            {/* Left Side: Welcome message and Farm selector */}
+            <div className="d-flex align-items-center">
+                {/* Mobile menu toggle */}
+                <button
+                    className="btn btn-link text-dark d-lg-none me-2 p-0"
+                    type="button"
+                    aria-label="Toggle sidebar"
+                    onClick={toggleSidebar}
+                >
+                    <i className="fas fa-bars fa-fw fs-4"></i>
+                </button>
+                
+                {/* Welcome Text */}
+                <div className="d-none d-lg-block">
+                    <h4 className="fw-bold mb-0">Welcome, John Doe</h4>
+                    <div className="d-flex align-items-center" style={{ cursor: 'pointer' }}>
+                        <span className="text-muted me-1">Mugutha Farm, Ruiru</span>
+                        <i className="fas fa-chevron-down small text-muted"></i>
                     </div>
                 </div>
+            </div>
 
-                {/* Right : Search + icons */}
-                <div className="d-flex align-items-center gap-3">
-                    {/* Search */}
-                    <Formik
-                        initialValues={initialValues}
-                        validationSchema={validationSchema}
-                        onSubmit={searchForItem}
-                    >
-                        {() => (
-                            <Form className="input-group rounded-pill overflow-hidden bg-light" style={{ maxWidth: "15rem" }}>
-                                <span className="input-group-text bg-transparent border-0 py-0 ps-3 pe-0">
-                                    <img src="/assets/images/search_icon.svg" alt="search" style={{ height: "1rem" }} />
-                                </span>
-                                <Field
-                                    name="searchItem"
-                                    type="text"
-                                    className="form-control border-0 bg-transparent small-regular"
-                                    placeholder="Search"
-                                />
-                            </Form>
-                        )}
-                    </Formik>
-
-                    {/* Icons */}
-                    <button className="btn btn-link position-relative p-0" onClick={loadNotifications}>
-                        <img src="/assets/images/notification_icon.svg" alt="notifications" />
-                    </button>
-
-                    <button className="btn btn-link p-0" onClick={loadProfile}>
-                        <img src="/assets/images/profile_icon.svg" alt="profile" />
-                    </button>
-
-                    <button className="btn btn-link p-0" onClick={showMoreActions}>
-                        <img src="/assets/images/more_icon.svg" alt="more actions" />
-                    </button>
+            {/* Right Side: Search, Notifications, Profile */}
+            <div
+                className="d-flex align-items-center rounded-pill px-3 py-1"
+                style={{ backgroundColor: '#fff' }}
+            >
+                {/* Search Input */}
+                <div className="d-flex align-items-center">
+                    <i className="fas fa-search text-muted me-2"></i>
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        className="form-control border-0 bg-transparent p-0 d-none d-md-inline-block"
+                        style={{ boxShadow: 'none', width: '200px', backgroundColor: '#ECECEC' }}
+                        aria-label="Search"
+                    />
                 </div>
-            </nav>
-        );
-    };
 
-    return render();
+                {/* Notification Icon */}
+                <div className="position-relative mx-3" style={{ cursor: 'pointer' }}>
+                    <i className="fas fa-bell fs-5 text-muted"></i>
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style={{ fontSize: '0.6em', border: '2px solid white' }}>
+                        1
+                        <span className="visually-hidden">new notifications</span>
+                    </span>
+                </div>
+
+                {/* Profile */}
+                <div className="d-flex align-items-center" style={{ cursor: 'pointer' }}>
+                    <img
+                        src="https://i.pravatar.cc/40?img=1" // Placeholder for user avatar
+                        alt="User Avatar"
+                        className="rounded-circle"
+                        style={{ width: '32px', height: '32px' }}
+                    />
+                    <i className="fas fa-chevron-down small text-muted ms-2"></i>
+                </div>
+            </div>
+        </header>
+    );
 }

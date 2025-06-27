@@ -28,14 +28,18 @@ export default function Dashboard() {
     };
 
     return ( 
-        <div className="container-fluid position-absolute top-0 start-0 vh-100" style={{ backgroundColor: '#ececec' }}>
+        <div
+  className="container-fluid position-absolute top-0 start-0 vh-100 w-100 overflow-x-hidden "
+  style={{ backgroundColor: '#ececec' }}
+>
+
             <div className="row h-100">
                 {/* Sidebar - collapsible on small screens */}
                 <div
                     className={`col-12 col-lg-3 col-xl-2 bg-white h-100 p-0 ${
                         isSidebarVisible ? "position-fixed start-0 top-0 z-3 shadow" : "d-none d-lg-block"
                     }`}
-                    style={{ width: isSidebarVisible ? "280px" : undefined, zIndex: isSidebarVisible ? 1200 : undefined }}
+                    style={{ minWidth: isSidebarVisible ? "280px" : undefined, zIndex: isSidebarVisible ? 1200 : undefined }}
                 >
                     <SideBar toggleSidebar={toggleSidebar} />
                 </div>

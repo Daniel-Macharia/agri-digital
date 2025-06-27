@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
  
 const navItems = [ 
   { label: "Erus", path: "erus" }, 
- 
+  { label: "Gestigation", path: "breeding" },
 ]; 
  
 const NavBar: React.FC = () => { 
@@ -20,49 +20,51 @@ const NavBar: React.FC = () => {
   const current = location.pathname.split("/").pop(); 
  
   return ( 
-    <div style={{ 
-      display: "flex", 
-      alignItems: "center", 
-      background: "#f5f5f5", 
-      padding: "12px 16px",
-      borderBottom: "1px solid #e0e0e0"
-    }}> 
-      {/* Nav Items */} 
-      {navItems.map((item, index) => { 
-        const isActive = current === item.path; 
-        return ( 
-          <button 
-            key={item.label} 
-            style={{ 
-              background: isActive ? "#689F38" : "transparent", 
-              color: isActive ? "#fff" : "#666", 
-              border: "none", 
-              borderRadius: 16, 
-              padding: "8px 16px", 
-              marginRight: index < navItems.length - 1 ? 12 : 0, 
-              fontWeight: isActive ? 500 : 400, 
-              fontSize: 14, 
-              outline: "none", 
-              cursor: "pointer", 
-              transition: "all 0.2s ease",
-              whiteSpace: "nowrap"
-            }} 
-            onClick={() => navigate(`${basePath}/${item.path}`)} 
-            onMouseEnter={(e) => {
-              if (!isActive) {
-                e.currentTarget.style.background = "#f0f0f0";
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!isActive) {
-                e.currentTarget.style.background = "transparent";
-              }
-            }}
-          > 
-            {item.label} 
-          </button> 
-        ); 
-      })} 
+    <div
+    className="d-flex flex-column align-items-start gap-2 gap-md-3 gap-lg-4 w-100 p-2 p-md-3"
+    style={{ backgroundColor: '#ECECEC' }}
+  >
+  
+      {/* Back Arrow */}
+      <div className="d-flex align-items-center" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
+        <div className="d-inline-block" style={{ width: "1.25rem", height: "1.25rem", transform: "rotate(0deg)", flexShrink: 0 }}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <g clipPath="url(#clip0_2_16669)">
+              <path d="M16.875 10H3.125" stroke="#333333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M8.75 4.375L3.125 10L8.75 15.625" stroke="#333333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_2_16669">
+                <rect width="20" height="20" fill="white" transform="matrix(0 1 -1 0 20 0)"/>
+              </clipPath>
+            </defs>
+          </svg>
+        </div>
+      </div>
+
+      {/* Navigation Items - Responsive Layout */}
+      <div className="d-flex flex-wrap justify-content-start align-items-start gap-2 gap-md-3 gap-lg-4 w-100">
+        {navItems.map((item, index) => { 
+          const isActive = current === item.path; 
+          return ( 
+            <button 
+              key={item.label} 
+              className={`btn ${isActive ? 'btn-success' : 'btn-light'} btn-sm btn-md-md rounded-pill px-3 py-2 fw-${isActive ? 'medium' : 'normal'} text-nowrap`}
+              style={{
+                backgroundColor: isActive ? "#689F38" : "#fff",
+                color: isActive ? "#fff" : "#000",
+                border: "none",
+                fontSize: "0.875rem",
+                transition: "all 0.2s ease",
+                minWidth: "fit-content"
+              }}
+              onClick={() => navigate(`${basePath}/${item.path}`)}
+            > 
+              {item.label} 
+            </button> 
+          ); 
+        })} 
+      </div>
     </div> 
   ); 
 }; 

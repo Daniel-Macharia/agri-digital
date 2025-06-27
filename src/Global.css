@@ -476,3 +476,6 @@
 .border-success { border-color: var(--success); }
 
 
+html, body {
+  overflow-x: hidden;
+}

@@ -7,7 +7,7 @@ export default function Content( {children}: DashboardLayoutProps){
     {
         return (<>
         <div >
-            <main >
+            <main className="px-5" style={{ backgroundColor: '#ECECEC' }}>
                 {children}
             </main>
         </div>

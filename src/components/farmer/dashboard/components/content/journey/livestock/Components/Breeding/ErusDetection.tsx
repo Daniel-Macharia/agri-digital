@@ -38,7 +38,7 @@ const validationSchema = Yup.object({
 const ErusDetection: React.FC = () => {
   return (
     
-    <div className="w-100 rounded-4 bg-white border m-4 p-4 ">
+    <div className="w-100 rounded-4 bg-white border mt-3 p-4">
         <h5 className="mb-4 text-start" style={{ color: "#333" }}>Estrus Detection</h5>
         <Formik
           initialValues={initialValues}
