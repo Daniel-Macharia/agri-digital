@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import ReusableLandingPage from '../../Shared/ReusableLandingPage';
+import NavBar from '../../Shared/NavBar';
 
 
 
@@ -11,12 +12,15 @@ const FeedingLandingPage = () => {
   };
 
   return (
-    <ReusableLandingPage
-      title="No Records Yet"
-      text="Start by registering your livestock."
-      buttonText="Get Started"
-      onButtonClick={handleGetStarted}
-    />
+    <>
+      <NavBar />
+      <ReusableLandingPage
+        title="No Records Yet"
+        text="Start by registering your livestock."
+        buttonText="Get Started"
+        onButtonClick={handleGetStarted}
+      />
+    </>
   );
 };
 

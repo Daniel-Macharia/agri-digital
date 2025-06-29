@@ -44,7 +44,7 @@ export default function Dashboard() {
                     <SideBar toggleSidebar={toggleSidebar} />
                 </div>
 
-                {/* Overlay for mobile view */}
+                {/* Overlay for mobile view */} 
                 {isSidebarVisible && (
                     <div
                         className="position-fixed top-0 start-0 w-100 h-100 bg-dark d-lg-none"
