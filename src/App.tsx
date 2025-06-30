@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import NotFound from "./components/common/exceptions/NotFound";
-import AuthLayout from "./components/common/layout/AuthLayout";
-import HomePageLayout from "./components/common/layout/HomePageLayout";
+import NotFound from "./common/exceptions/NotFound";
+import AuthLayout from "./common/layout/AuthLayout";
+import HomePageLayout from "./common/layout/HomePageLayout";
 import { APP_ROUTES } from "./lib/Routes";
 const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 

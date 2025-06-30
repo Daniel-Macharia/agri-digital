@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import * as Yup from 'yup';
 
-import "/src/components/auth/style.css";
+import "../../style.css";
 import "./CreatePassword.css";
 import { Field, Form, Formik } from "formik";
 

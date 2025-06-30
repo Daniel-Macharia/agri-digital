@@ -18,7 +18,7 @@ import Wallet from "./content/wallet";
 import Weather from "./content/weather";
 import Settings from "./content/settings";
 import Invite from "./content/invite";
-import NotFound from "../../../common/exceptions/NotFound";
+import NotFound from "../common/exceptions/NotFound";
 
 export default function Dashboard() {
     const [isSidebarVisible, setSidebarVisible] = useState(false);

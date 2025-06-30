@@ -4,7 +4,7 @@ import ProjectInfo from "./project-info";
 import JourneyHome from "./journey-home";
 import AddNewProject from "./add-new-project";
 import Livestock from "./livestock";
-import NotFound from "../../../../../common/exceptions/NotFound";
+import NotFound from "../../../common/exceptions/NotFound";
 
 export default function Journey()
 {
