@@ -1,15 +1,18 @@
-import "./index.css";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 
-export default function MarketPlace()
-{
+import MarketplacePage from './pages/MarketplacePage';
+import CheckoutPage from './pages/CheckoutPage';
+import TrackOrderPage from './pages/TrackOrderPage';
 
-    const render = () =>{
-        return (<>
-        <div id="market-place-page-content">
-            <h1>This is the market place page content</h1>
-        </div>
-        </>);
-    };
+const MarketPlaceRouter: React.FC = () => {
+    return (
+        <Routes>
+            <Route path="" element={<MarketplacePage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/track-order" element={<TrackOrderPage />} />
+        </Routes>
+    );
+};
 
-    return render();
-}
+export default MarketPlaceRouter; 

@@ -1,0 +1,20 @@
+.management-activity-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 20px;
+}
+
+#management-content-div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.management-activity-description{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}

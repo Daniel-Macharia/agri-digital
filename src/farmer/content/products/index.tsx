@@ -1,4 +1,6 @@
 import "./index.css";
+import ProductsPage from "./ProductsPage";
+
 
 export default function Products()
 {
@@ -6,7 +8,7 @@ export default function Products()
     const render = () =>{
         return (<>
         <div id="products-page-content">
-            <h1>This is the products page content</h1>
+          <ProductsPage />
         </div>
         </>);
     };

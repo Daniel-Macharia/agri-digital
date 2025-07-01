@@ -1,0 +1,87 @@
+#top-bar-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#content-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#planting-calendar-container{
+    display: flex;
+width: 586px;
+padding: 20px 10px;
+flex-direction: column;
+align-items: center;
+gap: 20px;
+
+align-self: center;
+justify-self: center;
+
+border-radius: 6px;
+background: var(--cards-form-bg, #FFF);
+}
+
+#planting-calendar-item{
+    display: flex;
+width: 53px;
+height: 51.344px;
+padding: 8px 10px;
+align-items: center;
+gap: 10px;
+}
+
+#planting-calendar-title{
+    color: var(--Primary-Text, #333);
+text-align: center;
+
+/* H3/bold */
+font-family: Roboto;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: 32px; /* 160% */
+}
+
+#planting-calendar-description{
+    color: var(--Secondary-Text, #777);
+text-align: center;
+
+/* Body/medium */
+font-family: Roboto;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 25.6px; /* 160% */
+}
+
+button{
+    display: flex;
+padding-top: 10px;
+padding-bottom: 10px;
+padding-left: 10px;
+padding-right: 10px;
+
+width: fit-content;
+justify-content: center;
+align-items: center;
+gap: 10px;
+
+border-radius: 8px;
+background: var(--Primary, #457900);
+}
+
+
+/* #add-crop-modal-footer{
+    align-items: center;
+    justify-content: flex-end;
+} */
+
+#add-crop-button{
+    width: 100%;
+}

@@ -1,0 +1,25 @@
+.overview-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    background-color: white;
+    border-style: none;
+    border-radius: 4px;
+    margin: 4px;
+
+    padding: 4px;
+
+    width: 100%;
+}
+
+.overview-title{
+    color: black;
+    font-weight: bold;
+    font-size: large;
+}
+
+.overview-body{
+    display: flex;
+}

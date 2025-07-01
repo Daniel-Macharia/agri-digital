@@ -1,0 +1,33 @@
+
+
+.storage-information-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 109%;
+    gap: 30px;
+    padding: 4px;
+}
+
+.storage-specs-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0px;
+    margin: 0px;
+    padding: 10px;
+}
+
+
+.storage-item-container{
+    border-style: none;
+    border-radius: 20px;
+}
+
+.storage-items-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+}

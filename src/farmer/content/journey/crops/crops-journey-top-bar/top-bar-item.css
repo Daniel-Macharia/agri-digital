@@ -1,0 +1,12 @@
+.top-bar-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-bar-item img{
+    width: 32px;
+    height: 32px;
+    aspect-ratio: 1/1;
+}

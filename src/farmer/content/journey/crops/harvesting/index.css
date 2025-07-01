@@ -1,0 +1,17 @@
+.harvest-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.harvest-content{
+    background-color: white;
+    border-radius: 20px;
+}
+
+#heading{
+    text-align: start;
+}

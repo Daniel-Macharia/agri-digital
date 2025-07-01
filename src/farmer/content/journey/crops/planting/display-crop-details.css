@@ -1,0 +1,57 @@
+.crop-icon{
+    margin-left: 0px;
+    padding: 0px;
+    width: 16px;
+}
+
+.crop-details-date-icon{
+    margin: 0px;
+    width: 24px;
+    padding: 0px;
+}
+
+.crop-details-date-label{
+    text-align: start;
+    margin: 0px;
+}
+
+.crop-label{
+    text-align: start;
+}
+
+.crop-details-top-bar{
+    margin: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.crop-details-top-bar-item{
+    margin: 0px;
+}
+
+.crop-details-content-div{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.crop-details-date-container{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin: 8px;
+    justify-content: flex-start;
+    align-items: center;
+
+    background-color: whitesmoke;
+    border-style: solid;
+    border-radius: 2px;
+    border-width: 0px;
+}
+
+.display-crops-activities-review-top-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

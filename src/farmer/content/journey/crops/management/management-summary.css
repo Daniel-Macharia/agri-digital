@@ -1,0 +1,26 @@
+.summary-cards{
+    padding: 0px 10px;
+}
+
+.summary-col-item{
+    margin: 0px;
+    padding: 0px;
+    text-align: start;
+}
+
+.summary-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+}
+
+#edit-icon{
+    height: 100%;
+    background-color: whitesmoke;
+    border-radius: 16px;
+}
+
+.summary-col-item-value{
+    text-align: end;
+}

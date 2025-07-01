@@ -1,0 +1,252 @@
+.container{
+    display: flex;
+    width: 100%;
+    padding: 33px 32px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+
+    border-radius: 20px;
+    background: #FFF;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-content{
+    width: 100%;
+}
+
+.project-assessment-title{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.project-assessment-title h3{
+    color: var(--Primary-Text, #333);
+
+    /* H3/semibold */
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px; /* 160% */
+}
+
+.project-assessment-title p{
+    color: var(--Secondary-Text, #777);
+
+    /* Body/regular */
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25.6px; /* 160% */
+}
+
+.revenue-div{
+    display: flex;
+    padding: 20px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+
+    border-radius: 20px;
+    background: #FFF;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.revenue-div label{
+    color: var(--Primary-Text, #333);
+
+    /* Body/regular */
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25.6px; /* 160% */
+}
+
+.price-input-field{
+    height: 50px;
+    align-self: stretch;
+
+    width: 100%;
+    flex-shrink: 0;
+
+    border-radius: 6px;
+    border: 1px solid var(--Border, #ECECEC);
+    background: var(--White, #FFF);
+
+    color: var(--Secondary-Text, #777);
+
+    /* Body/regular */
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25.6px; /* 160% */
+}
+
+.expenses{
+    display: flex;
+    padding: 20px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    border-radius: 20px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.expenses label{
+    color: var(--Primary-Text, #333);
+
+/* Body/regular */
+font-family: Roboto;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 25.6px; /* 160% */
+}
+
+.button-div{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-button{
+    display: flex;
+    padding: 10px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    border-radius: 6px;
+    border: 1px solid var(--Secondary, #FF9800);
+
+    color: var(--Secondary, #FF9800);
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22.4px; /* 160% */
+}
+
+.continue-button{
+    display: flex;
+    padding: 10px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px;
+    background: var(--Primary, #457900);
+
+    color: var(--cards-form-bg, #FFF);
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22.4px; /* 160% */
+}
+
+.total-expense-div{
+    display: flex;
+padding: 20px 16px;
+flex-direction: column;
+align-items: flex-start;
+gap: 8px;
+align-self: stretch;
+}
+
+.total-expense-div label{
+
+    color: var(--Primary-Text, #333);
+
+    /* Body/regular */
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25.6px; /* 160% */
+}
+
+.other-expenses-div{
+    width: 100%;
+    padding: 0px;
+}
+
+.input-label{
+    display: inline-flex;
+    padding: 10px;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 15%;
+    margin-top: 20px;
+}
+
+.input-fields{
+    display: flex;
+align-items: center;
+justify-self: flex-end;
+padding: 0px;
+margin: 0px;
+margin-top: 20px;
+width: 70%;
+
+gap: 20px;
+}
+
+.assessment-input-group{
+    width: 100%;
+    align-self: stretch;
+}
+
+.cost-input-field{
+    width: 30%;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 1px solid var(--Border, #ECECEC);
+    background: var(--White, #FFF);
+
+    color: var(--Secondary-Text, #777);
+
+    /* Body/regular */
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25.6px; /* 160% */
+}
+
+.description-input-field{
+    width: 70%;
+    height: 44px;
+    flex-shrink: 0;
+
+    border-radius: 6px;
+    border: 1px solid var(--Border, #ECECEC);
+    background: var(--White, #FFF);
+
+    color: var(--Secondary-Text, #777);
+
+    /* Body/regular */
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25.6px; /* 160% */
+}

@@ -1,12 +1,12 @@
 import "./index.css";
-
+import BankPage from "./BankPage";
 export default function Banks()
 {
 
     const render = () =>{
         return (<>
         <div id="banks-page-content">
-            <h1>This is the banks page content</h1>
+            <BankPage />
         </div>
         </>);
     };

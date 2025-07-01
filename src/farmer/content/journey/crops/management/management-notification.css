@@ -1,0 +1,28 @@
+#management-notification{
+    margin: 0px;
+    /* display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 20%;
+    height: 240px; */
+}
+
+.management-notification-item{
+    text-align: start;
+}
+
+#management-notification-name{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#management-notification-description{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#management-notification-details{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}

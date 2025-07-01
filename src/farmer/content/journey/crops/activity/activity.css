@@ -1,0 +1,44 @@
+#management-activity-div{
+    background-color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    border-radius: 20px;
+}
+.management-input-label{
+    text-align: start;
+    min-width: 100%;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.management-input-field{
+    width: 100%;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.management-input-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#management-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 0px;
+}
+
+#add-management-activity-form-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    gap: 10px;
+    margin-top: 0px;
+}

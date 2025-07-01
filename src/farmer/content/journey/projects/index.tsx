@@ -2,9 +2,13 @@ import JourneyItem, { type Project } from "./journey-item/jouney-item";
 
 import { loadProjects } from "../utils/load-projects";
 import { NavLink } from "react-router-dom";
+import StartNewProjectModal from "../add-new-project";
+import { useState } from "react";
 
 export default function Projects(){
     const journeyItems: Project[] | null =  loadProjects();
+
+    const [show, setShow] = useState<boolean>(false);
 
     const render = ()=>{
         return (<>
@@ -13,7 +17,9 @@ export default function Projects(){
                     <NavLink to="/farmer/projects"  className="nav-link">
                         <p>back</p>
                     </NavLink>
-                    <button><NavLink className="nav-link" to="/farmer/projects/add">Add a new project</NavLink></button>
+                    <button onClick={ () => setShow( true ) }>
+                        Add a new project
+                    </button>
                 </div>
                 <div id="journey-content" >
                     <div className="project-container" id="current-project" >
@@ -50,6 +56,8 @@ export default function Projects(){
                     </div>
                 </div>
             </div>
+
+            <StartNewProjectModal show={show} setShow={setShow}  />
         </>);
     };
 

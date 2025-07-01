@@ -1,0 +1,16 @@
+#wrapper{
+    width: 100%;
+}
+
+
+.form{
+    width: 100%;
+}
+.input-label{
+    text-align: center;
+    height: 100%;
+}
+
+.date-time-div{
+    width: 40%;
+}

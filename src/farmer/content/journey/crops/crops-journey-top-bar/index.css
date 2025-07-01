@@ -1,0 +1,10 @@
+.top-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    background-color: white;
+    border-radius: 24px;
+    padding: 8px;
+}

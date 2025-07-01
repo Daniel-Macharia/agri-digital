@@ -1,0 +1,19 @@
+.oneline-notification-item-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.oneline-notification-item-description{
+    text-align: start;
+    margin: 0px;
+}
+
+.oneline-notification-item-urgency{
+    background-color: white;
+    margin: 0px;
+}

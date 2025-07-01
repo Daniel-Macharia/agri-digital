@@ -4,3 +4,9 @@
     align-items: center;
     justify-content: center;
 }
+
+.other-button{
+    background-color: white;
+    color: var(--secondary);
+    border-color: var(--secondary);
+}

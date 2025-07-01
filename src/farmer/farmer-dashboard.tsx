@@ -7,8 +7,8 @@ import Content from "./content";
 
 import Home from "./content/home-content";
 import Journey from "./content/journey";
-import MarketPlace from "./content/market-place";
-import Products from "./content/products";
+import MarketPlaceRouter from "./content/market-place";
+import Products from "./content/products/index.tsx";
 import Banks from "./content/banks";
 import Sponsors from "./content/sponsors";
 import Package from "./content/package";
@@ -61,7 +61,7 @@ export default function Dashboard() {
                             <Route path="/home" element={<Home />} />
                             <Route path="/projects/*" element={<Journey />} />
                             <Route path="/products" element={<Products />} />
-                            <Route path="/market-place" element={<MarketPlace />} />
+                            <Route path="/market-place/*" element={<MarketPlaceRouter />} />
                             <Route path="/banks" element={<Banks />} />
                             <Route path="/sponsors" element={<Sponsors />} />
                             <Route path="/wallet" element={<Wallet />} />

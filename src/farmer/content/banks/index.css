@@ -1,6 +1,558 @@
-#banks-page-content{
+/* Base styles and mobile-first approach */
+* {
+  box-sizing: border-box;
+}
+
+/* Container and layout fixes */
+.container-fluid {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Remove fixed widths and make flexible */
+.row[style*="width: 1000px"] {
+  width: 100% !important;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.row[style*="width: 100%"] {
+  width: 100% !important;
+}
+
+/* Card responsiveness */
+.card {
+  margin-bottom: 1rem;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+/* Form controls */
+.form-control,
+.form-select {
+  font-size: 14px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+}
+
+/* Form alignment - ensure all form text starts from same column */
+.row.align-items-center .col-12.col-md-3,
+.row.align-items-left .col-12.col-md-3 {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+.row.align-items-center .col-12.col-md-9,
+.row.align-items-left .col-12.col-md-9 {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* Ensure labels and inputs start from same column position */
+.row.align-items-center label,
+.row.align-items-left label {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  text-align: left !important;
+}
+
+.row.align-items-center .form-control,
+.row.align-items-center .form-select,
+.row.align-items-center .input-group,
+.row.align-items-left .form-control,
+.row.align-items-left .form-select,
+.row.align-items-left .input-group {
+  margin-left: 0 !important;
+}
+
+/* Form rows - straight line alignment */
+.form-row,
+.row.align-items-center,
+.row.align-items-left {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.form-row > *,
+.row.align-items-center > *,
+.row.align-items-left > * {
+  padding-left: 0 !important;
+  padding-right: 15px;
+}
+
+/* Ensure all form elements start from the same line */
+.card-body .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.card-body .row > [class*="col-"] {
+  padding-left: 0 !important;
+}
+
+/* Button responsiveness */
+.btn {
+  font-size: 14px;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  white-space: nowrap;
+}
+
+/* Request Partnership Button - RIGHT aligned and responsive */
+.d-flex.justify-content-end {
+  justify-content: flex-end !important;
+  margin-left: auto !important;
+}
+
+.d-flex.justify-content-end .btn {
+  width: auto !important;
+  max-width: 100%;
+  white-space: nowrap;
+  padding: 0.5rem 1rem;
+  flex-shrink: 0;
+  margin-left: auto !important;
+}
+
+/* Partnership button responsive behavior */
+@media (max-width: 575.98px) {
+  .d-flex.justify-content-end .btn {
+    font-size: 13px;
+    padding: 0.375rem 0.75rem;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .d-flex.justify-content-end .btn {
+    font-size: 14px;
+    padding: 0.5rem 1rem;
+  }
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 12px;
+}
+
+/* Tab buttons - FLUID and fully visible */
+.d-flex.gap-1 {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 0.25rem !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+
+.btn.rounded-pill {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  padding: 0.375rem 0.5rem !important;
+  font-size: 8px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Responsive tab button sizing */
+@media (min-width: 576px) {
+  .btn.rounded-pill {
+    padding: 0.375rem 0.75rem !important;
+    font-size: 13px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn.rounded-pill {
+    padding: 0.375rem 1rem !important;
+    font-size: 14px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .btn.rounded-pill {
+    flex: 0 0 auto !important;
+    min-width: 120px !important;
+  }
+}
+
+/* File upload areas */
+.rounded-3[style*="border: 1px dashed"] {
+  width: 100% !important;
+  max-width: 600px;
+  padding: 2rem 1rem;
+}
+
+/* Loan cards grid */
+.col-12.col-sm-6.col-lg-4 {
+  margin-bottom: 1rem;
+}
+
+.card img {
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Loan balance card */
+.card[style*="background: linear-gradient"] {
+  min-height: 100px;
+}
+
+/* Modal responsiveness */
+.modal-dialog {
+  margin: 1rem;
+  max-width: 500px;
+}
+
+.modal-content {
+  border-radius: 0.5rem;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+h5 {
+  font-size: 1.125rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+/* Small text adjustments */
+small, .small {
+  font-size: 0.875rem;
+}
+
+/* Icon adjustments */
+.text-muted svg {
+  flex-shrink: 0;
+}
+
+/* Active loans layout */
+.col-5 {
+  flex: 0 0 auto;
+  width: 50%;
+}
+
+/* Loan details section background fix */
+.bg-light {
+  background-color: transparent !important;
+  padding: 0.5rem 0;
+}
+
+
+/* Mobile Styles (up to 576px) */
+@media (max-width: 575.98px) {
+  .container-fluid {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .card-body {
+    padding: 0.75rem;
+  }
+  
+  /* Tab buttons mobile - ensure all are visible */
+  .d-flex.gap-1 {
+    gap: 0.125rem !important;
+  }
+  
+  .btn.rounded-pill {
+    padding: 0.25rem 0.375rem !important;
+    font-size: 10px !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+  
+  /* Form layouts mobile - maintain column alignment */
+  .row.align-items-center .col-12.col-md-3,
+  .row.align-items-left .col-12.col-md-3 {
+    margin-bottom: 0.5rem;
+    padding-left: 0 !important;
+  }
+  
+  .row.align-items-center .col-12.col-md-9,
+  .row.align-items-left .col-12.col-md-9 {
+    margin-bottom: 1rem;
+    padding-left: 0 !important;
+  }
+  
+  /* Ensure mobile form alignment */
+  .row.align-items-center label,
+  .row.align-items-left label {
+    text-align: left !important;
+    padding-left: 0 !important;
+  }
+  
+  /* Typography mobile */
+  h4 {
+    font-size: 1.125rem;
+  }
+  
+  h5 {
+    font-size: 1rem;
+  }
+  
+  h6 {
+    font-size: 0.9rem;
+  }
+  
+  /* Button adjustments mobile */
+  .btn {
+    font-size: 13px;
+    padding: 0.375rem 0.75rem;
+  }
+  
+  .btn.w-100 {
+    padding: 0.5rem;
+  }
+  
+  /* Card image mobile */
+  .card img {
+    height: 150px;
+  }
+  
+  /* Loan balance card mobile */
+  .card[style*="background: linear-gradient"] {
+    min-height: 80px;
+  }
+  
+  .card[style*="background: linear-gradient"] h3 {
+    font-size: 1.25rem;
+  }
+  
+  /* Active loans mobile layout */
+  .col-5 {
+    width: 48%;
+  }
+  
+  .col-5:first-child {
+    margin-right: 4%;
+  }
+  
+  /* File upload mobile */
+  .rounded-3[style*="border: 1px dashed"] {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  /* Modal mobile */
+  .modal-dialog {
+    margin: 0.5rem;
+  }
+  
+  /* Form controls mobile */
+  .form-control,
+  .form-select {
+    font-size: 13px;
+  }
+  
+  /* Back button mobile */
+  .btn-link {
+    font-size: 12px;
+    padding: 0;
+  }
+}
+
+/* Tablet Styles (576px to 767.98px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .btn.rounded-pill {
+    font-size: 12px !important;
+    padding: 0.375rem 0.75rem !important;
+  }
+  
+  /* Card image tablet */
+  .card img {
+    height: 160px;
+  }
+  
+  /* Loan balance card tablet */
+  .card[style*="background: linear-gradient"] {
+    min-height: 90px;
+  }
+  
+  /* Form layouts tablet - maintain column alignment */
+  .row.align-items-center .col-12.col-md-3,
+  .row.align-items-left .col-12.col-md-3 {
+    margin-bottom: 0.25rem;
+    padding-left: 0 !important;
+  }
+  
+  .row.align-items-center .col-12.col-md-9,
+  .row.align-items-left .col-12.col-md-9 {
+    padding-left: 0 !important;
+  }
+}
+
+/* Small Desktop (768px to 991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .card img {
+    height: 170px;
+  }
+  
+  /* Loan balance card small desktop */
+  .card[style*="background: linear-gradient"] {
+    min-height: 110px;
+  }
+  
+  .row[style*="width: 1000px"] {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+}
+
+/* Large Desktop (992px to 1199.98px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .card img {
+    height: 180px;
+  }
+  
+  .row[style*="width: 1000px"] {
+    max-width: 950px;
+  }
+}
+
+/* Extra Large Desktop (1200px and up) */
+@media (min-width: 1200px) {
+  .card img {
+    height: 200px;
+  }
+  
+  .row[style*="width: 1000px"] {
+    max-width: 1000px;
+  }
+}
+
+/* Fix for text nowrap issues on small screens */
+@media (max-width: 575.98px) {
+  .text-nowrap {
+    white-space: normal !important;
+  }
+  
+  .d-flex.text-nowrap {
+    white-space: nowrap;
+  }
+}
+
+/* Utility classes for better spacing */
+.fit-content {
+  width: fit-content;
+  margin-left: auto !important;
+}
+
+/* Ensure buttons don't overflow */
+.btn-group-responsive {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.btn-group-responsive .btn {
+  flex: 1;
+  min-width: 120px;
+}
+
+@media (max-width: 575.98px) {
+  .btn-group-responsive .btn {
+    min-width: 100px;
+    font-size: 12px;
+  }
+}
+
+/* Form row improvements */
+.form-row-responsive {
+  margin-bottom: 1rem;
+}
+
+.form-row-responsive .form-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-align: left !important;
+  padding-left: 0 !important;
+}
+
+@media (min-width: 768px) {
+  .form-row-responsive .form-label {
+    margin-bottom: 0;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    height: calc(1.5em + 1rem + 2px);
+  }
+}
+
+/* Improve file upload on mobile */
+@media (max-width: 575.98px) {
+  .rounded-3[style*="border: 1px dashed"] p {
+    font-size: 0.8rem;
+    margin-bottom: 1rem !important;
+  }
+  
+  .rounded-3[style*="border: 1px dashed"] .btn {
+    font-size: 12px;
+    padding: 0.375rem 0.75rem;
+  }
+}
+
+/* Loan application form improvements */
+.loan-application-form .row {
+  margin-bottom: 1rem;
+}
+
+.loan-application-form .form-check {
+  margin-bottom: 0.5rem;
+}
+
+/* Ensure form check alignment */
+.loan-application-form .form-check-inline {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+@media (max-width: 575.98px) {
+  .loan-application-form .form-check-inline {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Additional form alignment fixes */
+.card-body .row.align-items-center > div:first-child,
+.card-body .row.align-items-left > div:first-child {
+  text-align: left !important;
+}
+
+.card-body .row.align-items-center > div:last-child,
+.card-body .row.align-items-left > div:last-child {
+  text-align: left !important;
+}
+
+/* Radio button and checkbox alignment */
+.form-check-inline .form-check-input {
+  margin-left: 0 !important;
+}
+
+.form-check-inline .form-check-label {
+  padding-left: 0.25rem !important;
+}
+
+ .form-check-input:checked {
+  background-color: #0b9004 !important;
+  border-color : #008232 !important;
+}
+
+/* File upload area alignment */
+.rounded-3[style*="border: 1px dashed"] {
+  text-align: center !important;
+  margin-left: 0 !important;
 }
