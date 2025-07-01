@@ -130,6 +130,7 @@ const Ventilation: React.FC = () => {
                       background: "#f8f9fa",
                       minHeight: "10rem",
                       cursor: "pointer",
+                      position: "relative",
                     }}
                   >
                     <input
@@ -180,7 +181,7 @@ const Ventilation: React.FC = () => {
                             />
                           </g>
                           <defs>
-                            <clipPath id="clip0_436_94702">
+                            <clipPath id="clip0_436_94702)">
                               <rect
                                 width="24"
                                 height="24"
