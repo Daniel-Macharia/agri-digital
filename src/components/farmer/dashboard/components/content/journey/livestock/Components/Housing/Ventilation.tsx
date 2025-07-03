@@ -49,7 +49,7 @@ const Ventilation: React.FC = () => {
       )}
       <div className="w-100 rounded-4 bg-white border mt-3 p-4">
         <h5 className="mb-4 text-start" style={{ color: "#333" }}>
-          Ventilation
+          Ventilation 
         </h5>
         <Formik
           initialValues={initialValues}
@@ -83,7 +83,7 @@ const Ventilation: React.FC = () => {
                   <ErrorMessage
                     name="type"
                     component="div"
-                    className="text-danger small"
+                    className="text-danger small text-start"
                   />
                 </div>
               </div>
@@ -107,7 +107,7 @@ const Ventilation: React.FC = () => {
                   <ErrorMessage
                     name="quality"
                     component="div"
-                    className="text-danger small"
+                    className="text-danger small text-start"
                   />
                 </div>
               </div>
@@ -216,7 +216,7 @@ const Ventilation: React.FC = () => {
                   <ErrorMessage
                     name="photo"
                     component="div"
-                    className="text-danger small"
+                    className="text-danger small text-start"
                   />
                 </div>
               </div>
@@ -241,7 +241,7 @@ const Ventilation: React.FC = () => {
                   <ErrorMessage
                     name="notes"
                     component="div"
-                    className="text-danger small"
+                    className="text-danger small text-start"
                   />
                 </div>
               </div>
@@ -250,19 +250,27 @@ const Ventilation: React.FC = () => {
               <div className="d-flex justify-content-between mt-4">
                 <button
                   type="button"
-                  className="btn btn-outline-warning"
+                  className="btn btn-outline-warning ventilation-cancel-btn"
+                  style={{ borderRadius: "0.375rem", padding: "0.375rem 1.25rem", fontSize: "0.95rem", minWidth: "100px" }}
                   onClick={() => resetForm()}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  style={{ backgroundColor: "#457900", color: "white" }}
+                  style={{ backgroundColor: "#457900", color: "white", borderRadius: "0.375rem", padding: "0.375rem 1.25rem", fontSize: "0.95rem", minWidth: "100px", border: "none" }}
                   disabled={isSubmitting}
                 >
-                  Continue
+                  Save
                 </button>
               </div>
+              <style>{`
+                .ventilation-cancel-btn:hover, .ventilation-cancel-btn:focus {
+                  background-color: transparent !important;
+                  color: #ffc107 !important;
+                  border-color: #ffc107 !important;
+                }
+              `}</style>
             </Form>
           )}
         </Formik>
