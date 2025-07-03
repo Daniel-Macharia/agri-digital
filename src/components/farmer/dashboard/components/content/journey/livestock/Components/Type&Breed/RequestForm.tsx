@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Saved from "../../Shared/Saved";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
   serviceType: Yup.string()
@@ -34,6 +35,14 @@ const initialValues = {
 
 const RequestForm: React.FC = () => {
   const [showSaved, setShowSaved] = useState(false);
+  const navigate = useNavigate();
+
+  const handleDone = () => {
+    setShowSaved(false);
+    navigate("/journey/livestock/typebreed/form/records"); 
+  };
+
+ 
 
   return (
     <>
@@ -41,7 +50,7 @@ const RequestForm: React.FC = () => {
         <div
           style={{
             position: "fixed",
-            top: 0,
+            top: 0, 
             left: 0,
             right: 0,
             bottom: 0,
@@ -52,7 +61,7 @@ const RequestForm: React.FC = () => {
             justifyContent: "center",
           }}
         >
-          <Saved onDone={() => setShowSaved(false)} />
+          <Saved onDone={handleDone} />
         </div>
       )}
       <div className="w-100 rounded-4 bg-white border mt-3 p-4">
