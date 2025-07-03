@@ -8,7 +8,7 @@ import Extrapage from "./ExtraPage"
 import NavBar from "./NavBar"
 
 // Helper to wrap pages with NavBar
-const WithNavBar = (Component: React.FC) => (
+const WithNavBar = (Component: React.FC) => (   
   <>
     <NavBar />
     <Component />
