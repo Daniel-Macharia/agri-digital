@@ -28,7 +28,7 @@ const NavBar: React.FC = () => {
       >
         <div
           className="d-inline-block"
-          style={{
+          style={{ 
             width: "1.25rem",
             height: "1.25rem",
             transform: "rotate(0deg)",

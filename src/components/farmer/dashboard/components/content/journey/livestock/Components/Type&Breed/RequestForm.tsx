@@ -75,14 +75,14 @@ const RequestForm: React.FC = () => {
             setTimeout(() => {
               setShowSaved(true);
               setSubmitting(false);
-              resetForm();
+              resetForm();  
             }, 400);
           }}
         >
           {({ setFieldValue, isSubmitting, values, resetForm }) => (
             <Form>
               {/* Service Type */}
-              <div className="row mb-3 align-items-center">
+              <div className="row mb-3 align-items-center"> 
                 <label
                   htmlFor="serviceType"
                   className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
