@@ -74,7 +74,7 @@ const Space: React.FC = () => {
                   <ErrorMessage
                     name="area"
                     component="div"
-                    className="text-danger small"
+                    className="text-danger small text-start"
                   />
                 </div>
               </div>
@@ -98,7 +98,7 @@ const Space: React.FC = () => {
                   <ErrorMessage
                     name="animalCapacity"
                     component="div"
-                    className="text-danger small"
+                    className="text-danger small text-start"
                   />
                 </div>
               </div>
@@ -122,7 +122,7 @@ const Space: React.FC = () => {
                   <ErrorMessage
                     name="density"
                     component="div"
-                    className="text-danger small"
+                    className="text-danger small text-start"
                   />
                 </div>
               </div>
@@ -147,7 +147,7 @@ const Space: React.FC = () => {
                   <ErrorMessage
                     name="notes"
                     component="div"
-                    className="text-danger small"
+                    className="text-danger small text-start"
                   />
                 </div>
               </div>
@@ -156,23 +156,31 @@ const Space: React.FC = () => {
               <div className="d-flex justify-content-between mt-4">
                 <button
                   type="button"
-                  className="btn btn-outline-warning"
+                  className="btn btn-outline-warning ventilation-cancel-btn"
+                  style={{ borderRadius: "0.375rem", padding: "0.375rem 1.25rem", fontSize: "0.95rem", minWidth: "100px" }}
                   onClick={() => resetForm()}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  style={{ backgroundColor: "#457900", color: "white" }}
+                  style={{ backgroundColor: "#457900", color: "white", borderRadius: "0.375rem", padding: "0.375rem 1.25rem", fontSize: "0.95rem", minWidth: "100px", border: "none" }}
                   disabled={isSubmitting}
                 >
-                  Continue
+                  Save
                 </button>
               </div>
             </Form>
           )}
         </Formik>
       </div>
+      <style>{`
+        .ventilation-cancel-btn:hover, .ventilation-cancel-btn:focus {
+          background-color: transparent !important;
+          color: #ffc107 !important;
+          border-color: #ffc107 !important;
+        }
+      `}</style>
     </>
   );
 };
