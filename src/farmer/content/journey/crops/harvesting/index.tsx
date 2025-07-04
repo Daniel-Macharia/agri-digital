@@ -23,9 +23,16 @@ const Harvesting: React.FC = ()=>{
             <CropsNotification iconUrl="/assets/images/plant.svg" message="Your crop is nearing harvest. Begin planning for harvesting logistics" />
 
             
-            <div className="row  col-sm-12">
+            <div className="row  col-sm-12"
+            style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                alignItems: "center"
+            }}
+            >
                 <button
-                className="col-sm-4 offset-8"
+                className="col-sm-4"
                 onClick={handleRequestForHarvestingTools}
                 >
                     Request for harvesting tools

@@ -1,10 +1,8 @@
 .content-div{
 display: flex;
 flex-direction: row;
-width: 100%;
 align-items: center;
 justify-content: center;
-gap: 111.598px;
 }
 
 .environment{
@@ -12,8 +10,6 @@ display: flex;
 flex-direction: column;
 align-items: center;
 align-self: stretch;
-
-width: 30%;
 
 border-radius: 8px;
 border: 3px solid var(--Border, #ECECEC);

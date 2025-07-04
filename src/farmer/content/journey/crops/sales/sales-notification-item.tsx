@@ -9,7 +9,11 @@ const SalesNotificationItem: React.FC<SalesNotificationItemProps> = (salesNotifi
             <div className="row col-sm-12"
             >
                 <div className="col-sm-2">
+                    {/* <img src={salesNotification.iconUrl} 
+                    /> */}
+
                     <img src={salesNotification.iconUrl} 
+                    className="sales-icon" 
                     />
 
                 </div>
@@ -29,7 +33,7 @@ const SalesNotificationItem: React.FC<SalesNotificationItemProps> = (salesNotifi
                 </div>
 
                 <div className="col-sm-4">
-                    <p className="col-sm-12 small-regular left-aligned-text"
+                    <p className="small-regular left-aligned-text"
                     >
                         {salesNotification.timeReceived} ago
                     </p>

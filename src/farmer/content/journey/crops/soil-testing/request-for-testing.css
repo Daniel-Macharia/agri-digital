@@ -68,3 +68,8 @@ line-height: 22.4px; /* 160% */
 
 background-color: white;
 }
+
+
+.testing-input-label{
+    text-align: start;
+}

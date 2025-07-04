@@ -9,4 +9,6 @@
     background-color: white;
     color: var(--secondary);
     border-color: var(--secondary);
+    border-style: solid;
+    border-width: 1px;
 }

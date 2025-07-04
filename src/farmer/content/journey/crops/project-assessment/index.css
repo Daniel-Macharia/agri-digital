@@ -1,7 +1,6 @@
 .container{
     display: flex;
-    width: 100%;
-    padding: 33px 32px;
+    padding: 20px 20px;
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
@@ -215,7 +214,6 @@ gap: 20px;
 }
 
 .cost-input-field{
-    width: 30%;
     height: 44px;
     flex-shrink: 0;
     border-radius: 6px;
@@ -223,17 +221,9 @@ gap: 20px;
     background: var(--White, #FFF);
 
     color: var(--Secondary-Text, #777);
-
-    /* Body/regular */
-    font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 25.6px; /* 160% */
 }
 
 .description-input-field{
-    width: 70%;
     height: 44px;
     flex-shrink: 0;
 
@@ -242,11 +232,11 @@ gap: 20px;
     background: var(--White, #FFF);
 
     color: var(--Secondary-Text, #777);
+}
 
-    /* Body/regular */
-    font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 25.6px; /* 160% */
+
+.form-input-label{
+    text-align: start;
+    margin: 0px;
+    padding: 0px;
 }

@@ -73,11 +73,19 @@ const Management: React.FC = ()=>{
 
             <CropsNotification iconUrl={"/assets/images/warning.svg"} message={"Strong winds detected.Stalk weak plants to prevent damage"} />
             
-            <div className="row col-sm-12" >
+            <div className="row col-sm-12"
+            style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                alignItems: "center"
+            }} >
                 <button
-                className="col-sm-4 offset-8"
+                className="col-sm-4"
                 onClick={handleRequestAService}
-
+                style={{
+                    width: "max-content"
+                }}
                 >Request a Service</button>
             </div>
 

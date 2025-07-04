@@ -15,7 +15,11 @@ const StorageInformation: React.FC = () => {
             <div className="storage-top-bar row" >
                 <h3 className="h3-semibold storage-title col-sm-10 storage-left-aligned-text" >Storage</h3>
 
-                <img src="/assets/images/edit.svg" alt="edit" className="storage-edit col-sm-1"/>
+                <img src="/assets/images/edit.svg" 
+                alt="edit" 
+                className="activity-icon storage-edit col-sm-1"
+                style={{width: "max-content"}}
+                />
             </div>
 
             <div className="row storage-items-container">
