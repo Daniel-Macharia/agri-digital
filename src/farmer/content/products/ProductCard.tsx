@@ -119,7 +119,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onUpdate, onDelete, 
             
             <div className="card-body p-3">
                 {/* Product Name and Actions Row */}
-                <div className="d-flex justify-content-between align-items-center mb-2">
+                <div className="d-flex justify-content-between  align-items-center mb-2">
                     <div className="flex-grow-1 d-flex align-items-center">
                         {isEditing && !isMergedProduct ? (
                             <input 
@@ -133,9 +133,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onUpdate, onDelete, 
                             <h6 className="fw-bold mb-0" style={{ fontSize: '16px', color: '#333' }}>{product.name}</h6>
                         )}
                     </div>
-                    <div className="d-flex gap-1 ">
+                    <div className="d-flex gap-0 me-1 ">
                         <button 
-                            className="btn btn-link p-1 text-success d-flex align-items-center justify-content-center"
+                            className="btn btn-link p-1 text-success d-flex align-items-end justify-content-center"
                             onClick={handleEditToggle}
                             style={{ 
                                 fontSize: '14px', 
@@ -150,7 +150,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onUpdate, onDelete, 
                             {isEditing ? <PiCheckThin /> : <PiEraserThin />}
                         </button>
                         <button 
-                            className="btn btn-link p-1 d-flex align-items-center justify-content-center"
+                            className="btn btn-link p-1 d-flex align-items-end justify-content-center"
                             onClick={isEditing ? handleCancelEdit : onDelete}
                             style={{ 
                                 fontSize: '14px', 

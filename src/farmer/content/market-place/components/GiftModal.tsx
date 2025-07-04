@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { TiContacts } from "react-icons/ti";
 
 export interface Product {
     id: number;
@@ -45,6 +46,24 @@ const GiftModal: React.FC<GiftModalProps> = ({ show, onHide, product, onSendGift
         }
     }, [show, product]);
 
+    // Kenyan phone number validation
+    const validateKenyanPhoneNumber = (phone: string): boolean => {
+        // Remove spaces, hyphens, and parentheses
+        const cleanPhone = phone.replace(/[\s\-\(\)]/g, '');
+        
+        // Kenyan phone number patterns:
+        // +254XXXXXXXXX (international format)
+        // 254XXXXXXXXX (without +)
+        // 07XXXXXXXX or 01XXXXXXXX (local format)
+        const kenyanPatterns = [
+            /^\+254[17]\d{8}$/, // +254 followed by 7 or 1 and 8 digits
+            /^254[17]\d{8}$/,   // 254 followed by 7 or 1 and 8 digits
+            /^0[17]\d{8}$/      // 0 followed by 7 or 1 and 8 digits
+        ];
+
+        return kenyanPatterns.some(pattern => pattern.test(cleanPhone));
+    };
+
     const validateForm = () => {
         const newErrors: {[key: string]: string} = {};
 
@@ -54,8 +73,8 @@ const GiftModal: React.FC<GiftModalProps> = ({ show, onHide, product, onSendGift
 
         if (!recipientNumber.trim()) {
             newErrors.recipientNumber = 'Recipient phone number is required';
-        } else if (!/^[\d\s\-\+\(\)]+$/.test(recipientNumber.trim())) {
-            newErrors.recipientNumber = 'Please enter a valid phone number';
+        } else if (!validateKenyanPhoneNumber(recipientNumber.trim())) {
+            newErrors.recipientNumber = 'Please enter a valid Kenyan phone number (e.g., 0712345678, +254712345678)';
         }
 
         if (!message.trim()) {
@@ -139,30 +158,32 @@ const GiftModal: React.FC<GiftModalProps> = ({ show, onHide, product, onSendGift
                 keyboard={!isSubmitting}
                 onClick={handleModalClick}
                 className="responsive-gift-modal"
-                dialogClassName="modal-dialog-responsive"
+                dialogClassName="modal-dialog-centered modal-dialog-scrollable"
+                size="lg"
             >
-                <Modal.Header className="modal-header d-flex justify-content-between align-items-center px-3 px-sm-4 py-2 py-sm-3" closeButton={!isSubmitting}>
-                    <Modal.Title className="modal-title text-star flex-grow-1 fs-6 fs-sm-5">
+                <Modal.Header className="modal-header d-flex justify-content-between align-items-center px-3 px-sm-4 py-2 py-sm-3 border-bottom" closeButton={!isSubmitting}>
+                    <Modal.Title className="modal-title text-dark fw-bold flex-grow-1 fs-6 fs-sm-5">
                         Buy for Someone
                     </Modal.Title>
                 </Modal.Header>
-                
-                <Form onSubmit={handleSubmit}>
-                    <Modal.Body className="px-3 px-sm-4 py-2 py-sm-3 modal-body-responsive">
+
+                <Form onSubmit={handleSubmit} className="h-100 d-flex flex-column">
+                    <Modal.Body className="px-3 px-sm-4 py-3 modal-body-scrollable flex-grow-1">
                         {product && (
-                            <div className="d-flex flex-column flex-sm-row mb-3 product-info-responsive">
+                            <div className="d-flex flex-column flex-sm-row mb-4 product-info-responsive">
                                 <img 
                                     src={product.image} 
                                     alt={product.name}
                                     className="rounded me-0 me-sm-3 mb-2 mb-sm-0 align-self-start"
-                                    style={{ width: '80px', height: '60px', objectFit: 'cover' }}
+                                    style={{ maxWidth: '190px', minWidth: '130px', maxHeight: '182.4px', minHeight: '142.4px', objectFit: 'cover' }}
                                 />
-                                <div className="flex-grow-1">
-                                    <h6 className="mb-1 fw-bold product-name-responsive">{product.name}</h6>
-                                    <p className="text-muted mb-1 small">Sold by {product.seller}</p>
-                                    <p className="mb-0 fw-bold">
-                                        KES {product.price.toFixed(2)} 
-                                        <span className="fw-normal text-muted small"> {product.unit}</span>
+                                <div className="flex-grow-1 pt-4">
+                                    <h6 className="mb-1 fw-bold product-name-responsive text-dark">{product.name}</h6>
+                                    <p className="text mb-1 small fw-medium" style={{color: '#457900'}}>Sold by {product.seller}</p>
+                                    <p className="mb-0">
+                                        <span className="text-muted small">current price: </span>
+                                        <span className="fw-bold text" style={{color: '#457900'}}>KES {product.price.toFixed(2)}</span>
+                                        <span className="fw-normal text small" style={{color: '#457900'}}> per {product.unit}</span>
                                     </p>
                                 </div>
                             </div>
@@ -175,7 +196,7 @@ const GiftModal: React.FC<GiftModalProps> = ({ show, onHide, product, onSendGift
                         )}
                         
                         <Form.Group className="mb-3" controlId="formRecipientName">
-                            <Form.Label className="form-label-responsive">Recipient <span className="text-danger">*</span></Form.Label>
+                            <Form.Label className="form-label-responsive fw-normal">Recipient <span className="text-danger">*</span></Form.Label>
                             <Form.Control 
                                 type="text" 
                                 placeholder="Search for recipient by name or Shamba ID" 
@@ -191,32 +212,54 @@ const GiftModal: React.FC<GiftModalProps> = ({ show, onHide, product, onSendGift
                         </Form.Group>
                         
                         <Form.Group className="mb-3" controlId="formRecipientNumber">
-                            <Form.Label className="form-label-responsive">Recipient's Phone Number <span className="text-danger">*</span></Form.Label>
-                            <Form.Control 
-                                type="tel" 
-                                placeholder="Enter recipient's phone number" 
-                                value={recipientNumber}
-                                onChange={(e) => setRecipientNumber(e.target.value)}
-                                isInvalid={!!errors.recipientNumber}
-                                disabled={isSubmitting}
-                                className="form-control-responsive"
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.recipientNumber}
-                            </Form.Control.Feedback>
+                            <Form.Label className="form-label-responsive fw-normal">Recipient's Number <span className="text-danger">*</span></Form.Label>
+                            
+                            {/* Container for icon and input */}
+                            <div className="d-flex align-items-start gap-2">
+                                {/* Input wrapper */}
+                                <div className="flex-grow-1">
+                                    <Form.Control 
+                                        type="tel" 
+                                        placeholder="e.g., 0712345678 or +254712345678" 
+                                        value={recipientNumber}
+                                        onChange={(e) => setRecipientNumber(e.target.value)}
+                                        isInvalid={!!errors.recipientNumber}
+                                        disabled={isSubmitting}
+                                        className="form-control-responsive"
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.recipientNumber}
+                                    </Form.Control.Feedback>
+                                </div> 
+                                
+                                {/* Circular Icon Background */}
+                                <div 
+                                    className="d-flex align-items-center justify-content-center rounded-circle shadow-sm"
+                                    style={{
+                                        width: '40px',
+                                        height: '40px',
+                                        minWidth: '40px',
+                                        flexShrink: 0,
+                                        backgroundColor: '#D0F0C0',
+                                    }}
+                                >
+                                    <TiContacts size={18} style={{color: '#457900'}} />
+                                </div>
+                            </div>
                         </Form.Group>
                         
                         <Form.Group className="mb-3" controlId="formGiftMessage">
-                            <Form.Label className="form-label-responsive">Gift Message <span className="text-danger">*</span></Form.Label>
+                            <Form.Label className="form-label-responsive fw-normal">Gift Message <span className="text-danger">*</span></Form.Label>
                             <Form.Control 
                                 as="textarea" 
-                                rows={3} 
+                                rows={4} 
                                 placeholder="Write a personal message for your gift..."
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
                                 isInvalid={!!errors.message}
                                 disabled={isSubmitting}
                                 className="form-control-responsive textarea-responsive"
+                                style={{ resize: 'vertical', minHeight: '100px' }}
                             />
                             <Form.Control.Feedback type="invalid">
                                 {errors.message}
@@ -227,12 +270,13 @@ const GiftModal: React.FC<GiftModalProps> = ({ show, onHide, product, onSendGift
                         </Form.Group>
                     </Modal.Body>
                     
-                    <Modal.Footer className="px-3 px-sm-4 py-2 py-sm-3">
+                    <Modal.Footer className="px-3 px-sm-4 py-3 border-top">
                         <Button 
-                            variant="primary" 
+                            variant="success"
                             type="submit"
                             disabled={isSubmitting}
-                            className="btn-responsive"
+                            className="btn-responsive w-100 fw-bold"
+                            style={{backgroundColor: '#457900', borderColor: '#457900'}}
                         >
                             {isSubmitting ? 'Processing...' : 'Send Gift'}
                         </Button>
@@ -241,105 +285,150 @@ const GiftModal: React.FC<GiftModalProps> = ({ show, onHide, product, onSendGift
             </Modal>
 
             <style>{`
-                .responsive-gift-modal .modal-dialog-responsive {
-                    margin: 1rem;
+                .responsive-gift-modal .modal-dialog {
+                    max-width: 600px;
+                    margin: 1.75rem auto;
+                }
+
+                .responsive-gift-modal .modal-content {
+                    border-radius: 12px;
+                    border: none;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                }
+
+                .modal-body-scrollable {
+                    overflow-y: auto;
+                    max-height: calc(100vh - 200px);
+                }
+
+                .modal-header .btn-close {
+                    font-size: 0.75rem;
                 }
 
                 /* Small screens (mobile) */
                 @media (max-width: 576px) {
-                    .responsive-gift-modal .modal-dialog-responsive {
+                    .responsive-gift-modal .modal-dialog {
                         margin: 0.5rem;
                         max-width: calc(100% - 1rem);
-                        max-height: calc(100vh - 1rem);
+                        height: calc(100vh - 1rem);
                     }
                     
                     .responsive-gift-modal .modal-content {
-                        max-height: calc(100vh - 1rem);
-                        overflow: hidden;
+                        height: 100%;
                         display: flex;
                         flex-direction: column;
+                        border-radius: 8px;
                     }
                     
-                    .modal-body-responsive {
+                    .modal-body-scrollable {
                         overflow-y: auto;
                         flex: 1;
-                        padding: 0.75rem !important;
+                        padding: 1rem !important;
+                        -webkit-overflow-scrolling: touch;
                     }
                     
                     .product-info-responsive {
-                        padding: 0.5rem;
+                        padding: 0.75rem;
                         background-color: #f8f9fa;
-                        border-radius: 0.375rem;
+                        border-radius: 8px;
+                        margin-bottom: 1rem !important;
                     }
                     
                     .product-name-responsive {
-                        font-size: 0.9rem;
-                        line-height: 1.3;
+                        font-size: 1rem;
+                        line-height: 1.4;
                     }
                     
                     .form-label-responsive {
-                        font-size: 0.875rem;
-                        font-weight: 600;
-                        margin-bottom: 0.25rem;
+                        font-size: 0.9rem;
+                        font-weight: 500 !important;
+                        margin-bottom: 0.5rem;
                     }
                     
                     .form-control-responsive {
-                        font-size: 0.875rem;
-                        padding: 0.5rem 0.75rem;
+                        font-size: 0.9rem;
+                        padding: 0.75rem;
+                        border-radius: 6px;
                     }
                     
                     .textarea-responsive {
-                        min-height: 70px !important;
-                        resize: none;
+                        min-height: 80px !important;
+                        resize: vertical;
                     }
                     
                     .form-text-responsive {
-                        font-size: 0.75rem;
+                        font-size: 0.8rem;
+                        margin-top: 0.5rem;
                     }
                     
                     .btn-responsive {
-                        font-size: 0.875rem;
-                        padding: 0.5rem 1.5rem;
-                        width: 100%;
+                        font-size: 1rem;
+                        padding: 0.75rem 1.5rem;
+                        border-radius: 8px;
                     }
                 }
 
                 /* Extra small screens */
                 @media (max-width: 400px) {
-                    .responsive-gift-modal .modal-dialog-responsive {
+                    .responsive-gift-modal .modal-dialog {
                         margin: 0.25rem;
                         max-width: calc(100% - 0.5rem);
+                        height: calc(100vh - 0.5rem);
                     }
                     
-                    .modal-body-responsive {
-                        padding: 0.5rem !important;
+                    .modal-body-scrollable {
+                        padding: 0.75rem !important;
                     }
                     
                     .product-info-responsive {
-                        padding: 0.375rem;
+                        padding: 0.5rem;
                     }
                     
                     .form-control-responsive {
-                        font-size: 0.8rem;
-                        padding: 0.4rem 0.625rem;
+                        font-size: 0.85rem;
+                        padding: 0.6rem;
                     }
                     
                     .textarea-responsive {
-                        min-height: 60px !important;
+                        min-height: 70px !important;
                     }
                     
                     .btn-responsive {
-                        font-size: 0.8rem;
-                        padding: 0.45rem 1rem;
+                        font-size: 0.9rem;
+                        padding: 0.65rem 1rem;
                     }
                 }
 
-                /* Medium and larger screens - maintain original spacing */
-                @media (min-width: 577px) {
-                    .modal-body-responsive {
-                        max-height: calc(100vh - 250px);
-                        overflow-y: auto;
+                /* Large screens - ensure proper centering */
+                @media (min-width: 992px) {
+                    .responsive-gift-modal .modal-dialog {
+                        max-width: 650px;
+                        margin: 2rem auto;
                     }
+                    
+                    .modal-body-scrollable {
+                        max-height: calc(100vh - 250px);
+                        padding: 2rem !important;
+                    }
+                }
+
+                /* Scrollbar styling for webkit browsers */
+                .modal-body-scrollable::-webkit-scrollbar {
+                    width: 6px;
+                }
+
+                .modal-body-scrollable::-webkit-scrollbar-track {
+                    background: #f1f1f1;
+                    border-radius: 3px;
+                }
+
+                .modal-body-scrollable::-webkit-scrollbar-thumb {
+                    background: #c1c1c1;
+                    border-radius: 3px;
+                }
+
+                .modal-body-scrollable::-webkit-scrollbar-thumb:hover {
+                    background: #a8a8a8;
                 }
             `}</style>
         </>

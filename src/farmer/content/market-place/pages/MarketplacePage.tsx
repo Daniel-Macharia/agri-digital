@@ -153,7 +153,11 @@ const MarketplacePage: React.FC = () => {
         console.log("Gift Sent:", giftData);
         setShowGiftModal(false);
     };
-  
+
+    // Handle product image click to navigate to product details
+    const handleProductClick = (productId: number) => {
+        navigate(`/farmer/market-place/product/${productId}`);
+    };
 
     const getCategoryBadgeColor = (category: string) => {
         const colors: { [key: string]: string } = {
@@ -167,8 +171,8 @@ const MarketplacePage: React.FC = () => {
     };
 
     return (
-        <div style={{ backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
-            <Container fluid className="py-2 py-md-3">
+        <div style={{ backgroundColor: 'grey', minHeight: '100vh' }}>
+            <Container fluid className="py-2 py-md-3" style={{ backgroundColor: '#EEEEEE' }}>
                 {/* Header Section */}
                 <div className="mb-3 mb-md-4 text-start">
                     <Row>
@@ -265,7 +269,11 @@ const MarketplacePage: React.FC = () => {
                     {currentProducts.map(product => (
                         <Col key={product.id}>
                             <Card className="h-100 shadow-sm border-0 gap-0 product-card">
-                                <div className="position-relative">
+                                <div 
+                                    className="position-relative cursor-pointer" 
+                                    style={{ top: '0', left: '0', right: '0'}}
+                                    onClick={() => handleProductClick(product.id)}
+                                >
                                     <Card.Img 
                                         variant="top" 
                                         src={product.image} 
@@ -273,7 +281,8 @@ const MarketplacePage: React.FC = () => {
                                         style={{
                                             height: '200px', 
                                             objectFit: 'cover',
-                                            transition: 'transform 0.3s ease'
+                                            transition: 'transform 0.3s ease',
+                                            cursor: 'pointer'
                                         }}
                                         onError={(e) => {
                                             e.currentTarget.src = 'https://via.placeholder.com/400x300?text=No+Image';
@@ -286,44 +295,45 @@ const MarketplacePage: React.FC = () => {
                                     </div>
                                 </div>
                                 <Card.Body className="d-flex flex-column text-start row" style={{ padding: "4px"}}>
-                                    <Card.Title className="fs-6 fs-md-5 mb-1 text-start">
+                                    <Card.Title className="fs-6 fs-md-5 mb-0 text-start">
                                         {product.name}
                                     </Card.Title>
-                                    <Card.Text className="text-muted small mb-2 text-start">
+                                    <Card.Text className="text-muted small mb-0 text-start">
                                         {product.seller}
                                     </Card.Text>
-                                    <div className="text-warning mb-2 text-start" style={{ fontSize: '0.9rem' }}>
+                                    <div className="text-warning mb-0 text-start" style={{ fontSize: '0.9rem' }}>
                                         {'★'.repeat(product.rating)}{'☆'.repeat(5 - product.rating)}
-                                        <span className="text-muted ms-1">({product.rating}/5)</span>
                                     </div>
                                     <Card.Text className="fw-bold mb-3 text-start">
                                         KES {product.price.toLocaleString()} 
-                                        <span className="fw-normal text-muted"> {product.unit}</span>
+                                        <span className="fw-semibold text-dark"> {product.unit}</span>
                                     </Card.Text>
-                                    <div className="mt-auto flex-nowrap align-items-center row col-sm-12" style={{ padding: "0px"}}>
-                                        {/* <div className="d-flex gap-1 flex-nowrap row col-sm-12"> */}
-                                            <Button 
-                                                variant="success" 
-                                                onClick={() => handleAddToCart(product)}
-                                                className="flex-fill d-flex align-items-center justify-content-center row col-sm-6 gap-0"
-                                                style={{ maxWidth: '120px', height: '38px', fontSize: '0.875rem' }}
-                                            >
-                                                <FiShoppingCart className="col-sm-4" size={14} style={{margin: "0px"}} />
-                                                <span className="text-nowrap col-sm-6" style={{margin: "0px"}}>Add to Cart</span>
-                                            </Button>
-                                            <Button 
-                                                variant="outline-warning" 
-                                                onClick={() => {
-                                                    setSelectedProduct(product); 
-                                                    setShowGiftModal(true);
-                                                }}
-                                                className="flex-shrink-0 d-flex align-items-center justify-content-center col-sm-6 gap-0"
-                                                style={{ maxWidth: '120px', height:'38px', fontSize: '0.875rem' }}
-                                            >
-                                                <FiGift className="me-1 col-sm-4" size={14} />
-                                                <span className="text-nowrap col-sm-6">Gift This</span>
-                                            </Button>
-                                        {/* </div> */}
+                                    <div className="mt-auto flex-nowrap gap-3 align-items-center row col-sm-12" style={{ padding: "0px"}}>
+                                        <Button 
+                                            variant="success" 
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleAddToCart(product);
+                                            }}
+                                            className="flex-fill d-flex align-items-center justify-content-center row col-sm-6 gap-0"
+                                            style={{ maxWidth: '120px', height: '38px', fontSize: '0.875rem', backgroundColor: '#556B2F' }}
+                                        >
+                                            <FiShoppingCart className="col-sm-4" size={14} style={{margin: "0px"}} />
+                                            <span className="text-nowrap col-sm-6" style={{margin: "0px"}}>Add to Cart</span>
+                                        </Button>
+                                        <Button 
+                                            variant="outline-warning" 
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setSelectedProduct(product); 
+                                                setShowGiftModal(true);
+                                            }}
+                                            className="flex-shrink-0 d-flex align-items-center justify-content-center col-sm-6 gap-0"
+                                            style={{ maxWidth: '120px', height:'38px', fontSize: '0.875rem' }}
+                                        >
+                                            <FiGift className="me-0 col-sm-4" size={14} />
+                                            <span className="text-nowrap col-sm-6">Gift This</span>
+                                        </Button>
                                     </div>
                                 </Card.Body>
                             </Card>
@@ -336,8 +346,8 @@ const MarketplacePage: React.FC = () => {
                     <div className="mt-4 mt-md-5 d-flex justify-content-center">
                         <Pagination 
                             currentPage={currentPage} 
-                            totalPages={totalPages} 
-                            onPageChange={setCurrentPage} 
+                            totalPages={100} 
+                            onPageChange={(page) => setCurrentPage(page)} 
                         />
                     </div>
                 )}
@@ -361,7 +371,7 @@ const MarketplacePage: React.FC = () => {
                 onRemoveItem={handleRemoveItem}
                 onProceedToCheckout={handleProceedToCheckout}
                 onContinueShopping={() => setShowCart(false)} 
-                              />
+            />
 
             <GiftModal 
                 show={showGiftModal}
@@ -378,6 +388,10 @@ const MarketplacePage: React.FC = () => {
                 
                 .product-card:hover .product-image {
                     transform: scale(1.05);
+                }
+                
+                .cursor-pointer {
+                    cursor: pointer;
                 }
                 
                 @media (max-width: 576px) {

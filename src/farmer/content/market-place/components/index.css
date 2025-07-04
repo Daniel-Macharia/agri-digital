@@ -1,0 +1,25 @@
+.custom-pagination .page-item .page-link {
+    background-color: #ececee;
+    color: #3e5c02;
+    border-color: #ebeceb;
+    font-size: 12px; /* Font size */
+    width: 20px; /* Fixed width */
+    height: 20px; /* Fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 3px; /* Spacing between items */
+    padding: 0; /* Remove default padding */
+    border-radius: 4px; 
+}
+
+.custom-pagination .page-item.active .page-link {
+    background-color: #cefae3;
+    border-color: #f7f8f7;
+    color: #3e5c02;
+}
+
+.custom-pagination .page-item:not(.active) .page-link:hover {
+    background-color: #e9ecef;
+    color: #6B8E23;
+}
