@@ -22,6 +22,7 @@ const TypeBreed = () => {
       <Route path="form" element={WithNavBar(TypeBreedForm)} />
       <Route path="form/request" element={<RequestForm />} />
       <Route path="form/records" element={<LivestockRecord />} />
+      
     </Routes>
   );
 };

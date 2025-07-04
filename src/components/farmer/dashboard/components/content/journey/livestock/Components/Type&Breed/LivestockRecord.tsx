@@ -33,7 +33,7 @@ const LivestockRecord: React.FC = () => {
           background: '#FFF',
         }}
       >
-        <div className="row mb-3 align-items-center">
+        <div className="row mb-3 align-items-center">  
           <div className="col-md-6">
             <h3 className="h3-semibold" style={{ color: 'var(--Primary-Text, #333)' }}>My Cows Records</h3>
           </div>

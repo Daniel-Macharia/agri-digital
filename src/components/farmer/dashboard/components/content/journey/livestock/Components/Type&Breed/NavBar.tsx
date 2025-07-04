@@ -5,12 +5,15 @@ type NavBarProps = {
   onRequestService?: () => void;
 };
 
-const NavBar: React.FC<NavBarProps> = ({ onRequestService }) => {
+const NavBar: React.FC<NavBarProps> = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  
+
   // Get the base path (e.g., /farmer/dashboard/components/content/journey/livestock/Components/Housing)
   const basePath = location.pathname.split("/").slice(0, -1).join("/");
+  const requestServicePath = basePath + "/form/request";
 
   return (
     <div
@@ -69,7 +72,7 @@ const NavBar: React.FC<NavBarProps> = ({ onRequestService }) => {
         </div>
       </div>
 
-      {/* Request for service button */}
+      {/* Request Service button */}
       <button
         className="btn px-4 py-2"
         style={{
@@ -80,9 +83,9 @@ const NavBar: React.FC<NavBarProps> = ({ onRequestService }) => {
           fontSize: "0.95rem",
           fontWeight: 400,
         }}
-        onClick={onRequestService}
+        onClick={() => navigate(requestServicePath)}
       >
-        Request for service
+        Request Service
       </button>
     </div>
   );
