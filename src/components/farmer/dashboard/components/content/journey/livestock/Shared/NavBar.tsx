@@ -3,38 +3,36 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const navItems = [
   {
     label: 'Type & Breed',
-    img: '/assets/images/group.svg',
-
-    
+    img: '/assets/images/livestockmenu/One Cow.svg',   
     path: 'typebreed',
   },
   {
     label: 'Housing',
-    img: '/assets/images/home.svg',
+    img: '/assets/images/livestockmenu/cow shed.svg',
     path: 'housing',
   },
   {
     label: 'Feeding',
-    img: '/assets/images/package.svg',
+    img: '/assets/images/livestockmenu/cow feed.svg',
     path: 'feeds',
-  },
+  },  
   {
     label: 'Health Management',
-    img: '/assets/images/quality_score.svg',
+    img: '/assets/images/livestockmenu/cow with black vet.svg',
     path: 'health',
   },
   {
     label: 'Breeding',
-    img: '/assets/images/journey.svg',
+    img: '/assets/images/livestockmenu/cow breeding.svg',
     path: 'breeding',
   },
   {
     label: 'Production',
-    img: '/assets/images/marketplace.svg',
+    img: '/assets/images/livestockmenu/sale.svg',
   },
   {
     label: 'Sales',
-    img: '/assets/images/success.svg',
+    img: '/assets/images/livestockmenu/milk from a cow.svg',
   },
 ];
 
@@ -63,7 +61,7 @@ const NavBar = () => {
             >
               <img src={item.img} alt={item.label} className="img-fluid" style={{ width: '44px', height: '44px', objectFit: 'contain' }} />
             </div>
-            <small className={`fw-medium ${isActive ? 'text-success fw-bold' : 'text-dark'}`}>
+            <small className={`small-bold ${isActive ? 'text-success fw-bold' : 'text-dark'}`}>
               {item.label}
             </small>
           </div>
