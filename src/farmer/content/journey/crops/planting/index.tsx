@@ -25,31 +25,41 @@ const Planting: React.FC = ()=>{
 
     const render = ()=>{
         return (<>
-        <div>
-            <div id="top-bar-div">
+        <div className="col-sm-12"
+        style={{paddingBottom: "32px"}}>
+            <div className="col-sm-12"
+            style={{display: "flex", flexDirection: "row", justifyContent: "flex-end"}}>
                 <button
+                className="col-sm-4 offset-md-8"
                 onClick={handleRequestForService}
+                style={{minWidth: "max-content", alignSelf: "end"}}
                 >
                     Request Services
                 </button>
             </div>
 
-            <div id="container-div">
-                <div id="planting-calendar-container">
-                    <img src="/assets/images/planting-calendar-icon.svg" id="planting-calendar-item" />
+            <div id="container-div" className="col-sm-12">
+                <div id="planting-calendar-container" className="col-sm-12">
+                    <img 
+                    src="/assets/images/planting-calendar-icon.svg" 
+                    id="planting-calendar-item"
+                    className="col-sm-12 planting-icon"
+                    />
 
-                    <h3 className="h3-medium" id="planting-calendar-title">
+                    <h3 className="h3-medium col-sm-12" id="planting-calendar-title">
                         Create your Planting Calendar!
                     </h3>
 
-                    <p id="planting-calendar-description">
+                    <p id="planting-calendar-description"
+                    className="col-sm-12">
                         Start planning your growing season by adding your first crop.
                     </p>
 
                     <Button 
                     variant="primary"
                     onClick={()=> setShow(true) }
-                    className="col-sm-4"
+                    className="col-md-4"
+                    style={{minWidth: "max-content"}}
                     >
                         Add your first crop
                     </Button>

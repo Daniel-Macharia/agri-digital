@@ -7,13 +7,11 @@
 }
 .management-input-label{
     text-align: start;
-    min-width: 100%;
     padding-bottom: 0px;
     margin-bottom: 0px;
 }
 
 .management-input-field{
-    width: 100%;
     margin-top: 0px;
     padding-top: 0px;
 }
@@ -41,4 +39,31 @@
     width: 100%;
     gap: 10px;
     margin-top: 0px;
+}
+
+
+.input-group{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: flex-start;
+}
+
+.input-label{
+    width: 100%;
+    background-color: green;
+}
+
+.activity-input-field{
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 1px solid var(--Border, #ECECEC);
+    background: var(--White, #FFF);
+
+    color: var(--Secondary-Text, #777);
+}
+
+.activity-input-label{
+    text-align: start;
 }

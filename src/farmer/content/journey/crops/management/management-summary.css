@@ -16,9 +16,8 @@
 }
 
 #edit-icon{
-    height: 100%;
-    background-color: whitesmoke;
-    border-radius: 16px;
+    height: max-content;
+    width: max-content;
 }
 
 .summary-col-item-value{

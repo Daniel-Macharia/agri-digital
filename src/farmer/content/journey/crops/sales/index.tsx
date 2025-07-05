@@ -99,48 +99,67 @@ const Sales: React.FC = ()=>{
 
     const render = ()=>{
         return (<>
-        <div className="row col-sm-12">
-            <CropsNotification iconUrl={"/assets/images/warning.svg"} message={"Tomato prices in Mombasa just rose by 10%"} />
 
-            <div className="col-sm-8">
-                <div className="row col-sm-12 sales-container">
-                    <h3 className="body-medium left-aligned-text">My crops</h3>
+            <CropsNotification 
+            iconUrl={"/assets/images/warning.svg"} 
+            message={"Tomato prices in Mombasa just rose by 10%"} />
 
-                    <div className="row col-sm-12">
+        <div className="row col-sm-12" 
+        >
+
+            <div className="row flex-wrap col-sm-12 col-md-8">
+                <div className="col-sm-12 sales-container">
+                    <div className="col-sm-12" >
+                        <h3 className="body-medium left-aligned-text col-sm-12">My crops</h3>
+                    </div>
+
+                    <div className="row col-sm-12"
+                    style={{gap: "0px",
+                        display: "flex",
+                        flexDirection: "row",
+                        flexWrap: "wrap",
+                        padding: "0px",
+                        minWidth: "100%"
+                    }}
+                    >
                         <img
                         className="col-sm-12 col-md-6 order-1"
-                        src="/assets/images/organic_tomatoes_main.png" />
-                        <div className="row col-sm-12 col-md-6 order-0">
-                            <div className="key-value-text row col-sm-12">
+                        src="/assets/images/organic_tomatoes_main.png"
+                        style={{margin: "0px"}}
+                        />
+                        <div className="col-sm-12 col-md-6 order-0"
+                        style={{margin: "0px"}}
+                        >
+                            <div className="key-value-text row-sm-12">
                                 <p className="left-aligned-text col-sm-6 small-regular">Crop Name</p>
                                 <p className="right-aligned-text col-sm-6 small-semibold">{myCrops.name}</p>
                             </div>
-                            <div className="key-value-text row col-sm-12">
+                            <div className="key-value-text row-sm-12">
                                 <p className="left-aligned-text col-sm-6 small-regular">Variety 2</p>
                                 <p className="right-aligned-text col-sm-6 small-semibold">{myCrops.variety}</p>
                             </div>
-                            <div className="key-value-text row col-sm-12">
+                            <div className="key-value-text row-sm-12">
                                 <p className="left-aligned-text col-sm-6 small-regular">Quantity (Qty)</p>
                                 <p className="right-aligned-text col-sm-6  small-semibold">{myCrops.quantity} Kg</p>
                             </div>
-                            <div className="key-value-text row col-sm-12">
+                            <div className="key-value-text row-sm-12">
                                 <p className="left-aligned-text col-sm-6 small-regular">Price Per Unit 4</p>
                                 <p className="right-aligned-text col-sm-6 small-semibold">Ksh {myCrops.unitPrice}</p>
                             </div>
-                            <div className="key-value-text row col-sm-12">
+                            <div className="key-value-text row-sm-12">
                                 <p className="left-aligned-text col-sm-6 small-regular">Total Price</p>
                                 <p className="right-aligned-text col-sm-6 small-semibold">Ksh {myCrops.unitPrice * myCrops.quantity}</p>
                             </div>
-                            <div className="key-value-text row col-sm-12">
+                            <div className="key-value-text row-sm-12">
                                 <p className="left-aligned-text col-sm-6 small-regular">Harvesting Date</p>
                                 <p className="right-aligned-text col-sm-6 small-semibold">{myCrops.harvestingDate}</p>
                             </div>
-                            <div className="key-value-text row col-sm-12">
+                            <div className="key-value-text row-sm-12">
                                 <p className="left-aligned-text col-sm-6 small-regular">Quality</p>
                                 <p className="right-aligned-text col-sm-6 small-semibold">{myCrops.quality}</p>
                             </div>
-                            <div className="key-value-text row col-sm-12">
-                                <p className="left-aligned-text col-sm-6 small-regular">Storage Method</p>
+                            <div className="key-value-text row-sm-12 no-wrap">
+                                <p className="left-aligned-text  col-sm-6 small-regular">Storage Method</p>
                                 <p className="right-aligned-text col-sm-6 small-semibold">{myCrops.storageMethod}</p>
                             </div>
                         </div>
@@ -158,13 +177,13 @@ const Sales: React.FC = ()=>{
 
                         {
                             ({}) => (
-                                <Form>
-                                    <div className="col-sm-12"
+                                <Form className="col-sm-12">
+                                    <div className="col-sm-12 "
                                     style={{
                                         margin: '0px',
                                     }}
                                     >
-                                        <p className="small-semibold row col-sm-12 left-aligned-text"
+                                        <p className="small-semibold row col-sm-12 left-aligned-text "
                                         style={{
                                             margin: '0px'
                                         }}
@@ -173,7 +192,7 @@ const Sales: React.FC = ()=>{
                                         </p>
                                         <div className="col-sm-12"
                                         style={{borderStyle: 'dashed',
-                                            borderWidth: '2px', 
+                                            borderWidth: '1px', 
                                             marginTop: '0px'}}
                                         
                                         onClick={handleSelectFileAction}
@@ -197,52 +216,54 @@ const Sales: React.FC = ()=>{
                                     </div>
 
                                     <div className="col-sm-12">
-                                        <div className="row col-sm-12 col-md-6 order-1">
-                                            <label className="col-sm-12 left-aligned-text small-regular" htmlFor="productName">
-                                                Product Name
-                                            </label>
-                                            <Field
-                                            name="productName"
-                                            placeholder="Maize"
-                                            type="text"
-                                            className="col-sm-12"
-                                            />
+                                        <div className="row col-sm-12">
+                                            <div className="col-sm-12 col-md-6 order-1 sales-input-group">
+                                                <label className="col-sm-12 left-aligned-text small-regular sales-input-label" htmlFor="productName">
+                                                    Product Name
+                                                </label>
+                                                <Field
+                                                name="productName"
+                                                placeholder="Maize"
+                                                type="text"
+                                                className="col-sm-12 sales-input-field"
+                                                />
+                                            </div>
+                                            <div className="row col-sm-12 col-md-6 order-2 sales-input-group">
+                                                <label className="col-sm-12 left-aligned-text small-regular sales-input-label" htmlFor="productQuantity">
+                                                    Quantity
+                                                </label>
+                                                <Field
+                                                name="productQuantity"
+                                                placeholder="140Kg"
+                                                type="text"
+                                                className="col-sm-12 sales-input-field"
+                                                />
+                                            </div>
                                         </div>
-                                        <div className="row col-sm-12 col-md-6 order-2">
-                                            <label className="col-sm-12 left-aligned-text small-regular" htmlFor="productQuantity">
-                                                Quantity
-                                            </label>
-                                            <Field
-                                            name="productQuantity"
-                                            placeholder="140Kg"
-                                            type="text"
-                                            className="col-sm-12"
-                                            />
-                                        </div>
-                                    </div>
 
-                                    <div className="col-sm-12">
-                                        <div className="row col-sm-12 col-md-6 order-1">
-                                            <label className="col-sm-12 left-aligned-text small-regular" htmlFor="productPrice">
-                                                Price
-                                            </label>
-                                            <Field
-                                            name="productPrice"
-                                            placeholder="Ksh 120/Kg"
-                                            type="text"
-                                            className="col-sm-12"
-                                            />
-                                        </div>
-                                        <div className="row col-sm-12 col-md-6 order-2">
-                                            <label className="col-sm-12 left-aligned-text small-regular" htmlFor="productType">
-                                                Type
-                                            </label>
-                                            <Field
-                                            name="productType"
-                                            placeholder="Maize"
-                                            type="text"
-                                            className="col-sm-12"
-                                            />
+                                        <div className="row flex-wrap col-sm-12">
+                                            <div className="row col-sm-12 col-md-6 order-1 sales-input-group">
+                                                <label className="sales-input-label col-sm-12 left-aligned-text small-regular" htmlFor="productPrice">
+                                                    Price
+                                                </label>
+                                                <Field
+                                                name="productPrice"
+                                                placeholder="Ksh 120/Kg"
+                                                type="text"
+                                                className="col-sm-12 sales-input-field"
+                                                />
+                                            </div>
+                                            <div className="row col-sm-12 col-md-6 order-2 sales-input-group">
+                                                <label className="sales-input-label col-sm-12 left-aligned-text small-regular" htmlFor="productType">
+                                                    Type
+                                                </label>
+                                                <Field
+                                                name="productType"
+                                                placeholder="Maize"
+                                                type="text"
+                                                className="col-sm-12 sales-input-field"
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </Form>
@@ -262,12 +283,14 @@ const Sales: React.FC = ()=>{
                         <SalesLineChart />
                     </div>
 
-                    <div className="col-sm-12 card">
-                        <div className="row no-wrap col-sm-12">
+                    <div className="col-sm-12 card" style={{backgroundColor: ""}}>
+                        <div className="row no-wrap col-sm-12" style={{backgroundColor: "", padding: "0px"}}>
                             <img src="/assets/images/notification_bell_icon.svg" 
-                            className="col-sm-1"
+                            className="sales-icon col-sm-2"
+                            style={{backgroundColor: "", margin: "0px"}}
                             />
                             <h3 className="col-sm-10 left-aligned-text body-semibold"
+                            style={{backgroundColor: "", margin: "0px"}}
                             >
                                 Market Updates
                             </h3>
@@ -288,14 +311,14 @@ const Sales: React.FC = ()=>{
                 </div>
             </div>
 
-            <div className="col-sm-4">
-                <div className="row col-sm-12 sales-container">
+            <div className="col-sm-12 col-md-4">
+                <div className="col-sm-12 sales-container">
                     <h3 className="col-sm-12 left-aligned-text body-medium">My Products</h3>
                     <div className="col-sm-12">
                         <img
                         className="col-sm-12"
                         src="/assets/images/organic_tomatoes_side.png" />
-                        <div className="col-sm-12">
+                        <div className="col-sm-12" >
                             <div className="row col-sm-12 key-value-text">
                                 <p className="left-aligned-text col-sm-6 small-regular">Crop Name</p>
                                 <p className="right-aligned-text col-sm-6 small-semibold">{myProducts.name}</p>

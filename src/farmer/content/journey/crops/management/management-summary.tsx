@@ -6,12 +6,23 @@ export default function ManagementSummary( summary: ManagementSummaryProps ){
     const render = ()=>{
         return (<>
         <div className="col-sm-12 card" >
-            <div className="row summary-row">
-                <p className="summary-col-item col-sm-8 small-semibold">
+            <div className="row " 
+            style={{
+                display: "flex", 
+                flexDirection: "row", 
+                justifyContent: "space-between", 
+                alignItems: "center"
+                }}
+                >
+                <p className="summary-col-item col-sm-8 small-semibold"
+                >
                     {summary.title}
                 </p>
 
-                <img src="/assets/images/edit.svg" id="edit-icon" className="col-sm-2 offset-1" alt="edit"/>
+                <img src="/assets/images/edit.svg" 
+                id="edit-icon" 
+                className="" alt="edit"
+                style={{justifySelf: "flex-start", alignSelf: "start"}}/>
             </div>
 
             {
