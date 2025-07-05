@@ -1,16 +1,9 @@
-<<<<<<< HEAD
-import React from "react";
-=======
 import React, { useState } from "react";
->>>>>>> bill
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-<<<<<<< HEAD
-=======
 import Saved from "../../Shared/Saved";
->>>>>>> bill
 
 const validationSchema = Yup.object({
   serviceType: Yup.string()
@@ -39,148 +32,6 @@ const initialValues = {
 };
 
 const RequestForm: React.FC = () => {
-<<<<<<< HEAD
-  return (
-    <div className="w-100 rounded-4 bg-white border mt-3 p-4">
-      <h5 className="mb-4 text-start" style={{ color: "#333" }}>
-        Request Form
-      </h5>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log("Form data submitted:", values);
-          alert("Form submitted successfully! Check console for values.");
-        }}
-      >
-        {({ setFieldValue, isSubmitting, values, resetForm }) => (
-          <Form>
-            {/* Service Type */}
-            <div className="row mb-3 align-items-center">
-              <label
-                htmlFor="serviceType"
-                className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
-              >
-                Service Type
-              </label>
-              <div className="col-md-10">
-                <Field
-                  as="select"
-                  id="serviceType"
-                  name="serviceType"
-                  className="form-select bg-light"
-                >
-                  <option value="" label="Select a service" />
-                  <option value="consultation" label="Consultation" />
-                  <option value="repair" label="Repair" />
-                  <option value="installation" label="Installation" />
-                </Field>
-                <ErrorMessage
-                  name="serviceType"
-                  component="div"
-                  className="text-danger small"
-                />
-              </div>
-            </div>
-
-            {/* Date of Service */}
-            <div className="row mb-3 align-items-center">
-              <label
-                htmlFor="dateOfService"
-                className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
-              >
-                Date of Service
-              </label>
-              <div className="col-md-10">
-                <DatePicker
-                  id="dateOfService"
-                  name="dateOfService"
-                  selected={values.dateOfService}
-                  onChange={(date) => setFieldValue("dateOfService", date)}
-                  minDate={new Date()}
-                  placeholderText="Select a date"
-                  className="form-control bg-light"
-                  dateFormat="yyyy-MM-dd"
-                  wrapperClassName="w-100"
-                />
-                <ErrorMessage
-                  name="dateOfService"
-                  component="div"
-                  className="text-danger small"
-                />
-              </div>
-            </div>
-
-            {/* Location */}
-            <div className="row mb-3 align-items-center">
-              <label
-                htmlFor="location"
-                className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
-              >
-                Location
-              </label>
-              <div className="col-md-10">
-                <Field
-                  type="text"
-                  id="location"
-                  name="location"
-                  className="form-control bg-light"
-                  placeholder="Enter location"
-                />
-                <ErrorMessage
-                  name="location"
-                  component="div"
-                  className="text-danger small"
-                />
-              </div>
-            </div>
-
-            {/* Contact Information */}
-            <div className="row mb-3 align-items-center">
-              <label
-                htmlFor="contactInfo"
-                className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
-              >
-                Contact Information
-              </label>
-              <div className="col-md-10">
-                <Field
-                  type="text"
-                  id="contactInfo"
-                  name="contactInfo"
-                  className="form-control bg-light"
-                  placeholder="Enter contact information"
-                />
-                <ErrorMessage
-                  name="contactInfo"
-                  component="div"
-                  className="text-danger small"
-                />
-              </div>
-            </div>
-
-            {/* Buttons */}
-            <div className="d-flex justify-content-between mt-4">
-              <button
-                type="button"
-                className="btn btn-outline-warning"
-                onClick={() => resetForm()}
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                style={{ backgroundColor: "#457900", color: "white" }}
-                disabled={isSubmitting}
-              >
-                Continue
-              </button>
-            </div>
-          </Form>
-        )}
-      </Formik>
-    </div>
-=======
   const [showSaved, setShowSaved] = useState(false);
 
   return (
@@ -354,7 +205,6 @@ const RequestForm: React.FC = () => {
         </Formik>
       </div>
     </>
->>>>>>> bill
   );
 };
 

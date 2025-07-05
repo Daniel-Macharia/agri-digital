@@ -1,9 +1,4 @@
 import LandingPage from './LandingPage';
-<<<<<<< HEAD
-import TypeBreedForm from './TypeBreedForm';
-import RequestForm from './RequestForm';
-import { Routes, Route } from 'react-router-dom';
-=======
 import RequestForm from './RequestForm';
 import { Routes, Route } from 'react-router-dom';
 import TypeBreedForm from './TypeBreedForm';
@@ -19,24 +14,11 @@ const WithNavBar = (Component: React.FC) => {
     </>
   );
 };
->>>>>>> bill
 
 const TypeBreed = () => {
   return (
     <Routes>
       <Route path="" element={<LandingPage />} />
-<<<<<<< HEAD
-      <Route path="form" element={<TypeBreedForm />} />
-      <Route path="form/request" element={<RequestForm />} /> 
-    </Routes>
-  );
-}
-
-export default TypeBreed
-
-
-
-=======
       <Route path="form" element={WithNavBar(TypeBreedForm)} />
       <Route path="form/request" element={<RequestForm />} />
       <Route path="form/records" element={<LivestockRecord />} />
@@ -46,4 +28,3 @@ export default TypeBreed
 };
 
 export default TypeBreed;
->>>>>>> bill
