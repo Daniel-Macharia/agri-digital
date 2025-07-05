@@ -29,10 +29,12 @@ const navItems = [
   {
     label: 'Production',
     img: '/assets/images/livestockmenu/sale.svg',
+    path: 'production'
   },
   {
     label: 'Sales',
     img: '/assets/images/livestockmenu/milk from a cow.svg',
+    path: 'sales'
   },
 ];
 

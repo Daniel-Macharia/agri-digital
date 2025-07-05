@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "../../farmer/dashboard/components/farmer-dashboard";
+import Dashboard from "../../farmer/farmer-dashboard";
 import NotFound from "../exceptions/NotFound";
 
 const HomePageLayout: React.FC = () => {
