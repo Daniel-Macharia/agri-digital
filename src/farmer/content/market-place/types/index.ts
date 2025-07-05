@@ -99,6 +99,52 @@ export interface PaymentData {
     cvv?: string;
 }
 
+// types.ts
+export interface Product {
+  id: number;
+  name: string;
+  seller: string;
+  price: number;
+  unit: string;
+  rating: number;
+  image: string;
+  category: string;
+}
+
+export interface CartItem extends Product {
+  quantity: number;
+}
+
+export interface GiftData {
+  recipientName: string;
+  recipientEmail: string;
+  message: string;
+  product: Product;
+}
+
+export interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
+
+export interface ShoppingCartModalProps {
+  show: boolean;
+  onHide: () => void;
+  cartItems: CartItem[];
+  onUpdateQuantity: (itemId: number, quantity: number) => void;
+  onRemoveItem: (itemId: number) => void;
+  onProceedToCheckout: () => void;
+  onContinueShopping: () => void;
+}
+
+export interface GiftModalProps {
+  show: boolean;
+  onHide: () => void;
+  product: Product | null;
+  //onSendGift: (giftData: GiftData) => void;
+}
+
 
 // Agridigi/src/components/farmer/dashboard/components/content/market-place/index.ts
 /*import React from 'react';

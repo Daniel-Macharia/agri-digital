@@ -1,56 +1,149 @@
 import React from 'react';
 import { Pagination as BootstrapPagination } from 'react-bootstrap';
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
 
 export interface PaginationProps {
-    currentPage: number;
-    totalPages: number;
-    onPageChange: (page: number) => void;
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
 }
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
-    const pageNumbers = [];
-    const maxPagesToShow = 3;
-
-    let startPage: number, endPage: number;
-    if (totalPages <= maxPagesToShow + 2) {
-        startPage = 1;
-        endPage = totalPages;
-    } else {
-        if (currentPage <= maxPagesToShow) {
-            startPage = 1;
-            endPage = maxPagesToShow + 1;
-        } else if (currentPage + 1 >= totalPages) {
-            startPage = totalPages - maxPagesToShow;
-            endPage = totalPages;
-        } else {
-            startPage = currentPage - 1;
-            endPage = currentPage + 1;
+    const renderPageNumbers = () => {
+        const pages = [];
+        
+        // Always show first 3 pages when on first 3 pages
+        if (currentPage <= 3) {
+            for (let i = 1; i <= 3; i++) {
+                pages.push(
+                    <BootstrapPagination.Item
+                        key={i}
+                        active={i === currentPage}
+                        onClick={() => onPageChange(i)}
+              >
+                        {i}
+                    </BootstrapPagination.Item>
+                );
+            }
+            if (totalPages > 6) {
+                pages.push(<BootstrapPagination.Ellipsis key="ellipsis" disabled />);
+            }
+            // Show last 3 pages
+            for (let i = totalPages - 2; i <= totalPages; i++) {
+                if (i > 3) { // Ensure no duplicate pages
+                    pages.push(
+                        <BootstrapPagination.Item
+                            key={i}
+                            active={i === currentPage}
+                            onClick={() => onPageChange(i)}
+                    >
+                            {i}
+                        </BootstrapPagination.Item>
+                    );
+                }
+            }
         }
-    }
+        // Show last 3 pages when on last 3 pages
+        else if (currentPage >= totalPages - 2) {
+            // Show first 3 pages
+            for (let i = 1; i <= 3; i++) {
+                pages.push(
+                    <BootstrapPagination.Item
+                        key={i}
+                        active={i === currentPage}
+                        onClick={() => onPageChange(i)}
+          >
+                        {i}
+                    </BootstrapPagination.Item>
+                );
+            }
+            if (totalPages > 6) {
+                pages.push(<BootstrapPagination.Ellipsis key="ellipsis" disabled />);
+            }
+            // Show last 3 pages
+            for (let i = totalPages - 2; i <= totalPages; i++) {
+                pages.push(
+                    <BootstrapPagination.Item
+                        key={i}
+                        active={i === currentPage}
+                        onClick={() => onPageChange(i)}
+                     >
+                        {i}
+                    </BootstrapPagination.Item>
+                );
+            }
+        }
+        // Middle pages - show current page and adjacent pages
+        else {
+            // Show first 3 pages
+            for (let i = 1; i <= 3; i++) {
+                pages.push(
+                    <BootstrapPagination.Item
+                        key={i}
+                        active={i === currentPage}
+                        onClick={() => onPageChange(i)}
+                    >
+                        {i}
+                    </BootstrapPagination.Item>
+                );
+            }
+            pages.push(<BootstrapPagination.Ellipsis key="first-ellipsis" disabled />);
+            
+            // Show current page and adjacent pages
+            for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+                if (i > 3 && i < totalPages - 2) {
+                    pages.push(
+                        <BootstrapPagination.Item
+                            key={i}
+                            active={i === currentPage}
+                            onClick={() => onPageChange(i)}
+                        >
+                            {i}
+                        </BootstrapPagination.Item>
+                    );
+                }
+            }
+            
+            pages.push(<BootstrapPagination.Ellipsis key="last-ellipsis" disabled />);
+            // Show last 3 pages
+            for (let i = totalPages - 2; i <= totalPages; i++) {
+                pages.push(
+                    <BootstrapPagination.Item
+                        key={i}
+                        active={i === currentPage}
+                        onClick={() => onPageChange(i)}
+                    >
+                        {i}
+                    </BootstrapPagination.Item>
+                );
+            }
+        }
 
-    for (let i = startPage; i <= endPage; i++) {
-        pageNumbers.push(i);
-    }
+        return pages;
+    };
 
     return (
-        <BootstrapPagination className="justify-content-center">
-            {startPage > 1 && <BootstrapPagination.First onClick={() => onPageChange(1)} />}
-            {currentPage > 1 && <BootstrapPagination.Prev onClick={() => onPageChange(currentPage - 1)} />}
-
-            {startPage > 1 && <BootstrapPagination.Ellipsis disabled />}
-
-            {pageNumbers.map(number => (
-                <BootstrapPagination.Item key={number} active={number === currentPage} onClick={() => onPageChange(number)}>
-                    {number}
-                </BootstrapPagination.Item>
-            ))}
-
-            {endPage < totalPages && <BootstrapPagination.Ellipsis disabled />}
+        <div className="d-flex align-items-center justify-content-center">
+            <BootstrapPagination className="mb-0 custom-pagination">
+                {renderPageNumbers()}
+            </BootstrapPagination>
             
-            {currentPage < totalPages && <BootstrapPagination.Next onClick={() => onPageChange(currentPage + 1)} />}
-            {endPage < totalPages && <BootstrapPagination.Last onClick={() => onPageChange(totalPages)} />}
-        </BootstrapPagination>
+            {currentPage < totalPages && (
+                <button
+                    className="btn btn-success ms-5 py-0"
+                    onClick={() => onPageChange(currentPage + 1)}
+                    style={{
+                        backgroundColor: '#6B8E23',
+                        borderColor: '#6B8E23',
+                        fontWeight: '300',
+                        //position: 'sticky',
+                    }}
+                >
+                    Next
+                </button>
+            )}
+        </div>
     );
 };
-
-export default Pagination; 
+export default Pagination;

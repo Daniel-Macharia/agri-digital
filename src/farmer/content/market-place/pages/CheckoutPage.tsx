@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Card, Button, Form, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Button, Form, Alert, Card } from 'react-bootstrap';
 import { FiArrowLeft, FiPlus, FiMinus, FiTrash2, FiCalendar, FiGift } from 'react-icons/fi';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { CartItem, Order, PaymentData } from '../types';
@@ -202,7 +202,7 @@ const CheckoutPage: React.FC = () => {
                     <Button 
                         variant="link" 
                         onClick={() => navigate(-1)} 
-                        className="text-dark mb-3 ps-0 d-flex align-items-center"
+                        className="text-dark mb-3 ps-0 d-flex align-items-start"
                         style={{ fontSize: '0.9rem' }}
                     >
                         <FiArrowLeft className="me-1" /> Back
@@ -229,10 +229,10 @@ const CheckoutPage: React.FC = () => {
                 <Button 
                     variant="link" 
                     onClick={() => navigate(-1)} 
-                    className="text-dark mb-3 ps-0 d-flex align-items-center"
+                    className="text-dark mb-3 ps-0 d-flex align-items-start"
                     style={{ fontSize: '0.9rem' }}
                 >
-                    <FiArrowLeft className="me-1" /> Back
+                    <FiArrowLeft className="item-start me-1" /> Back
                 </Button>
                 
                 <div className="d-flex align-items-center mb-3 mb-md-4">
@@ -258,207 +258,193 @@ const CheckoutPage: React.FC = () => {
                     </Alert>
                 )}
 
-                <Row className="g-3 g-md-4">
-                    <Col lg={7}>
-                        {/* Cart Items */}
-                        <Card className="mb-3 mb-md-4">
-                            <Card.Body className="p-3 p-md-4">
-                                <h5 className="mb-3 h6 h-md-5">
-                                    {isGift ? 'Gift Items' : 'Your Items'}
-                                </h5>
-                                {cartItems.map((item) => (
-                                    <div key={item.id} className="d-flex align-items-start align-items-sm-center mb-3 pb-3 border-bottom">
-                                        <img
-                                            src={item.image}
-                                            alt={item.name}
-                                            className="rounded me-2 me-sm-3 flex-shrink-0"
-                                            style={{ 
-                                                width: '60px', 
-                                                height: '60px', 
-                                                objectFit: 'cover',
-                                                /*'@media (min-width: 768px)': {
-                                                    width: '80px',
-                                                    height: '80px'
-                                                }*/
-                                            }}
-                                        />
+                {/* Cart Items */}
+                <div className="mb-4">
+                    <h5 className="mb-3 h6 h-md-5">
+                        {isGift ? 'Gift Item' : ''}
+                    </h5>
+                    {cartItems.map((item) => (
+                        <div key={item.id} className="d-flex align-items-start align-items-sm-center mb-5 pb-0 border-bottom">
+                            <img
+                                src={item.image}
+                                alt={item.name}
+                                className="rounded me-2 me-sm-3 flex-shrink-0"
+                                style={{ 
+                                    width: '120px', 
+                                    height: '120px', 
+                                    objectFit: 'cover',
+                                }}
+                            />
+                            
+                            <div className="flex-grow-1 min-width-0">
+                                <div className="d-flex align-items-center flex-wrap">
+                                    <h6 className="mb-1 me-2 text-truncate" style={{ fontSize: '0.9rem' }}>
+                                        {item.name}
+                                    </h6>
+                                    {isGift && <FiGift className="text-warning flex-shrink-0" size={16} />}
+                                </div>
+                                <p className="text-muted d-flex align-items-start mb-0 small text-truncate">{item.seller}</p>
+                                <p className="text-dark mb-0 fw-semi-bold">
+                                    KES {item.price.toFixed(2)} per {item.unit}
+                                </p>
+                                
+                                <div className="d-flex align-items-center gap-0 flex-wrap">
+                                    <div className="d-flex align-items-center gap-0 rounded-pill" style={{backgroundColor: '#cefae3' }}>
+                                        <Button
+                                            variant="outline-secondary"
+                                            size="sm"
+                                            className="rounded-circle d-flex align-items-center justify-content-center bg-white border-0"
+                                            style={{ width: '18px', height: '18px', padding: 0, fontSize: '0.75rem' }}
+                                            onClick={() => handleQuantityChange(item.id, -1)}
+                                            disabled={isGift}
+                                        >
+                                            <FiMinus size={10} />
+                                        </Button>
                                         
-                                        <div className="flex-grow-1 min-width-0">
-                                            <div className="d-flex align-items-center flex-wrap">
-                                                <h6 className="mb-1 me-2 text-truncate" style={{ fontSize: '0.9rem' }}>
-                                                    {item.name}
-                                                </h6>
-                                                {isGift && <FiGift className="text-warning flex-shrink-0" size={16} />}
-                                            </div>
-                                            <p className="text-muted mb-1 small text-truncate">{item.seller}</p>
-                                            <p className="text-success mb-2 fw-bold small">
-                                                KES {item.price.toFixed(2)} per {item.unit}
-                                            </p>
-                                            
-                                            <div className="d-flex align-items-center gap-2 flex-wrap">
-                                                <div className="d-flex align-items-center gap-1">
-                                                    <Button
-                                                        variant="outline-secondary"
-                                                        size="sm"
-                                                        className="rounded-circle d-flex align-items-center justify-content-center"
-                                                        style={{ width: '28px', height: '28px', padding: 0, fontSize: '0.7rem' }}
-                                                        onClick={() => handleQuantityChange(item.id, -1)}
-                                                        disabled={isGift}
-                                                    >
-                                                        <FiMinus size={10} />
-                                                    </Button>
-                                                    
-                                                    <span className="fw-bold mx-2 small" style={{ minWidth: '20px', textAlign: 'center' }}>
-                                                        {item.quantity}
-                                                    </span>
-                                                    
-                                                    <Button
-                                                        variant="outline-secondary"
-                                                        size="sm"
-                                                        className="rounded-circle d-flex align-items-center justify-content-center"
-                                                        style={{ width: '28px', height: '28px', padding: 0, fontSize: '0.7rem' }}
-                                                        onClick={() => handleQuantityChange(item.id, 1)}
-                                                        disabled={isGift}
-                                                    >
-                                                        <FiPlus size={10} />
-                                                    </Button>
-                                                </div>
-                                                
-                                                {!isGift && (
-                                                    <button
-                                                        className="btn btn-link text-danger p-0 ms-1"
-                                                        style={{ border: 'none', background: 'none' }}
-                                                        onClick={() => handleRemoveItem(item.id)}
-                                                        aria-label="Remove item"
-                                                    >
-                                                        <FiTrash2 size={14} />
-                                                    </button>
-                                                )}
-                                            </div>
-                                        </div>
+                                        <span className="fw-bold mx-2 small" style={{ minWidth: '20px', textAlign: 'center' }}>
+                                            {item.quantity}
+                                        </span>
+                                        
+                                        <Button
+                                            variant="outline-secondary"
+                                            size="sm"
+                                            className="rounded-circle d-flex align-items-center justify-content-center bg-white border-0"
+                                            style={{ width: '18px', height: '18px', padding: 0, fontSize: '0.75rem' }}
+                                            onClick={() => handleQuantityChange(item.id, 1)}
+                                            disabled={isGift}
+                                        >
+                                            <FiPlus size={10} />
+                                        </Button>
                                     </div>
-                                ))}
-                            </Card.Body>
-                        </Card>
+                                    
+                                    {!isGift && (
+                                        <button
+                                            className="btn btn-link text-danger p-0 ms-1"
+                                            style={{ border: 'none', background: 'none' }}
+                                            onClick={() => handleRemoveItem(item.id)}
+                                            aria-label="Remove item"
+                                        >
+                                            <FiTrash2 size={14} />
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
 
+                {/* Form Fields Row */}
+                <Row className="g-3 g-md-4 w-100">
+                    <Col lg={6}>
                         {/* Delivery Address */}
-                        <Card className="mb-3 mb-md-4">
-                            <Card.Body className="p-3 p-md-4">
-                                <h5 className="mb-3 h6 h-md-5">
-                                    {isGift ? 'Recipient Address' : 'Delivery Address'}
-                                </h5>
-                                <Form.Group>
-                                    <Form.Control
-                                        as="textarea"
-                                        rows={3}
-                                        name="deliveryAddress"
-                                        value={formData.deliveryAddress}
-                                        onChange={handleInputChange}
-                                        placeholder={isGift ? "Enter recipient's delivery address" : "Enter your delivery address"}
-                                        required
-                                        isInvalid={!!validationErrors.deliveryAddress}
-                                        className="resize-none"
-                                        style={{ fontSize: '0.9rem' }}
-                                    />
-                                    <Form.Control.Feedback type="invalid">
-                                        {validationErrors.deliveryAddress}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                            </Card.Body>
-                        </Card>
+                        <div className="mb-4">
+                            <h5 className="mb-3 h6 h-md-5">
+                                {isGift ? 'Recipient Address' : 'Delivery Address'}
+                            </h5>
+                            <Form.Group>
+                                <Form.Control
+                                    as="textarea"
+                                    rows={3}
+                                    name="deliveryAddress"
+                                    value={formData.deliveryAddress}
+                                    onChange={handleInputChange}
+                                    placeholder={isGift ? "Enter recipient's delivery address" : "Enter your delivery address"}
+                                    required
+                                    isInvalid={!!validationErrors.deliveryAddress}
+                                    className="resize-none"
+                                    style={{ fontSize: '0.9rem' }}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    {validationErrors.deliveryAddress}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                        </div>
 
                         {/* Delivery Options */}
-                        <Card className="mb-3 mb-md-4">
-                            <Card.Body className="p-3 p-md-4">
-                                <h5 className="mb-3 h6 h-md-5">
-                                    {isGift ? 'Delivery Option (for recipient)' : 'Delivery Option'}
-                                </h5>
-                                <Form.Group>
-                                    <Form.Select 
-                                        name="deliveryMethod" 
-                                        value={formData.deliveryMethod} 
-                                        onChange={handleInputChange}
-                                        className="mb-3"
-                                        style={{ fontSize: '0.9rem' }}
-                                    >
-                                        <option value="courier">Courier Delivery (+KES 200)</option>
-                                        <option value="self-delivery">Self Delivery (Free)</option>
-                                        <option value="buyer-pickup">
-                                            {isGift ? 'Recipient Pickup (Free)' : 'Buyer Self-Pickup (Free)'}
-                                        </option>
-                                    </Form.Select>
-                                </Form.Group>
-                                {isGift && formData.deliveryMethod === 'courier' && (
-                                    <small className="text-info d-block">
-                                        The gift will be delivered directly to the recipient at their location.
-                                    </small>
-                                )}
-                            </Card.Body>
-                        </Card>
+                        <div className="mb-4">
+                            <h5 className="mb-3 h6 h-md-5">
+                                {isGift ? 'Delivery Option (for recipient)' : 'Delivery Option'}
+                            </h5>
+                            <Form.Group>
+                                <Form.Select 
+                                    name="deliveryMethod" 
+                                    value={formData.deliveryMethod} 
+                                    onChange={handleInputChange}
+                                    className="mb-3"
+                                    style={{ fontSize: '0.9rem' }}
+                                >
+                                    <option value="courier">Courier Delivery (+KES 200)</option>
+                                    <option value="self-delivery">Self Delivery (Free)</option>
+                                    <option value="buyer-pickup">
+                                        {isGift ? 'Recipient Pickup (Free)' : 'Buyer Self-Pickup (Free)'}
+                                    </option>
+                                </Form.Select>
+                            </Form.Group>
+                            {isGift && formData.deliveryMethod === 'courier' && (
+                                <small className="text-info d-block">
+                                    The gift will be delivered directly to the recipient at their location.
+                                </small>
+                            )}
+                        </div>
 
                         {/* Delivery Date */}
-                        <Card className="mb-3 mb-md-4">
-                            <Card.Body className="p-3 p-md-4">
-                                <h5 className="mb-3 h6 h-md-5">
-                                    {isGift ? 'Gift Delivery Date (Optional)' : 'Preferred Delivery Date (Optional)'}
-                                </h5>
-                                <Form.Group className="position-relative">
-                                    <Form.Control 
-                                        type="date" 
-                                        name="deliveryDate"
-                                        value={formData.deliveryDate}
-                                        onChange={handleInputChange}
-                                        className="pe-5"
-                                        min={getTodayDate()}
-                                        isInvalid={!!validationErrors.deliveryDate}
-                                        style={{ fontSize: '0.9rem' }}
-                                    />
-                                    <FiCalendar 
-                                        className="position-absolute top-50 end-0 translate-middle-y me-3 text-muted" 
-                                        size={18}
-                                        style={{ pointerEvents: 'none' }}
-                                    />
-                                    <Form.Control.Feedback type="invalid">
-                                        {validationErrors.deliveryDate}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                                <small className="text-muted mt-2 d-block">
-                                    {isGift 
-                                        ? "Leave blank for standard delivery timing to recipient."
-                                        : "Leave blank for standard delivery timing."
-                                    }
-                                </small>
-                            </Card.Body>
-                        </Card>
+                        <div className="mb-4">
+                            <h5 className="mb-3 h6 h-md-5">
+                                {isGift ? 'Gift Delivery Date (Optional)' : 'Preferred Delivery Date (Optional)'}
+                            </h5>
+                            <Form.Group className="position-relative">
+                                <Form.Control 
+                                    type="date" 
+                                    name="deliveryDate"
+                                    value={formData.deliveryDate}
+                                    onChange={handleInputChange}
+                                    className="pe-5"
+                                    min={getTodayDate()}
+                                    isInvalid={!!validationErrors.deliveryDate}
+                                    style={{ fontSize: '0.9rem' }}
+                                />
+                                <FiCalendar 
+                                    className="position-absolute top-50 end-0 translate-middle-y me-3 text-muted" 
+                                    size={18}
+                                    style={{ pointerEvents: 'none' }}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    {validationErrors.deliveryDate}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                            <small className="text-muted mt-2 d-block">
+                                {isGift 
+                                    ? "Leave blank for standard delivery timing to recipient."
+                                    : "Leave blank for standard delivery timing."
+                                }
+                            </small>
+                        </div>
 
                         {/* Tip Section - Optional for gifts */}
                         {!isGift && (
-                            <Card className="mb-3 mb-md-4">
-                                <Card.Body className="p-3 p-md-4">
-                                    <h5 className="mb-3 h6 h-md-5">Add Tip (Optional)</h5>
-                                    <Form.Group>
-                                        <Form.Control
-                                            type="number"
-                                            name="tipAmount"
-                                            value={formData.tipAmount}
-                                            onChange={handleInputChange}
-                                            placeholder="Enter tip amount"
-                                            min="0"
-                                            step="0.01"
-                                            isInvalid={!!validationErrors.tipAmount}
-                                            style={{ fontSize: '0.9rem' }}
-                                        />
-                                        <Form.Control.Feedback type="invalid">
-                                            {validationErrors.tipAmount}
-                                        </Form.Control.Feedback>
-                                    </Form.Group>
-                                </Card.Body>
-                            </Card>
+                            <div className="mb-4">
+                                <h5 className="mb-3 h6 h-md-5">Add Tip (Optional)</h5>
+                                <Form.Group>
+                                    <Form.Control
+                                        type="number"
+                                        name="tipAmount"
+                                        value={formData.tipAmount}
+                                        onChange={handleInputChange}
+                                        placeholder="Enter tip amount"
+                                        min="0"
+                                        step="0.01"
+                                        isInvalid={!!validationErrors.tipAmount}
+                                        style={{ fontSize: '0.9rem' }}
+                                    />
+                                    <Form.Control.Feedback type="invalid">
+                                        {validationErrors.tipAmount}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </div>
                         )}
                     </Col>
-                    
-                    <Col lg={24}>
-                        <Card className="card w-100 sticky-top" style={{ top: '20px' }}>
+                    <Col lg={6} className="ms-auto">
+                        <Card className="shadow-sm" style={{ backgroundColor: '#f8f9fa' }}>
                             <Card.Body className="p-3 p-md-4">
                                 <h5 className="mb-3 mb-md-4 h6 h-md-5">
                                     {isGift ? 'Gift Summary' : 'Order Summary'}
@@ -511,17 +497,20 @@ const CheckoutPage: React.FC = () => {
                                         size="lg" 
                                         onClick={handleProceedToPayment}
                                         disabled={isSubmitting}
-                                        className="btn btn-primary text-start text-nowrap px-4 w-50 fw-bold d-flex content-fit py-2 py-md-3"
+                                        className="fw-bold pt-0 pb-1 d-flex align-items-center fit-content w-100 justify-content-center py-2 py-sm-0"
                                         style={{ fontSize: '0.9rem' }}
                                     >
                                         {isGift && <FiGift className="me-2" size={16} />}
-                                        {isSubmitting ? 'Processing...' : (isGift ? ' Gift Payment' : 'Proceed to Payment')}
+                                        {isSubmitting ? 'Processing...' : (isGift ? 'Complete Gift Payment' : 'Proceed to Payment')}
                                     </Button>
                                 </div>
                             </Card.Body>
                         </Card>
                     </Col>
                 </Row>
+
+                {/* Order Summary Row - Always Below */}
+                
             </Container>
 
             <PaymentModal 

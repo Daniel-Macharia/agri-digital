@@ -182,11 +182,11 @@ function ProductsPage(): JSX.Element {
     };
 
     return (
-        <div className="d-flex min-vh-100" style={{ backgroundColor: '#f8f9fa' }}>
+        <div className="d-flex min-vh-100" style={{ backgroundColor: '#EEEEEE' }}>
             {/* Sidebar Space */}
             {/* Main Content Area */}
             <div className="flex-grow-1 py-4 pe-4" style={{ paddingLeft: '5px', paddingRight: '2px' }}>
-                <div className="container-fluid">
+                <div className="container-fluid" style={{ backgroundColor: '#EEEEEE' }}>
                     {/* Header */}
                     <Row className="mb-4">
                         <Col xs={12} md={8} lg={9} className="d-flex align-items-center">
