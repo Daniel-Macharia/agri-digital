@@ -63,7 +63,7 @@ const TypeBreedForm: React.FC = () => {
           <Saved onDone={() => setShowSaved(false)} />
         </div>
       )}
-      <div className="w-100 rounded-4 bg-white border mt-3 p-4">
+      <div className="w-100 rounded-4 bg-white border mt-3 mb-5 p-4">
         <h5 className="mb-4 text-start" style={{ color: "#333" }}>
           Type & Breed Selection
         </h5>

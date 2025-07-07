@@ -453,7 +453,7 @@
 .text-remember-me-links { color: var(--remember-me-links); }
 
 /* Background Colors */
-.bg-primary { background-color: var(--primary); }
+.bg-primary { background-color: var(--primary) !important; }
 .bg-secondary { background-color: var(--secondary); }
 .bg-accent { background-color: var(--accent); }
 .bg-background { background-color: var(--background); }

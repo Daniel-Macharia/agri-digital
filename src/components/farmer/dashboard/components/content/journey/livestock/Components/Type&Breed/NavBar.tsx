@@ -9,8 +9,6 @@ const NavBar: React.FC<NavBarProps> = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  
-
   // Get the base path (e.g., /farmer/dashboard/components/content/journey/livestock/Components/Housing)
   const basePath = location.pathname.split("/").slice(0, -1).join("/");
   const requestServicePath = basePath + "/form/request";
@@ -74,18 +72,23 @@ const NavBar: React.FC<NavBarProps> = () => {
 
       {/* Request Service button */}
       <button
-        className="btn px-4 py-2"
+        className="btn  justify-content-center align-items-center gap-2 px-3 py-2 rounded bg-primary"
         style={{
-          backgroundColor: "#457900",
-          color: "#fff",
-          border: "none",
-          borderRadius: "6px",
-          fontSize: "0.95rem",
-          fontWeight: 400,
+          whiteSpace: "nowrap", // Prevent text from wrapping
+          minWidth: "fit-content", // Ensure button width adjusts to content
+          overflow: "hidden", // Hide overflow content
+          textOverflow: "ellipsis", // Add ellipsis for long text
         }}
         onClick={() => navigate(requestServicePath)}
       >
-        Request Service
+        <span
+          className="small-medium"
+          style={{
+            color: "#fff",
+          }}
+        >
+          Request Services
+        </span>
       </button>
     </div>
   );
