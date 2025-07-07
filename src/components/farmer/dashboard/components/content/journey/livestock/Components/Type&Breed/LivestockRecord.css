@@ -1,0 +1,83 @@
+.livestock-table-container {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 32px 24px 24px 24px;
+  margin-top: 24px;
+}
+
+.livestock-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.livestock-table thead tr {
+  background: #f7f7f7;
+}
+
+.livestock-table th {
+  font-weight: 700;
+  color: #333;
+  padding: 16px 12px;
+  font-size: 15px;
+  border-bottom: 1.5px solid #e0e0e0;
+}
+
+.livestock-table td {
+  padding: 14px 12px;
+  font-size: 15px;
+  color: #444;
+  border-bottom: 1px solid #f0f0f0;
+  background: #fff;
+}
+
+.livestock-table tbody tr:nth-child(even) td {
+  background: #fafbfc;
+}
+
+.livestock-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.livestock-table .view-score-link {
+  color: #3A9B13;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.livestock-table .view-score-link:hover {
+  text-decoration: underline;
+}
+
+.livestock-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.livestock-header-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+}
+
+.livestock-add-btn {
+  background: #3A9B13;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.livestock-add-btn:hover {
+  background: #317d10;
+} 

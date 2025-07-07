@@ -40,7 +40,7 @@ const RequestForm: React.FC = () => {
 
   const handleDone = () => {
     setShowSaved(false);
-    navigate("/journey/livestock/typebreed/form/records"); 
+    navigate("/farmer/projects/livestock/typebreed/form/records"); 
   };
 
   return (
