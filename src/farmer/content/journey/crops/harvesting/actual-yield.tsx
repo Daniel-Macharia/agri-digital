@@ -8,6 +8,18 @@ import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import TimePicker from "react-time-picker";
+
+
+interface YieldProps{
+    fieldType: string,
+    quantity: number | null,
+    qualityGrade: string,
+    harvestingDate: Date | null,
+    harvestingTime: string | null,
+    previewUrl: string | null,
+    additionalNotes: string
+};
+
 const ActualYield: React.FC = ()=>{
 
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -18,24 +30,57 @@ const ActualYield: React.FC = ()=>{
     
     const navigate = useNavigate();
 
-    const initialValues = {
-
+    const initialValues: YieldProps = {
+        fieldType: '',
+        quantity: null,
+        qualityGrade: "",
+        harvestingDate: null,
+        harvestingTime: null,
+        previewUrl: null,
+        additionalNotes: ""
     };
 
     const validationSchema = Yup.object({
-
+        fieldType: Yup.string().required("required").typeError("field type is required"),
+        quantity: Yup.number().required("required").typeError("quantity must be a number"),
+        qualityGrade: Yup.string().required("required").typeError("quality is required"),
+        harvestingDate: Yup.date().notRequired(),//required("harvesting date is required"),
+        harvestingTime: Yup.string().notRequired(),//required("harvesting time is required"),
+        previewUrl: Yup.string().notRequired(),//required("select an image"),
+        additionalNotes: Yup.string().notRequired()
     });
 
-    const handleSubmit = ()=>{
-        console.log("submitting");
-    };
+    const handleSubmit = (data : YieldProps )=>{
 
-    const handleSaveYield = ()=>{
-        console.log("saving yield");
+        if( selectedDate == null )
+        {
+            console.log("date not selected");
+            return;
+        }
+
+        if( selectedTime == null )
+        {
+            console.log("time not selected");
+            return;
+        }
+
+        if( previewUrl == null )
+        {
+            console.log("image not selected");
+            return;
+        }
+
+        data.previewUrl = previewUrl;
+        data.harvestingDate = selectedDate;
+        data.harvestingTime = selectedTime;
+
+        console.log(data);
+        console.log("submitting");
     };
 
     const handleContinue = ()=>{
         console.log("continuing");
+        navigate("/farmer/projects/crops/post-harvesting")
     };
 
     const handleFileUpload = () => {
@@ -118,7 +163,7 @@ const ActualYield: React.FC = ()=>{
                                 <div className="text-danger small harvesting-input-label col-sm-12"
                                 style={{margin: "0px"}}
                                 >
-                                    <ErrorMessage name="fieldType" />
+                                    <ErrorMessage name="quantity" />
                                 </div>
                             </div>
                         </div>
@@ -142,7 +187,7 @@ const ActualYield: React.FC = ()=>{
                                 <div className="text-danger small harvesting-input-label col-sm-12"
                                 style={{margin: "0px"}}
                                 >
-                                    <ErrorMessage name="fieldType" />
+                                    <ErrorMessage name="qualityGrade" />
                                 </div>
                             </div>
                         </div>
@@ -158,18 +203,26 @@ const ActualYield: React.FC = ()=>{
                                     Harvesting Date
                                 </label>
 
-                                <DatePicker
-                                className="harvesting-input-field col-sm-12 col-md-6"
-                                name="harvestingDate" 
-                                
-                                dateFormat='MM/dd/yyyy'
-                                minDate={new Date()}
+                                <div className="col-sm-12 col-md-6" >
+                                    <DatePicker
+                                    className="harvesting-input-field col-sm-12"
+                                    name="harvestingDate" 
+                                    
+                                    dateFormat='MM/dd/yyyy'
+                                    minDate={new Date()}
 
-                                selected={selectedDate}
-                                onChange={date => setSelectedDate( date ) }
+                                    selected={selectedDate}
+                                    onChange={date => setSelectedDate( date ) }
 
-                                placeholderText="select harvesting date"
-                                />
+                                    placeholderText="select harvesting date"
+
+                                    wrapperClassName="w-100"
+                                    />
+
+                                    <div className="col-sm-12 text-danger small" style={{margin: "0px", textAlign: "start"}}>
+                                        <ErrorMessage name="harvestingDate" />
+                                    </div>
+                                </div>
                             </div>
 
                             <div 
@@ -181,16 +234,22 @@ const ActualYield: React.FC = ()=>{
                                     Harvesting Time
                                 </label>
 
-                                <TimePicker
-                                className="harvesting-input-field col-sm-12 col-md-6"
-                                name="harvestingTime" 
-                                
-                                
-                                value={selectedTime}
-                                onChange={value => setSelectedTime(value)}
-                                disableClock={true}
-                                clearIcon={null}
-                                />
+                                <div className="col-sm-12 col-md-6" >
+                                    <TimePicker
+                                    className="harvesting-input-field col-sm-12 "
+                                    name="harvestingTime" 
+                                    
+                                    
+                                    value={selectedTime}
+                                    onChange={value => setSelectedTime(value)}
+                                    disableClock={true}
+                                    clearIcon={null}
+                                    />
+
+                                    <div className="col-sm-12 text-danger small" style={{margin: "0px", textAlign: "start"}} >
+                                        <ErrorMessage name="harvestingTime" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -229,6 +288,11 @@ const ActualYield: React.FC = ()=>{
                                     <img src={previewUrl || "/assets/images/upload_photo.svg"} 
                                     className={previewUrl ? "col-sm-8" : "col-sm-1"}/>
                                     <p>Upload Photo of the Product<br/>PDF,PNG,JPG up to 10 MB </p>
+                                    <div className="text-danger small harvesting-input-label col-sm-12"
+                                    style={{margin: "0px", textAlign: "center"}}
+                                    >
+                                        <ErrorMessage name="previewUrl" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -248,6 +312,8 @@ const ActualYield: React.FC = ()=>{
                                 className="harvesting-input-field col-sm-12"
                                 name="additionalNotes" 
                                 placeholder="additional notes"
+
+                                style={{height: "88px"}}
                                 />
                                 <div className="text-danger small harvesting-input-label col-sm-12"
                                 style={{margin: "0px"}}
@@ -259,10 +325,9 @@ const ActualYield: React.FC = ()=>{
 
                         <div className="actions-div" >
                             <Button
-                            onClick={handleSaveYield}
                             variant="secondary"
                             className="other-button"
-
+                            type="submit"
                             >
                                 Save
                             </Button>

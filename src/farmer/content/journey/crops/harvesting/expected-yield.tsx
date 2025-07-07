@@ -122,7 +122,7 @@ const ExpectedYield: React.FC = ()=>{;
                                 </label>
                                 <div className="row col-sm-12 col-md-6" >
                                     <DatePicker
-                                    className="col-sm-12 harvesting-input-field"
+                                    className="col-sm-12 form-control bg-light"
                                     name="harvestingDate" 
                                     
                                     
@@ -131,6 +131,8 @@ const ExpectedYield: React.FC = ()=>{;
                                     selected={selectedDate}
                                     onChange={ date => setSelectedDate(date) }
                                     minDate={new Date()}
+
+                                    wrapperClassName="w-100"
                                     />
                                 </div>
                             </div>
@@ -172,6 +174,8 @@ const ExpectedYield: React.FC = ()=>{;
                                 className="harvesting-input-field col-sm-12"
                                 name="additionalNotes" 
                                 placeholder="additional notes"
+
+                                style={{height: "88px"}}
                                 />
                             </div>
                             

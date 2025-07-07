@@ -1,14 +1,68 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ProgressBar from "../../../journey/projects/journey-item/progress-bar";
 
 import "./overview.css";
 import "./projects-overview.css";
 import { useState } from "react";
-import StartNewProjectModal from "../../../journey/add-new-project";
+import { CropFormData, LivestockFormData } from "../../../products";
+import ProjectSelectionModal from "../../../products/ProjectSelectionModal";
+import LivestockProjectModal from "../../../products/LivestockProjectModal";
+import CropProjectModal from "../../../products/CropProjectModal";
 
 export default function ProjectsOverview(){
 
-    const [show, setShow] = useState<boolean>(false);
+    const navigate = useNavigate();
+
+    const [showProjectSelection, setShowProjectSelection] = useState<boolean>(false);
+    const [showLivestockModal, setShowLivestockModal] = useState<boolean>(false);
+    const [showCropModal, setShowCropModal] = useState<boolean>(false);
+
+    // New Project Modal handlers
+    const handleAddNewProduct = (): void => {
+        setShowProjectSelection(true);
+    };
+
+    const handleCloseProjectSelection = (): void => {
+        setShowProjectSelection(false);
+    };
+
+    const handleCropProject = (): void => {
+        setShowProjectSelection(false);
+        setShowCropModal(true);
+    };
+
+    const handleLivestockProject = (): void => {
+        setShowProjectSelection(false);
+        setShowLivestockModal(true);
+    };
+
+    const handleBackToProjectSelection = (): void => {
+        setShowLivestockModal(false);
+        setShowCropModal(false);
+        setShowProjectSelection(true);
+    };
+
+    const handleCloseLivestockModal = (): void => {
+        setShowLivestockModal(false);
+    };
+
+    const handleCloseCropModal = (): void => {
+        setShowCropModal(false);
+    };
+
+    const handleLivestockSubmit = (formData: LivestockFormData): void => {
+        console.log('Livestock Project Data:', formData);
+        navigate("/farmer/projects/livestock/typebreed");
+
+        setShowLivestockModal(false);
+    };
+
+    const handleCropSubmit = (formData: CropFormData): void => {
+        console.log('Crop Project Data:', formData);
+        navigate("/farmer/projects/crops/assessment");
+        
+        setShowCropModal(false);
+    };
 
     const render = ()=>{
         return (<>
@@ -26,7 +80,7 @@ export default function ProjectsOverview(){
 
             <div id="projects-actions" >
                 <button
-                onClick={() => setShow(true)}
+                onClick={() => setShowProjectSelection(true)}
                 >
                     {/* <NavLink to="/farmer/projects/crops/assessment" className="nav-link"> */}
                     Add a New Project
@@ -41,52 +95,30 @@ export default function ProjectsOverview(){
                     </NavLink>
                 </button>
             </div>
-
-            <StartNewProjectModal show={show} setShow={setShow} />
-
-
-            {/* <Modal
-            show={show}
-            onHide={ () => setShow(false)}
-
-            centered
-            >
-
-                <Modal.Header>
-
-                </Modal.Header>
-
-                <Modal.Body>
-                    <img src="/assets/images/bank.svg" />
-                    <h3 className="h3-medium" >
-                        Project
-                    </h3>
-
-                    <p>Ready to start your farming adventure ? 
-
-                        <br/>
-                        Choose project Journey ?
-                    </p>
-                </Modal.Body>
-
-                <Modal.Footer>
-                    <Button
-                    type="submit"
-                    variant="primary"
-
-                    onClick={handleStartCropProject}
-                    >Crop Project</Button>
-
-                    <Button
-                    type="submit"
-                    variant="primary"
-
-                    onClick={handleStartLivestockProject}
-                    >Livestock Project</Button>
-                </Modal.Footer>
-            </Modal> */}
-
         </div>
+
+
+        {/* New Project Modals */}
+        <ProjectSelectionModal
+            show={showProjectSelection}
+            onHide={handleCloseProjectSelection}
+            onCropProject={handleCropProject}
+            onLivestockProject={handleLivestockProject}
+        />
+
+        <LivestockProjectModal
+            show={showLivestockModal}
+            onHide={handleCloseLivestockModal}
+            onBack={handleBackToProjectSelection}
+            onSubmit={handleLivestockSubmit}
+        />
+
+        <CropProjectModal
+            show={showCropModal}
+            onHide={handleCloseCropModal}
+            onBack={handleBackToProjectSelection}
+            onSubmit={handleCropSubmit}
+        />
         </>);
     };
 

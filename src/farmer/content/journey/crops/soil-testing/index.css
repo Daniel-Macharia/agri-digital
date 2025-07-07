@@ -115,3 +115,8 @@ line-height: 22.4px; /* 160% */
 
     color: var(--Secondary-Text, #777);
 }
+
+.key-value-pair{
+    display: flex;
+    
+}

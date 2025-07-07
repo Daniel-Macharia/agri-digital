@@ -4,7 +4,7 @@ import CropsNotification from "../crops-notification/crops-notification";
 import "./index.css";
 import SalesOffer from "./sales-offer";
 import "/src/index.css";
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import SalesNotificationItem from "./sales-notification-item";
 
 import * as Yup from "yup";
@@ -88,24 +88,24 @@ const Sales: React.FC = ()=>{
 
     const validationSchema = Yup.object({
         productName: Yup.string().required("required"),
-        productQuantity: Yup.string().required("required"),
+        productQuantity: Yup.number().required("required").typeError("quantity must be a number"),
         productType: Yup.string().required("required"),
-        productPrice: Yup.string().required("required")
+        productPrice: Yup.number().required("required").typeError("price must be a number")
     });
 
     const handleAddProductAction = (product: typeof initialValues) => {
         console.log(product);
+        alert(product);
     };
 
     const render = ()=>{
         return (<>
-
+        <div className="row col-sm-12"
+        style={{paddingTop: "20px"}} 
+        >
             <CropsNotification 
             iconUrl={"/assets/images/warning.svg"} 
             message={"Tomato prices in Mombasa just rose by 10%"} />
-
-        <div className="row col-sm-12" 
-        >
 
             <div className="row flex-wrap col-sm-12 col-md-8">
                 <div className="col-sm-12 sales-container">
@@ -177,20 +177,20 @@ const Sales: React.FC = ()=>{
 
                         {
                             ({}) => (
-                                <Form className="col-sm-12">
+                                <Form className="col-sm-12" >
                                     <div className="col-sm-12 "
                                     style={{
                                         margin: '0px',
                                     }}
                                     >
-                                        <p className="small-semibold row col-sm-12 left-aligned-text "
+                                        <p className="form-label row col-sm-12 left-aligned-text "
                                         style={{
                                             margin: '0px'
                                         }}
                                         >
                                             Upload Photo
                                         </p>
-                                        <div className="col-sm-12"
+                                        <div className="col-sm-12 form-control"
                                         style={{borderStyle: 'dashed',
                                             borderWidth: '1px', 
                                             marginTop: '0px'}}
@@ -215,56 +215,110 @@ const Sales: React.FC = ()=>{
                                         </div>
                                     </div>
 
-                                    <div className="col-sm-12">
-                                        <div className="row col-sm-12">
-                                            <div className="col-sm-12 col-md-6 order-1 sales-input-group">
-                                                <label className="col-sm-12 left-aligned-text small-regular sales-input-label" htmlFor="productName">
+                                    <div className="col-sm-12" style={{margin: "0px", padding: "0px", marginBottom: "0px", gap: "12px"}}>
+                                        <div className="row col-sm-12" 
+                                        style={{
+                                            margin: "0px", 
+                                            padding: "0px",
+                                            gap: "12px",
+                                            marginBottom: "10px"}}>
+                                            <div className="col-sm-12 col-md-6 order-1 sales-input-group" 
+                                            style={{
+                                                padding: "0px",
+                                                alignSelf: "start"}}>
+                                                <label className="col-sm-12 left-aligned-text form-label sales-input-label" htmlFor="productName"
+                                                style={{marginBottom: "0px"}}>
                                                     Product Name
                                                 </label>
-                                                <Field
-                                                name="productName"
-                                                placeholder="Maize"
-                                                type="text"
-                                                className="col-sm-12 sales-input-field"
-                                                />
+                                                <div className="col-sm-12" >
+                                                    <Field
+                                                    name="productName"
+                                                    placeholder="Maize"
+                                                    type="text"
+                                                    className="col-sm-12 sales-input-field form-control"
+                                                    />
+                                                    <div className="text-danger small col-sm-12" 
+                                                    style={{margin: "0px", textAlign: "start"}} >
+                                                        <ErrorMessage name="productName" />
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="row col-sm-12 col-md-6 order-2 sales-input-group">
-                                                <label className="col-sm-12 left-aligned-text small-regular sales-input-label" htmlFor="productQuantity">
+                                            <div className="row col-sm-12 col-md-6 order-2 sales-input-group"
+                                            style={{padding: "0px", alignSelf: "start", paddingLeft: "4px"}}>
+                                                <label className="col-sm-12 left-aligned-text form-label sales-input-label" htmlFor="productQuantity"
+                                                style={{marginBottom: "0px"}}
+                                                >
                                                     Quantity
                                                 </label>
-                                                <Field
-                                                name="productQuantity"
-                                                placeholder="140Kg"
-                                                type="text"
-                                                className="col-sm-12 sales-input-field"
-                                                />
+                                                <div className="col-sm-12" style={{padding: "0px"}}>
+                                                    <Field
+                                                    name="productQuantity"
+                                                    placeholder="140Kg"
+                                                    type="text"
+                                                    className="col-sm-12 sales-input-field form-control"
+                                                    />
+                                                    <div className="text-danger small col-sm-12" 
+                                                    style={{margin: "0px", textAlign: "start"}} >
+                                                        <ErrorMessage name="productQuantity" />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div className="row flex-wrap col-sm-12">
-                                            <div className="row col-sm-12 col-md-6 order-1 sales-input-group">
-                                                <label className="sales-input-label col-sm-12 left-aligned-text small-regular" htmlFor="productPrice">
+                                        <div className="row col-sm-12" 
+                                        style={{margin: "0px", padding: "0px", gap: "12px", marginBottom: "10px"}}>
+                                            <div className="col-sm-12 col-md-6 order-1 sales-input-group"
+                                            style={{padding: "0px", alignSelf: "start"}}>
+                                                <label className="sales-input-label col-sm-12 left-aligned-text form-label" htmlFor="productPrice"
+                                                style={{marginBottom: "0px"}}
+                                                >
                                                     Price
                                                 </label>
-                                                <Field
-                                                name="productPrice"
-                                                placeholder="Ksh 120/Kg"
-                                                type="text"
-                                                className="col-sm-12 sales-input-field"
-                                                />
+                                                <div className="col-sm-12">
+                                                    <Field
+                                                    name="productPrice"
+                                                    placeholder="Ksh 120/Kg"
+                                                    type="text"
+                                                    className="col-sm-12 sales-input-field form-control"
+                                                    />
+                                                    <div className="text-danger small col-sm-12" 
+                                                    style={{margin: "0px", textAlign: "start"}} >
+                                                        <ErrorMessage name="productPrice" />
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="row col-sm-12 col-md-6 order-2 sales-input-group">
-                                                <label className="sales-input-label col-sm-12 left-aligned-text small-regular" htmlFor="productType">
+                                            <div className="row col-sm-12 col-md-6 order-2 sales-input-group"
+                                            style={{padding: "0px", alignSelf: "start", paddingLeft: '4px'}}
+                                            >
+                                                <label className="sales-input-label col-sm-12 left-aligned-text form-label" htmlFor="productType"
+                                                style={{marginBottom: "0px"}}
+                                                >
                                                     Type
                                                 </label>
-                                                <Field
-                                                name="productType"
-                                                placeholder="Maize"
-                                                type="text"
-                                                className="col-sm-12 sales-input-field"
-                                                />
+                                                <div className="col-sm-12" style={{padding: "0px"}}>
+                                                    <Field
+                                                    name="productType"
+                                                    placeholder="Maize"
+                                                    type="text"
+                                                    className="col-sm-12 sales-input-field form-control"
+                                                    />
+                                                    <div className="text-danger small col-sm-12" 
+                                                    style={{margin: "0px", textAlign: "start"}} >
+                                                        <ErrorMessage name="productType" />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div className="col-sm-12">
+                                        <button
+                                        type="submit"
+                                        className="col-sm-4 small-semibold"
+                                        >
+                                            Add Product
+                                        </button>
+
                                     </div>
                                 </Form>
                             )

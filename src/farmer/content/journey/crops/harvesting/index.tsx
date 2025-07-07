@@ -20,7 +20,10 @@ const Harvesting: React.FC = ()=>{
     const render = ()=>{
         return (<>
         <div className="row harvest-container">
-            <CropsNotification iconUrl="/assets/images/plant.svg" message="Your crop is nearing harvest. Begin planning for harvesting logistics" />
+            <CropsNotification 
+            iconUrl="/assets/images/plant.svg" 
+            message="Your crop is nearing harvest. Begin planning for harvesting logistics"
+             />
 
             
             <div className="row  col-sm-12"

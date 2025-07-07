@@ -1,7 +1,35 @@
-import { SalesOfferProps } from "../crops-models";
+import { useState } from "react";
+import { SalesNegotiationProductProps, SalesOfferProps } from "../crops-models";
 import "./sales-offer.css";
+import ConfirmAcceptanceModal from "./confirm-acceptance-modal";
+import NegotiateOfferModal from "./negotiate-offer-modal";
 
 const SalesOffer: React.FC<SalesOfferProps> = (sale: SalesOfferProps) => {
+
+    const [showAcceptanceModal, setShowAcceptanceModal] = useState<boolean>(false);
+
+    const [showNegotiateModal, setShowNegotiateModal] = useState<boolean>(false);
+
+    let negotiatedProduct: SalesNegotiationProductProps = {
+        "productImageUrl" : "/assets/images/organic_tomatoes_side.png",
+        "productName": "Organic Tomatoes",
+        "productSeller": "My Products",
+        "productUnitPrice": "150",
+        "productUnitName": "Kg",
+        "show": showNegotiateModal,
+        "setShow": setShowNegotiateModal
+    };
+    
+    const handleAcceptAction = () => {
+        console.log("confirming acceptance");
+        setShowAcceptanceModal(true);
+    };
+
+    const handleNegotiateAction = () => {
+        console.log("negitating deal");
+        setShowNegotiateModal(true);
+    };
+
     const render = () => {
         return (<>
         <div className="col-sm-12 card" >
@@ -87,6 +115,8 @@ const SalesOffer: React.FC<SalesOfferProps> = (sale: SalesOfferProps) => {
                         className="col-sm-6"
 
                         style={{margin: "0px"}}
+
+                        onClick={handleAcceptAction}
                         
                         >
                             Accept
@@ -97,12 +127,25 @@ const SalesOffer: React.FC<SalesOfferProps> = (sale: SalesOfferProps) => {
                         className="col-sm-6 other-button"
                         
                         style={{margin: "0px"}}
+
+                        onClick={handleNegotiateAction}
                         >
                             Negotiate
                         </button>
                     </div>)
                 }
         </div>
+
+        <ConfirmAcceptanceModal show={showAcceptanceModal} setShow={setShowAcceptanceModal} />
+
+        <NegotiateOfferModal 
+        productImageUrl={negotiatedProduct.productImageUrl} 
+        productName={negotiatedProduct.productName} 
+        productSeller={negotiatedProduct.productSeller} 
+        productUnitPrice={negotiatedProduct.productUnitPrice} 
+        productUnitName={negotiatedProduct.productUnitName} 
+        show={negotiatedProduct.show} 
+        setShow={negotiatedProduct.setShow} />
         </>);
     };
 

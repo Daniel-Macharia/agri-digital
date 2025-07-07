@@ -317,7 +317,7 @@ const SoilTesting: React.FC  = ()=>{
                                     type="textarea"
                                     name="comment"
                                     placeholder="your comments.."
-                                    style={{margin: "0px"}}
+                                    style={{margin: "0px", height: "88px"}}
                                     />
                                     <div className="text-danger small col-sm-12"
                                     style={{padding: "0px", 
@@ -361,41 +361,58 @@ const SoilTesting: React.FC  = ()=>{
         show={show}
         onHide={() => setShow(false)}
 
-        centered
+        centered={true}
+
+        dialogClassName="mx-auto"
+
+        className="col-sm-12"
         >
                 <Modal.Header closeButton>
-                    <Modal.Title>
+                    <Modal.Title className="h3-semibold"
+                    style={{margin: "0px 20px"}}>
                         Soil Test Results
                     </Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                    <div>
-                        <label>pH level </label>
-                        <label>{pHLevel}</label>
+                    <div className="key-value-pair row col-sm-12">
+                        <label className="col-sm-6">pH level </label>
+                        <label className="form-label col-sm-6" style={{textAlign: "end"}}>{pHLevel}</label>
+                    </div>
+
+                    <div className="key-value-pair col-sm-12">
+                        <label className="col-sm-6">Nutrients levels </label>
+                        <label className="form-label col-sm-6" style={{textAlign: "end"}}>{nutrientLevels}</label>
                     </div>
 
                     <div>
-                        <label>Nutrients levels </label>
-                        <label>{nutrientLevels}</label>
-                    </div>
-
-                    <div>
-                        <h3>
+                        <p className="body-semibold"
+                        style={{
+                            marginBottom: "0px"
+                        }}>
                             Recommendations
-                        </h3>
+                        </p>
                         {recommendations}
                     </div>
                 </Modal.Body>
 
-                <Modal.Footer>
+                <Modal.Footer className="row col-sm-12" style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingLeft: "24px",
+                    paddingRight: "4px"
+                }}>
                     <Button
+                    className="col-sm-4 other-button"
                     onClick={handleModalDownloadAction}
                     >
                         Download
                     </Button>
                     
-                    <Button onClick={handleModalContinueAction}>
+                    <Button 
+                    className="col-sm-4"
+                    onClick={handleModalContinueAction}>
                         Continue
                     </Button>
                 </Modal.Footer>

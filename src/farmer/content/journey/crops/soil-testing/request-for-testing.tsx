@@ -168,7 +168,7 @@ const RequestForTesting: React.FC = ()=>{
                                 
                                 <div className="col-sm-12 col-md-8" >
                                     <DatePicker
-                                    className="testing-input-field col-sm-12 body-regular"
+                                    className="form-control bg-light col-sm-12 body-regular"
                                     name="dateForTesting"
 
                                     dateFormat="MM/dd/yyyy"
@@ -176,6 +176,9 @@ const RequestForTesting: React.FC = ()=>{
                                     onChange={ date => setSelectedDate(date) }
                                     
                                     minDate={new Date()}
+
+                                    wrapperClassName="w-100"
+
                                     placeholderText="select date for testing"
                                     />
                                     <div className="text-danger small testing-input-label col-sm-12" >

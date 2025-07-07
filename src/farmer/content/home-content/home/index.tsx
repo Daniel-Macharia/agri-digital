@@ -6,10 +6,6 @@ export default function FarmerHome(){
     const render = ()=>{
         return(<>
         <div id="journey-home-content" >
-            <div className="content-background" id="projects-home-top">
-                <h1>Here is the top bar</h1>
-            </div>
-
             <div id="projects-home-content-main" >
                 <div className="content-background" id="projects-home-content-main-left">
                     <ProjectsOverview />

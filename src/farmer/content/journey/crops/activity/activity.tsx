@@ -51,8 +51,9 @@ export default function ActivityAddAndReview() {
         }
     ];
 
-    const handleAddActivity = () => {
+    const handleAddActivity = ( data: AddActivityProps ) => {
         console.log("adding activity");
+        console.log(data);
     };
 
     const handleUploadImageAction = () => {
@@ -82,11 +83,11 @@ export default function ActivityAddAndReview() {
     };
 
     const validationSchema = Yup.object({
-        activityType: Yup.string().required("required").typeError("activity type required"),
-        activityDate: Yup.date().notRequired(),
-        activityTime: Yup.string().notRequired(),
-        previewUrl: Yup.string().notRequired(),
-        activityDescription: Yup.string().required().test( desc => desc?.length > 0 )
+        activityType: Yup.string().required("activity type is required").typeError("activity type required"),
+        activityDate: Yup.date().notRequired(),//nullable().required("date is required"),
+        activityTime: Yup.string().notRequired(),//.nullable().required("select time"),
+        previewUrl: Yup.string().notRequired(),//nullable().required("select image"),
+        activityDescription: Yup.string().required("test is required").test( desc => desc?.length > 0 )
     });
 
     const render = () => {
@@ -133,37 +134,52 @@ export default function ActivityAddAndReview() {
                                         </div>
                                     </div>
 
-                                    <div className="management-input-group ">
+                                    <div className="management-input-group col-sm-12">
                                         <label htmlFor="activityDate" className="management-input-label ">
                                             Date
                                         </label>
 
-                                        <DatePicker
-                                        className="activity-input-field body-regular"
-                                        name="activityDate"
-                                        dateFormat={"MM/dd/yyyy"}
+                                        <div className="col-sm-12">
+                                            <DatePicker
+                                            className="form-control body-regular bg-light"
+                                            name="activityDate"
+                                            dateFormat={"MM/dd/yyyy"}
 
-                                        selected={selectedDate}
-                                        onChange={date => setSelectedDate( date ) }
+                                            selected={selectedDate}
+                                            onChange={date => setSelectedDate( date ) }
 
-                                        minDate={new Date()}
+                                            minDate={new Date()}
 
-                                        />
+                                            placeholderText="select activity date"
+                                            wrapperClassName="w-100"
+                                            />
+
+                                            <div className="col-sm-12 text-danger small" style={{margin: "0px", textAlign: "start"}}>
+                                                <ErrorMessage name="activityDate" />
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div className="management-input-group col-sm-12">
                                         <label htmlFor="activityTime" className="management-input-label col-sm-12">
                                             Time
                                         </label>
+                                        <div className="col-sm-12">
+                                            <TimePicker
+                                            className="form-control body-regular col-sm-12"
+                                            name="activityTime"
+                                            value={selectedTime}
+                                            onChange={time => {setSelectedTime(time); console.log("Selected time: ", time)}}
+                                            disableClock={true}
+                                            clearIcon={null}
+                                            
+                                            />
 
-                                        <TimePicker
-                                        className="activity-input-field body-regular col-sm-12"
-                                        name="activityTime"
-                                        value={selectedTime}
-                                        onChange={time => {setSelectedTime(time); console.log("Selected time: ", time)}}
-                                        disableClock={true}
-                                        clearIcon={null}
-                                        />
+                                            <div className="col-sm-12 text-danger small" style={{margin: "0px", textAlign: "start"}}>
+                                                <ErrorMessage name="activityTime" />
+                                            </div>
+                                        </div>
+                                        
                                     </div>
 
                                     <div className="management-input-group col-sm-12">
@@ -207,6 +223,8 @@ export default function ActivityAddAndReview() {
                                             className="activity-input-field body-regular col-sm-12"
                                             name="activityDescription"
 
+                                            style={{height: "88px"}}
+                                            placeholder="activity description"
                                             />
                                             <div className="col-sm-12 text-danger small" style={{textAlign: "start"}}>
                                                 <ErrorMessage name="activityType" />

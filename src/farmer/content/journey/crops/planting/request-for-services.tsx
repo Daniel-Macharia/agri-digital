@@ -175,17 +175,20 @@ const RequestForService: React.FC = () => {
                                     Date of service
                                 </label>
 
-                                <DatePicker
-                                name="dateOfService"
-                                className="planting-input-field col-sm-12 col-md-8 order-1"
-                                selected={selectedDate}
-                                onChange={(date) => setSelectedDate( date ) }
-                                dateFormat={'MM/dd/yyyy'}
-                                placeholderText="select date of service"
-                                minDate={new Date()}
+                                <div className="col-sm-12 col-md-8 order-1" 
+                                style={{padding: "0px"}}>
+                                    <DatePicker
+                                    name="dateOfService"
+                                    className="form-control col-sm-12"
+                                    selected={selectedDate}
+                                    onChange={(date) => setSelectedDate( date ) }
+                                    dateFormat={'MM/dd/yyyy'}
+                                    placeholderText="select date of service"
+                                    minDate={new Date()}
 
-                                
-                                />
+                                    wrapperClassName="w-100"
+                                    />
+                                </div>
                             </div>
 
                             <div className="row col-sm-12" >
@@ -195,17 +198,19 @@ const RequestForService: React.FC = () => {
                                 >
                                     Location
                                 </label>
-                                <Field
-                                className="planting-input-field col-sm-12 col-md-8"
-                                name="location"
-                                type="text"
-                                placeholder="Kiambu"
-                                style={{margin: "0px"}}
-                                />
-                                <div className="col-sm-12 text-danger small planting-input-label" 
-                                style={{margin: "0px", padding: "0px"}}
-                                >
-                                    <ErrorMessage name="location" />
+                                <div className="col-sm-12  col-md-8" style={{padding: "0px"}} >
+                                    <Field
+                                    className="planting-input-field col-sm-12"
+                                    name="location"
+                                    type="text"
+                                    placeholder="Kiambu"
+                                    style={{margin: "0px"}}
+                                    />
+                                    <div className="col-sm-12 text-danger small planting-input-label" 
+                                    style={{margin: "0px", padding: "0px"}}
+                                    >
+                                        <ErrorMessage name="location" />
+                                    </div>
                                 </div>
                             </div>
 
@@ -216,18 +221,20 @@ const RequestForService: React.FC = () => {
                                 >
                                     Contact Information
                                 </label>
-                                <Field
-                                className="planting-input-field col-sm-12 col-md-8"
-                                name="contactInformation"
-                                type="text"
-                                placeholder="+254 712345678"
-                                style={{margin: "0px"}}
+                                <div className="col-sm-12 col-md-8" style={{padding: "0px"}} >
+                                    <Field
+                                    className="planting-input-field col-sm-12"
+                                    name="contactInformation"
+                                    type="text"
+                                    placeholder="+254 712345678"
+                                    style={{margin: "0px"}}
 
-                                />
-                                <div className="col-sm-12 text-danger small planting-input-label" 
-                                style={{margin: "0px", padding: "0px"}}
-                                >
-                                    <ErrorMessage name="contactInformation" />
+                                    />
+                                    <div className="col-sm-12 text-danger small planting-input-label" 
+                                    style={{margin: "0px", padding: "0px"}}
+                                    >
+                                        <ErrorMessage name="contactInformation" />
+                                    </div>
                                 </div>
                             </div>
 
@@ -280,12 +287,14 @@ const RequestForService: React.FC = () => {
                                 </label>
 
                                 <div className="col-sm-12 col-md-8" style={{padding: "0px"}}>
-                                    <Field 
-                                    type="textarea"
+                                    
+                                    <textarea
                                     className="planting-input-field  col-sm-12"
                                     name="additionalNotes"
                                     placeholder="additional notes"
-                                    style={{margin: "0px"}}/>
+                                    style={{margin: "0px", height: "88px", textAlign: "start"}}
+
+                                    />
 
                                     <div className="col-sm-12 text-danger small planting-input-label" 
                                     style={{margin: "0px", padding: "0px"}}

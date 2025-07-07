@@ -12,3 +12,9 @@
     border-style: solid;
     border-width: 1px;
 }
+
+
+.react-time-picker__wrapper{
+    border: none !important;
+    padding: 0px;
+}
