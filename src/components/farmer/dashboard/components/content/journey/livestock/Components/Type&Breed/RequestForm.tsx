@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Saved from "../../Shared/Saved";
 import { useNavigate } from "react-router-dom";
+import { IoArrowBack } from 'react-icons/io5';
 
 const validationSchema = Yup.object({
   serviceType: Yup.string()
@@ -42,10 +43,13 @@ const RequestForm: React.FC = () => {
     navigate("/journey/livestock/typebreed/form/records"); 
   };
 
- 
-
   return (
     <>
+      {/* Back Arrow Icon */}
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem', cursor: 'pointer', width: 'fit-content' }} onClick={() => navigate('/farmer/projects/livestock/typebreed')}>
+        <IoArrowBack size={22} />
+        
+      </div>
       {showSaved && (
         <div
           style={{
