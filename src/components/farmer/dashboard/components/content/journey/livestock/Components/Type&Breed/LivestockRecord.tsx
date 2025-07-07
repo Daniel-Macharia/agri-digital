@@ -38,7 +38,7 @@ const LivestockRecord: React.FC = () => {
             <h3 className="h3-semibold" style={{ color: 'var(--Primary-Text, #333)' }}>My Cows Records</h3>
           </div>
           <div className="col-md-6 text-md-end">
-            <button className="btn btn-success">+ Add Livestock</button>
+            <button className="btn btn-success">+ Add Livestok</button>
           </div>
         </div>
 
