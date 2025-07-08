@@ -25,7 +25,7 @@ const Housing = () => {
       <Route path="space" element={WithNavBar(Space)} />
       <Route path="protection" element={WithNavBar(LivestockProtection)} />
       <Route path="results" element={<Results />}  />
-    </Routes>
+    </Routes> 
   )
 }
 
