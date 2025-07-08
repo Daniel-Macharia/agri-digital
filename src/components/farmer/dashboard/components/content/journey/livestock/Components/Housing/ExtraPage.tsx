@@ -167,7 +167,7 @@ const Extrapage = () => {
                                         <div>
                                             <div className="body-semibold">Waste Disposal</div>
                                             <small className="text-primary">2025/12/03 8:00AM</small>
-                                            <div><small>Lorem Ipsum</small></div>
+                                            <div><small>Lorem Ipsum</small></div> 
                                         </div>
                                     </div>
                                 </Card.Body>
