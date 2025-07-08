@@ -5,12 +5,34 @@ import TimePicker from 'react-time-picker';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-time-picker/dist/TimePicker.css';
 import { FiEdit, FiCalendar, FiClock} from 'react-icons/fi';
+import Saved from '../../Shared/Saved';
+import { useNavigate } from 'react-router-dom';
 
 const Extrapage = () => {
     const [startDate, setStartDate] = useState<Date | null>(new Date());
-    const [time, setTime] = useState<string | null>('10:00'); 
+    const [time, setTime] = useState<string | null>('10:00');
+    const [showSaved, setShowSaved] = useState(false);
+    const navigate = useNavigate();
     return (
         <div className="container p-4">
+            {showSaved && (
+                <div
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        background: 'rgba(0,0,0,0.2)',
+                        zIndex: 9999,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <Saved onDone={() => navigate('/farmer/projects/livestock/housing/results')} />
+                </div>
+            )}
             {/* First row with 3 cards */}
             <div className="row mb-4">
                 <div className="col-md-4">
@@ -117,7 +139,7 @@ const Extrapage = () => {
                     <Card className="h-100">
                         <Card.Body>
                             <Card.Title as="h6" className="mb-3 h3-semibold">Add New Activity</Card.Title>
-                            <Form>
+                            <Form onSubmit={e => { e.preventDefault(); setShowSaved(true); }}>
                                 <Form.Group className="mb-3" controlId="activityType">
                                     <Form.Label><small>Activity Type</small></Form.Label>
                                     <Form.Control type="text" placeholder="Lorem Ipsum" />
@@ -167,7 +189,7 @@ const Extrapage = () => {
                                         <div>
                                             <div className="body-semibold">Waste Disposal</div>
                                             <small className="text-primary">2025/12/03 8:00AM</small>
-                                            <div><small>Lorem Ipsum</small></div> 
+                                            <div><small>Lorem Ipsum</small></div>
                                         </div>
                                     </div>
                                 </Card.Body>
