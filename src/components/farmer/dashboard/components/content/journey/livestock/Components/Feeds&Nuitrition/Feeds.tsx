@@ -91,7 +91,7 @@ const FeedsForm: React.FC = () => {
             justifyContent: "center",
           }}
         >
-          <Saved onDone={() => setShowSaved(false)} />
+          <Saved onDone={() => navigate("/farmer/projects/livestock/feeds/results")}/>
         </div>
       )}
       {/* Request for Feeds Button */}

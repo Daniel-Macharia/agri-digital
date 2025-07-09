@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import TimePicker from "react-time-picker";
 import "react-time-picker/dist/TimePicker.css";
 import Saved from "../../Shared/Saved";
+import { useNavigate } from "react-router-dom";
 
 // Example livestock data
 const livestockData = [
@@ -41,6 +42,7 @@ const validationSchema = Yup.object({
 
 const FeedingSchedule: React.FC = () => {
   const [showSaved, setShowSaved] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -59,7 +61,7 @@ const FeedingSchedule: React.FC = () => {
             justifyContent: "center",
           }}
         >
-          <Saved onDone={() => setShowSaved(false)} />
+          <Saved onDone={() => navigate("/farmer/projects/livestock/feeds/results")}/>
         </div>
       )}
       <div className="w-100 rounded-4 bg-white border mt-3 p-4">

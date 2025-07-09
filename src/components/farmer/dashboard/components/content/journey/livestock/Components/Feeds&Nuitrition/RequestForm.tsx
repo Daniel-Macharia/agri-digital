@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Saved from "../../Shared/Saved";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
   serviceType: Yup.string()
@@ -33,6 +34,7 @@ const initialValues = {
 
 const RequestForm: React.FC = () => {
   const [showSaved, setShowSaved] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -51,7 +53,7 @@ const RequestForm: React.FC = () => {
             justifyContent: "center",
           }}
         >
-          <Saved onDone={() => setShowSaved(false)} />
+          <Saved onDone={() => navigate("/farmer/projects/livestock/feeds/results")}/>
         </div>
       )}
       <div className="w-100 rounded-4 bg-white border mt-3 p-4">
