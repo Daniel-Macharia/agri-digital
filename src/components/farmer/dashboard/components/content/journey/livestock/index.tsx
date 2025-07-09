@@ -6,6 +6,7 @@ import Housing from "./Components/Housing";
 import Health from "./Components/Health-Management";
 import FeedsNutrition from "./Components/Feeds&Nuitrition/Index";
 import Breeding from "./Components/Breeding";
+import Production from "./Components/Production";
 
 
 
@@ -18,7 +19,9 @@ export default function LivestockRoutes() {
       <Route path="housing/*" element={<Housing />} />
       <Route path="health/*" element={<Health />} />
       <Route path="feeds/*" element={<FeedsNutrition />} />
-      <Route path="breeding/*" element={<Breeding />} />      
+      <Route path="breeding/*" element={<Breeding />} /> 
+      <Route path="production/*" element={<Production />} /> 
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
