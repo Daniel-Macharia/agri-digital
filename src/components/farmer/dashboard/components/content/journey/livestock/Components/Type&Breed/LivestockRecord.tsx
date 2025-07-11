@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./LivestockRecord.css";
 import NavBar from "../../Shared/NavBar";
 
 type Livestock = {
@@ -148,150 +147,145 @@ const navItems = [
 const LivestockRecord: React.FC = () => {
   const navigate = useNavigate();
 
-  // // Get the base path and construct the path to TypeBreedForm
+  // Get the base path and construct the path to TypeBreedForm
   const basePath = location.pathname.split("/").slice(0, -1).join("/");
   const requestServicePath = basePath;
 
   return (
     <>
-
-    <NavBar navItems={navItems} />
-   
-
-    <div className="livestock-table-container mb-5">
-      {/* Search, count, and status filter row */}
-      <div
-        className="d-flex justify-content-end w-100 "
-        style={{ borderRadius: "24px", padding: "16px 24px" }}
-      >
-        <div className="d-flex align-items-center gap-3">
-          <div className="position-relative" style={{ maxWidth: 320 }}>
-            <input
-              type="text"
-              className="form-control border-0 bg-white ps-5"
-              placeholder="Search"
-              aria-label="Search"
-              style={{ borderRadius: "24px" }}
-            />
-
-            <span
-              className="position-absolute"
-              style={{
-                left: 14,
-                top: "50%",
-                transform: "translateY(-50%)",
-                color: "#bdbdbd",
-                pointerEvents: "none",
-              }}
-            >
-              <i className="fa fa-search"></i>
-            </span>
-          </div>
-          <span className="me-3" style={{ color: "#222", fontSize: 15 }}>
-            Showing 1-10 of 100 Livestock
-          </span>
-          <div className="dropdown">
-            <button
-              className="btn btn-link dropdown-toggle p-0"
-              type="button"
-              id="statusDropdown"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              style={{
-                color: "#222",
-                fontWeight: 500,
-                fontSize: 15,
-                textDecoration: "none",
-              }}
-            >
-              Status
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="statusDropdown">
-              <li>
-                <a className="dropdown-item" href="#">
-                  All
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Active
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Inactive
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      {/* End search, count, and status filter row */}
-
-      <div className="w-100">
-        <div className="livestock-header-row">
-          <div>
-            <h3 className="livestock-header-title">My Cows Records</h3>
-          </div>
-          <div>
-            <button
-              className="btn  justify-content-center align-items-center gap-2 px-3 py-2 rounded bg-primary"
-              style={{
-                whiteSpace: "nowrap", // Prevent text from wrapping
-                minWidth: "fit-content", // Ensure button width adjusts to content
-                overflow: "hidden", // Hide overflow content
-                textOverflow: "ellipsis", // Add ellipsis for long text
-              }}
-              onClick={() => navigate(requestServicePath)}
-            >
+      <NavBar navItems={navItems} />
+      
+      <div className="bg-white rounded-3 shadow-sm p-4 mt-4 mb-5">
+        {/* Search, count, and status filter row */}
+        <div className="d-flex justify-content-end w-100 rounded-4 p-3 mb-3">
+          <div className="d-flex align-items-center gap-3 flex-wrap">
+            <div className="position-relative" style={{ maxWidth: 320 }}>
+              <input
+                type="text"
+                className="form-control border-0 bg-white ps-5 rounded-pill"
+                placeholder="Search"
+                aria-label="Search"
+              />
               <span
-                className="small-medium"
+                className="position-absolute text-muted"
                 style={{
-                  color: "#fff",
+                  left: 14,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  pointerEvents: "none",
                 }}
               >
-                + Livestock
+                <i className="fa fa-search"></i>
               </span>
-            </button>
+            </div>
+            <span className="me-3 text-dark small">
+              Showing 1-10 of 100 Livestock
+            </span>
+            <div className="dropdown">
+              <button
+                className="btn btn-link dropdown-toggle p-0 text-dark fw-medium text-decoration-none small"
+                type="button"
+                id="statusDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Status
+              </button>
+              <ul className="dropdown-menu" aria-labelledby="statusDropdown">
+                <li>
+                  <a className="dropdown-item" href="#">
+                    All
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Active
+                  </a>
+                </li>
+                <li>
+                  <a className="dropdown-item" href="#">
+                    Inactive
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-        <div className="table-responsive">
-          <table className="livestock-table">
-            <thead>
-              <tr>
-                <th>Livestock Identification</th>
-                <th>Sex</th>
-                <th>Breed</th>
-                <th>Purpose</th>
-                <th>Birth Weight</th>
-                <th>Date of Birth</th>
-                <th>Quality Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              {livestockData.map((cow, index) => (
-                <tr key={cow.id}>
-                  <td>
-                    {index + 1}. {cow.identification}
-                  </td>
-                  <td>{cow.sex}</td>
-                  <td>{cow.breed}</td>
-                  <td>{cow.purpose}</td>
-                  <td>{cow.birthWeight}</td>
-                  <td>{cow.dateOfBirth}</td>
-                  <td>
-                    <a href="#" className="view-score-link">
-                      View Quality Score
-                    </a>
-                  </td>
+        {/* End search, count, and status filter row */}
+
+        <div className="w-100">
+          <div className="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <h3 className="h5 fw-bold text-dark mb-0">My Cows Records</h3>
+            </div>
+            <div>
+              <button
+                className="btn btn-primary d-flex justify-content-center align-items-center gap-2 px-3 py-2 rounded"
+                style={{
+                  whiteSpace: "nowrap",
+                  minWidth: "fit-content",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+                onClick={() => navigate(requestServicePath)}
+              >
+                <span className="small fw-medium text-white">
+                  + Livestock
+                </span>
+              </button>
+            </div>
+          </div>
+          
+          <div className="table-responsive">
+            <table className="table table-hover mb-0 rounded-3 overflow-hidden">
+              <thead className="table-light">
+                <tr>
+                  <th className="fw-bold text-dark p-3 border-bottom border-2">
+                    Livestock Identification
+                  </th>
+                  <th className="fw-bold text-dark p-3 border-bottom border-2">
+                    Sex
+                  </th>
+                  <th className="fw-bold text-dark p-3 border-bottom border-2">
+                    Breed
+                  </th>
+                  <th className="fw-bold text-dark p-3 border-bottom border-2">
+                    Purpose
+                  </th>
+                  <th className="fw-bold text-dark p-3 border-bottom border-2">
+                    Birth Weight
+                  </th>
+                  <th className="fw-bold text-dark p-3 border-bottom border-2">
+                    Date of Birth
+                  </th>
+                  <th className="fw-bold text-dark p-3 border-bottom border-2">
+                    Quality Score
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {livestockData.map((cow, index) => (
+                  <tr key={cow.id} className={index % 2 === 1 ? "bg-light" : "bg-white"}>
+                    <td className="p-3 text-dark">
+                      {index + 1}. {cow.identification}
+                    </td>
+                    <td className="p-3 text-dark">{cow.sex}</td>
+                    <td className="p-3 text-dark">{cow.breed}</td>
+                    <td className="p-3 text-dark">{cow.purpose}</td>
+                    <td className="p-3 text-dark">{cow.birthWeight}</td>
+                    <td className="p-3 text-dark">{cow.dateOfBirth}</td>
+                    <td className="p-3">
+                      <a href="#" className="text-success fw-semibold text-decoration-none">
+                        View Quality Score
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
-
     </>
   );
 };

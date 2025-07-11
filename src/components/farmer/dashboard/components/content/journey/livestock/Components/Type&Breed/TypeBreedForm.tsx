@@ -17,17 +17,40 @@ const validationSchema = Yup.object({
     .test(
       "fileSize",
       "File too large (max 10MB)",
-      (value) => !value || (value && value.size <= 10 * 1024 * 1024)
+      (value) => {
+        if (!value) return true;
+        if (value instanceof File) {
+          return value.size <= 10 * 1024 * 1024;
+        }
+        return false;
+      }
     )
     .test(
       "fileType",
       "Unsupported File Format (PDF, PNG, JPG)",
-      (value) =>
-        !value || ["application/pdf", "image/png", "image/jpeg"].includes(value.type)
+      (value) => {
+        if (!value) return true;
+        if (value instanceof File) {
+          return ["application/pdf", "image/png", "image/jpeg"].includes(value.type);
+        }
+        return false;
+      }
     ),
 });
 
-const initialValues = {
+interface FormValues {
+  livestockName: string;
+  breed: string;
+  purpose: string;
+  weight: string;
+  sex: string;
+  age: string;
+  source: string;
+  notes: string;
+  attachPhoto: File | null;
+}
+
+const initialValues: FormValues = {
   livestockName: "",
   breed: "",
   purpose: "",
@@ -60,7 +83,7 @@ const TypeBreedForm: React.FC = () => {
             justifyContent: "center",
           }}
         >
-          <Saved onDone={() => setShowSaved(false)} />
+          <Saved onDone={() => navigate("/farmer/projects/livestock/typebreed/form/records")} />
         </div>
       )}
       <div className="w-100 rounded-4 bg-white border mt-3 mb-5 p-4">
@@ -245,7 +268,7 @@ const TypeBreedForm: React.FC = () => {
                     />
                     {values.attachPhoto ? (
                       <span className="body-regular" style={{ color: "#333" }}>
-                        {values.attachPhoto.name}
+                        {values.attachPhoto instanceof File ? values.attachPhoto.name : ""}
                       </span>
                     ) : (
                       <div className="d-flex flex-column align-items-center justify-content-center">
