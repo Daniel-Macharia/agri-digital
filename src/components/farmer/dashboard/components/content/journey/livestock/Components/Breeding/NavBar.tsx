@@ -17,10 +17,10 @@ const NavBar: React.FC = () => {
   const current = location.pathname.split("/").pop();
 
   return (
-    <div className="d-flex flex-column align-items-start g-1 g-md-2 g-lg-3 w-100 p-2 p-md-3">
+    <div className="d-flex flex-column align-items-start w-100 p-2 p-md-3">
       {/* Back Arrow */}
       <div
-        className="d-flex align-items-center"
+        className="d-flex align-items-center mb-2 mb-md-3"
         style={{ cursor: "pointer" }}
         onClick={() => navigate(basePath)}
       >
@@ -71,19 +71,21 @@ const NavBar: React.FC = () => {
       </div>
 
       {/* Navigation Items - Responsive Layout */}
-      <div className="d-flex flex-wrap justify-content-start align-items-start g-1 g-md-2 g-lg-3 w-100">
-        {navItems.map((item, index) => {
+      <div className="d-flex justify-content-start align-items-start gap-1 gap-md-2 gap-lg-3 w-100 overflow-auto">
+        {navItems.map((item) => {
           const isActive = current === item.path;
           return (
             <button
               key={item.label}
-              className="btn btn-sm rounded-pill px-3 py-2 text-nowrap small-medium" 
+              className="btn rounded-pill px-2 px-sm-3 py-1 py-md-2 text-nowrap small-medium"
               style={{
                 backgroundColor: isActive ? "#457900" : "#fff",
                 color: isActive ? "#fff" : "#000",
                 border: "none",
                 transition: "all 0.2s ease",
                 minWidth: "fit-content",
+                fontSize: "clamp(0.75rem, 0.9vw, 1rem)",
+                whiteSpace: "nowrap",
               }}
               onClick={() => navigate(`${basePath}/${item.path}`)}
             >
