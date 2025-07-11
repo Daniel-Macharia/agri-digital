@@ -34,7 +34,7 @@ const navItems = [
   },
   {
     label: 'Sales',
-    img: '/assets/images/livestockmenu/milk from a cow.svg',
+    img: '/assets/images/livestockmenu/milk from a cow.svg', 
     path: 'sales',
   },
 ];
@@ -48,7 +48,7 @@ const NavBar = () => {
   const current = match ? match[1] : '';
 
   return (
-    <div className="d-flex flex-row align-items-center justify-content-between rounded-4 px-4 py-3 gap-3 overflow-auto bg-light my-3">
+    <div className="d-flex flex-row align-items-center justify-content-between rounded-4 px-4 py-3 gap-3 overflow-auto my-3" style={{ backgroundColor: '#FFF' }}>
       {navItems.map((item) => {
         const isActive = current === item.path;
         return (
