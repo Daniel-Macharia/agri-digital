@@ -109,40 +109,41 @@ const navItems = [
   {
     label: 'Type & Breed',
     img: '/assets/images/livestockmenu/One Cow.svg',   
-    path: 'typebreed',
+    path: '/farmer/projects/livestock/typebreed',
   },
   {
     label: 'Housing',
     img: '/assets/images/livestockmenu/cow shed.svg',
-    path: 'housing',
+    path: '/farmer/projects/livestock/housing',
   },
   {
     label: 'Feeding',
     img: '/assets/images/livestockmenu/cow feed.svg',
-    path: 'feeds',
+    path: '/farmer/projects/livestock/feeds',
   },  
   {
     label: 'Health Management',
     img: '/assets/images/livestockmenu/cow with black vet.svg',
-    path: 'health',
+    path: '/farmer/projects/livestock/health',
   },
   {
     label: 'Breeding',
     img: '/assets/images/livestockmenu/cow breeding.svg',
-    path: 'breeding',
+    path: '/farmer/projects/livestock/breeding',
   },
   {
     label: 'Production',
     img: '/assets/images/livestockmenu/sale.svg',
-    path: 'production',
+    path: '/farmer/projects/livestock/production',
 
   },
   {
     label: 'Sales',
     img: '/assets/images/livestockmenu/milk from a cow.svg', 
-    path: 'sales',
+    path: '/farmer/projects/livestock/sales',
   },
 ];
+
 
 const LivestockRecord: React.FC = () => {
   const navigate = useNavigate();
