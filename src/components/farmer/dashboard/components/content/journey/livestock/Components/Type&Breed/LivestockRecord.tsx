@@ -106,6 +106,45 @@ const livestockData: Livestock[] = [
   },
 ];
 
+const navItems = [
+  {
+    label: 'Type & Breed',
+    img: '/assets/images/livestockmenu/One Cow.svg',   
+    path: 'typebreed',
+  },
+  {
+    label: 'Housing',
+    img: '/assets/images/livestockmenu/cow shed.svg',
+    path: 'housing',
+  },
+  {
+    label: 'Feeding',
+    img: '/assets/images/livestockmenu/cow feed.svg',
+    path: 'feeds',
+  },  
+  {
+    label: 'Health Management',
+    img: '/assets/images/livestockmenu/cow with black vet.svg',
+    path: 'health',
+  },
+  {
+    label: 'Breeding',
+    img: '/assets/images/livestockmenu/cow breeding.svg',
+    path: 'breeding',
+  },
+  {
+    label: 'Production',
+    img: '/assets/images/livestockmenu/sale.svg',
+    path: 'production',
+
+  },
+  {
+    label: 'Sales',
+    img: '/assets/images/livestockmenu/milk from a cow.svg', 
+    path: 'sales',
+  },
+];
+
 const LivestockRecord: React.FC = () => {
   const navigate = useNavigate();
 
@@ -116,7 +155,7 @@ const LivestockRecord: React.FC = () => {
   return (
     <>
 
-    <NavBar />
+    <NavBar navItems={navItems} />
    
 
     <div className="livestock-table-container mb-5">
