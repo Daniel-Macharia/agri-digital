@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
  
 const navItems = [ 
   { label: "Erus", path: "erus" }, 
-  { label: "Gestigation", path: "breeding" },
+  { label: "Gestigation", path: "gestigation" },
   { label: "NewBorn", path: "new" },
 ]; 
  

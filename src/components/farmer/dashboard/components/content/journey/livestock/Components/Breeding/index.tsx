@@ -3,6 +3,7 @@ import LandingPage from "./LandingPage"
 import NavBar from "./NavBar";
 import ErusDetection from "./ErusDetection";
 import NewBorns from "./NewBorns";
+import Gestigation from "./Gestigation";
 
 
 
@@ -19,7 +20,12 @@ const Breeding = () => {
     <Routes>
       <Route path="" element={<LandingPage />} />
       <Route path="erus" element={WithNavBar(ErusDetection)} />
+      <Route path="gestigation" element={WithNavBar(Gestigation)} />
+
       <Route path="new" element={WithNavBar(NewBorns)} />
+
+
+      
       
 
     
