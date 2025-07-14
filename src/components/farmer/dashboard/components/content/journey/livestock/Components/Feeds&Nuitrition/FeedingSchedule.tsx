@@ -61,7 +61,9 @@ const FeedingSchedule: React.FC = () => {
             justifyContent: "center",
           }}
         >
-          <Saved onDone={() => navigate("/farmer/projects/livestock/feeds/results")}/>
+          <Saved
+            onDone={() => navigate("/farmer/projects/livestock/feeds/results")}
+          />
         </div>
       )}
       <div className="w-100 rounded-4 bg-white border mt-3 p-4">
@@ -98,7 +100,10 @@ const FeedingSchedule: React.FC = () => {
                   >
                     <option value="">Select Identification</option>
                     {livestockData.map((livestock) => (
-                      <option key={livestock.id} value={livestock.identification}>
+                      <option
+                        key={livestock.id}
+                        value={livestock.identification}
+                      >
                         {livestock.identification}
                       </option>
                     ))}
@@ -251,14 +256,27 @@ const FeedingSchedule: React.FC = () => {
                 <button
                   type="button"
                   className="btn btn-outline-warning feedingschedule-cancel-btn"
-                  style={{ borderRadius: "0.375rem", padding: "0.375rem 1.25rem", fontSize: "0.95rem", minWidth: "100px" }}
+                  style={{
+                    borderRadius: "0.375rem",
+                    padding: "0.375rem 1.25rem",
+                    fontSize: "0.95rem",
+                    minWidth: "100px",
+                  }}
                   onClick={() => resetForm()}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  style={{ backgroundColor: "#457900", color: "white", borderRadius: "0.375rem", padding: "0.375rem 1.25rem", fontSize: "0.95rem", minWidth: "100px", border: "none" }}
+                  style={{
+                    backgroundColor: "#457900",
+                    color: "white",
+                    borderRadius: "0.375rem",
+                    padding: "0.375rem 1.25rem",
+                    fontSize: "0.95rem",
+                    minWidth: "100px",
+                    border: "none",
+                  }}
                   disabled={isSubmitting}
                 >
                   Save
