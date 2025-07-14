@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom"
 import LandingPage from "./LandingPage"
 import NavBar from "./NavBar";
 import ErusDetection from "./ErusDetection";
+import NewBorns from "./NewBorns";
 
 
 
@@ -18,6 +19,9 @@ const Breeding = () => {
     <Routes>
       <Route path="" element={<LandingPage />} />
       <Route path="erus" element={WithNavBar(ErusDetection)} />
+      <Route path="new" element={WithNavBar(NewBorns)} />
+      
+
     
 
 

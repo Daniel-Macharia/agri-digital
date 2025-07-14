@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const navItems = [ 
   { label: "Erus", path: "erus" }, 
   { label: "Gestigation", path: "breeding" },
+  { label: "NewBorn", path: "new" },
 ]; 
  
 const NavBar: React.FC = () => {
