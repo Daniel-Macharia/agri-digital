@@ -1,44 +1,16 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const navItems = [
-  {
-    label: 'Type & Breed',
-    img: '/assets/images/livestockmenu/One Cow.svg',   
-    path: 'typebreed',
-  },
-  {
-    label: 'Housing',
-    img: '/assets/images/livestockmenu/cow shed.svg',
-    path: 'housing',
-  },
-  {
-    label: 'Feeding',
-    img: '/assets/images/livestockmenu/cow feed.svg',
-    path: 'feeds',
-  },  
-  {
-    label: 'Health Management',
-    img: '/assets/images/livestockmenu/cow with black vet.svg',
-    path: 'health',
-  },
-  {
-    label: 'Breeding',
-    img: '/assets/images/livestockmenu/cow breeding.svg',
-    path: 'breeding',
-  },
-  {
-    label: 'Production',
-    img: '/assets/images/livestockmenu/sale.svg',
-    path: 'production'
-  },
-  {
-    label: 'Sales',
-    img: '/assets/images/livestockmenu/milk from a cow.svg',
-    path: 'sales'
-  },
-];
+type NavItem = {
+  label: string;
+  img: string;
+  path: string;
+};
 
-const NavBar = () => {
+type NavBarProps = {
+  navItems: NavItem[]; 
+};
+
+const NavBar: React.FC<NavBarProps> = ({ navItems }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -47,7 +19,7 @@ const NavBar = () => {
   const current = match ? match[1] : '';
 
   return (
-    <div className="d-flex flex-row align-items-center justify-content-between rounded-4 px-4 py-3 gap-3 overflow-auto bg-light my-3">
+    <div className="d-flex flex-row align-items-center justify-content-between rounded-4 px-4 py-3 gap-3 overflow-auto my-3" style={{ backgroundColor: '#FFF' }}>
       {navItems.map((item) => {
         const isActive = current === item.path;
         return (

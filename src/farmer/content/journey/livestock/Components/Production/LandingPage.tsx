@@ -1,6 +1,8 @@
-import { useNavigate } from 'react-router-dom';
-import ReusableLandingPage from '../../Shared/ReusableLandingPage';
+import { useNavigate } from "react-router-dom";
+import ReusableLandingPage from "../../Shared/ReusableLandingPage";
 import NavBar from '../../Shared/NavBar';
+
+
 
 const navItems = [
   {
@@ -41,24 +43,20 @@ const navItems = [
   },
 ];
 
-const FeedingLandingPage = () => {
-  const navigate = useNavigate();
-
-  const handleGetStarted = () => {
-    navigate('feeds'); 
-  };
-
+const LandingPage = () => {
+  const navigate = useNavigate()
   return (
     <>
       <NavBar navItems={navItems} />
       <ReusableLandingPage
         title="No Records Yet"
-        text="Start by registering your livestock."
+        text="Start by registering your first livestock production"
         buttonText="Get Started"
-        onButtonClick={handleGetStarted}
+        onButtonClick={() => navigate("produce")}
       />
     </>
   );
 };
 
-export default FeedingLandingPage;
+export default LandingPage;
+  

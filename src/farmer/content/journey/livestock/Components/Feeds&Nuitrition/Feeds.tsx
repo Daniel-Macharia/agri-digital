@@ -34,13 +34,18 @@ const validationSchema = Yup.object({
     .required("Supplier is required"),
   notes: Yup.string().max(500, "Must be 500 characters or less"),
   uploadPhoto: Yup.mixed()
-    .test("fileSize", "File too large (max 10MB)", (value: any) =>
-      !value || (value && value.size <= 10 * 1024 * 1024)
+    .test(
+      "fileSize",
+      "File too large (max 10MB)",
+      (value: any) => !value || (value && value.size <= 10 * 1024 * 1024)
     )
-    .test("fileType", "Unsupported File Format (PDF, PNG, JPG)", (value: any) =>
-      !value ||
-      (value &&
-        ["application/pdf", "image/png", "image/jpeg"].includes(value.type))
+    .test(
+      "fileType",
+      "Unsupported File Format (PDF, PNG, JPG)",
+      (value: any) =>
+        !value ||
+        (value &&
+          ["application/pdf", "image/png", "image/jpeg"].includes(value.type))
     ),
 });
 
@@ -91,26 +96,23 @@ const FeedsForm: React.FC = () => {
             justifyContent: "center",
           }}
         >
-          <Saved onDone={() => setShowSaved(false)} />
+          <Saved
+            onDone={() => navigate("/farmer/projects/livestock/feeds/results")}
+          />
         </div>
       )}
       {/* Request for Feeds Button */}
-      <div className="w-100 d-flex justify-content-end" style={{ marginTop: "1.5rem" }}>
+      <div className="w-100 d-flex justify-content-end small-medium  ">
         <button
           type="button"
+          className="rounded small-medium bg-primary text-white border-0"
           style={{
-            backgroundColor: "#457900",
-            color: "white",
-            borderRadius: "0.5rem",
-            padding: "0.5rem 1.5rem",
-            fontSize: "1rem",
-            border: "none",
-            fontWeight: 500,
-            minWidth: "200px"
+            minWidth: "200px",
+          
           }}
-          onClick={() => navigate("form")}
+          onClick={() => navigate("/farmer/projects/livestock/feeds/form")}
         >
-          Request for Feeds 
+          Request for Feeds
         </button>
       </div>
       <div className="w-100 rounded-4 bg-white border mt-3 p-4">
@@ -354,7 +356,10 @@ const FeedsForm: React.FC = () => {
                       className="position-absolute w-100 h-100 opacity-0"
                       style={{ cursor: "pointer", top: 0, left: 0 }}
                       onChange={(event) => {
-                        setFieldValue("uploadPhoto", event.currentTarget.files?.[0] || null);
+                        setFieldValue(
+                          "uploadPhoto",
+                          event.currentTarget.files?.[0] || null
+                        );
                       }}
                     />
                     {values.uploadPhoto ? (
@@ -366,13 +371,20 @@ const FeedsForm: React.FC = () => {
                         <LuUpload size={23} color="#457900" />
                         <p
                           className="body-regular mb-1"
-                          style={{ color: "#457900", fontWeight: 500, fontSize: "1rem" }}
+                          style={{
+                            color: "#457900",
+                            fontWeight: 500,
+                            fontSize: "1rem",
+                          }}
                         >
                           Upload Photos
                         </p>
                         <p
                           className="body-regular text-center"
-                          style={{ color: "var(--Secondary-Text, #777)", fontSize: "0.875rem" }}
+                          style={{
+                            color: "var(--Secondary-Text, #777)",
+                            fontSize: "0.875rem",
+                          }}
                         >
                           PDF, PNG, JPG up to 10MB
                         </p>
@@ -417,14 +429,27 @@ const FeedsForm: React.FC = () => {
                 <button
                   type="button"
                   className="btn btn-outline-warning feeds-cancel-btn"
-                  style={{ borderRadius: "0.375rem", padding: "0.375rem 1.25rem", fontSize: "0.95rem", minWidth: "100px" }}
+                  style={{
+                    borderRadius: "0.375rem",
+                    padding: "0.375rem 1.25rem",
+                    fontSize: "0.95rem",
+                    minWidth: "100px",
+                  }}
                   onClick={() => resetForm()}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  style={{ backgroundColor: "#457900", color: "white", borderRadius: "0.375rem", padding: "0.375rem 1.25rem", fontSize: "0.95rem", minWidth: "100px", border: "none" }}
+                  style={{
+                    backgroundColor: "#457900",
+                    color: "white",
+                    borderRadius: "0.375rem",
+                    padding: "0.375rem 1.25rem",
+                    fontSize: "0.95rem",
+                    minWidth: "100px",
+                    border: "none",
+                  }}
                   disabled={isSubmitting}
                 >
                   Save

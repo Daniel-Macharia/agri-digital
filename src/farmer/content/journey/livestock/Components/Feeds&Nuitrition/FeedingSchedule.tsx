@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import TimePicker from "react-time-picker";
 import "react-time-picker/dist/TimePicker.css";
 import Saved from "../../Shared/Saved";
+import { useNavigate } from "react-router-dom";
 
 // Example livestock data
 const livestockData = [
@@ -41,6 +42,7 @@ const validationSchema = Yup.object({
 
 const FeedingSchedule: React.FC = () => {
   const [showSaved, setShowSaved] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -59,7 +61,9 @@ const FeedingSchedule: React.FC = () => {
             justifyContent: "center",
           }}
         >
-          <Saved onDone={() => setShowSaved(false)} />
+          <Saved
+            onDone={() => navigate("/farmer/projects/livestock/feeds/results")}
+          />
         </div>
       )}
       <div className="w-100 rounded-4 bg-white border mt-3 p-4">
@@ -96,7 +100,10 @@ const FeedingSchedule: React.FC = () => {
                   >
                     <option value="">Select Identification</option>
                     {livestockData.map((livestock) => (
-                      <option key={livestock.id} value={livestock.identification}>
+                      <option
+                        key={livestock.id}
+                        value={livestock.identification}
+                      >
                         {livestock.identification}
                       </option>
                     ))}
@@ -249,14 +256,27 @@ const FeedingSchedule: React.FC = () => {
                 <button
                   type="button"
                   className="btn btn-outline-warning feedingschedule-cancel-btn"
-                  style={{ borderRadius: "0.375rem", padding: "0.375rem 1.25rem", fontSize: "0.95rem", minWidth: "100px" }}
+                  style={{
+                    borderRadius: "0.375rem",
+                    padding: "0.375rem 1.25rem",
+                    fontSize: "0.95rem",
+                    minWidth: "100px",
+                  }}
                   onClick={() => resetForm()}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  style={{ backgroundColor: "#457900", color: "white", borderRadius: "0.375rem", padding: "0.375rem 1.25rem", fontSize: "0.95rem", minWidth: "100px", border: "none" }}
+                  style={{
+                    backgroundColor: "#457900",
+                    color: "white",
+                    borderRadius: "0.375rem",
+                    padding: "0.375rem 1.25rem",
+                    fontSize: "0.95rem",
+                    minWidth: "100px",
+                    border: "none",
+                  }}
                   disabled={isSubmitting}
                 >
                   Save

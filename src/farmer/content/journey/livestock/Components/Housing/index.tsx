@@ -4,8 +4,9 @@ import Ventilation from "./Ventilation"
 import WasteManagement from "./WasteManagement"
 import Space from "./Space"
 import LivestockProtection from "./LivestocckProtection"
-import Extrapage from "./ExtraPage"
+
 import NavBar from "./NavBar"
+import Results from "./Results"
 
 // Helper to wrap pages with NavBar
 const WithNavBar = (Component: React.FC) => (   
@@ -15,7 +16,7 @@ const WithNavBar = (Component: React.FC) => (
   </>
 );  
 
-const Housing = () => {
+const Housing = () => { 
   return (
     <Routes>
       <Route path="" element={<LandingPage />} />
@@ -23,8 +24,8 @@ const Housing = () => {
       <Route path="waste-management" element={WithNavBar(WasteManagement)} />
       <Route path="space" element={WithNavBar(Space)} />
       <Route path="protection" element={WithNavBar(LivestockProtection)} />
-      <Route path="extra" element={WithNavBar(Extrapage)} />
-    </Routes>
+      <Route path="results" element={<Results />}  />
+    </Routes> 
   )
 }
 

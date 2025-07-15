@@ -1,6 +1,10 @@
-import { useNavigate } from 'react-router-dom';
-import ReusableLandingPage from '../../Shared/ReusableLandingPage';
-import NavBar from '../../Shared/NavBar';
+import { Route, Routes } from "react-router-dom"
+import LandingPage from "./LandingPage"
+import NavBar from "../../Shared/NavBar";
+import Livestockproduce from "./Livestockproduce";
+import Meat from "./Meat";
+import Productionrecords from "./Productionrecords";
+
 
 const navItems = [
   {
@@ -41,24 +45,23 @@ const navItems = [
   },
 ];
 
-const FeedingLandingPage = () => {
-  const navigate = useNavigate();
+// Helper to wrap pages with NavBar
+const WithNavBar = (Component: React.FC) => (   
+  <>
+    <NavBar navItems={navItems} />
+    <Component />
+  </>
+);  
 
-  const handleGetStarted = () => {
-    navigate('feeds'); 
-  };
-
+const Production = () => {
   return (
-    <>
-      <NavBar navItems={navItems} />
-      <ReusableLandingPage
-        title="No Records Yet"
-        text="Start by registering your livestock."
-        buttonText="Get Started"
-        onButtonClick={handleGetStarted}
-      />
-    </>
-  );
-};
+    <Routes>
+      <Route path="" element={<LandingPage />} />
+      <Route path="produce" element={WithNavBar(Livestockproduce)} />
+      <Route path="meat" element={WithNavBar(Meat)} />
+      <Route path="production-records" element={WithNavBar(Productionrecords)} />      
+    </Routes> 
+  )
+}
 
-export default FeedingLandingPage;
+export default Production
