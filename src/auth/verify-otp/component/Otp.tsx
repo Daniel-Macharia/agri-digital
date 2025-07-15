@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 
 
-import "/src/components/auth/style.css";
+import "/src/auth/style.css";
 import "./Otp.css";
 import sendOtpUtil from "../../sign-in/utils/SendOtpUtil";
 import { Formik, Form, Field, ErrorMessage } from "formik";

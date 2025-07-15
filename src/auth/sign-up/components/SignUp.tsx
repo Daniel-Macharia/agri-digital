@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from 'formik';
-import '/src/components/auth/style.css';
+import '/src/auth/style.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 import * as Yup from "yup";

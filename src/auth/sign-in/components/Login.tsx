@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import * as Yup from 'yup';
 
- import "./Login.css";
- import "/src/components/auth/style.css";
+ import "/src/auth/style.css";
 
 import { Formik, Form, Field, ErrorMessage} from "formik";
 import sendOtpUtil from "../utils/SendOtpUtil.ts";
