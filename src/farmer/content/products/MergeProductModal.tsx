@@ -441,6 +441,7 @@ const MergeProductModal: React.FC<MergeProductModalProps> = ({
                             type="button"
                             className="btn btn-success text-nowrap w-20 py-2"
                             onClick={handleSubmit}
+                            style={{ backgroundColor: '#556B2F' }}
                             disabled={isSubmitting}
                         >
                             {isSubmitting ? 'Saving...' : 'Save Product'}

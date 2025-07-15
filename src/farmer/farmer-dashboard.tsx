@@ -10,6 +10,7 @@ import Journey from "./content/journey";
 import MarketPlaceRouter from "./content/market-place";
 import Products from "./content/products/index.tsx";
 import Banks from "./content/banks";
+import Insurance from "./content/insurance/index.tsx";
 import Sponsors from "./content/sponsors";
 import Package from "./content/package";
 import QualityScore from "./content/quality-score";
@@ -63,6 +64,7 @@ export default function Dashboard() {
                             <Route path="/products" element={<Products />} />
                             <Route path="/market-place/*" element={<MarketPlaceRouter />} />
                             <Route path="/banks" element={<Banks />} />
+                            <Route path="/insurance/*" element={<Insurance />} />
                             <Route path="/sponsors" element={<Sponsors />} />
                             <Route path="/wallet" element={<Wallet />} />
                             <Route path="/package" element={<Package />} />

@@ -202,7 +202,8 @@ function ProductsPage(): JSX.Element {
                                 style={{ 
                                     minHeight: '38px',
                                     fontSize: '15px',
-                                    whiteSpace: 'nowrap'
+                                    whiteSpace: 'nowrap',
+                                    backgroundColor: '#556B2F'
                                 }}
                                 onClick={() => setShowModal(true)}
                             >
