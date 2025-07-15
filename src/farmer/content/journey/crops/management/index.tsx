@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import CropsNotification from "../crops-notification/crops-notification";
-import "./index.css";
-import "/src/index.css";
 
 import { ManagementNotificationProps, ManagementSummaryProps } from "../crops-models";
 import ManagementNotification from "./management-notification";
@@ -27,7 +25,7 @@ const Management: React.FC = ()=>{
             "details": "Plan ahead with real-time weather insights."
         },
         {
-            "name": "Pendig Requests",
+            "name": "Pending Requests",
             "description": "2",
             "details": "Don't miss a step. Complete your tasks."
         }
@@ -69,59 +67,59 @@ const Management: React.FC = ()=>{
 
     const render = ()=>{
         return (<>
-        <div className="rows management-container">
+        <div className="col-12">
 
-            <CropsNotification iconUrl={"/assets/images/warning.svg"} message={"Strong winds detected.Stalk weak plants to prevent damage"} />
+            <div className="col-12 my-3">
+                <CropsNotification 
+                iconUrl={"/assets/images/warning.svg"} 
+                message={"Strong winds detected.Stalk weak plants to prevent damage"} />
+            </div>
             
-            <div className="row col-sm-12"
-            style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-end",
-                alignItems: "center"
-            }} >
-                <button
-                className="col-sm-4"
-                onClick={handleRequestAService}
-                style={{
-                    width: "max-content"
-                }}
-                >Request a Service</button>
-            </div>
+            <div className="col-12 crops-container">
+                <div className="row justify-content-end px-1 my-2 mx-0" >
+                    <button
+                    className="col-12 col-md-4 m-0 crops-accept-button"
+                    onClick={handleRequestAService}
+                    >Request a Service</button>
+                </div>
 
-            <div className="management-notifications row col-sm-12" >
-                
-                {
-                    managementNotifications.map( notification => <div className="col-sm-12 col-md-3">
-                        <ManagementNotification 
-                        name={notification.name} 
-                        description={notification.description} 
-                        details={notification.details} 
-                        />
-                    </div> )
-                }
-
-            </div>
-
-            <ActivityAddAndReview />
-
-            <div id="summary-div" className="row col-sm-12">
-                {
-                    managementSummary.map(
-                        summary => <div className="col-sm-10 col-md-4">
-                            <ManagementSummary 
-                            title={summary.title}
-                            items={summary.items}
+                <div className="row  px-0 mx-0 mt-2 " >
+                    
+                    {
+                        managementNotifications.map( notification => 
+                        <div className="col-12 col-md-3 mx-0 px-0 px-md-4 py-1">
+                            <ManagementNotification 
+                            name={notification.name} 
+                            description={notification.description} 
+                            details={notification.details} 
                             />
-                        </div>
-                    )
-                }
-            </div>
+                        </div> )
+                    }
 
-            <div id="hostorical-records-div" className="row container">
-                <h3 className="h3-bold" >
+                </div>
+
+                <div className="col-12 mt-2" >
+                    <ActivityAddAndReview />
+                </div>
+
+                <div className="row px-0 mx-0 mt-2 ">
+                    {
+                        managementSummary.map(
+                            summary => 
+                            <div className="col-12 col-md-4 mx-0 px-0 px-md-1 p-1">
+                                <ManagementSummary 
+                                title={summary.title}
+                                items={summary.items}
+                                />
+                            </div>
+                        )
+                    }
+                </div>
+
+                <div className="col-12 px-0 mt-2">
                     <HistoricalRecords />
-                </h3>
+                </div>
+
             </div>
         </div>
         </>);

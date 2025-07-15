@@ -1,5 +1,4 @@
-import { Button, Modal } from "react-bootstrap";
-import "./add-new-crop-modal.css";
+import { Modal } from "react-bootstrap";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import DatePicker from "react-datepicker";
 
@@ -36,8 +35,8 @@ const AddNewCropModal: React.FC<AddNewCropModalProps> = (props: AddNewCropModalP
         cropName: Yup.string().required("Crop name is required"),
         seedName: Yup.string().required("seed name is required"),
         seedVariety: Yup.string().required("seed variety is required"),
-        plantingDate: Yup.date().notRequired(),//.nullable().required("planting date is required"),
-        expectedHarvestingDate: Yup.date().notRequired()//.nullable().required("harvesting date is required")
+        plantingDate: Yup.date().required("planting date is required"),
+        expectedHarvestingDate: Yup.date().required("harvesting date is required")
     });
 
     const handleHasSeeds = () => {
@@ -89,15 +88,13 @@ const AddNewCropModal: React.FC<AddNewCropModalProps> = (props: AddNewCropModalP
         centered
         
         dialogClassName="mx-auto"
-        
-        className="modal-container"
+        className="col-sm-12"
         >
             <Modal.Header closeButton
             className="modal-header">
-                <Modal.Title className="h3-semibold" style={{
-                    margin: "0px"
-                }}>
-                    Add Crop
+                <Modal.Title className="h2-bold primary-text my-0" 
+                >
+                    Add New Crop
                 </Modal.Title>
             </Modal.Header>
 
@@ -107,18 +104,20 @@ const AddNewCropModal: React.FC<AddNewCropModalProps> = (props: AddNewCropModalP
             onSubmit={handleAddCrop}
             
             >
-                {({}) => (
-                    <Form>
+                {({setFieldValue}) => (
+                    <Form className="col-12">
                         <Modal.Body>
                             <div 
                             className="col-sm-12"
                             style={{marginBottom: "10px"}}
                             >
-                                <label className="col-sm-12 form-label" style={{margin: "0px"}}>Crop Name</label>
+                                <label className="col-sm-12 body-regular primary-text my-0">
+                                    Crop Name
+                                </label>
                                 
                                 <div className="col-sm-12" >
                                     <Field
-                                    className="form-control col-sm-12"
+                                    className="form-control body-regular col-sm-12 mb-0"
                                     type="text"
                                     name="cropName"
                                     placeholder="Maize"
@@ -133,11 +132,11 @@ const AddNewCropModal: React.FC<AddNewCropModalProps> = (props: AddNewCropModalP
                             className="col-sm-12 modal-input-group"
                             style={{display: step == 1 ? "none" : "block", marginBottom: "10px"}}
                             >
-                                <label className="col-sm-12 form-label" style={{margin: "0px"}}>Seed Name</label>
+                                <label className="col-sm-12 body-regular primary-text my-0" style={{margin: "0px"}}>Seed Name</label>
                                 
                                 <div className="col-sm-12" >
                                     <Field
-                                    className="form-control col-sm-12"
+                                    className="form-control body-regular col-sm-12 mb-0"
                                     type="text"
                                     name="seedName"
                                     placeholder="Maize"
@@ -149,18 +148,32 @@ const AddNewCropModal: React.FC<AddNewCropModalProps> = (props: AddNewCropModalP
                             </div>
 
                             <div className="modal-input-group" style={{ marginBottom: "10px"}}>
-                                <label className="form-label" style={{margin: "0px"}}>Seed Variety</label>
+                                <label className="body-regular primary-text my-0" style={{margin: "0px"}}>Seed Variety</label>
                                 
 
                                 <div className="col-sm-12"
                                 style={{display: step == 1 ? "none" : "block"}}
                                 >
-                                    <Field
-                                    className="form-control col-sm-12"
-                                    type="text"
+                                    <select
+                                    className="form-control body-regular col-sm-12 mb-0"
                                     name="seedVariety"
-                                    placeholder="Maize"
-                                    />
+
+                                    onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                                        const value = event.target?.value;
+
+                                        if( value === "select variety")
+                                            return;
+
+                                        console.log("selected: ", value);
+                                        setFieldValue("seedVariety", value);
+                                    }}
+                                    >
+                                        <option selected>select variety</option>
+                                        <option>variety one</option>
+                                        <option>variety two</option>
+                                        <option>variety three</option>
+                                        <option>variety four</option>
+                                    </select>
                                     <div 
                                     className="text-danger small col-sm-12" 
                                     >
@@ -172,13 +185,15 @@ const AddNewCropModal: React.FC<AddNewCropModalProps> = (props: AddNewCropModalP
                             <div className="modal-input-group"
                             style={{display: step == 1 ? "none" : "block", marginBottom: "10px"}}
                             >
-                                <label className="form-label col-sm-12" style={{margin: "0px"}}>Planting Date</label>
+                                <label className="body-regular primary-text my-0 col-sm-12" style={{margin: "0px"}}>Planting Date</label>
                                 
                                 <div className="col-sm-12">
                                     <DatePicker
                                     selected={ selectedPlantingDate }
-                                    onChange={date => setSelectedPlantingDate( date ) }
-                                    className="form-control col-sm-12 bg-light"
+                                    onChange={date => {setSelectedPlantingDate( date );
+                                        setFieldValue("plantingDate", date);
+                                    } }
+                                    className="form-control body-regular col-sm-12 bg-light px-2 mb-0"
                                     name="plantingDate"
                                     placeholderText="select planting date"
 
@@ -196,17 +211,19 @@ const AddNewCropModal: React.FC<AddNewCropModalProps> = (props: AddNewCropModalP
                             <div className="modal-input-group"
                             style={{display: step == 1 ? "none" : "block", marginBottom: "10px"}}
                             >
-                                <label className="form-label col-sm-12" style={{margin: "0px"}}>Expected Harvesting Date</label>
+                                <label className="body-regular primary-text my-0 col-sm-12" style={{margin: "0px"}}>Expected Harvesting Date</label>
                                 
                                 <div className="col-sm-12" >
                                     <DatePicker
-                                    className="form-control col-sm-12"
+                                    className="form-control body-regular col-sm-12 mb-0"
                                     name="expectedHarvestingDate"
                                     placeholderText="select planting date"
                                     dateFormat="MM/dd/yyyy"
 
                                     selected={selectedHarvestingDate}
-                                    onChange={ date => setSelectedHarvestingDate(date) }
+                                    onChange={ date => {setSelectedHarvestingDate(date);
+                                        setFieldValue("expectedHarvestingDate", date);
+                                    } }
                                     minDate={selectedPlantingDate||undefined}
 
                                     wrapperClassName="w-100"
@@ -222,52 +239,53 @@ const AddNewCropModal: React.FC<AddNewCropModalProps> = (props: AddNewCropModalP
                         </Modal.Body>
 
                         <Modal.Footer
-                        className="col-sm-12"
+                        className="col-12"
                         >
-                            <div 
-                            className="row col-sm-12"
-                            style={{display: step == 1 ? "flex" : "none",
-                                flexDirection: 'row',
-                                justifyContent: "space-between",
-                                alignItems: "center"
-                            }}
-                            >
-                                <button
-                                className="col-sm-5 other-button"
-                                id="add-crop-buttons"
-                                disabled={isSubmitting}
-                                onClick={handleHasSeeds}
-                                type="button"
-
-                                style={{
-                                    borderStyle: 'solid',
-                                    borderWidth: '1px',
-                                    borderColor: 'orange'
-                                }}
+                            {
+                                ((step == 1) ? (<>
+                                <div 
+                                className="col-12"
                                 >
-                                    I have seeds
-                                </button>
+                                    <div className="row">
+                                        <div className="col-6">
+                                            <div className="row px-3">
+                                                <button
+                                                className="col-12 crops-other-button"
+                                                disabled={isSubmitting}
+                                                onClick={handleHasSeeds}
+                                                type="submit"
+                                                >
+                                                    I have seeds
+                                                </button>
+                                            </div>
+                                        </div>
 
-                                <button
-                                className="col-sm-5"
-                                disabled={isSubmitting}
-                                onClick={handleRequestForSeeds}
-                                type="button"
-                                >
-                                    Request for seeds
-                                </button>
-                            </div>
-
-                            <Button
-                            className="col-sm-12"
-                            type="submit"
-                            variant="primary"
-                            disabled={isSubmitting}
-                            style={{margin: "2px 0px",
-                                display: step == 1 ? "none" : "block"}}
-                            >
-                                {isSubmitting ? "Adding crop ..." : "Add Crop"}
-                            </Button>
+                                        <div className="col-6">
+                                            <div className="row px-3">
+                                                <button
+                                                className="col-12 crops-accept-button"
+                                                disabled={isSubmitting}
+                                                onClick={handleRequestForSeeds}
+                                                type="submit"
+                                                >
+                                                    Request for seeds
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </>) :(<>
+                                <div className="col-12">
+                                    <button
+                                    className="col-12 crops-accept-button"
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    >
+                                        {isSubmitting ? "Adding crop ..." : "Add Crop"}
+                                    </button>
+                                </div>
+                                </>))
+                            }
                         </Modal.Footer>
                     </Form>
                 )}

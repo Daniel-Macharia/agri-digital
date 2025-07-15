@@ -56,15 +56,15 @@ const NegotiateOfferModal: React.FC<SalesNegotiationProductProps> = ( props: Sal
                     </div>
 
                     <div className="col-sm-7" >
-                        <p className="body-semibold">
+                        <p className="body-semibold my-1">
                             {props.productName}
                         </p>
 
-                        <p className="small-regular" style={{color: "var(--primary)"}}>
+                        <p className="small-regular my-1" style={{color: "var(--primary)"}}>
                             {props.productSeller}
                         </p>
 
-                        <p className="body-regular col-sm-12" style={{padding: "0px"}}>
+                        <p className="body-regular col-sm-12 my-1" style={{padding: "0px"}}>
                             Current Price: 
                             <span className="h3-semibold" style={{color: "var(--primary)"}}> KES {props.productUnitPrice}</span>
                             <span className="body-regular" style={{color: "var(--primary)"}}> per {props.productUnitName}</span>
@@ -146,7 +146,7 @@ const NegotiateOfferModal: React.FC<SalesNegotiationProductProps> = ( props: Sal
 
                                 <div className="col-sm-12">
                                     <button
-                                    className="other-button col-sm-12"
+                                    className="crops-other-button col-sm-12 mx-0"
                                     type="submit"
                                     >
                                         Submit Offer

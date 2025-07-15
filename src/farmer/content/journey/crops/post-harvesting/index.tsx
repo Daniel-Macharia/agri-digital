@@ -3,10 +3,8 @@ import ActivityAddAndReview from "../activity/activity";
 import { ManagementSummaryProps } from "../crops-models";
 import CropsNotification from "../crops-notification/crops-notification";
 import ManagementSummary from "../management/management-summary";
-import "./index.css";
 import OnelineNotifications from "./oneline-notifications";
 import StorageInformation from "./storage-information";
-import "/src/index.css";
 
 const PostHarvesting: React.FC = ()=>{
 
@@ -47,64 +45,79 @@ const PostHarvesting: React.FC = ()=>{
     };
     const render = ()=>{
         return (<>
-        <div className="row post-harvest-content-wrapper">
-            <CropsNotification iconUrl={"/assets/images/warning.svg"} message={"Use ventilated plastic crates for tomatoes to reducee spoilage"} />
+        <div className="col-12">
 
-            <div className="row col-sm-12">
-                <button className="col-sm-4 offset-8" 
-                onClick={handleRequestForService}
-                >
-                    Request for Service
-                </button>
+            <div className="col-12 my-3">
+                <CropsNotification iconUrl={"/assets/images/warning.svg"} message={"Use ventilated plastic crates for tomatoes to reducee spoilage"} />
             </div>
 
+            <div className="crops-container m-0">
 
-            <div className="row col-sm-12">
-                <div className="col-sm-10 col-md-7 post-harvest-container" >
-                    
-                    <StorageInformation />
-                    
+                <div className="col-12">
+                    <div className="row justify-content-end my-2">
+                        <button className="col-12 col-md-4 crops-accept-button" 
+                        onClick={handleRequestForService}
+                        >
+                            Request for Service
+                        </button>
+                    </div>
                 </div>
 
-                <div className="col-sm-10 col-md-5 side-summary-container" >
-                    {
-                        sideSummaries.map( sideSummary => <ManagementSummary 
-                            title={sideSummary.title} 
-                            items={sideSummary.items} 
-                            />)
-                    }
-                </div>
-            </div>
 
-            <div className="row col-sm-12">
-                <div className="row col-sm-10 col-md-8" >
-                    
-                    {
-                        otherSummaries.map( otherSummary => <div className="col-sm-6">
-                            <ManagementSummary
-                            title={otherSummary.title}
-                            items={otherSummary.items} />
-                        </div>)
-                    }
+                <div className="col-12">
+                    <div className="row">
+                        <div className="col-12 col-md-7 mt-2" >
+                            <StorageInformation />
+                        </div>
 
+                        <div className="col-12 col-md-5 mt-2 p-1" >
+                            {
+                                sideSummaries.map( sideSummary => <div className="col-12 px-2">
+                                    <ManagementSummary 
+                                    title={sideSummary.title} 
+                                    items={sideSummary.items} 
+                                    />
+                                </div>)
+                            }
+                        </div>
+                    </div>
                 </div>
 
-                <div className="col-sm-12 col-md-4" >
-                    
-                    <OnelineNotifications />
+                <div className="col-12 mt-2">
+                    <div className="row">
+                        <div className="col-12 col-md-8" >
+                            <div className="row">
+                                {
+                                    otherSummaries.map( otherSummary => <div className="col-12 col-md-6 px-2">
+                                        <ManagementSummary
+                                        title={otherSummary.title}
+                                        items={otherSummary.items} />
+                                    </div>)
+                                }
+                            </div>
+                        </div>
 
+                        <div className="col-12 col-md-4 crops-container bg-white pb-0" >
+                            <OnelineNotifications />
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <ActivityAddAndReview />
+                <div className="col-12 mt-2">
+                    <ActivityAddAndReview />
+                </div>
 
-            <div className="row col-sm-12">
-                <button 
-                className="col-sm-4 offset-8"
-                onClick={handleContinueAction}
-                >
-                Continue
-                </button> 
+                <div className="col-12 mt-2">
+                    <div className="row justify-content-end" >
+                        <button 
+                        className="col-12 col-md-4 crops-accept-button"
+                        onClick={handleContinueAction}
+                        >
+                        Continue
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
         </>);

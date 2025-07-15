@@ -17,9 +17,9 @@ export default function Crops(){
 
     const render = () => {
         return (<>
-        <div >
+        <div className="col-12">
             <CropsTopBar />
-            <div className="content-wraper"
+            <div className="col-12"
             >
                 <Routes>
                     <Route path="/soil-testing" element={ <SoilTesting /> } />

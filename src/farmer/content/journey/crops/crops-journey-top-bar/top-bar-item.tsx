@@ -1,5 +1,4 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import "./top-bar-item.css"
 
 interface CropsTopBarItemProps{
     iconUrl: string,
@@ -19,12 +18,23 @@ const CropsTopBarItem: React.FC<CropsTopBarItemProps> = ({iconUrl, itemName, pag
         return (<>
         <NavLink
         to={pageUrl} end
-        className="nav-link"
+        className="nav-link col-12 px-1"
         >
             {({isActive}) => (
-                <div className="top-bar-item" onClick={handleClickItem}>
-                    <img src={iconUrl} />
-                    <p>{itemName}</p>
+                <div className=" col-12 m-0" 
+                onClick={handleClickItem} 
+                >
+
+                    <img src={iconUrl} 
+                    style={{width: "32px", height: "32px"}}
+                    />
+
+                    <p className=" col-12 mx-0 my-0" 
+                    style={{ textWrap:  "nowrap"}}
+                    >
+                        {itemName}
+                    </p>
+
                 </div>
             )}
         </NavLink>

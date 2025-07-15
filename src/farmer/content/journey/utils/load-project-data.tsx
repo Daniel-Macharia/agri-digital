@@ -1,0 +1,116 @@
+import { CropProjectSummaryProps, LivestockProjectSummaryProps, ProjectProps, ProjectReviewProps } from "../models";
+
+
+export function loadProjects() : ProjectProps[] {
+    try{
+        let projects: ProjectProps[] = [
+            { projectId: 1, projectName: "Maize", projectDuration: 12, overallScore: 42, completionDate: "25/06/2025", currentStage: 5, projectType: "crop"},
+            { projectId: 2, projectName: "Rabbits", projectDuration: 10, overallScore: 38, completionDate: "25/06/2025", currentStage: 7, projectType: "livestock"},
+            { projectId: 3, projectName: "Potatoes", projectDuration: 16, overallScore: 93, completionDate: "25/06/2025", currentStage: 6, projectType: "crop"},
+            { projectId: 4, projectName: "Kales", projectDuration: 8, overallScore: 57, completionDate: "25/06/2025", currentStage: 6, projectType: "crop"},
+            { projectId: 5, projectName: "Poultry", projectDuration: 16, overallScore: 94, completionDate: "25/06/2025", currentStage: 6, projectType: "livestock"}
+        ];
+
+        return projects;
+    }
+    catch(error)
+    {
+        console.log("Failed to load projects");
+        return [];
+    }
+}
+
+
+export function loadProjectReviews(projectId: number): ProjectReviewProps[]{
+    try{
+        let reviews: ProjectReviewProps[] = [
+            {username: "Julius Kiptoo",
+            userAccountState: "verified",
+            reviewDate: new Date("06/24/2025"),
+            rating: 4,
+            comment: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum repellat placeat quisquam! Laborum obcaecati provident nesciunt unde officiis, rerum mollitia?"},
+
+            {username: "Sandra Juma", 
+            userAccountState: "verified", 
+            reviewDate: new Date("06/10/2025"), 
+            rating: 2, 
+            comment: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum repellat placeat quisquam! Laborum obcaecati provident nesciunt unde officiis, rerum mollitia?"},
+            
+            {username: "Millicent Ole Sapit", 
+            userAccountState: "verified", 
+            reviewDate: new Date("05/26/2025"), 
+            rating: 1, 
+            comment: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum repellat placeat quisquam! Laborum obcaecati provident nesciunt unde officiis, rerum mollitia?"},
+            
+            {username: "Kevin Maiyo", 
+            userAccountState: "verified", 
+            reviewDate: new Date("05/20/2025"), 
+            rating: 3, 
+            comment: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum repellat placeat quisquam! Laborum obcaecati provident nesciunt unde officiis, rerum mollitia?"},
+
+            {username: "Sylvia Nanyama", 
+            userAccountState: "verified", 
+            reviewDate: new Date("05/13/2025"), 
+            rating: 4, 
+            comment: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum repellat placeat quisquam! Laborum obcaecati provident nesciunt unde officiis, rerum mollitia?"}
+        ];
+
+        return reviews;
+    }
+    catch( Error )
+    {
+        console.log("Failed loading errors");
+        return [];
+    }
+}
+
+
+export function loadLivestockProjectDetails(projectId: number): LivestockProjectSummaryProps[]
+{
+    try{
+        let details: LivestockProjectSummaryProps[] = [
+            {livestockName: "Gift", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockName: "Lucky", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockName: "Jimmy", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockName: "Blacky", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockName: "Jane", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockName: "Mary", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockName: "Joe", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockName: "Whitey", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockName: "Donald", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockName: "Jerry", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockName: "Tom", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockName: "Sam", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockName: "Chris", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockName: "Burner", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+        ];
+
+        return details;
+    }catch(Error)
+    {
+        console.log("Error getting details", Error);
+        return [];
+    }
+}
+
+
+export function loadCropProjectDetails(projectId: number) :CropProjectSummaryProps[] {
+    try{
+        let details: CropProjectSummaryProps[] = [
+            {cropProjectStage: 1, stageScore: 92, cropProjectDescription: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. At consequuntur tempore a, eos nostrum amet dolorem unde aliquam doloremque quam est neque accusantium, dolores asperiores labore, consequatur quaerat? Tempore aliquid sint saepe? Quibusdam tempore magni officiis, aliquid consectetur necessitatibus odit nulla amet obcaecati est exercitationem animi magnam nam at repellendus."},
+            {cropProjectStage: 2, stageScore: 72, cropProjectDescription: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. At consequuntur tempore a, eos nostrum amet dolorem unde aliquam doloremque quam est neque accusantium, dolores asperiores labore, consequatur quaerat? Tempore aliquid sint saepe? Quibusdam tempore magni officiis, aliquid consectetur necessitatibus odit nulla amet obcaecati est exercitationem animi magnam nam at repellendus."},
+            {cropProjectStage: 3, stageScore: 88, cropProjectDescription: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. At consequuntur tempore a, eos nostrum amet dolorem unde aliquam doloremque quam est neque accusantium, dolores asperiores labore, consequatur quaerat? Tempore aliquid sint saepe? Quibusdam tempore magni officiis, aliquid consectetur necessitatibus odit nulla amet obcaecati est exercitationem animi magnam nam at repellendus."},
+            {cropProjectStage: 4, stageScore: 79, cropProjectDescription: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. At consequuntur tempore a, eos nostrum amet dolorem unde aliquam doloremque quam est neque accusantium, dolores asperiores labore, consequatur quaerat? Tempore aliquid sint saepe? Quibusdam tempore magni officiis, aliquid consectetur necessitatibus odit nulla amet obcaecati est exercitationem animi magnam nam at repellendus."},
+            {cropProjectStage: 5, stageScore: 94, cropProjectDescription: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. At consequuntur tempore a, eos nostrum amet dolorem unde aliquam doloremque quam est neque accusantium, dolores asperiores labore, consequatur quaerat? Tempore aliquid sint saepe? Quibusdam tempore magni officiis, aliquid consectetur necessitatibus odit nulla amet obcaecati est exercitationem animi magnam nam at repellendus."},
+            {cropProjectStage: 6, stageScore: 86, cropProjectDescription: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. At consequuntur tempore a, eos nostrum amet dolorem unde aliquam doloremque quam est neque accusantium, dolores asperiores labore, consequatur quaerat? Tempore aliquid sint saepe? Quibusdam tempore magni officiis, aliquid consectetur necessitatibus odit nulla amet obcaecati est exercitationem animi magnam nam at repellendus."}
+        ];
+
+        return details;
+    }
+    catch(Error)
+    {
+        console.log("Error: ", Error);
+        return [];
+    }
+}
+

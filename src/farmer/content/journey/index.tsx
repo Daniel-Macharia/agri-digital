@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import Projects from "./projects";
-import ProjectInfo from "./project-info";
 import Livestock from "./livestock";
 import NotFound from "../../../common/exceptions/NotFound";
 import Crops from "./crops";
@@ -9,6 +8,7 @@ import ProjectAssessment from "./crops/project-assessment";
 import DisplayCropDetails from "./crops/planting/display-crop-details";
 import RequestForTesting from "./crops/soil-testing/request-for-testing";
 import SelectFarmingEnvironment from "./crops/select-farming-environment";
+import ProjectInformation from "./projects/project-info";
 
 export default function Journey()
 {
@@ -18,7 +18,7 @@ export default function Journey()
         <Routes>
             {/* <Route path="" element={<JourneyHome /> } /> */}
             <Route path="" element={<Projects /> } />
-            <Route path="/info" element={<ProjectInfo /> } />
+            <Route path="/info" element={<ProjectInformation /> } />
             <Route path="/livestock/*" element={<Livestock />} />
 
             <Route path="/crops/assessment" element={<ProjectAssessment />} />

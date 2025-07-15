@@ -1,12 +1,13 @@
-import JourneyItem, { type Project } from "./journey-item/jouney-item";
 
-import { loadProjects } from "../utils/load-projects";
-import { NavLink, useNavigate } from "react-router-dom";
+import { loadProjects } from "../utils/load-project-data";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ProjectSelectionModal from "../../products/ProjectSelectionModal";
-import { CropFormData, LivestockFormData, LivestockType } from "../../products";
+import { CropFormData, LivestockFormData } from "../../products";
 import LivestockProjectModal from "../../products/LivestockProjectModal";
 import CropProjectModal from "../../products/CropProjectModal";
+import { ProjectProps } from "../models";
+import JourneyItem from "./journey-item";
 
 export default function Projects(){
 
@@ -62,22 +63,40 @@ export default function Projects(){
         setShowCropModal(false);
     };
 
-    const journeyItems: Project[] | null =  loadProjects();
+    const journeyItems: ProjectProps[] | null =  loadProjects();
 
     const render = ()=>{
         return (<>
-            <div id="content" >
-                <div id="journey-actions" >
-                    <NavLink to="/farmer/projects"  className="nav-link">
-                        <p>back</p>
-                    </NavLink>
-                    <button onClick={ () => setShowProjectSelection( true ) }>
-                        Add a new project
-                    </button>
+            <div className="col-12" >
+                <div className="col-12 d-flex" >
+                    <div className="col-6">
+                        <div className="row justify-content-start">
+                            <div className="col-4 col-sm-2">
+                                <img className="crops-start-aligned-text col-12 col-sm-6"
+                                    src="/assets/images/back-icon.svg"
+                                    onClick={() => {navigate("/farmer/home");}}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-6">
+                        <div className="row justify-content-end">
+                            <button 
+                            onClick={ () => setShowProjectSelection( true ) }
+                            className="col-12 col-sm-6 crops-accept-button mx-2"
+                            >
+                                Add a new project
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div id="journey-content" >
-                    <div className="project-container" id="current-project" >
-                        <h3 className="overall-title">Current Project</h3>
+                <div className="col-12 " >
+                    <div className="col-12 crops-container bg-white " >
+                        <div className="col-12">
+                            <h3 className="h3-semibold primary-text crops-start-aligned-text my-0">
+                                Current Project
+                            </h3>
+                        </div>
 
                         <JourneyItem 
                         projectId={journeyItems[0].projectId}
@@ -85,28 +104,38 @@ export default function Projects(){
                         projectDuration={journeyItems[0].projectDuration} 
                         overallScore={journeyItems[0].overallScore} 
                         completionDate={journeyItems[0].completionDate}
+                        currentStage={journeyItems[0].currentStage}
+                        projectType={journeyItems[0].projectType}
                         />
 
                     </div>
 
-                    <div className="project-container" id="other-projects" >
-                        <h3 className="overall-title">Completed Projects</h3>
-                        {
-                            
-                        journeyItems.map((journeyItem, index) => {
-                                if( index === 0 )//skip first project
-                                    return  "";
-                                else
-                                    return (<JourneyItem 
-                                        projectId={journeyItem.projectId}
-                                        projectName={journeyItem.projectName} 
-                                        projectDuration={journeyItem.projectDuration} 
-                                        overallScore={journeyItem.overallScore}
-                                        completionDate={journeyItem.completionDate}
-                                        />);
-                            })
-                            
-                        }
+                    <div className="col-12 crops-container bg-white my-3" >
+                        <div className="col-12" >
+                            <h3 className="h3-semibold primary-text crops-start-aligned-text my-0">
+                                Completed Projects
+                            </h3>
+                        </div>
+                        
+                        <div className="col-12" >
+                            {
+                                journeyItems.map((journeyItem, index) => {
+                                    if( index === 0 )//skip first project
+                                        return  "";
+                                    else
+                                        return (<JourneyItem 
+                                            projectId={journeyItem.projectId}
+                                            projectName={journeyItem.projectName} 
+                                            projectDuration={journeyItem.projectDuration} 
+                                            overallScore={journeyItem.overallScore}
+                                            completionDate={journeyItem.completionDate}
+                                            currentStage={journeyItem.currentStage}
+                                            projectType={journeyItem.projectType}
+                                            />);
+                                })
+                                
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

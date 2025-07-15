@@ -1,9 +1,6 @@
-import "./actual-yield.css";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import "./expected-yield.css";
 
 import * as Yup from "yup";
-import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import DatePicker from "react-datepicker";
@@ -35,8 +32,8 @@ const ActualYield: React.FC = ()=>{
         quantity: null,
         qualityGrade: "",
         harvestingDate: null,
-        harvestingTime: null,
-        previewUrl: null,
+        harvestingTime: "",
+        previewUrl: "",
         additionalNotes: ""
     };
 
@@ -44,9 +41,9 @@ const ActualYield: React.FC = ()=>{
         fieldType: Yup.string().required("required").typeError("field type is required"),
         quantity: Yup.number().required("required").typeError("quantity must be a number"),
         qualityGrade: Yup.string().required("required").typeError("quality is required"),
-        harvestingDate: Yup.date().notRequired(),//required("harvesting date is required"),
-        harvestingTime: Yup.string().notRequired(),//required("harvesting time is required"),
-        previewUrl: Yup.string().notRequired(),//required("select an image"),
+        harvestingDate: Yup.date().required("harvesting date is required"),
+        harvestingTime: Yup.string().required("harvesting time is required"),
+        previewUrl: Yup.string().required("select an image"),
         additionalNotes: Yup.string().notRequired()
     });
 
@@ -110,32 +107,33 @@ const ActualYield: React.FC = ()=>{
 
     const render = ()=>{
         return (<>
-        <div id="wrapper">
+        <div className="col-12">
             <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
             >
-                {({}) => (
-                    <Form className="form">
+                {({setFieldValue}) => (
+                    <Form className="col-12">
                         <div 
-                        className="row col-sm-12"
+                        className="row"
                         >
-                            <label htmlFor="fieldType"
-                            className="harvesting-input-label col-sm-12 col-md-4"
-                             >
-                                Environment
-                            </label>
+                            <div className="col-12 col-md-2" >
+                                <label htmlFor="fieldType"
+                                className="crops-start-aligned-text col-12 m-0 body-regular primary-text"
+                                >
+                                    Environment
+                                </label>
+                            </div>
 
-                            <div className="col-sm-12 col-md-8">
+                            <div className="col-12 col-md-10">
                                 <Field
-                                className="harvesting-input-field col-sm-12"
+                                className="form-control body-regular mb-0"
                                 name="fieldType" 
                                 type="text"
                                 placeholder="Open Field"
                                 />
-                                <div className="text-danger small harvesting-input-label col-sm-12"
-                                style={{margin: "0px"}}
+                                <div className="text-danger small crops-start-aligned-text col-12 m-0"
                                 >
                                     <ErrorMessage name="fieldType" />
                                 </div>
@@ -143,25 +141,25 @@ const ActualYield: React.FC = ()=>{
                         </div>
 
                         <div 
-                        className="row col-sm-12"
+                        className="row mt-2"
                         >
-                            <label htmlFor="quantity"
-                            className="harvesting-input-label col-sm-12 col-md-4"
-                            style={{margin: "0px"}}
-                             >
-                                Quantity
-                            </label>
+                            <div className="col-12 col-md-2">
+                                <label htmlFor="quantity"
+                                className="crops-start-aligned-text col-12 m-0 body-regular primary-text"
+                                >
+                                    Quantity
+                                </label>
+                            </div>
 
-                            <div className="col-sm-12 col-md-8"
+                            <div className="col-12 col-md-10"
                             >
                                 <Field
-                                className="harvesting-input-field col-sm-12"
+                                className="form-control body-regular mb-0"
                                 name="quantity" 
                                 type="text"
                                 placeholder="80Kg"
                                 />
-                                <div className="text-danger small harvesting-input-label col-sm-12"
-                                style={{margin: "0px"}}
+                                <div className="text-danger small crops-start-aligned-text col-12 m-0"
                                 >
                                     <ErrorMessage name="quantity" />
                                 </div>
@@ -169,23 +167,24 @@ const ActualYield: React.FC = ()=>{
                         </div>
 
                         <div 
-                        className="row col-sm-12"
+                        className="row mt-2"
                         >
-                            <label htmlFor="qualityGrade"
-                            className="harvesting-input-label col-sm-12 col-md-4"
-                             >
-                                Quality Grade
-                            </label>
+                            <div className="col-12 col-md-2">
+                                <label htmlFor="qualityGrade"
+                                className="crops-start-aligned-text col-12 m-0 body-regular primary-text"
+                                >
+                                    Quality Grade
+                                </label>
+                            </div>
 
-                            <div className="col-sm-12 col-md-8">
+                            <div className="col-12 col-md-10">
                                 <Field
-                                className="harvesting-input-field col-sm-12"
+                                className="form-control body-regular mb-0"
                                 name="qualityGrade" 
                                 type="text"
                                 placeholder="Grade A"
                                 />
-                                <div className="text-danger small harvesting-input-label col-sm-12"
-                                style={{margin: "0px"}}
+                                <div className="text-danger small crops-start-aligned-text col-12 m-0"
                                 >
                                     <ErrorMessage name="qualityGrade" />
                                 </div>
@@ -193,79 +192,93 @@ const ActualYield: React.FC = ()=>{
                         </div>
 
                         <div 
-                        className="row col-sm-12"
+                        className="row mt-2"
                         >
                             <div 
-                            className="row col-sm-12 col-md-6"
+                            className="col-6"
                             >
-                                <label htmlFor="harvestingDate" 
-                                className="harvesting-input-label col-sm-12 col-md-6">
-                                    Harvesting Date
-                                </label>
+                                <div className="row">
+                                    <div className="col-12 col-md-4">
+                                        <label htmlFor="harvestingDate" 
+                                        className="crops-start-aligned-text col-12 m-0 body-regular primary-text">
+                                            Harvesting Date
+                                        </label>
+                                    </div>
 
-                                <div className="col-sm-12 col-md-6" >
-                                    <DatePicker
-                                    className="harvesting-input-field col-sm-12"
-                                    name="harvestingDate" 
-                                    
-                                    dateFormat='MM/dd/yyyy'
-                                    minDate={new Date()}
+                                    <div className="col-12 col-md-6" >
+                                        <DatePicker
+                                        className="form-control body-regular mb-0"
+                                        name="harvestingDate" 
+                                        
+                                        dateFormat='MM/dd/yyyy'
+                                        minDate={new Date()}
 
-                                    selected={selectedDate}
-                                    onChange={date => setSelectedDate( date ) }
+                                        selected={selectedDate}
+                                        onChange={date => {setSelectedDate( date );
+                                            setFieldValue( "harvestingDate", date);
+                                        } }
 
-                                    placeholderText="select harvesting date"
+                                        placeholderText="select harvesting date"
 
-                                    wrapperClassName="w-100"
-                                    />
+                                        wrapperClassName="w-100"
+                                        />
 
-                                    <div className="col-sm-12 text-danger small" style={{margin: "0px", textAlign: "start"}}>
-                                        <ErrorMessage name="harvestingDate" />
+                                        <div className="col-sm-12 text-danger small crops-start-aligned-text">
+                                            <ErrorMessage name="harvestingDate" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <div 
-                            className="row col-sm-12 col-md-6"
+                            className="col-6"
                             >
-                                <label htmlFor="harvestingTime" 
-                                className="harvesting-input-label col-sm-12 col-md-6"
-                                >
-                                    Harvesting Time
-                                </label>
+                                <div className="row">
+                                    <div className="col-12 col-md-4">
+                                        <label htmlFor="harvestingTime" 
+                                        className="crops-start-aligned-text col-12 body-regular primary-text"
+                                        >
+                                            Harvesting Time
+                                        </label>
+                                    </div>
 
-                                <div className="col-sm-12 col-md-6" >
-                                    <TimePicker
-                                    className="harvesting-input-field col-sm-12 "
-                                    name="harvestingTime" 
-                                    
-                                    
-                                    value={selectedTime}
-                                    onChange={value => setSelectedTime(value)}
-                                    disableClock={true}
-                                    clearIcon={null}
-                                    />
+                                    <div className="col-12 col-md-6" >
+                                        <TimePicker
+                                        className="form-control body-regular mb-0"
+                                        name="harvestingTime" 
+                                        
+                                        
+                                        value={selectedTime}
+                                        onChange={value => {setSelectedTime(value);
+                                            setFieldValue("harvestingTime", value);
+                                        }}
+                                        disableClock={true}
+                                        clearIcon={null}
+                                        />
 
-                                    <div className="col-sm-12 text-danger small" style={{margin: "0px", textAlign: "start"}} >
-                                        <ErrorMessage name="harvestingTime" />
+                                        <div className="col-sm-12 text-danger small m-0 crops-start-aligned-text" >
+                                            <ErrorMessage name="harvestingTime" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div 
-                        className="row col-sm-12"
+                        className="row mt-2"
                         >
-                            <label htmlFor="uploadCrop" 
-                            className="harvesting-input-label col-sm-12 col-md-4"
-                            >
-                                Upload Crop
-                            </label>
+                            <div className="col-12 col-md-2">
+                                <label htmlFor="uploadCrop" 
+                                className="crops-start-aligned-text col-12 m-0  body-regular primary-text"
+                                >
+                                    Upload Crop
+                                </label>
+                            </div>
 
-                            <div className="col-sm-12 col-md-8"
+                            <div className="col-12 col-md-10"
                             >
                                 <div
-                                className="col-sm-12"
+                                className="col-12 "
                                 onClick={handleFileUpload}
                                 style={{
                                     borderStyle: "dashed",
@@ -280,7 +293,21 @@ const ActualYield: React.FC = ()=>{
                                     type="file"
                                     accept="images/*"
 
-                                    onChange={handleFileChange}
+                                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                                        const file = event.target.files?.[0];
+
+                                        if( file )
+                                        {
+                                            console.log("Uploaded file: ", file.name );
+
+                                            setPreviewUrl( URL.createObjectURL( file ) );
+                                            setFieldValue("previewUrl", file);
+
+                                        }
+                                        else{
+                                            console.log("failed to upload file!");
+                                        }
+                                    }}
 
                                     style={{display: "none"}}
                                     />
@@ -298,18 +325,19 @@ const ActualYield: React.FC = ()=>{
                         </div>
 
                         <div 
-                        className="row col-sm-12"
+                        className="row mt-2"
                         >
-                            <label htmlFor="additionalNotes" 
-                            className="harvesting-input-label col-sm-12 col-md-4"
-                            style={{margin: "0px"}}
-                            >
-                                Additional Notes
-                            </label>
+                            <div className="col-12 col-md-2">
+                                <label htmlFor="additionalNotes" 
+                                className="crops-start-aligned-text col-12 m-0 body-regular primary-text"
+                                >
+                                    Additional Notes
+                                </label>
+                            </div>
 
-                            <div className="col-sm-12 col-md-8">
+                            <div className="col-12 col-md-10">
                                 <textarea
-                                className="harvesting-input-field col-sm-12"
+                                className="form-control body-regular mb-0"
                                 name="additionalNotes" 
                                 placeholder="additional notes"
 
@@ -323,22 +351,30 @@ const ActualYield: React.FC = ()=>{
                             </div>
                         </div>
 
-                        <div className="actions-div" >
-                            <Button
-                            variant="secondary"
-                            className="other-button"
-                            type="submit"
-                            >
-                                Save
-                            </Button>
+                        <div className="col-12" >
+                            <div className="row">
+                                <div className="col-12 col-md-6 mt-2" >
+                                    <div className="row justify-content-start m-0" >
+                                        <button
+                                        className="crops-other-button col-12 col-md-4 m-0"
+                                        type="submit"
+                                        >
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
 
-                            <Button
-                            onClick={handleContinue}
-                            variant="primary"
-
-                            >
-                                Continue
-                            </Button>
+                                <div className="col-12 col-md-6 mt-2" >
+                                    <div className="row justify-content-end m-0" >
+                                        <button
+                                        className="crops-accept-button col-12 col-md-4 m-0"
+                                        onClick={handleContinue}
+                                        >
+                                            Continue
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </Form>
                 )}

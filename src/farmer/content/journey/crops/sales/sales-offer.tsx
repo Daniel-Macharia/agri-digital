@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { SalesNegotiationProductProps, SalesOfferProps } from "../crops-models";
-import "./sales-offer.css";
 import ConfirmAcceptanceModal from "./confirm-acceptance-modal";
 import NegotiateOfferModal from "./negotiate-offer-modal";
 
@@ -32,106 +31,111 @@ const SalesOffer: React.FC<SalesOfferProps> = (sale: SalesOfferProps) => {
 
     const render = () => {
         return (<>
-        <div className="col-sm-12 card" >
-            <div className="row no-wrap col-sm-12 sales-offer-title">
-                <img src="/assets/images/user_icon.svg" className="col-sm-2 sales-icon" />
-                <p className="small-semibold left-aligned-text col-sm-10 " >
-                    {sale.customerName}
-                </p>
+        <div className="col-12 p-1" >
+
+            <div className="row py-0">
+                <div className="col-2 py-0">
+                    <img src="/assets/images/user_icon.svg" className="sales-icon" 
+                    style={{width: "24px", height: "24px"}}/>
+                </div>
+                <div className="col-10 py-0">
+                    <p className="body-bold primary-text crops-start-aligned-text col-12 my-0 " >
+                        {sale.customerName}
+                    </p>
+                </div>
             </div>
-            <div className="col-sm-12" style={{padding: '0px'}} >
-                <div className="key-value-text row col-sm-12">
-                    <p className="left-aligned-text small-regularjk col-sm-6">
+            
+            <div className="col-12" >
+                <div className="row">
+                    <p className="crops-start-aligned-text body-regular secondary-text col-6 order-0 mx-0 my-1">
                         Buyer Type
                     </p>
-                    <p className="right-aligned-text small-semibold col-sm-6">
+                    <p className="crops-end-aligned-text body-bold primary-text col-6 order-1 mx-0 my-1">
                         {sale.buyerType}
                     </p>
                 </div>
                 
-                <div className="key-value-text row col-sm-12">
-                    <p className="left-aligned-text small-regular col-sm-6">
+                <div className="row">
+                    <p className="crops-start-aligned-text body-regular secondary-text col-6 order-0 mx-0 my-1">
                         Order Request
                     </p>
-                    <p className="right-aligned-text small-semibold col-sm-6">
+                    <p className="crops-end-aligned-text body-bold primary-text col-6 order-1 mx-0 my-1">
                         {sale.orderRequest}
                     </p>
                 </div>
 
-                <div className="key-value-text row col-sm-12">
-                    <p className="left-aligned-text small-regular col-sm-6">
+                <div className="row">
+                    <p className="crops-start-aligned-text body-regular secondary-text col-6 order-0 mx-0 my-1">
                         Negotitation Status
                     </p>
-                    <p className="right-aligned-text small-semibold col-sm-6">
+                    <p className="crops-end-aligned-text body-bold primary-text col-6 order-1 mx-0 my-1">
                         {sale.negotiationStatus ? "Completed" : "Pending"}
                     </p>
                 </div>
 
-                <div className="key-value-text row col-sm-12">
-                    <p className="left-aligned-text small-regular col-sm-6">
+                <div className="row">
+                    <p className="crops-start-aligned-text body-regular secondary-text col-6 order-0 mx-0 my-1">
                         Proposed Price
                     </p>
-                    <p className="right-aligned-text small-semibold col-sm-6">
+                    <p className="crops-end-aligned-text body-bold primary-text col-6 order-1 mx-0 my-1">
                         {sale.proposedPrice}
                     </p>
                 </div>
 
-                <div className="key-value-text row col-sm-12">
-                    <p className="left-aligned-text small-regular col-sm-6">
+                <div className="row">
+                    <p className="crops-start-aligned-text body-regular secondary-text col-6 order-0 mx-0 my-1">
                         Quantity
                     </p>
-                    <p className="right-aligned-text small-semibold col-sm-6">
+                    <p className="crops-end-aligned-text body-bold primary-text col-6 order-1 mx-0 my-1">
                         {sale.quantity}
                     </p>
                 </div>
 
-                <div className="key-value-text row col-sm-12">
-                    <p className="left-aligned-text small-regular col-sm-6">
+                <div className="row">
+                    <p className="crops-start-aligned-text body-regular secondary-text col-6 order-0 mx-0 my-1">
                         Total Price
                     </p>
-                    <p className="right-aligned-text small-semibold col-sm-6">
+                    <p className="crops-end-aligned-text body-bold primary-text col-6 order-1 mx-0 my-1">
                         {sale.quantity * sale.proposedPrice}
                     </p>
                 </div>
 
-                <div className="key-value-text row col-sm-12">
-                    <p className="left-aligned-text small-regular col-sm-6">
+                <div className="row">
+                    <p className="crops-start-aligned-text body-regular secondary-text col-6 order-0 mx-0 my-1">
                         Delivery Method
                     </p>
-                    <p className="right-aligned-text small-semibold col-sm-6">
+                    <p className="crops-end-aligned-text body-bold primary-text col-6 order-1 mx-0 my-1">
                         {sale.deliveryMethod}
                     </p>
                 </div>
             </div>
 
-            {sale.negotiationStatus ? "" : (<div className="row col-sm-12" 
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        padding: "0px"
-                        }}>
-                        <button
-                        type="button"
-                        className="col-sm-6"
-
-                        style={{margin: "0px"}}
-
-                        onClick={handleAcceptAction}
-                        
-                        >
-                            Accept
-                        </button>
-
-                        <button
-                        type="button"
-                        className="col-sm-6 other-button"
-                        
-                        style={{margin: "0px"}}
-
-                        onClick={handleNegotiateAction}
-                        >
-                            Negotiate
-                        </button>
+            {sale.negotiationStatus ? "" : (<div className="col-12" >
+                        <div className="row">
+                           <div className="col-12 col-md-6">
+                                <div className="row pe-1 justify-content-start">
+                                    <button
+                                    type="button"
+                                    className="col-12 mx-0 crops-accept-button"
+                                    onClick={handleAcceptAction}
+                                    >
+                                        Accept
+                                    </button>
+                                </div>
+                           </div>
+                           
+                           <div className="col-12 col-md-6">
+                                <div className="row ps-1 justify-content-end" >
+                                    <button
+                                    type="button"
+                                    className="col-12 other-button mx-0 crops-other-button"
+                                    onClick={handleNegotiateAction}
+                                    >
+                                        Negotiate
+                                    </button>
+                                </div>
+                           </div>
+                        </div>
                     </div>)
                 }
         </div>

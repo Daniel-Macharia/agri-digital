@@ -1,5 +1,4 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import "./activity.css";
 
 import * as Yup from "yup";
 import { ManagementActivityProps } from "../crops-models";
@@ -13,7 +12,7 @@ interface AddActivityProps{
     activityDate: Date|null,
     activityTime: string|null,
     previewUrl: string|null,
-    activityDescription: string
+    activityDescription: string|null
 };
 
 export default function ActivityAddAndReview() {
@@ -79,187 +78,229 @@ export default function ActivityAddAndReview() {
         activityDate: null,
         activityTime: null,
         previewUrl: null,
-        activityDescription: ''
+        activityDescription: null
     };
 
     const validationSchema = Yup.object({
         activityType: Yup.string().required("activity type is required").typeError("activity type required"),
-        activityDate: Yup.date().notRequired(),//nullable().required("date is required"),
-        activityTime: Yup.string().notRequired(),//.nullable().required("select time"),
-        previewUrl: Yup.string().notRequired(),//nullable().required("select image"),
-        activityDescription: Yup.string().required("test is required").test( desc => desc?.length > 0 )
+        activityDate: Yup.date().required("date is required"),
+        activityTime: Yup.string().required("select time"),
+        previewUrl: Yup.string().required("select image"),
+        activityDescription: Yup.string().nullable()
     });
 
     const render = () => {
         return (<>
-        <div 
-            className="row col-sm-12" 
-            id="management-activity-div"
-            >
+        <div className="row p-2" style={{backgroundColor: "white", borderRadius: "8px"}}>
 
-                <div id="add-management-activity-div"
-                className="col-sm-10 col-md-6">
+                <div className="col-12 col-md-6 pe-md-4">
                     <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={handleAddActivity}
                     >
-                        {({}) => (
-                            <Form id="management-form"
-                            >
-                                <h3
-                                className="h3-regular">
-                                    Add New Activity
-                                </h3>
+                        {({setFieldValue}) => (
+                            <Form className="col-12">
+                                <div className="row">
+                                    <h3
+                                    className="h3-bold primary-text crops-start-aligned-text col-12">
+                                        Add New Activity
+                                    </h3>
+                                </div>
                                 
-                                <div id="add-management-activity-form-body"
-                                className="col-sm-12">
-                                    <div className="management-input-group col-sm-12">
-                                        <label htmlFor="activityType" className="management-input-label col-sm-12">
-                                            Activity Type
-                                        </label>
+                                <div className="col-12">
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <label htmlFor="activityType" 
+                                            className="crops-start-aligned-text body-regular primary-text col-12 m-0">
+                                                Activity Type
+                                            </label>
+                                        </div>
 
-                                        <div className="col-sm-12" >
+                                        <div className="col-12" >
                                             <Field
                                             name="activityType"
-                                            className="activity-input-field body-regular col-sm-12"
+                                            className="form-control body-regular col-12 mb-0"
                                             type="text"
                                             placeholder="activity type here"
 
                                             />
 
-                                            <div className="col-sm-12 text-danger small" style={{textAlign: "start"}}>
+                                            <div className="col-12 text-danger small" 
+                                            style={{textAlign: "start"}}>
                                                 <ErrorMessage name="activityType" />
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="management-input-group col-sm-12">
-                                        <label htmlFor="activityDate" className="management-input-label ">
-                                            Date
-                                        </label>
+                                    <div className="row mt-2">
+                                        <div className="col-12 ">
+                                            <label htmlFor="activityDate" 
+                                            className="crops-start-aligned-text body-regular primary-text col-12 m-0">
+                                                Date
+                                            </label>
+                                        </div>
 
-                                        <div className="col-sm-12">
+                                        <div className="col-12">
                                             <DatePicker
-                                            className="form-control body-regular bg-light"
+                                            className="form-control body-regular bg-light col-12 mb-0 p-1 px-2"
                                             name="activityDate"
                                             dateFormat={"MM/dd/yyyy"}
-
                                             selected={selectedDate}
-                                            onChange={date => setSelectedDate( date ) }
-
+                                            onChange={date => {setSelectedDate( date );
+                                                setFieldValue( "activityDate", date);
+                                            } }
                                             minDate={new Date()}
-
                                             placeholderText="select activity date"
                                             wrapperClassName="w-100"
                                             />
 
-                                            <div className="col-sm-12 text-danger small" style={{margin: "0px", textAlign: "start"}}>
+                                            <div className="col-12 m-0 text-danger small crops-start-aligned-text"
+                                            >
                                                 <ErrorMessage name="activityDate" />
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="management-input-group col-sm-12">
-                                        <label htmlFor="activityTime" className="management-input-label col-sm-12">
-                                            Time
-                                        </label>
-                                        <div className="col-sm-12">
+                                    <div className="row mt-2">
+                                        <div className="col-12">
+                                            <label htmlFor="activityTime" 
+                                            className="crops-start-aligned-text body-regular primary-text col-12 m-0">
+                                                Time
+                                            </label>
+                                        </div>
+
+                                        <div className="col-12">
                                             <TimePicker
-                                            className="form-control body-regular col-sm-12"
+                                            className="form-control body-regular col-12 mb-0"
                                             name="activityTime"
                                             value={selectedTime}
-                                            onChange={time => {setSelectedTime(time); console.log("Selected time: ", time)}}
+                                            onChange={time => {setSelectedTime(time); console.log("Selected time: ", time);
+                                                setFieldValue("activityTime", time);
+                                            }}
                                             disableClock={true}
                                             clearIcon={null}
                                             
                                             />
 
-                                            <div className="col-sm-12 text-danger small" style={{margin: "0px", textAlign: "start"}}>
+                                            <div className="col-12 m-0 text-danger small" 
+                                            style={{ textAlign: "start"}}>
                                                 <ErrorMessage name="activityTime" />
                                             </div>
                                         </div>
                                         
                                     </div>
 
-                                    <div className="management-input-group col-sm-12">
-                                        <label htmlFor="activityImage" className="management-input-label col-sm-12">
-                                            Upload Image
-                                        </label>
+                                    <div className="row mt-2">
+                                        <div className="col-12">
+                                            <label htmlFor="activityImage" 
+                                            className="crops-start-aligned-text body-regular primary-text col-12 m-0">
+                                                Upload Image
+                                            </label>
+                                        </div>
 
-                                        <div className="management-input-field col-sm-12"
-                                        onClick={handleUploadImageAction}
-                                        style={{borderStyle: "dashed",
-                                            borderWidth: "1px",
-                                                display:"flex",
-                                                flexDirection: 'column',
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                            }}
-                                        >
-                                            <input
-                                            name="activityImage"
-                                            type="file"
-                                            accept="image/*"
-                                            ref={fileInputRef}
-                                            style={{display: "none"}}
-                                            onChange={handleFileChange}
-                                            />
+                                        <div className="col-12">
+                                            <div className="form-control col-12"
+                                            onClick={handleUploadImageAction}
+                                            style={{borderStyle: "dashed",
+                                                borderWidth: "1px",
+                                                    display:"flex",
+                                                    flexDirection: 'column',
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                }}
+                                            >
+                                                <input
+                                                name="previewUrl"
+                                                type="file"
+                                                accept="image/*"
+                                                ref={fileInputRef}
+                                                style={{display: "none"}}
+                                                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                                                    const file = event.target.files?.[0];
 
-                                            <img src={previewUrl||"/assets/images/upload_photo.svg"}
-                                            className={previewUrl ? 'col-sm-8' : "col-sm-1"}
-                                            />
-                                            <p>Upload Photo of the Product<br/>PDF,PNG,JPG up to 10 MB </p>
+                                                    if( file )
+                                                    {
+                                                        console.log("loaded file: ", file.name);
+
+                                                        setPreviewUrl( URL.createObjectURL(file) );
+                                                        setFieldValue("previewUrl", file.name);
+                                                    }
+                                                    else{
+                                                        console.log("File upload failed !");
+                                                    }
+                                                }}
+                                                />
+
+                                                <img src={previewUrl||"/assets/images/upload_photo.svg"}
+                                                className={previewUrl ? 'col-4' : "col-1"}
+                                                />
+                                                <p>Upload Photo of the Product<br/>PDF,PNG,JPG up to 10 MB </p>
+                                                <div className="text-danger small">
+                                                    <ErrorMessage name="previewUrl" />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div className="management-input-group col-sm-12">
-                                        <label htmlFor="activityDescription" className="management-input-label col-sm-12">
-                                            Description
-                                        </label>
+                                    <div className="row mt-2">
+                                        <div className="col-12">
+                                            <label htmlFor="activityDescription" 
+                                            className="crops-start-aligned-text body-regular primary-text col-12 m-0">
+                                                Description
+                                            </label>
+                                        </div>
 
-                                        <div className="col-sm-12" >
+                                        <div className="col-12" >
                                             <textarea
-                                            className="activity-input-field body-regular col-sm-12"
+                                            className="form-control body-regular col-12"
                                             name="activityDescription"
 
                                             style={{height: "88px"}}
                                             placeholder="activity description"
+
+                                            onChange={(event) => {
+                                                //setFieldValue('activityDescription', value);
+                                                const value = event.target?.value;
+                                                console.log(value);
+                                                setFieldValue("activityDescription", value);
+                                            }}
                                             />
-                                            <div className="col-sm-12 text-danger small" style={{textAlign: "start"}}>
-                                                <ErrorMessage name="activityType" />
+                                            <div className="col-12 text-danger small m-0" style={{textAlign: "start"}}>
+                                                <ErrorMessage name="activityDescription" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div id="actions-div"
-                                className="col-sm-12" >
-                                    <button
-                                    type="submit"
-                                    className="col-sm-12"
-                                    >
-                                        Add Activity
-                                    </button>
+                                <div className="col-12 mx-0 px-0" >
+                                    <div className="row justify-content-start">
+                                        <button
+                                        type="submit"
+                                        className="col-12 col-md-4 mx-0 crops-accept-button"
+                                        >
+                                            Add Activity
+                                        </button>
+                                    </div>
                                 </div>
                             </Form>
                         )}
                     </Formik>
                 </div>
 
-                <div id="review-management-activity-div"
-                className="col-sm-10 col-md-6">
-                    <h3>Upcoming Activities</h3>
+                <div className="col-12 col-md-6 ps-md-4">
+                    <h3 className="h3-bold primary-text crops-start-aligned-text">Upcoming Activities</h3>
 
-                    {
-                        
-                        managementActivities.map( activity => <ManagementActivity 
+                    <div className="row ps-md-3" >
+                        {
+                            managementActivities.map( activity => <ManagementActivity 
                             activityName={activity.activityName} 
                             activityDescription={activity.activityDescription} 
                             activityCompletionDate={activity.activityCompleted ? "DONE" : activity.activityCompletionDate} 
                             activityCompletionTime={activity.activityCompleted ? "" : activity.activityCompletionTime} 
                             activityCompleted={activity.activityCompleted} />)
-                    }
+                        }
+                    </div>
                 </div>
             </div>
         </>);

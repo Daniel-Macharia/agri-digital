@@ -1,20 +1,106 @@
-#crops-content-div{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
-.other-button{
-    background-color: white;
-    color: var(--secondary);
-    border-color: var(--secondary);
+.crops-accept-button{
+    background-color: var(--primary,#457900);
+    color: white;
+    border-color: var(--primary,#457900);
     border-style: solid;
     border-width: 1px;
+
+    border-radius: 6px;
+    padding: 10px 16px;
+
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22.4px;
 }
 
+.crops-accept-button:hover{
+    background-color: white;
+    color: var(--primary,#457900);
+    border-color: var(--primary,#457900);
+}
+
+.crops-accept-button:active{
+    background-color: white;
+    color: var(--primary);
+    border-color: var(--primary,#457900);
+}
+
+
+.crops-other-button{
+    background-color: white;
+    color: var(--secondary,#FF9800);
+    border-color: var(--secondary,#FF9800);
+    border-style: solid;
+    border-width: 1px;
+
+    border-radius: 6px;
+    padding: 10px 16px;
+
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22.4px; /* 160% */
+}
+
+.crops-other-button:hover{
+    background-color: var(--secondary,#FF9800);
+    color: white;
+    border-color: white;
+}
+
+.crops-other-button:active{
+    background-color: var(--secondary,#FF9800);
+    color: white;
+    border-color: white;
+}
 
 .react-time-picker__wrapper{
     border: none !important;
     padding: 0px;
+}
+
+.crops-container{
+    border-style: none;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.crops-end-aligned-text{
+    text-align: end;
+}
+
+.crops-start-aligned-text{
+    text-align: start;
+}
+
+.crops-center-aligned-text{
+    text-align: center;
+}
+
+.crops-farming-environment{
+    border-radius: 8px;
+    border: 3px solid var(--Border, #ECECEC);
+    background: var(--cards-form-bg, #FFF);
+}
+
+.crops-farming-environment-title{
+    color: var(--Primary-Text, #333);
+    text-align: center;
+}
+
+.crops-farming-environment-description{
+    color: var(--Secondary-Text, #777);
+    text-align: center;
+}
+
+.primary-text{
+    color: var(--Primary-Text, #333);
+}
+
+.secondary-text{
+    color: var(--Secondary-Text, #777);
 }

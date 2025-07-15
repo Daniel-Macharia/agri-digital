@@ -1,6 +1,5 @@
 import { OnelineNotificationItemProps } from "../crops-models";
 import OnelineNotificationItem from "./oneline-notification-item";
-import "./oneline-notifications.css";
 
 const OnelineNotifications: React.FC = () => {
     let onelineNotifications: OnelineNotificationItemProps[] = [
@@ -16,16 +15,18 @@ const OnelineNotifications: React.FC = () => {
     ];
     const render = () => {
         return (<>
-        <div className="col-sm-12 oneline-notifications-container">
-            <h3 className="col-sm-12 h3-semibold oneline-notifications-title" >
+        <div className="col-12 pb-0" >
+            <h3 className="col-12 h3-bold primary-text crops-start-aligned-text my-0 pb-0" >
                 Notifications
             </h3>
-            <div className="col-sm-12">
+            <div className="col-12 mb-0" >
                 {
-                    onelineNotifications.map( notification => <OnelineNotificationItem 
+                    onelineNotifications.map( notification => <div className="col-12">
+                        <OnelineNotificationItem 
                         notificationDescription={notification.notificationDescription} 
                         urgency={notification.urgency}
-                        />)
+                        />
+                        </div>)
                 }
             </div>
         </div>

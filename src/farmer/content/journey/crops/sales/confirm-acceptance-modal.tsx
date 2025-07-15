@@ -53,15 +53,15 @@ const ConfirmAcceptanceModal: React.FC<ConfirmAcceptanceProps> = (props: Confirm
                 alignItems: "center"
             }}>
                 <button
-                className="other-button col-sm-4"
-                onClick={handleConfirmAction}
+                className="crops-other-button col-sm-4"
+                onClick={handleCancelAction}
                 >
                     Cancel
                 </button>
 
                 <button
-                className="confirm-button col-sm-4"
-                onClick={handleCancelAction}
+                className="crops-accept-button col-sm-4"
+                onClick={handleConfirmAction}
                 >
                     Confirm
                 </button>
