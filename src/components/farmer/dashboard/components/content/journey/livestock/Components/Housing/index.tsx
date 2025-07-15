@@ -16,7 +16,7 @@ const WithNavBar = (Component: React.FC) => (
   </>
 );  
 
-const Housing = () => {
+const Housing = () => { 
   return (
     <Routes>
       <Route path="" element={<LandingPage />} />

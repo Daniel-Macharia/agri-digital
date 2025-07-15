@@ -12,7 +12,7 @@ const navItems = [
     label: 'Housing',
     img: '/assets/images/livestockmenu/cow shed.svg',
     path: 'housing',
-  },
+  }, 
   {
     label: 'Feeding',
     img: '/assets/images/livestockmenu/cow feed.svg',
