@@ -5,9 +5,9 @@ const SalesOffer: React.FC<SalesOfferProps> = (sale: SalesOfferProps) => {
     const render = () => {
         return (<>
         <div className="col-sm-12 card" >
-            <div className="row col-sm-12 sales-offer-title">
-                <img src="/assets/images/user_icon.svg" className="col-sm-2" />
-                <p className="small-semibold left-aligned-text col-sm-9 " >
+            <div className="row no-wrap col-sm-12 sales-offer-title">
+                <img src="/assets/images/user_icon.svg" className="col-sm-2 sales-icon" />
+                <p className="small-semibold left-aligned-text col-sm-10 " >
                     {sale.customerName}
                 </p>
             </div>

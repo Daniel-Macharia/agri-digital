@@ -14,7 +14,6 @@
 
 #planting-calendar-container{
     display: flex;
-width: 586px;
 padding: 20px 10px;
 flex-direction: column;
 align-items: center;
@@ -84,4 +83,9 @@ background: var(--Primary, #457900);
 
 #add-crop-button{
     width: 100%;
+}
+
+.planting-icon{
+    width: 64px;
+    height: 64px;
 }

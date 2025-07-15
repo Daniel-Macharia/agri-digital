@@ -1,9 +1,15 @@
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import "./expected-yield.css";
 
 import * as Yup from "yup";
+import DatePicker from "react-datepicker";
+import TimePicker from "react-time-picker";
+import { useState } from "react";
 
-const ExpectedYield: React.FC = ()=>{
+const ExpectedYield: React.FC = ()=>{;
+
+    const [selectedDate, setSelectedDate] = useState<Date|null>(null);
+    const [selectedTime, setSelectedTime] = useState<string|null>(null)
 
     const initialValues = {
 
@@ -20,120 +26,155 @@ const ExpectedYield: React.FC = ()=>{
 
     const render = ()=>{
         return (<>
-        <div id="wrapper" className="row">
+        <div id="wrapper" className="row col-sm-12"
+        style={{marginBottom: "24px"}}>
             <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
             >
                 {({}) => (
-                    <Form className="form">
+                    <Form className="form col-sm-12">
                         <div 
-                        className="input-group row"
+                        className="row col-sm-12"
                         >
                             <label htmlFor="fieldType"
-                            className="input-label col-md-4 col-sm-12 order-sm-1"
+                            className="harvesting-input-label col-md-4 col-sm-12"
+                            style={{margin: "0px"}}
                              >
                                 Environment
                             </label>
 
-                            <Field
-                            className="input-field col-md-8 col-sm-12 order-sm-2"
-                            name="fieldType" 
-                            type="text"
-                            placeholder="Open Field"
-                            />
-                        </div>
-
-                        <div 
-                        className="input-group row"
-                        >
-                            <label htmlFor="quantity"
-                            className="input-label col-md-4 col-sm-12 order-sm-1"
-                             >
-                                Quantity
-                            </label>
-
-                            <Field
-                            className="input-field col-md-8 col-sm-12 order-sm-2"
-                            name="quantity" 
-                            type="text"
-                            placeholder="80Kg"
-                            />
-                        </div>
-
-                        <div 
-                        className="input-group row"
-                        >
-                            <label htmlFor="qualityGrade"
-                            className="input-label col-md-4 col-sm-12 order-sm-1"
-                             >
-                                Quality Grade
-                            </label>
-
-                            <Field
-                            className="input-field col-md-8 col-sm-12 order-sm-2"
-                            name="qualityGrade" 
-                            type="text"
-                            placeholder="Grade A"
-                            />
-                        </div>
-
-                        <div 
-                        className="col-sm-12"
-                        >
-                            <div className="row">
-                                <div 
-                                className="col-sm-6"
+                            <div className="col-sm-12 col-md-8">
+                                <Field
+                                className="harvesting-input-field col-sm-12"
+                                name="fieldType" 
+                                type="text"
+                                placeholder="Open Field"
+                                />
+                                <div className="text-danger small harvesting-input-label col-sm-12"
+                                style={{margin: "0px"}}
                                 >
-                                    <div className="row" >
-                                        <label htmlFor="harvestingDate" 
-                                        className="col-sm-4 order-sm-1">
-                                            Harvesting Date
-                                        </label>
-
-                                        <Field
-                                        className="col-sm-6 order-sm-2"
-                                        name="harvestingDate" 
-                                        type="date"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div 
-                                className="col-sm-6"
-                                >
-                                    <div className="row">
-                                        <label htmlFor="harvestingTime" 
-                                        className="col-sm-4 order-sm-1"
-                                        >
-                                            Harvesting Time
-                                        </label>
-
-                                        <Field
-                                        className="col-sm-6 order-sm-2"
-                                        name="harvestingTime" 
-                                        type="time"
-                                        />
-                                    </div>
+                                    <ErrorMessage name="fieldType" />
                                 </div>
                             </div>
                         </div>
 
                         <div 
-                        className="input-group row"
+                        className=" row col-sm-12"
+                        >
+                            <label htmlFor="quantity"
+                            className="harvesting-input-label col-md-4 col-sm-12"
+                            style={{margin: "0px"}}
+                             >
+                                Quantity
+                            </label>
+
+                            <div className="col-sm-12 col-md-8"
+                            >
+                                <Field
+                                className="harvesting-input-field col-sm-12"
+                                name="quantity" 
+                                type="text"
+                                placeholder="80Kg"
+                                />
+                                <div className="text-danger small harvesting-input-label col-sm-12"
+                                >
+                                    <ErrorMessage name="quantity" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div 
+                        className=" row col-sm-12"
+                        >
+                            <label htmlFor="qualityGrade"
+                            className="harvesting-input-label col-sm-12 col-md-4 "
+                            style={{margin: "0px"}}
+                             >
+                                Quality Grade
+                            </label>
+
+                            <div className="col-sm-12 col-md-8"
+                            >
+                                <Field
+                                className="harvesting-input-field col-sm-12"
+                                name="qualityGrade" 
+                                type="text"
+                                placeholder="Grade A"
+                                />
+                                <div className="text-danger small harvesting-input-label col-sm-12"
+                                >
+                                    <ErrorMessage name="qualityGrade" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div 
+                        className="row col-sm-12"
+                        >
+                            <div 
+                            className="row col-sm-12 col-md-6"
+                            >
+                                <label htmlFor="harvestingDate" 
+                                className="col-sm-12 col-md-6 harvesting-input-label">
+                                    Harvesting Date
+                                </label>
+                                <div className="row col-sm-12 col-md-6" >
+                                    <DatePicker
+                                    className="col-sm-12 harvesting-input-field"
+                                    name="harvestingDate" 
+                                    
+                                    
+                                    placeholderText="selected harvesting date"
+                                    dateFormat="MM/dd/yyyy"
+                                    selected={selectedDate}
+                                    onChange={ date => setSelectedDate(date) }
+                                    minDate={new Date()}
+                                    />
+                                </div>
+                            </div>
+
+                            <div 
+                            className="row col-sm-12 col-md-6"
+                            >
+                                <label htmlFor="harvestingTime" 
+                                    className="col-sm-12 col-md-6 harvesting-input-label"
+                                    >
+                                        Harvesting Time
+                                    </label>
+                                <div className="row col-sm-12 col-md-6">
+                                    <TimePicker
+                                    className="col-sm-12 harvesting-input-field"
+                                    name="harvestingTime"
+                                    
+                                    value={selectedTime}
+                                    onChange={value => setSelectedTime(value) }
+
+                                    clearIcon={null}
+                                    disableClock={true}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div 
+                        className=" row col-sm-12"
                         >
                             <label htmlFor="additionalNotes" 
-                            className="input-label col-md-4 col-sm-12 order-sm-1"
+                            className="harvesting-input-label col-sm-12 col-md-4"
                             >
                                 Additional Notes
                             </label>
 
-                            <textarea
-                            className="input-field col-md-8 col-sm-12 order-sm-2"
-                            name="additionalNotes" 
-                            placeholder="additional notes"
-                            />
+                            <div className="col-sm-12 col-md-8">
+                                <textarea
+                                className="harvesting-input-field col-sm-12"
+                                name="additionalNotes" 
+                                placeholder="additional notes"
+                                />
+                            </div>
+                            
                         </div>
                     </Form>
                 )}

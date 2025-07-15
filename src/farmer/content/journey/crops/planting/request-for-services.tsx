@@ -1,4 +1,4 @@
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import "./request-for-services.css";
 
 import * as Yup from "yup";
@@ -8,12 +8,24 @@ import { useRef, useState } from "react";
 
 import DatePicker from "react-datepicker";
 
+interface RequestForServiceProps{
+    location: string,
+    contactInformation: string,
+    additionalNotes: string,
+    selectedDate: Date|null,
+    previewUrl: string|null,
+    serviceType: string|null
+};
+
 const RequestForService: React.FC = () => {
 
     const fileInputRef = useRef<HTMLInputElement>(null);
+
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+    
+    const [selectedService, setSelectedService] = useState<string|null>(null);
 
     const navigate = useNavigate();
     const backUrl = useLocation().state;
@@ -25,22 +37,24 @@ const RequestForService: React.FC = () => {
         "Feeds", "Seeds", "Laborer"
     ];
     
-    const initialValues = {
-        type: [],
-        dateOfService: '',
+    const initialValues: RequestForServiceProps = {
         location: '',
         contactInformation: '',
-        uploadPhoto: '',
-        additionNotes: ''
+        additionalNotes: '',
+        selectedDate: null,
+        previewUrl: null,
+        serviceType: null
     };
 
     const validationSchema = Yup.object({
-        type: Yup.string().required("required"),
-        dateOfService: Yup.date().required("required"),
         location: Yup.string().required("required"),
-        contactInformation: Yup.string().required("required"),
-        uploadPhoto: Yup.string().required("required"),
-        additionalNotes: Yup.string().required("required")
+        contactInformation: Yup.string()
+        .test( phone => /^0[17]{1}[0-9]{8}$/.test(phone) || /^\+?254[17]{1}[0-9]{8}$/.test(phone))
+        .required("required"),
+        additionalNotes: Yup.string().required("required"),
+        selectedDate: Yup.date().notRequired(),
+        previewUrl: Yup.string().notRequired(),
+        serviceTyoe: Yup.string().notRequired()
     });
 
     const handleFileUpload = () => {
@@ -64,9 +78,38 @@ const RequestForService: React.FC = () => {
     const handleDoneAction = () => {
         console.log("finished requesting for service");
         setShow(false);
+        handleBackNavigation();
     }
 
-    const handleRequestForService = (data: typeof initialValues, {}: any) => {
+    const handleServiceTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const selected = event.target?.value;
+
+        console.log("selected: ",selected);
+        setSelectedService(selected);
+    };
+    const handleRequestForService = (data: RequestForServiceProps, {}: any) => {
+
+        if( selectedDate == null )
+        {
+            console.log("select a date");
+            return;
+        }
+
+        if( previewUrl == null || previewUrl == "")
+        {
+            console.log("select an image");
+            return;
+        }
+
+        if( selectedService == null || selectedService == "")
+        {
+            console.log("select a service");
+            return;
+        }
+
+        data.selectedDate = selectedDate;
+        data.previewUrl = previewUrl;
+        data.serviceType = selectedService;
         console.log(data);
         setShow(true);
     };
@@ -79,173 +122,207 @@ const RequestForService: React.FC = () => {
 
     const render = () => {
         return (<>
-        <div>
-            <div id="request-for-services-top-bar">
+        <div className="col-sm-12 ">
+            <div id="request-for-services-top-bar col-sm-12"
+            style={{display: "flex", flexDirection: "row", justifyContent: "flex-start"}}>
                 <img
                 src="/assets/images/back-icon.svg" 
                 onClick={handleBackNavigation}
                 />
             </div>
-            <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handleRequestForService}
-            >
+            <div className="col-sm-12 content-wrapper" >
+                <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={handleRequestForService}
+                >
 
-                {({}) => (
-                    <Form className="form content-wrapper">
-                        <h3>
-                            Request form
-                        </h3>
-
-                        <div className="input-group row col-sm-12" >
-                            <label htmlFor="type"
-                            className="input-label col col-sm-12 col-md-2"
-                            >
-                                Request type
-                            </label>
-                            <select name="type"
-                            className="input-field col-sm-12 col-md-10"
-                            >
-                                <option value='' >Service Type</option>
-                                {
-                                    serviceTypeOptions.map(
-                                        option => {
-                                            //console.log(option);
-                                            return (<option value={option} >{option}</option>);
-                                        }
-                                    )
-                                }
-                            </select>
-                        </div>
-
-                        <div className="input-group row col-sm-12" >
-                            <label htmlFor="dateOfService"
-                            className="input-label col col-sm-12 col-md-2 order-2"
-                            >
-                                Date of service
-                            </label>
-
-                            <DatePicker
-                            name="dateOfService"
-                            className="input-field col-sm-12 col-md-8 order-1"
-                            selected={selectedDate}
-                            onChange={(date) => setSelectedDate( date ) }
-                            dateFormat={'MM/dd/yyyy'}
-                            placeholderText="select date of service"
-                            minDate={new Date()}
-                            />
-                            {/* <Field 
-                            className="input-field"
-                            name="dateOfService"
-                            type="date"
-
-                            /> */}
-                        </div>
-
-                        <div className="input-group row col-sm-12" >
-                            <label htmlFor="location"
-                            className="input-label col col-sm-12 col-md-2"
-                            >
-                                Location
-                            </label>
-                            <Field
-                            className="input-field col-sm-12 col-md-10"
-                            name="location"
-                            type="text"
-                            placeholder="Kiambu"
-
-                            />
-                        </div>
-
-                        <div className="input-group row col-sm-12" >
-                            <label htmlFor="contactInformation"
-                            className="input-label col col-sm-12 col-md-2"
-                            >
-                                Contact Information
-                            </label>
-                            <Field
-                            className="input-field col-sm-12 col-md-10"
-                            name="contactInformation"
-                            type="text"
-                            placeholder="+254 12345678"
-
-                            />
-                        </div>
-
-                        <div className="input-group row col-sm-12" >
-                            <label htmlFor="uploadPhoto"
-                            className="input-label col col-sm-12 col-md-2"
-                            >
-                                Upload Photo
-                            </label>
-                            
-                            <div
-                            className="input-field col-sm-12 col-md-8"
-                            style={{borderStyle: "dashed",
-                                display:"flex",
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}
-                            onClick={handleFileUpload}
-                            >
-                                <img  src={previewUrl || "/assets/images/upload_photo.svg"}
-                                className={previewUrl ? "col-sm-10 col-md-6" : "col-sm-1"}
-                                style={{
-                                
-                                }}/>
-
-                                <input
-                                ref={fileInputRef}
-                                className="image-upload-field"
-                                name="uploadPhoto"
-                                type="file"
-                                accept="image/*"
-                                onChange={handleFileChange}
-                                style={{display:"none"}}
-                                />
-
-                                <p>Upload Photo of the Product<br/>PDF,PNG,JPG up to 10 MB </p>
-                            </div>
-                        </div>
-
-                        <div className="input-group row col-sm-12" >
-                            <label htmlFor="additionalNotes"
-                            className="input-label col col-sm-12 col-md-2"
-                            >
-                                Additional Notes
-                            </label>
-
-                            <textarea 
-                            className="input-field col-sm-12 col-md-10"
-                            name="additionalNotes"
-                            placeholder="additional notes"/>
-                        </div>
-
-
-                        <div
-                        id="action-div"
-                        className="row col-sm-12"
+                    {({}) => (
+                        <Form className="form col-sm-12"
                         >
-                            <Button
-                            variant="secondary"
-                            onClick={handleBackNavigation}
-                            className="other-button col-sm-12 col-md-2"
-                            >
-                                Cancel
-                            </Button>
+                            <h3 className="col-sm-12" style={{textAlign: "start"}}>
+                                Request form
+                            </h3>
 
-                            <Button
-                            variant="primary"
-                            className={`col-sm-12 col-md-2`}
+                            <div className="row col-sm-12" >
+                                <label htmlFor="serviceType"
+                                className="planting-input-label col col-sm-12 col-md-4"
+                                style={{padding: "0px", textAlign: "start"}}
+                                >
+                                    Request type
+                                </label>
+                                <select name="serviceType"
+                                className="planting-input-field  col-sm-12 col-md-8"
+                                onChange={handleServiceTypeChange}
+                                >
+                                    <option value='' >Service Type</option>
+                                    {
+                                        serviceTypeOptions.map(
+                                            option => {
+                                                //console.log(option);
+                                                return (<option value={option} >{option}</option>);
+                                            }
+                                        )
+                                    }
+                                </select>
+                            </div>
+
+                            <div className="row col-sm-12" >
+                                <label htmlFor="dateOfService"
+                                className="planting-input-label col col-sm-12 col-md-4 order-0"
+                                style={{margin: "0px", textAlign: "start", padding: "0px"}}
+                                >
+                                    Date of service
+                                </label>
+
+                                <DatePicker
+                                name="dateOfService"
+                                className="planting-input-field col-sm-12 col-md-8 order-1"
+                                selected={selectedDate}
+                                onChange={(date) => setSelectedDate( date ) }
+                                dateFormat={'MM/dd/yyyy'}
+                                placeholderText="select date of service"
+                                minDate={new Date()}
+
+                                
+                                />
+                            </div>
+
+                            <div className="row col-sm-12" >
+                                <label htmlFor="location"
+                                className="col-sm-12 col-md-4 planting-input-label"
+                                style={{margin: "0px", textAlign: "start",  padding: "0px"}}
+                                >
+                                    Location
+                                </label>
+                                <Field
+                                className="planting-input-field col-sm-12 col-md-8"
+                                name="location"
+                                type="text"
+                                placeholder="Kiambu"
+                                style={{margin: "0px"}}
+                                />
+                                <div className="col-sm-12 text-danger small planting-input-label" 
+                                style={{margin: "0px", padding: "0px"}}
+                                >
+                                    <ErrorMessage name="location" />
+                                </div>
+                            </div>
+
+                            <div className=" row col-sm-12" >
+                                <label htmlFor="contactInformation"
+                                className=" col col-sm-12 col-md-4 planting-input-label"
+                                style={{textAlign: "start", padding: "0px"}}
+                                >
+                                    Contact Information
+                                </label>
+                                <Field
+                                className="planting-input-field col-sm-12 col-md-8"
+                                name="contactInformation"
+                                type="text"
+                                placeholder="+254 712345678"
+                                style={{margin: "0px"}}
+
+                                />
+                                <div className="col-sm-12 text-danger small planting-input-label" 
+                                style={{margin: "0px", padding: "0px"}}
+                                >
+                                    <ErrorMessage name="contactInformation" />
+                                </div>
+                            </div>
+
+                            <div className=" row col-sm-12" >
+                                <label htmlFor="uploadPhoto"
+                                className=" col col-sm-12 col-md-4"
+                                style={{textAlign: "start", padding: "0px"}}
+                                >
+                                    Upload Photo
+                                </label>
+                                
+                                <div
+                                className=" col-sm-12 col-md-8"
+                                style={{borderStyle: "dashed",
+                                    display:"flex",
+                                    flexDirection: 'column',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    borderWidth: "1px",
+                                    borderColor: "var(--Secondary-Text, #777)"
+                                }}
+                                onClick={handleFileUpload}
+                                >
+                                    <img  src={previewUrl || "/assets/images/upload_photo.svg"}
+                                    className={previewUrl ? "col-sm-10 col-md-6" : "col-sm-1"}
+                                    style={{
+                                    
+                                    }}/>
+
+                                    <input
+                                    ref={fileInputRef}
+                                    className="image-upload-field"
+                                    name="uploadPhoto"
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleFileChange}
+                                    style={{display:"none"}}
+                                    />
+
+                                    <p>Upload Photo of the Product<br/>PDF,PNG,JPG up to 10 MB </p>
+                                </div>
+                            </div>
+
+                            <div className=" row col-sm-12" >
+                                <label htmlFor="additionalNotes"
+                                className="planting-input-label col col-sm-12 col-md-4"
+                                style={{margin: "0px", textAlign: 'start', padding: "0px"}}
+                                >
+                                    Additional Notes
+                                </label>
+
+                                <div className="col-sm-12 col-md-8" style={{padding: "0px"}}>
+                                    <Field 
+                                    type="textarea"
+                                    className="planting-input-field  col-sm-12"
+                                    name="additionalNotes"
+                                    placeholder="additional notes"
+                                    style={{margin: "0px"}}/>
+
+                                    <div className="col-sm-12 text-danger small planting-input-label" 
+                                    style={{margin: "0px", padding: "0px"}}
+                                    >
+                                        <ErrorMessage name="additionalNotes" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div
+                            className="row col-sm-12"
+                            style={{
+                                display: 'flex', 
+                                flexDirection: "row",
+                            justifyContent: "space-between"}}
                             >
-                                Request
-                            </Button>
-                        </div>
-                    </Form>
-                )}
-            </Formik>
+                                <button
+                                onClick={handleBackNavigation}
+                                className="other-button col-sm-4"
+                                style={{margin: "0px"}}
+                                >
+                                    Cancel
+                                </button>
+
+                                <button
+                                className="col-sm-4"
+                                style={{margin: "0px"}}
+                                type="submit"
+                                >
+                                    Request
+                                </button>
+                            </div>
+                        </Form>
+                    )}
+                </Formik>
+            </div>
         </div>
 
         <Modal
@@ -266,7 +343,7 @@ const RequestForService: React.FC = () => {
                     <Button
                     variant="primary"
                     onClick={()=> {
-                        handleDoneAction
+                        handleDoneAction()
                     }}
                     >Done</Button>
                 </Modal.Footer>

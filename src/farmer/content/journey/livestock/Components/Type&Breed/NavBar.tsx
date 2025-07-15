@@ -1,23 +1,25 @@
-import React from "react"; 
-import { useLocation, useNavigate } from "react-router-dom"; 
- 
-const navItems = [ 
-  { label: "Erus", path: "erus" }, 
-  { label: "Gestigation", path: "breeding" },
-]; 
- 
-const NavBar: React.FC = () => {
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+type NavBarProps = {
+  onRequestService?: () => void;
+};
+
+const NavBar: React.FC<NavBarProps> = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  
+
   // Get the base path (e.g., /farmer/dashboard/components/content/journey/livestock/Components/Housing)
   const basePath = location.pathname.split("/").slice(0, -1).join("/");
-
-  // Extract the last part of the path to determine the active tab
-  const current = location.pathname.split("/").pop();
+  const requestServicePath = basePath + "/form/request";
 
   return (
-    <div className="d-flex flex-column align-items-start g-1 g-md-2 g-lg-3 w-100 p-2 p-md-3">
+    <div
+      className="d-flex flex-row justify-content-between align-items-center w-100 px-3 py-2"
+      style={{ minHeight: "48px" }}
+    >
       {/* Back Arrow */}
       <div
         className="d-flex align-items-center"
@@ -26,7 +28,7 @@ const NavBar: React.FC = () => {
       >
         <div
           className="d-inline-block"
-          style={{ 
+          style={{
             width: "1.25rem",
             height: "1.25rem",
             transform: "rotate(0deg)",
@@ -70,28 +72,21 @@ const NavBar: React.FC = () => {
         </div>
       </div>
 
-      {/* Navigation Items - Responsive Layout */}
-      <div className="d-flex flex-wrap justify-content-start align-items-start g-1 g-md-2 g-lg-3 w-100">
-        {navItems.map((item, index) => {
-          const isActive = current === item.path;
-          return (
-            <button
-              key={item.label}
-              className="btn btn-sm rounded-pill px-3 py-2 text-nowrap small-medium" 
-              style={{
-                backgroundColor: isActive ? "#457900" : "#fff",
-                color: isActive ? "#fff" : "#000",
-                border: "none",
-                transition: "all 0.2s ease",
-                minWidth: "fit-content",
-              }}
-              onClick={() => navigate(`${basePath}/${item.path}`)}
-            >
-              {item.label}
-            </button>
-          );
-        })}
-      </div>
+      {/* Request Service button */}
+      <button
+        className="btn px-4 py-2"
+        style={{
+          backgroundColor: "#457900",
+          color: "#fff",
+          border: "none",
+          borderRadius: "6px",
+          fontSize: "0.95rem",
+          fontWeight: 400,
+        }}
+        onClick={() => navigate(requestServicePath)}
+      >
+        Request Service
+      </button>
     </div>
   );
 };

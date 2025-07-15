@@ -1,19 +1,30 @@
 import LandingPage from './LandingPage';
-import TypeBreedForm from './TypeBreedForm';
 import RequestForm from './RequestForm';
 import { Routes, Route } from 'react-router-dom';
+import TypeBreedForm from './TypeBreedForm';
+import NavBar from './NavBar';
+import LivestockRecord from './LivestockRecord';
+
+// Helper to wrap pages with NavBar
+const WithNavBar = (Component: React.FC) => {
+  return (
+    <>
+      <NavBar />
+      <Component />
+    </>
+  );
+};
 
 const TypeBreed = () => {
   return (
     <Routes>
       <Route path="" element={<LandingPage />} />
-      <Route path="form" element={<TypeBreedForm />} />
-      <Route path="form/request" element={<RequestForm />} /> 
+      <Route path="form" element={WithNavBar(TypeBreedForm)} />
+      <Route path="form/request" element={<RequestForm />} />
+      <Route path="form/records" element={<LivestockRecord />} />
+      
     </Routes>
   );
-}
+};
 
-export default TypeBreed
-
-
-
+export default TypeBreed;

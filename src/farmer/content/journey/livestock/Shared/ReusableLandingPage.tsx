@@ -18,7 +18,7 @@ interface ReusableLandingPageProps {
 
 const ReusableLandingPage: React.FC<ReusableLandingPageProps> = ({ title, text, buttonText, onButtonClick }) => {
   return (
-    <div className="d-flex justify-content-center align-items-center min-vh-100">
+    <div className="d-flex justify-content-center mt-5">
       <Card
         className="text-center p-4 shadow-sm "
         style={{ maxWidth: '21.8125rem', borderRadius: '1rem', border: 'none' }}

@@ -1,4 +1,4 @@
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import "./activity.css";
 
 import * as Yup from "yup";
@@ -8,6 +8,13 @@ import DatePicker from "react-datepicker";
 import React, { useRef, useState } from "react";
 import TimePicker from "react-time-picker";
 
+interface AddActivityProps{
+    activityType: string,
+    activityDate: Date|null,
+    activityTime: string|null,
+    previewUrl: string|null,
+    activityDescription: string
+};
 
 export default function ActivityAddAndReview() {
 
@@ -15,7 +22,7 @@ export default function ActivityAddAndReview() {
     const [previewUrl, setPreviewUrl] = useState<string|null>(null);
 
     const [selectedDate, setSelectedDate] = useState<Date|null>(null);
-    const [selectedTime, setSelectedTime] = useState("00:00");
+    const [selectedTime, setSelectedTime] = useState<string|null>(null);
 
     let managementActivities: ManagementActivityProps[] = [
         {"activityName" : "Weed the vegetables",
@@ -66,12 +73,20 @@ export default function ActivityAddAndReview() {
         }
     };
 
-    const initialValues = {
-
+    const initialValues: AddActivityProps = {
+        activityType: '',
+        activityDate: null,
+        activityTime: null,
+        previewUrl: null,
+        activityDescription: ''
     };
 
     const validationSchema = Yup.object({
-
+        activityType: Yup.string().required("required").typeError("activity type required"),
+        activityDate: Yup.date().notRequired(),
+        activityTime: Yup.string().notRequired(),
+        previewUrl: Yup.string().notRequired(),
+        activityDescription: Yup.string().required().test( desc => desc?.length > 0 )
     });
 
     const render = () => {
@@ -87,7 +102,6 @@ export default function ActivityAddAndReview() {
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={handleAddActivity}
-
                     >
                         {({}) => (
                             <Form id="management-form"
@@ -98,29 +112,34 @@ export default function ActivityAddAndReview() {
                                 </h3>
                                 
                                 <div id="add-management-activity-form-body"
-                                
-                                className="row">
-                                    <div className="management-input-group">
-                                        <label htmlFor="activityType" className="management-input-label">
+                                className="col-sm-12">
+                                    <div className="management-input-group col-sm-12">
+                                        <label htmlFor="activityType" className="management-input-label col-sm-12">
                                             Activity Type
                                         </label>
 
-                                        <Field
-                                        name="activityType"
-                                        className="management-input-field"
-                                        type="text"
-                                        placeholder="activity type here"
+                                        <div className="col-sm-12" >
+                                            <Field
+                                            name="activityType"
+                                            className="activity-input-field body-regular col-sm-12"
+                                            type="text"
+                                            placeholder="activity type here"
 
-                                        />
+                                            />
+
+                                            <div className="col-sm-12 text-danger small" style={{textAlign: "start"}}>
+                                                <ErrorMessage name="activityType" />
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div className="management-input-group">
-                                        <label htmlFor="activityDate" className="management-input-label">
+                                    <div className="management-input-group ">
+                                        <label htmlFor="activityDate" className="management-input-label ">
                                             Date
                                         </label>
 
                                         <DatePicker
-                                        className="management-input-field"
+                                        className="activity-input-field body-regular"
                                         name="activityDate"
                                         dateFormat={"MM/dd/yyyy"}
 
@@ -132,29 +151,30 @@ export default function ActivityAddAndReview() {
                                         />
                                     </div>
 
-                                    <div className="management-input-group">
-                                        <label htmlFor="activityTime" className="management-input-label">
+                                    <div className="management-input-group col-sm-12">
+                                        <label htmlFor="activityTime" className="management-input-label col-sm-12">
                                             Time
                                         </label>
 
                                         <TimePicker
-                                        className="management-input-field"
+                                        className="activity-input-field body-regular col-sm-12"
                                         name="activityTime"
                                         value={selectedTime}
-                                        onChange={time => console.log("Selected time: ", time)}
+                                        onChange={time => {setSelectedTime(time); console.log("Selected time: ", time)}}
                                         disableClock={true}
                                         clearIcon={null}
                                         />
                                     </div>
 
-                                    <div className="management-input-group">
-                                        <label htmlFor="activityImage" className="management-input-label">
+                                    <div className="management-input-group col-sm-12">
+                                        <label htmlFor="activityImage" className="management-input-label col-sm-12">
                                             Upload Image
                                         </label>
 
-                                        <div className="management-input-field input-field"
+                                        <div className="management-input-field col-sm-12"
                                         onClick={handleUploadImageAction}
                                         style={{borderStyle: "dashed",
+                                            borderWidth: "1px",
                                                 display:"flex",
                                                 flexDirection: 'column',
                                                 justifyContent: 'center',
@@ -177,16 +197,21 @@ export default function ActivityAddAndReview() {
                                         </div>
                                     </div>
 
-                                    <div className="management-input-group">
-                                        <label htmlFor="activityDescription" className="management-input-label">
+                                    <div className="management-input-group col-sm-12">
+                                        <label htmlFor="activityDescription" className="management-input-label col-sm-12">
                                             Description
                                         </label>
 
-                                        <textarea
-                                        className="management-input-field"
-                                        name="activityDescription"
+                                        <div className="col-sm-12" >
+                                            <textarea
+                                            className="activity-input-field body-regular col-sm-12"
+                                            name="activityDescription"
 
-                                        />
+                                            />
+                                            <div className="col-sm-12 text-danger small" style={{textAlign: "start"}}>
+                                                <ErrorMessage name="activityType" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
