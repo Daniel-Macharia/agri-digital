@@ -202,10 +202,10 @@ const CheckoutPage: React.FC = () => {
                     <Button 
                         variant="link" 
                         onClick={() => navigate(-1)} 
-                        className="text-dark mb-3 ps-0 d-flex align-items-start"
+                        className="col-1 text-dark mb-0 ps-0 d-flex align-items-start"
                         style={{ fontSize: '0.9rem' }}
                     >
-                        <FiArrowLeft className="me-1" /> Back
+                        <FiArrowLeft className="me-0" /> Back
                     </Button>
                     <div className="text-center py-4 py-md-5">
                         <h4 className="h5 h-md-4">Your cart is empty</h4>
@@ -229,13 +229,13 @@ const CheckoutPage: React.FC = () => {
                 <Button 
                     variant="link" 
                     onClick={() => navigate(-1)} 
-                    className="text-dark mb-3 ps-0 d-flex align-items-start"
+                    className="col-1 text-dark mb-0 ps-0 d-flex align-items-start"
                     style={{ fontSize: '0.9rem' }}
                 >
                     <FiArrowLeft className="item-start me-1" /> Back
                 </Button>
                 
-                <div className="d-flex align-items-center mb-3 mb-md-4">
+                <div className="d-flex align-items-center mb-1 mb-md-1">
                     {isGift && <FiGift className="text-warning me-2" size={20} />}
                     <h4 className="mb-0 h5 h-md-4">
                         {isGift ? 'Complete Your Gift Purchase' : 'Complete Your Purchase'}
@@ -264,7 +264,7 @@ const CheckoutPage: React.FC = () => {
                         {isGift ? 'Gift Item' : ''}
                     </h5>
                     {cartItems.map((item) => (
-                        <div key={item.id} className="d-flex align-items-start align-items-sm-center mb-5 pb-0 border-bottom">
+                        <div key={item.id} className="d-flex align-items-start align-items-sm-center mb-3 pb-0 border-bottom">
                             <img
                                 src={item.image}
                                 alt={item.name}

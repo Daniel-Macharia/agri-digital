@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { 
-  FaSearch, 
-  FaBell, 
-  FaUser, 
-  FaChevronDown, 
   FaArrowLeft,
   FaPercentage,
   FaClock,
-  FaTimes,
   FaCheck,
   FaFileUpload
 } from 'react-icons/fa';
@@ -110,7 +105,7 @@ const BankPage: React.FC = () => {
   });
   const [selectedLoan, setSelectedLoan] = useState<LoanData | null>(null);
 
-  // Get today's date in YYYY-MM-DD format for validation
+  // today's date in YYYY-MM-DD format for validation
   const getTodayDate = () => {
     return new Date().toISOString().split('T')[0];
   };
@@ -425,7 +420,7 @@ const BankPage: React.FC = () => {
     switch (activeTab) {
       case 'Withdraw':
         return (
-          <div className="container-fluid">
+          <div className="container-fluid" style={{ backgroundColor: '#EEEEEE' }}>
           <div className="row w-100" style={{maxWidth: '1000px', height: 'auto'}}>
             <div className="col-12">
               <div className="card shadow-sm border-0 rounded-3 mb-4">
@@ -513,7 +508,8 @@ const BankPage: React.FC = () => {
                   </div>
                   
                   <button 
-                    className="btn btn-success fw-semibold w-100 py-0"
+                    className="btn fw-semibold w-100 py-2"
+                    style={{ backgroundColor: '#556B2F'}}
                     onClick={handleProcessWithdraw}
                   >
                     Process Withdraw
@@ -527,7 +523,7 @@ const BankPage: React.FC = () => {
         
       case 'Deposit':
         return (
-          <div className="row" style={{width: '1000px', height: '80px'}}>
+          <div className="row" style={{backgroundColor: '#EEEEEE', width: '1000px', height: '80px'}}>
             <div className="col-12">
               <div className="card shadow-sm border-0 rounded-3 mb-4">
                 <div className="card-body p-4">
@@ -638,7 +634,8 @@ const BankPage: React.FC = () => {
                   </div>
                   
                   <button 
-                    className="btn btn-success fw-semibold w-100 py-0"
+                    className="btn fw-semibold w-100 py-2"
+                    style={{backgroundColor: '#556B2F'}}
                     onClick={handleProcessDeposit}
                   >
                     Process Deposit
@@ -651,7 +648,7 @@ const BankPage: React.FC = () => {
         
       case 'Active Loans':
         return (
-          <div className="container-fluid p-3">
+          <div className="container-fluid p-3" style={{background: '#EEEEEE'}}>
             {/* Loan Balance Card */}
             <div className="row mb-4" style={{width: '100%'}}>
               <div className="col-12 col-md-4 col-lg-3">
@@ -728,7 +725,7 @@ const BankPage: React.FC = () => {
                 <div className="row g-3 mt-2">
                   <div className="col-6">
                     <button 
-                      className="btn btn-outline-warning w-100 py-0 fw-semibold"
+                      className="btn btn-outline-warning w-100 py-2 fw-semibold"
                       onClick={handleApplyNewLoan}
                       style={{borderColor: '#ffc107',}}
                     >
@@ -737,8 +734,8 @@ const BankPage: React.FC = () => {
                   </div>
                   <div className="col-6">
                     <button 
-                      className="btn btn-success w-100 py-0 fw-semibold text-white"
-                      style={{backgroundColor: '#28a745', borderColor: '#28a745'}}
+                      className="btn btn-success w-100 py-2 fw-semibold text-white"
+                      style={{backgroundColor: '#556b2f', borderColor: '#556b2f'}}
                     >
                       Make Payment
                     </button>
@@ -752,10 +749,10 @@ const BankPage: React.FC = () => {
      case 'LoanDetails':
   return (
     <Container fluid>
-    <div className="container-fluid" style={{ backgroundColor: '#f8f9fa', width: '100%', minHeight: '100vh', paddingTop: '20px' }}>
+    <div className="container-fluid" style={{backgroundColor: '#EEEEEE', width: '100%', minHeight: '100vh', paddingTop: '20px' }}>
       {selectedLoan && (
         <>
-          <div className="row mb-0">
+          <div className="row mb-0 bg-light">
             <div className="col-12 d-flex align-items-start">
               <button
                 className="btn btn-link text-decoration-none p-0 text-dark text-start text-nowrap"
@@ -834,10 +831,10 @@ const BankPage: React.FC = () => {
                   {/* Apply Now Button */}
                   <div className="d-flex justify-content-between align-items-center">
                     <button
-                      className="btn btn-success flex-grow-1 py-0 fw-semibold me-3"
+                      className="btn btn-success flex-grow-1 py-2 fw-semibold me-3"
                       onClick={handleApplyNow}
                       style={{ 
-                        backgroundColor: '#28a745',
+                        backgroundColor: '#556b2f',
                         borderColor: '#28a745',
                         fontSize: '14px'
                       }}
@@ -857,7 +854,7 @@ const BankPage: React.FC = () => {
 
       case 'LoanApplication':
         return (
-          <div className="container-fluid p-3">
+          <div className="container-fluid p-3 bg-light">
             <div className="row mb-1">
               <div className="col-2">
                 <button 
@@ -1245,7 +1242,8 @@ const BankPage: React.FC = () => {
                     
                     {/* Submit Button */}
                     <button 
-                      className="btn btn-success fw-semibold w-100 py-0"
+                      className="btn btn-success fw-semibold w-100 py-2"
+                      style={{backgroundColor: '#556B2F'}}
                       onClick={handleSubmitLoanApplication}
                     >
                       Submit Application
@@ -1259,7 +1257,7 @@ const BankPage: React.FC = () => {
         
       default: // Loans
         return (
-          <div className="row g-3 g-md-4">
+          <div className="row g-3 g-md-4" style={{backgroundColor: '#EEEEEE'}}>
             {loanData.map((loan: LoanData) => (
               <div key={loan.id} className="col-12 col-sm-6 col-lg-4">
                 <div className="card h-100 shadow-sm border-0 rounded-3">
@@ -1294,7 +1292,8 @@ const BankPage: React.FC = () => {
                     </div>
 
                     <button 
-                      className="btn btn-success w-100 fw-semibold py-0"
+                      className="btn btn-success w-100 fw-semibold py-2"
+                      style={{backgroundColor: '#556B2F'}}
                       type="button"
                       onClick={() => handleViewMore(loan)}
                     >
@@ -1310,16 +1309,17 @@ const BankPage: React.FC = () => {
   };
 
   return (
-    <div className="vh-100" style={{backgroundColor: '#f8f9fa'}}>
+    <div className="vh-100">
       {/* Main Content - Now covers entire screen */}
-      <div className="container-fluid h-100 py-3">
+      <div className="container-fluid h-100 py-3" style={{ backgroundColor: '#EEEEEE' }}>
         <div className="row h-100">
           <div className="col-12">
             {/* Request Partnership Button - Only show on Loans tab */}
             {activeTab === 'Loans' && (
               <div className="d-flex justify-content-end mb-3 fit-content">
                 <button 
-                  className="btn btn-success px-4 py-0 fw-semibold"
+                  className="btn btn-success px-4 py-2 fw-semibold"
+                  style={{backgroundColor: '#556B2F'}}
                   onClick={handleRequestPartnership}
                 >
                   Request Partnership
@@ -1335,9 +1335,10 @@ const BankPage: React.FC = () => {
                     {tabs.map((tab) => (
                       <button
                         key={tab}
-                        className={`btn ${activeTab === tab ? 'btn-success' : 'btn-outline-secondary'} px-3 py-0 rounded-pill`}
+                        className={`btn ${activeTab === tab ? 'btn-success' : 'btn-outline-secondary'} px-3 py-2 rounded-pill`}
+                        style={{ backgroundColor: activeTab === tab ? '#556B2F' : 'transparent', whiteSpace: 'nowrap', width: 'fit-content' }}
                         onClick={() => handleTabClick(tab)}
-                        style={{ whiteSpace: 'nowrap', width: 'fit-content' }}
+                        //style={{ whiteSpace: 'nowrap', width: 'fit-content' }}
                       >
                         {tab}
                       </button>
@@ -1357,7 +1358,7 @@ const BankPage: React.FC = () => {
 
       {/* Partnership Request Modal */}
       {showPartnershipModal && (
-        <div className="modal fade show d-block" tabIndex={-1} style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+        <div className="modal fade show d-block modal-dialog-centered " tabIndex={-1} style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content rounded-3">
               <div className="modal-header border-0 pb-0">
@@ -1380,6 +1381,7 @@ const BankPage: React.FC = () => {
                     <div className="d-grid">
                       <button 
                         className="btn btn-success fw-semibold py-2"
+                        style={{backgroundColor: '#556B2F'}}
                         onClick={handleCloseModal}
                       >
                         Return to Bank
@@ -1428,6 +1430,7 @@ const BankPage: React.FC = () => {
                       <button 
                         type="button"
                         className="btn btn-success fw-semibold py-2"
+                        style={{backgroundColor: '#556B2F'}}
                         onClick={handleSubmitRequest}
                         disabled={!bankName || !bankEmail}
                       >
