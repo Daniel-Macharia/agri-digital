@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 import ErusDetection from "./ErusDetection";
 import NewBorns from "./NewBorns";
 import Gestigation from "./Gestigation";
+import Results from "./Results";
 
 
 
@@ -21,8 +22,8 @@ const Breeding = () => {
       <Route path="" element={<LandingPage />} />
       <Route path="erus" element={WithNavBar(ErusDetection)} />
       <Route path="gestigation" element={WithNavBar(Gestigation)} />
-
       <Route path="new" element={WithNavBar(NewBorns)} />
+      <Route path="results" element={<Results />} />
 
 
       
