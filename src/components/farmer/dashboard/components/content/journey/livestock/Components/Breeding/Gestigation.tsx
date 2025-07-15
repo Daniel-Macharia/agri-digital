@@ -7,7 +7,7 @@ const Gestigation = () => {
   const [showSaved, setShowSaved] = useState(false);
 
   return (
-    <div className="w-100 rounded-4 bg-white border mt-3 p-4" style={{ maxWidth: 900, margin: '32px auto' }}>
+    <div className="w-100 rounded-4 bg-white border mt-3 p-4">
       <h5 className="mb-4 text-start" style={{ color: '#333' }}>Gestation</h5>
       <div className="d-flex mb-4">
         <button
