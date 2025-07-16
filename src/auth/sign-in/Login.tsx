@@ -4,10 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 
 import { Formik, Form, Field, ErrorMessage} from "formik";
-import sendOtpUtil from "../utils/SendOtpUtil.ts";
-import { storagePut } from "../utils/StorageUtils.ts";
+import sendOtpUtil from "./utils/SendOtpUtil.ts";
+import { storagePut } from "../../farmer/utils/StorageUtils.ts";
 
-import "../../index.css";
+import "../auth-style.css";
 
 
 const Login: React.FC = () => {
@@ -16,7 +16,9 @@ const Login: React.FC = () => {
     };
 
     const validationSchema = Yup.object({
-        userEmail: Yup.string().email('Invalid email format!').required('Required'),
+        userEmail: Yup.string().required('email or phone is required')
+        .test(emailOrPhone => /^[a-z0-9-]{1,100}@[a-z0-9-]{1,100}.[a-z0-9-]{1,100}.[a-z0-9-]{1,100}/.test(emailOrPhone.toLowerCase()) 
+    || ( /^0[17]{1}[0-9]{8}$/.test(emailOrPhone.toLowerCase()) || /^\+254[17]{1}[0-9]{8}$/.test(emailOrPhone.toLowerCase()) ) ),
     });
 
     const [ submitType, setSubmitType ] = useState('');
@@ -79,12 +81,11 @@ const Login: React.FC = () => {
                                                         Email address/Phone number *
                                                     </label>
                                                     
-                                                    <div className="col-12 mb-2">
+                                                    <div className="col-12 mb-4">
                                                         <Field 
                                                         name="userEmail" 
-                                                        className='form-control body-regular' 
+                                                        className='form-control body-regular mb-0' 
                                                         type='text' 
-                                                        id='email' 
                                                         placeholder='example@gmail.com/+254712345678' />
                                                         <div className="text-danger small my-0">
                                                             <ErrorMessage name="userEmail" />
@@ -151,7 +152,7 @@ const Login: React.FC = () => {
                                 </div> 
                             </div>
 
-                            <div className="col-6" style={{backgroundColor: "purple"}}>
+                            <div className="col-6">
                                 <img src='/shamba_bot_logo.svg' alt='logo'
                                 style={{width: "100%"}}/>
                             </div>

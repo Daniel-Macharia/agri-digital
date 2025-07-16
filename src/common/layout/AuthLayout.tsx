@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Login from "../../auth/sign-in/components/Login";
-import SignUp from "../../auth/sign-up/components/SignUp";
+import Login from "../../auth/sign-in/Login";
+import SignUp from "../../auth/sign-up/SignUp";
 import NotFound from "../exceptions/NotFound";
-import Otp from "../../auth/verify-otp/component/Otp";
-import EnterPassword from "../../auth/sign-in/components/EnterPassword";
-import CreatePassword from "../../auth/sign-up/components/CreatePassword";
+import Otp from "../../auth/verify-otp/Otp";
+import EnterPassword from "../../auth/sign-in/EnterPassword";
+import CreatePassword from "../../auth/sign-up/CreatePassword";
 
 const AuthLayout: React.FC = () => {
   return (

@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import { useLocation, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import AddNewCropModal from "./add-new-crop-modal";
-import { storageDelete, storageGet, storagePut } from "../../../../../auth/sign-in/utils/StorageUtils";
+import { storageDelete, storageGet, storagePut } from "../../../../utils/StorageUtils";
 
 const DisplayCropDetails: React.FC = ()=>{
 
