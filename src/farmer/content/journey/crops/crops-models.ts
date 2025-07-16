@@ -2,12 +2,12 @@ export interface CropDetails {
     cropName: string,
     seedName: string,
     seedVariety: string,
-    plantingDate: Date,
-    expectedHarvestingDate: Date
+    plantingDate: Date|null,
+    expectedHarvestingDate: Date|null
 };
 
 export interface PlantingActivity{
-activityDate: Date,
+activityDate: Date|null,
 activityDescription: string
 };
 
@@ -74,4 +74,16 @@ export interface SalesNotificationItemProps{
 export interface KeyValuePair{
     period: string,
     value: number
+};
+
+export interface SalesNegotiationProductProps{
+    productImageUrl: string,
+    productName: string,
+    productSeller: string,
+    productUnitPrice: string,
+    productUnitName: string,
+
+    //for showing and hiding modal
+    show: boolean,
+    setShow: Function
 };

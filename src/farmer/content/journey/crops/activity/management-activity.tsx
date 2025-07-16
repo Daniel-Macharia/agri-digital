@@ -1,40 +1,42 @@
 import { ManagementActivityProps } from "../crops-models";
-import "./management-activity.css";
-
 
 export default function ManagementActivity( activity: ManagementActivityProps){
     const render = () => {
         return (<>
-        <div className="management-activity-container card" >
-            <div id="completed-div" >
-                <input
-                type="checkbox"
-                checked={activity.activityCompleted}
-                readOnly={true}
-                />
+        <div className="col-12 card p-1" >
+            <div className="row p-0 d-flex" >
+                <div className="col-2" style={{alignSelf: "center"}}>
+                    <input
+                    type="checkbox"
+                    checked={activity.activityCompleted}
+                    readOnly={true}
+                    />
 
-            </div>
+                </div>
 
-            <div id="management-content-div" >
-                <h3 className="management-activity-description body-regular">
-                    {activity.activityName}
-                </h3>
+                <div className="col-10" >
+                    <h3 className="crops-start-aligned-text body-semibold primary-text col-12 m-0 body-regular"
+                    >
+                        {activity.activityName}
+                    </h3>
 
-                <p
-                className="management-activity-description body-semibold"
-                >
-                    {activity.activityCompletionDate.toString() }
+                    <p
+                    className="crops-start-aligned-text col-12 m-0 body-semibold"
+                    style={{color: "var(--Remember-me-Links, #2966FF)"}}
+                    >
+                        {activity.activityCompletionDate.toString() }
 
-                    <br/>
+                        <br/>
 
-                    {activity.activityCompletionTime}
-                </p>
+                        {activity.activityCompletionTime}
+                    </p>
 
-                <p
-                 className="management-activity-description small-light"
-                 >
-                    {activity.activityDescription}
-                </p>
+                    <p
+                    className="crops-start-aligned-text col-12 m-0 body-regular secondary-text"
+                    >
+                        {activity.activityDescription}
+                    </p>
+                </div>
             </div>
         </div>
         </>);

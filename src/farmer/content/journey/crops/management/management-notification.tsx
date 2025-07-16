@@ -1,27 +1,22 @@
 import { ManagementNotificationProps } from "../crops-models";
-import "./management-notification.css";
 
 export default function ManagementNotification( data: ManagementNotificationProps)
 {
     const render = () => {
         return (<>
-        <div id="management-notificationmmm"
-        className="card col-sm-8 col-sm-12"
+        <div className="card col-12 p-1 m-0"
         >
-            <h3 id="management-notification-name"
-            className="management-notification-item body-regular"
+            <h3 className=" body-semibold primary-text crops-start-aligned-text col-12 m-0"
             >
                 {data.name}
             </h3>
 
-            <h3 id="management-notification-description"
-            className="management-notification-item h3-semibold"
+            <h3 className=" h2-bold primary-text crops-start-aligned-text col-12 m-0"
             >
                 {data.description}
             </h3>
 
-            <p id="management-notification-details"
-            className="management-notification-item small-regular"
+            <p className=" small-regular secondary-text crops-start-aligned-text col-12 m-0"
             >
                 {data.details}
             </p>

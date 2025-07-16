@@ -1,30 +1,27 @@
 import { OnelineNotificationItemProps } from "../crops-models";
-import "./oneline-notification-item.css";
 
 const OnelineNotificationItem: React.FC<OnelineNotificationItemProps> = (item: OnelineNotificationItemProps) => {
     const render = () => {
         return (<>
-        <div className="row col-sm-12 oneline-notification-item-container"
-        style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center"
-        }}
+        <div className="col-12"
         >
-            <input
-            className="col-sm-1 oneline-notification-item-urgency"
-            
-            type="radio"
-            readOnly={true}
-            checked={true}
-            />
+            <div className="row my-1">
+                <div className="col-2 align-items-center justify-content-center my-0">
+                    <input
+                    className="col-12"
+                    type="radio"
+                    readOnly={true}
+                    checked={true}
+                    />
+                </div>
 
-            <p className="small-regular col-sm-11 oneline-notification-item-description"
-            
-            >
-                {item.notificationDescription}
-            </p>
+                <div className="col-10 align-items-center my-0">
+                    <p className="body-regular primary-text col-12 my-1 crops-start-aligned-text"
+                    >
+                        {item.notificationDescription}
+                    </p>
+                </div>
+            </div>
         </div>
         </>);
     };

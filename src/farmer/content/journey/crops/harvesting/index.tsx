@@ -1,7 +1,5 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
-import "./index.css";
 import TabNavBar from "./tab-nav-bar";
-import "/src/index.css";
 import ExpectedYield from "./expected-yield";
 import ActualYield from "./actual-yield";
 import CropsNotification from "../crops-notification/crops-notification";
@@ -19,36 +17,45 @@ const Harvesting: React.FC = ()=>{
     
     const render = ()=>{
         return (<>
-        <div className="row harvest-container">
-            <CropsNotification iconUrl="/assets/images/plant.svg" message="Your crop is nearing harvest. Begin planning for harvesting logistics" />
-
-            
-            <div className="row  col-sm-12"
-            style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-end",
-                alignItems: "center"
-            }}
-            >
-                <button
-                className="col-sm-4"
-                onClick={handleRequestForHarvestingTools}
-                >
-                    Request for harvesting tools
-                </button>
+        <div className="col-12">
+            <div className="row my-3 px-0 mx-0">
+                <CropsNotification 
+                iconUrl="/assets/images/plant.svg" 
+                message="Your crop is nearing harvest. Begin planning for harvesting logistics"
+                />
             </div>
-            <div className="row col-sm-12 harvest-content">
-                <h3 className="h3-regular" id="heading">Yield updates</h3>
+            
+            <div className="col-12 crops-container" >
+                <div className="row justify-content-end px-3 my-2">
+                    <button
+                    className="col-12 col-md-4 mx-0 crops-accept-button"
+                    onClick={handleRequestForHarvestingTools}
+                    >
+                        Request for harvesting tools
+                    </button>
+                </div>
 
-                <TabNavBar />
+                <div className="col-12 bg-white crops-container">
+                    <div className="col-12 my-0">
+                        <h3 className="h3-semibold primary-text col-12 my-0 crops-start-aligned-text" >
+                            Yield updates
+                        </h3>
+                    </div>
 
-                <Routes >
-                    <Route path="" element={ <ExpectedYield />} />
-                    <Route path="/actual-yield" element={ <ActualYield /> } />
+                    <div className="col-12">
+                        <TabNavBar />
+                    </div>
 
-                    <Route path="*" element={ <NotFound />} />
-                </Routes>
+                    <div className="col-12">
+                        <Routes >
+                            <Route path="" element={ <ExpectedYield />} />
+                            <Route path="/actual-yield" element={ <ActualYield /> } />
+
+                            <Route path="*" element={ <NotFound />} />
+                        </Routes>
+                    </div>
+                </div>
+
             </div>
         </div>
         </>);

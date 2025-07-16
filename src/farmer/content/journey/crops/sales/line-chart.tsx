@@ -23,7 +23,7 @@ const SalesLineChart: React.FC = () => {
         <ResponsiveContainer
         height={300}
         width="100%"
-        
+        className="mx-0"
         >
 
             <LineChart 

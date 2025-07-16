@@ -41,7 +41,7 @@ const LivestockProjectModal: React.FC<LivestockProjectModalProps> = ({ show, onH
 };
 
   return (
-    <Modal show={show} onHide={onHide} centered size="lg">
+    <Modal show={show} onHide={onHide} centered size="lg" dialogClassName='mx-auto'>
       <Modal.Body className="p-4">
         <Row className="justify-content-center">
           <Col xs={12} md={10} lg={8}>

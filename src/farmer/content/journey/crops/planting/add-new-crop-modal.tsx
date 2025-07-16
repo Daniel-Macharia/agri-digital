@@ -1,5 +1,4 @@
-import { Button, Modal } from "react-bootstrap";
-import "./add-new-crop-modal.css";
+import { Modal } from "react-bootstrap";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import DatePicker from "react-datepicker";
 
@@ -28,16 +27,16 @@ const AddNewCropModal: React.FC<AddNewCropModalProps> = (props: AddNewCropModalP
         cropName: '',
         seedName: '',
         seedVariety: '',
-        plantingDate: new Date( new Date().toDateString() ),
-        expectedHarvestingDate: new Date( new Date().toDateString() )
+        plantingDate: null,
+        expectedHarvestingDate: null
     };
 
     const validationSchema = Yup.object({
-        cropName: Yup.string().required("Required"),
-        seedName: Yup.string().required("Required"),
-        seedVariety: Yup.string().required("Required"),
-        plantingDate: Yup.date().required("Required"),
-        expectedHarvestingDate: Yup.date().required("Required"),
+        cropName: Yup.string().required("Crop name is required"),
+        seedName: Yup.string().required("seed name is required"),
+        seedVariety: Yup.string().required("seed variety is required"),
+        plantingDate: Yup.date().required("planting date is required"),
+        expectedHarvestingDate: Yup.date().required("harvesting date is required")
     });
 
     const handleHasSeeds = () => {
@@ -51,6 +50,22 @@ const AddNewCropModal: React.FC<AddNewCropModalProps> = (props: AddNewCropModalP
     };
 
     const handleAddCrop = (data: CropDetails, {}:any)=>{
+
+        if( selectedPlantingDate == null )
+        {
+            console.log("select a date for planting");
+            return;
+        }
+
+        if( selectedHarvestingDate == null )
+        {
+            console.log("select a date for harvesting");
+            return;
+        }
+
+        data.plantingDate = selectedPlantingDate;
+        data.expectedHarvestingDate = selectedHarvestingDate;
+
         setIsSubmitting(true);
         if( !isSubmitting )
         {
@@ -69,15 +84,17 @@ const AddNewCropModal: React.FC<AddNewCropModalProps> = (props: AddNewCropModalP
         return (<>
         <Modal 
         show={props.show}
-        onHide={() => props.setShow(false) }
+        onHide={() => {props.setShow(false); setStep(1);} }
         centered
         
-        className="modal-container"
+        dialogClassName="mx-auto"
+        className="col-sm-12"
         >
             <Modal.Header closeButton
             className="modal-header">
-                <Modal.Title className="modal-title">
-                    Add Crop
+                <Modal.Title className="h2-bold primary-text my-0" 
+                >
+                    Add New Crop
                 </Modal.Title>
             </Modal.Header>
 
@@ -87,144 +104,188 @@ const AddNewCropModal: React.FC<AddNewCropModalProps> = (props: AddNewCropModalP
             onSubmit={handleAddCrop}
             
             >
-                {({}) => (
-                    <Form>
+                {({setFieldValue}) => (
+                    <Form className="col-12">
                         <Modal.Body>
                             <div 
-                            className="modal-input-group"
+                            className="col-sm-12"
+                            style={{marginBottom: "10px"}}
                             >
-                                <label className="modal-label">Crop Name</label>
-                                <div className="text-danger small">
-                                    <ErrorMessage name="cropName"/>
+                                <label className="col-sm-12 body-regular primary-text my-0">
+                                    Crop Name
+                                </label>
+                                
+                                <div className="col-sm-12" >
+                                    <Field
+                                    className="form-control body-regular col-sm-12 mb-0"
+                                    type="text"
+                                    name="cropName"
+                                    placeholder="Maize"
+                                    />
+                                    <div className="text-danger small col-sm-12" style={{margin: "0px"}}>
+                                        <ErrorMessage name="cropName"/>
+                                    </div>
                                 </div>
-                                <Field
-                                className="modal-input-field"
-                                type="text"
-                                name="cropName"
-                                placeholder="Maize"
-                                />
                             </div>
 
                             <div
-                            className="modal-input-group"
-                            style={{display: step == 1 ? "none" : "block"}}
+                            className="col-sm-12 modal-input-group"
+                            style={{display: step == 1 ? "none" : "block", marginBottom: "10px"}}
                             >
-                                <label className="modal-label">Seed Name</label>
-                                <div className="text-danger small">
-                                    <ErrorMessage name="seedName"/>
+                                <label className="col-sm-12 body-regular primary-text my-0" style={{margin: "0px"}}>Seed Name</label>
+                                
+                                <div className="col-sm-12" >
+                                    <Field
+                                    className="form-control body-regular col-sm-12 mb-0"
+                                    type="text"
+                                    name="seedName"
+                                    placeholder="Maize"
+                                    />
+                                    <div className="text-danger small col-sm-12" style={{margin: "0px"}}>
+                                        <ErrorMessage name="seedName"/>
+                                    </div>
                                 </div>
-                                <Field
-                                className="modal-input-field"
-                                type="text"
-                                name="seedName"
-                                placeholder="Maize"
-                                />
                             </div>
 
-                            <div className="modal-input-group">
-                                <label className="modal-label">Seed Variety</label>
-                                <div 
-                                className="text-danger small" 
-                                style={{display: step == 1 ? "none" : "block"}}>
-                                    <ErrorMessage name="seedVariety"/>
-                                </div>
-                                <Field
-                                className="modal-input-field"
-                                type="text"
-                                name="seedVariety"
-                                placeholder="Maize"
+                            <div className="modal-input-group" style={{ marginBottom: "10px"}}>
+                                <label className="body-regular primary-text my-0" style={{margin: "0px"}}>Seed Variety</label>
+                                
+
+                                <div className="col-sm-12"
                                 style={{display: step == 1 ? "none" : "block"}}
-                                />
+                                >
+                                    <select
+                                    className="form-control body-regular col-sm-12 mb-0"
+                                    name="seedVariety"
+
+                                    onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                                        const value = event.target?.value;
+
+                                        if( value === "select variety")
+                                            return;
+
+                                        console.log("selected: ", value);
+                                        setFieldValue("seedVariety", value);
+                                    }}
+                                    >
+                                        <option selected>select variety</option>
+                                        <option>variety one</option>
+                                        <option>variety two</option>
+                                        <option>variety three</option>
+                                        <option>variety four</option>
+                                    </select>
+                                    <div 
+                                    className="text-danger small col-sm-12" 
+                                    >
+                                        <ErrorMessage name="seedVariety"/>
+                                    </div>
+                                </div>
                             </div>
 
                             <div className="modal-input-group"
-                            style={{display: step == 1 ? "none" : "block"}}
+                            style={{display: step == 1 ? "none" : "block", marginBottom: "10px"}}
                             >
-                                <label className="modal-label">Planting Date</label>
-                                <div className="text-danger small">
-                                    <ErrorMessage name="plantingDate"/>
+                                <label className="body-regular primary-text my-0 col-sm-12" style={{margin: "0px"}}>Planting Date</label>
+                                
+                                <div className="col-sm-12">
+                                    <DatePicker
+                                    selected={ selectedPlantingDate }
+                                    onChange={date => {setSelectedPlantingDate( date );
+                                        setFieldValue("plantingDate", date);
+                                    } }
+                                    className="form-control body-regular col-sm-12 bg-light px-2 mb-0"
+                                    name="plantingDate"
+                                    placeholderText="select planting date"
+
+                                    dateFormat={"MM/dd/yyyy"}
+                                    minDate={new Date()}
+                                    wrapperClassName="w-100"
+
+                                    />
+                                    <div className="text-danger small col-sm-12" style={{margin: "0px", textAlign: "start"}}>
+                                        <ErrorMessage name="plantingDate"/>
+                                    </div>
                                 </div>
-                                <DatePicker
-                                selected={ selectedPlantingDate }
-                                onChange={date => setSelectedPlantingDate( date ) }
-                                className="modal-input-field"
-                                name="plantingDate"
-                                placeholderText="select planting date"
-
-                                dateFormat={"MM/dd/yyyy"}
-                                minDate={new Date()}
-
-                                />
                             </div>
 
                             <div className="modal-input-group"
-                            style={{display: step == 1 ? "none" : "block"}}
+                            style={{display: step == 1 ? "none" : "block", marginBottom: "10px"}}
                             >
-                                <label className="modal-label">Expected Harvesting Date</label>
-                                <div className="text-danger small">
-                                    <ErrorMessage name="expectedHarvestingDate"/>
-                                </div>
-                                <DatePicker
-                                className="modal-input-field"
-                                name="expectedHarvestingDate"
-                                placeholderText="select planting date"
-                                dateFormat="MM/dd/yyyy"
+                                <label className="body-regular primary-text my-0 col-sm-12" style={{margin: "0px"}}>Expected Harvesting Date</label>
+                                
+                                <div className="col-sm-12" >
+                                    <DatePicker
+                                    className="form-control body-regular col-sm-12 mb-0"
+                                    name="expectedHarvestingDate"
+                                    placeholderText="select planting date"
+                                    dateFormat="MM/dd/yyyy"
 
-                                selected={selectedHarvestingDate}
-                                onChange={ date => setSelectedHarvestingDate(date) }
-                                minDate={selectedPlantingDate||undefined}
-                                />
+                                    selected={selectedHarvestingDate}
+                                    onChange={ date => {setSelectedHarvestingDate(date);
+                                        setFieldValue("expectedHarvestingDate", date);
+                                    } }
+                                    minDate={selectedPlantingDate||undefined}
+
+                                    wrapperClassName="w-100"
+                                    />
+
+                                    <div className="text-danger small col-sm-12" style={{margin: "0px", textAlign: "start"}}>
+                                        <ErrorMessage name="expectedHarvestingDate"/>
+                                    </div>
+                                </div>
+
                             </div>
 
                         </Modal.Body>
 
                         <Modal.Footer
-                        className="col-sm-12"
+                        className="col-12"
                         >
-                            <div 
-                            className="row col-sm-12"
-                            style={{display: step == 1 ? "flex" : "none",
-                                flexDirection: 'row',
-                                justifyContent: "space-between",
-                                alignItems: "center"
-                            }}
-                            >
-                                <button
-                                className="col-sm-5 other-button"
-                                id="add-crop-buttons"
-                                disabled={isSubmitting}
-                                onClick={handleHasSeeds}
-                                type="button"
-
-                                style={{
-                                    borderStyle: 'solid',
-                                    borderWidth: '1px',
-                                    borderColor: 'orange'
-                                }}
+                            {
+                                ((step == 1) ? (<>
+                                <div 
+                                className="col-12"
                                 >
-                                    I have seeds
-                                </button>
+                                    <div className="row">
+                                        <div className="col-6">
+                                            <div className="row px-3">
+                                                <button
+                                                className="col-12 crops-other-button"
+                                                disabled={isSubmitting}
+                                                onClick={handleHasSeeds}
+                                                type="submit"
+                                                >
+                                                    I have seeds
+                                                </button>
+                                            </div>
+                                        </div>
 
-                                <button
-                                className="col-sm-5"
-                                disabled={isSubmitting}
-                                onClick={handleRequestForSeeds}
-                                type="button"
-                                >
-                                    Request for seeds
-                                </button>
-                            </div>
-
-                            <Button
-                            className="col-sm-11"
-                            type="submit"
-                            variant="primary"
-                            disabled={isSubmitting}
-                            style={{margin: "2px 0px",
-                                display: step == 1 ? "none" : "block"}}
-                            >
-                                {isSubmitting ? "Adding crop ..." : "Add Crop"}
-                            </Button>
+                                        <div className="col-6">
+                                            <div className="row px-3">
+                                                <button
+                                                className="col-12 crops-accept-button"
+                                                disabled={isSubmitting}
+                                                onClick={handleRequestForSeeds}
+                                                type="submit"
+                                                >
+                                                    Request for seeds
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </>) :(<>
+                                <div className="col-12">
+                                    <button
+                                    className="col-12 crops-accept-button"
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    >
+                                        {isSubmitting ? "Adding crop ..." : "Add Crop"}
+                                    </button>
+                                </div>
+                                </>))
+                            }
                         </Modal.Footer>
                     </Form>
                 )}

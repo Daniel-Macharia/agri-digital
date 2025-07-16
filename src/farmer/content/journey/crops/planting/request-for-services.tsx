@@ -1,10 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import "./request-for-services.css";
 
 import * as Yup from "yup";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Modal } from "react-bootstrap";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 import DatePicker from "react-datepicker";
 
@@ -49,12 +48,12 @@ const RequestForService: React.FC = () => {
     const validationSchema = Yup.object({
         location: Yup.string().required("required"),
         contactInformation: Yup.string()
-        .test( phone => /^0[17]{1}[0-9]{8}$/.test(phone) || /^\+?254[17]{1}[0-9]{8}$/.test(phone))
-        .required("required"),
-        additionalNotes: Yup.string().required("required"),
-        selectedDate: Yup.date().notRequired(),
-        previewUrl: Yup.string().notRequired(),
-        serviceTyoe: Yup.string().notRequired()
+        .required("required")
+        .test( phone => /^0[17]{1}[0-9]{8}$/.test(phone) || /^\+?254[17]{1}[0-9]{8}$/.test(phone)),
+        additionalNotes: Yup.string().nullable("required"),
+        selectedDate: Yup.date().required("select date"),
+        previewUrl: Yup.string().required("upload a photo"),
+        serviceType: Yup.string().required("select a service")
     });
 
     const handleFileUpload = () => {
@@ -122,125 +121,162 @@ const RequestForService: React.FC = () => {
 
     const render = () => {
         return (<>
-        <div className="col-sm-12 ">
-            <div id="request-for-services-top-bar col-sm-12"
-            style={{display: "flex", flexDirection: "row", justifyContent: "flex-start"}}>
-                <img
-                src="/assets/images/back-icon.svg" 
-                onClick={handleBackNavigation}
-                />
+        <div className="col-12 ">
+            <div className="row justify-content-start"
+            >
+                <div className="col-2 col-md-1">
+                    <div className="row justify-content-start">
+                        <img
+                        src="/assets/images/back-icon.svg" 
+                        onClick={handleBackNavigation}
+                        className="col-sm-12 col-md-10 col-lg-8 col-xl-6 col-xxl-4"
+                        />
+                    </div>
+                </div>
             </div>
-            <div className="col-sm-12 content-wrapper" >
+
+            <div className="col-12 crops-container bg-white mt-3 px-4" >
                 <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={handleRequestForService}
                 >
 
-                    {({}) => (
-                        <Form className="form col-sm-12"
+                    {({setFieldValue}) => (
+                        <Form className="col-12"
                         >
-                            <h3 className="col-sm-12" style={{textAlign: "start"}}>
-                                Request form
-                            </h3>
-
-                            <div className="row col-sm-12" >
-                                <label htmlFor="serviceType"
-                                className="planting-input-label col col-sm-12 col-md-4"
-                                style={{padding: "0px", textAlign: "start"}}
-                                >
-                                    Request type
-                                </label>
-                                <select name="serviceType"
-                                className="planting-input-field  col-sm-12 col-md-8"
-                                onChange={handleServiceTypeChange}
-                                >
-                                    <option value='' >Service Type</option>
-                                    {
-                                        serviceTypeOptions.map(
-                                            option => {
-                                                //console.log(option);
-                                                return (<option value={option} >{option}</option>);
-                                            }
-                                        )
-                                    }
-                                </select>
+                            <div className="row my-0 px-0" >
+                                <h3 className="col-12 p-0 mx-0 crops-start-aligned-text" >
+                                    Request form
+                                </h3>
                             </div>
 
-                            <div className="row col-sm-12" >
-                                <label htmlFor="dateOfService"
-                                className="planting-input-label col col-sm-12 col-md-4 order-0"
-                                style={{margin: "0px", textAlign: "start", padding: "0px"}}
-                                >
-                                    Date of service
-                                </label>
+                            <div className="row" >
+                                <div className="col-12 col-md-4 p-0">
+                                    <label htmlFor="serviceType"
+                                    className="crops-start-aligned-text col-12 p-0 m-0"
+                                    >
+                                        Request type
+                                    </label>
+                                </div>
 
-                                <DatePicker
-                                name="dateOfService"
-                                className="planting-input-field col-sm-12 col-md-8 order-1"
-                                selected={selectedDate}
-                                onChange={(date) => setSelectedDate( date ) }
-                                dateFormat={'MM/dd/yyyy'}
-                                placeholderText="select date of service"
-                                minDate={new Date()}
+                                <div className="col-12 col-md-8 p-0">
+                                    <select name="serviceType"
+                                    className="col-12 form-control"
+                                    onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                                        const selected = event.target?.value;
 
+                                        console.log("selected: ",selected);
+                                        setSelectedService(selected);
+                                        setFieldValue("serviceType", selected);
+                                    }}
+                                    >
+                                        <option value='' >Service Type</option>
+                                        {
+                                            serviceTypeOptions.map(
+                                                option => {
+                                                    return (<option value={option} >{option}</option>);
+                                                }
+                                            )
+                                        }
+                                    </select>
+                                    <div className="text-danger small crops-start-aligned-text">
+                                        <ErrorMessage name="serviceType" />
+                                    </div>
+                                </div>
                                 
-                                />
                             </div>
 
-                            <div className="row col-sm-12" >
-                                <label htmlFor="location"
-                                className="col-sm-12 col-md-4 planting-input-label"
-                                style={{margin: "0px", textAlign: "start",  padding: "0px"}}
-                                >
-                                    Location
-                                </label>
-                                <Field
-                                className="planting-input-field col-sm-12 col-md-8"
-                                name="location"
-                                type="text"
-                                placeholder="Kiambu"
-                                style={{margin: "0px"}}
-                                />
-                                <div className="col-sm-12 text-danger small planting-input-label" 
-                                style={{margin: "0px", padding: "0px"}}
-                                >
-                                    <ErrorMessage name="location" />
+                            <div className="row mt-2" >
+                                <div className="col-12 col-md-4 p-0">
+                                    <label htmlFor="dateOfService"
+                                    className="crops-start-aligned-text col-12 m-0 p-0"
+                                    >
+                                        Date of service
+                                    </label>
+                                </div>
+
+                                <div className="col-12 col-md-8 p-0">
+                                    <DatePicker
+                                    name="selectedDate"
+                                    className="form-control col-12"
+                                    selected={selectedDate}
+                                    onChange={(date) => {setSelectedDate( date );
+                                        setFieldValue("selectedDate", date);
+                                    } }
+                                    dateFormat={'MM/dd/yyyy'}
+                                    placeholderText="select date of service"
+                                    minDate={new Date()}
+
+                                    wrapperClassName="w-100"
+                                    />
+                                    <div className="text-danger small crops-start-aligned-text" >
+                                        <ErrorMessage name="selectedDate" />
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className=" row col-sm-12" >
-                                <label htmlFor="contactInformation"
-                                className=" col col-sm-12 col-md-4 planting-input-label"
-                                style={{textAlign: "start", padding: "0px"}}
-                                >
-                                    Contact Information
-                                </label>
-                                <Field
-                                className="planting-input-field col-sm-12 col-md-8"
-                                name="contactInformation"
-                                type="text"
-                                placeholder="+254 712345678"
-                                style={{margin: "0px"}}
-
-                                />
-                                <div className="col-sm-12 text-danger small planting-input-label" 
-                                style={{margin: "0px", padding: "0px"}}
-                                >
-                                    <ErrorMessage name="contactInformation" />
+                            <div className="row mt-2" >
+                                <div className="col-12 col-md-4 p-0">
+                                    <label htmlFor="location"
+                                    className="col-12 m-0 p-0 crops-start-aligned-text"
+                                
+                                    >
+                                        Location
+                                    </label>
+                                </div>
+                                <div className="col-12  col-md-8" style={{padding: "0px"}} >
+                                    <Field
+                                    className="form-control col-12"
+                                    name="location"
+                                    type="text"
+                                    placeholder="Kiambu"
+                                    style={{margin: "0px"}}
+                                    />
+                                    <div className="col-12 m-0 p-0 text-danger small crops-start-aligned-text" 
+                                    >
+                                        <ErrorMessage name="location" />
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className=" row col-sm-12" >
-                                <label htmlFor="uploadPhoto"
-                                className=" col col-sm-12 col-md-4"
-                                style={{textAlign: "start", padding: "0px"}}
-                                >
-                                    Upload Photo
-                                </label>
+                            <div className=" row mt-2" >
+                                <div className="col-12 col-md-4 p-0">
+                                    <label htmlFor="contactInformation"
+                                    className=" col-12 p-0 crops-start-aligned-text"
+                                
+                                    >
+                                        Contact Information
+                                    </label>
+                                </div>
+                                <div className="col-12 col-md-8 p-0" >
+                                    <Field
+                                    className="form-control col-12 m-0"
+                                    name="contactInformation"
+                                    type="text"
+                                    placeholder="+254 712345678"
+
+                                    />
+                                    <div className="col-sm-12 text-danger small crops-start-aligned-text m-0 p-0" 
+                                    
+                                    >
+                                        <ErrorMessage name="contactInformation" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className=" row mt-2" >
+                                <div className="col-12 col-md-4 p-0">
+                                    <label htmlFor="uploadPhoto"
+                                    className=" col-12 m-0 p-0 crops-start-aligned-text"
+                                
+                                    >
+                                        Upload Photo
+                                    </label>
+                                </div>
                                 
                                 <div
-                                className=" col-sm-12 col-md-8"
+                                className=" col-12 col-md-8"
                                 style={{borderStyle: "dashed",
                                     display:"flex",
                                     flexDirection: 'column',
@@ -252,7 +288,7 @@ const RequestForService: React.FC = () => {
                                 onClick={handleFileUpload}
                                 >
                                     <img  src={previewUrl || "/assets/images/upload_photo.svg"}
-                                    className={previewUrl ? "col-sm-10 col-md-6" : "col-sm-1"}
+                                    className={previewUrl ? "col-10 col-md-6" : "col-1"}
                                     style={{
                                     
                                     }}/>
@@ -260,34 +296,59 @@ const RequestForService: React.FC = () => {
                                     <input
                                     ref={fileInputRef}
                                     className="image-upload-field"
-                                    name="uploadPhoto"
+                                    name="previewUrl"
                                     type="file"
                                     accept="image/*"
-                                    onChange={handleFileChange}
+                                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                                        const file = event.target.files?.[0];
+
+                                        if( file )
+                                        {
+                                            console.log("uploaded file: ", file.name);
+                                            setPreviewUrl( URL.createObjectURL(file));
+                                            setFieldValue( "previewUrl", file.name );
+                                        }
+                                        else{
+                                            console.log("uploaded file is null!");
+                                        }
+                                    }}
                                     style={{display:"none"}}
                                     />
 
                                     <p>Upload Photo of the Product<br/>PDF,PNG,JPG up to 10 MB </p>
+                                    <div className="text-danger small">
+                                        <ErrorMessage name="previewUrl" />
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className=" row col-sm-12" >
-                                <label htmlFor="additionalNotes"
-                                className="planting-input-label col col-sm-12 col-md-4"
-                                style={{margin: "0px", textAlign: 'start', padding: "0px"}}
-                                >
-                                    Additional Notes
-                                </label>
+                            <div className=" row mt-2" >
+                                <div className="col-12 col-md-4 p-0">
+                                    <label htmlFor="additionalNotes"
+                                    className="crops-start-aligned-text col-12 p-0 m-0"
+                                    style={{textAlign: 'start'}}
+                                    >
+                                        Additional Notes
+                                    </label>
+                                </div>
 
-                                <div className="col-sm-12 col-md-8" style={{padding: "0px"}}>
-                                    <Field 
-                                    type="textarea"
-                                    className="planting-input-field  col-sm-12"
+                                <div className="col-12 col-md-8 p-0">
+                                    
+                                    <textarea
+                                    className="form-control  col-12 m-0"
                                     name="additionalNotes"
                                     placeholder="additional notes"
-                                    style={{margin: "0px"}}/>
+                                    style={{height: "88px", textAlign: "start"}}
 
-                                    <div className="col-sm-12 text-danger small planting-input-label" 
+                                    onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+                                        const value = event.target?.value;
+
+                                        console.log(value);
+                                        setFieldValue("additionalNotes", value);
+                                    }}
+                                    />
+
+                                    <div className="col-sm-12 text-danger small crops-start-aligned-text" 
                                     style={{margin: "0px", padding: "0px"}}
                                     >
                                         <ErrorMessage name="additionalNotes" />
@@ -297,27 +358,30 @@ const RequestForService: React.FC = () => {
 
 
                             <div
-                            className="row col-sm-12"
-                            style={{
-                                display: 'flex', 
-                                flexDirection: "row",
-                            justifyContent: "space-between"}}
+                            className="row mt-2 justify-content-center"
                             >
-                                <button
-                                onClick={handleBackNavigation}
-                                className="other-button col-sm-4"
-                                style={{margin: "0px"}}
-                                >
-                                    Cancel
-                                </button>
+                                <div className="col-12 col-md-6">
+                                    <div className="row justify-content-start" >
+                                        <button
+                                        onClick={handleBackNavigation}
+                                        className="other-button col-12 col-md-8 m-0 mt-1 py-2 crops-other-button"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
 
-                                <button
-                                className="col-sm-4"
-                                style={{margin: "0px"}}
-                                type="submit"
-                                >
-                                    Request
-                                </button>
+                                <div className="col-12 col-md-6">
+                                    <div className="row justify-content-end">
+                                        <button
+                                        className="col-12 col-md-8 m-0 mt-1 py-2 crops-accept-button"
+                                        type="submit"
+                                        >
+                                            Request
+                                        </button>
+                                    </div>
+                                </div>
+
                             </div>
                         </Form>
                     )}
@@ -328,26 +392,39 @@ const RequestForService: React.FC = () => {
         <Modal
         show={show}
         onHide={() => setShow(false)}
-        centered
-        >
-            <Modal.Header>
-                <img src="/assets/images/bank.svg" />
-                <Modal.Title >
-                    Request Successful
-                </Modal.Title>
 
-                <Modal.Body>
-                    Your request was successful. You can track the progress.
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button
-                    variant="primary"
+
+        centered
+        dialogClassName="mx-auto"
+        style={{width: "max-content"}}
+        >
+            <Modal.Body style={{width: "max-content"}}>
+                <div className="col-12 justify-content-center">
+                    <div className="row justify-content-center">
+                        <img src="/assets/images/request_successful.svg" 
+                        style={{width: "88px"}}/>
+                    </div>
+                    <div className="col-12" >
+                        <p className="col-12 crops-center-aligned-text">
+                            Request Successful
+                        </p>
+                    </div>
+                </div>
+                <p className="crops-center-aligned-text col-12">
+                    Your request was successful. You can <br/> track the progress.
+                </p>
+                <div className="row p-1" >
+                    <button
+                    className="col-12 crops-accept-button m-0"
                     onClick={()=> {
                         handleDoneAction()
                     }}
-                    >Done</Button>
-                </Modal.Footer>
-            </Modal.Header>
+                    >
+                        Done
+                    </button>
+                </div>
+            </Modal.Body>
+
         </Modal>
         </>);
     };

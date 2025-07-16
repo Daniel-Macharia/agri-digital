@@ -1,14 +1,13 @@
 import { StorageSpecificationItemProps } from "../crops-models";
-import "./storage-specification.css";
 
 const StorageSpecification: React.FC<StorageSpecificationItemProps> = (item:StorageSpecificationItemProps) => {
     const render = () => {
         return (<>
-        <div className="row col-sm-12 storage-specification-container card">
-            <h3 className="small-regular col-sm-12 storage-left-aligned-text">
+        <div className="col-12 card p-1">
+            <h3 className="body-medium primary-text col-12 crops-start-aligned-text my-1">
                 {item.itemName}
             </h3>
-            <h3 className="small-bold col-sm-12 storage-left-aligned-text">
+            <h3 className="h3-semibold primary-text col-12 crops-start-aligned-text my-1">
                 {item.itemValue}
             </h3>
         </div>

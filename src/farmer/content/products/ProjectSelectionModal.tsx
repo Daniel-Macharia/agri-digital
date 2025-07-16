@@ -16,6 +16,8 @@ const ProjectSelectionModal: React.FC<ProjectSelectionModalProps> = ({
       centered 
       size='sm'
       className="px-2"
+
+      dialogClassName='mx-auto'
     >
       <Modal.Body className="p-2 p-sm-3 p-md-4">
         <Row className="justify-content-center">
