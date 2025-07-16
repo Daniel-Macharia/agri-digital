@@ -54,8 +54,8 @@ const Login: React.FC = () => {
             <>
                 {/* <div> */}
                     <div className="col-12" style={{backgroundColor: "var(--Background, #F5F5F5)"}}>
-                        <div className="row justify-content-center align-items-center">
-                            <div className="col-4" >
+                        <div className="row justify-content-center align-items-center px-4">
+                            <div className="col-12 col-md-5" >
                                 <div className="col-12">
                                     <p className="h1-bold primary-text mb-0">
                                         Login to your account.
@@ -96,7 +96,7 @@ const Login: React.FC = () => {
                                                         <button 
                                                         type='submit' 
                                                         name="pass"
-                                                        className="col-12 mx-0 auth-accept-button"
+                                                        className="col-12 mx-0 auth-accept-button body-bold"
                                                         onClick={ ()=>{ setSubmitType("pass") } }
                                                         >
                                                             Login with password
@@ -109,7 +109,7 @@ const Login: React.FC = () => {
                                                                 <hr className="mx-0 col-12" />
                                                             </div>
                                                             <div className="col-1 mx-0 px-0" >
-                                                                <p className="mx-0 col-12 auth-center-aligned-text" >
+                                                                <p className="mx-0 col-12 auth-center-aligned-text body-regular primary-text" >
                                                                     or
                                                                 </p>
                                                             </div>
@@ -123,7 +123,7 @@ const Login: React.FC = () => {
                                                         <button 
                                                         type="submit"
                                                         name="otp" 
-                                                        className="col-12 auth-white-button"
+                                                        className="col-12 auth-white-button body-regular"
                                                         onClick={ ()=>{setSubmitType("otp")} }
                                                         >
                                                             Login with O.T.P
@@ -142,9 +142,10 @@ const Login: React.FC = () => {
                                     <div
                                     className="col-12" 
                                     onClick={() => {navigate("/auth/sign-up");}}>
-                                        <p className='auth-center-aligned-text'>
+                                        <p className='auth-center-aligned-text body-regular primary-text'>
                                             Do not have an account ? {" "} 
-                                            <span className='login-button'>
+                                            <span className='login-button body-semibold'
+                                            style={{color: "var(--Primary, #457900)"}}>
                                                 Sign up
                                             </span>
                                         </p>
@@ -152,7 +153,7 @@ const Login: React.FC = () => {
                                 </div> 
                             </div>
 
-                            <div className="col-6">
+                            <div className="col-12 col-md-6 d-none d-md-flex">
                                 <img src='/shamba_bot_logo.svg' alt='logo'
                                 style={{width: "100%"}}/>
                             </div>

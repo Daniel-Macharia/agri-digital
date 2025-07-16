@@ -41,11 +41,11 @@ function SignUp(){
     return (
       <>
         <div className="col-12" style={{backgroundColor: "var(--Background, #F5F5F5)"}}>
-          <div className="row justify-content-center align-items-center">
-              <div className="col-4" >
+          <div className="row justify-content-center align-items-center px-4">
+              <div className="col-12 col-md-5" >
                   <div className="col-12">
                       <p className="h1-bold primary-text mb-0">
-                          Login to your account.
+                          Create your account.
                       </p>
                       <p className=" body-regular primary-text">
                           Join the Future of Farming - Easy, Fast and Reliable.
@@ -61,7 +61,7 @@ function SignUp(){
                         {({setFieldValue}) => (
                           <Form className='sign-up-form' >
                             <div className='col-12'>
-                              <label className="input-label" htmlFor='full-name'>
+                              <label className="body-regular primary-text mb-0" htmlFor='full-name'>
                                 Full Name
                               </label>
 
@@ -80,7 +80,7 @@ function SignUp(){
                             </div>
 
                             <div className='col-12'>
-                              <label className="input-label" htmlFor='email'>
+                              <label className="body-regular primary-text mb-0" htmlFor='email'>
                                 Email
                               </label>
 
@@ -99,7 +99,7 @@ function SignUp(){
                             </div>
                             
                             <div className='col-12'>
-                              <label className="input-label" htmlFor='phone-number'>
+                              <label className="body-regular primary-text mb-0" htmlFor='phone-number'>
                                 Phone number
                               </label>
 
@@ -118,7 +118,7 @@ function SignUp(){
                             </div>
                             
                             <div className='col-12'>
-                              <label className="input-label" htmlFor='user-role'>
+                              <label className="body-regular primary-text mb-0" htmlFor='user-role'>
                                 Role *
                               </label>
 
@@ -144,8 +144,7 @@ function SignUp(){
                             <div className='col-12'>
                               <button 
                               type='submit' 
-                              name="create-button" 
-                              className='col-12'
+                              className="auth-accept-button body-bold col-12"
                               >
                                 Continue
                               </button>
@@ -161,9 +160,10 @@ function SignUp(){
                         <div
                         className="col-12" 
                         onClick={() => {navigate("/auth/login");}}>
-                            <p className='auth-center-aligned-text'>
+                            <p className='auth-center-aligned-text body-regular primary-text'>
                                 Already have an account ? {" "} 
-                                <span className='login-button'>
+                                <span className='body-semibold'
+                                style={{color: "var(--Primary, #457900)"}}>
                                     Login
                                 </span>
                             </p>
@@ -171,7 +171,7 @@ function SignUp(){
                     </div> 
                 </div>
 
-                <div className="col-6" >
+                <div className="col-0 col-md-6 d-none d-md-flex" >
                     <img src='/shamba_bot_logo.svg' alt='logo'
                     style={{width: "100%"}}/>
                 </div>

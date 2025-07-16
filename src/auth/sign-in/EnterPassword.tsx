@@ -62,8 +62,8 @@ const EnterPassword : React.FC = () => {
         return (
             <>
             <div className="col-12" style={{backgroundColor: "var(--Background, #F5F5F5)"}}>
-                <div className="row justify-content-center align-items-center">
-                    <div className="col-4" >
+                <div className="row justify-content-center align-items-center px-4">
+                    <div className="col-12 col-md-5" >
                         <div className="col-12">
                             <p className="h1-bold primary-text mb-0">
                                 Login to your account.
@@ -80,8 +80,8 @@ const EnterPassword : React.FC = () => {
                                 onSubmit={completeLogin}
                                 >
                                     { ( {isSubmitting} ) => (
-                                        <Form className='sign-up-form'>
-                                            <label className="input-label col-12 auth-start-aligned-text" htmlFor='password'>
+                                        <Form className='col-12'>
+                                            <label className="body-regular primary-text col-12 auth-start-aligned-text" htmlFor='password'>
                                                 Password *
                                             </label>
                                             
@@ -105,7 +105,7 @@ const EnterPassword : React.FC = () => {
                                                             <div className="col-1">
                                                                 <input type="checkbox" />
                                                             </div>
-                                                            <p className="col-10">
+                                                            <p className="col-10 small-regular primary-text">
                                                             Remember me 
                                                             </p>
                                                         </div>
@@ -113,7 +113,8 @@ const EnterPassword : React.FC = () => {
 
                                                     <div className="col-6">
                                                         <div className="row justify-content-end">
-                                                        <Link to="#" className="react-link">
+                                                        <Link to="#" className="react-link auth-end-aligned-text small-semibold"
+                                                        style={{color: "var(--Primary, #457900)"}}>
                                                             Forgot password ?
                                                         </Link>
                                                         </div>
@@ -125,8 +126,7 @@ const EnterPassword : React.FC = () => {
                                             <div className="col-12">
                                                 <button 
                                                 type='submit' 
-                                                name="create-button" 
-                                                className="col-12"
+                                                className="col-12 auth-accept-button"
                                                 value={"Login"}
                                                 >
                                                     {isSubmitting ? 'Logging in ...' : 'Login'}
@@ -143,9 +143,10 @@ const EnterPassword : React.FC = () => {
                                 <div
                                 className="col-12" 
                                 onClick={() => {navigate("/auth/sign-up");}}>
-                                    <p className='auth-center-aligned-text'>
+                                    <p className='auth-center-aligned-text body-regular primary-text'>
                                         Do not have an account ? {" "} 
-                                        <span className='login-button'>
+                                        <span className='body-semibold'
+                                        style={{color: "var(--Primary, #457900)"}}>
                                             Sign up
                                         </span>
                                     </p>
@@ -153,7 +154,7 @@ const EnterPassword : React.FC = () => {
                             </div> 
                         </div>
 
-                        <div className="col-6">
+                        <div className="col-0 col-md-6 d-none d-md-flex">
                             <img src='/shamba_bot_logo.svg' alt='logo'
                             style={{width: "100%"}}/>
                         </div>

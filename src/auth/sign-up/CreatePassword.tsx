@@ -47,11 +47,11 @@ export default function CreatePassword(){
         return (
             <>
                 <div className="col-12" style={{backgroundColor: "var(--Background, #F5F5F5)"}}>
-                    <div className="row justify-content-center align-items-center">
-                        <div className="col-4" >
+                    <div className="row justify-content-center align-items-center px-4">
+                        <div className="col-12 col-md-5" >
                             <div className="col-12">
                                 <p className="h1-bold primary-text mb-0">
-                                    Login to your account.
+                                    Create your account.
                                 </p>
                                 <p className=" body-regular primary-text">
                                     Join the Future of Farming - Easy, Fast and Reliable.
@@ -67,7 +67,7 @@ export default function CreatePassword(){
                                 >
                                     <Form className='col-12' >
                                         <div className="col-12">
-                                            <label className="" htmlFor='password'>
+                                            <label className="body-regular primary-text" htmlFor='password'>
                                                 Password *
                                             </label>
                                             
@@ -86,13 +86,13 @@ export default function CreatePassword(){
                                         </div>
 
                                         <div className="col-12">
-                                            <p className="small secondary-text">
+                                            <p className="body-regular secondary-text">
                                                 The password should be atleast 8 characters long
                                             </p>
                                         </div>
 
                                         <div className="col-12 mt-3">
-                                            <label className="input-label" htmlFor='confirm-password'>
+                                            <label className="body-regular primary-text" htmlFor='confirm-password'>
                                                 Confirm Password *
                                             </label>
                                             <div className="col-12 mb-3">
@@ -118,13 +118,15 @@ export default function CreatePassword(){
                                                     name="agree"
                                                     />
                                                 </div>
-                                                <p className="col-10">
+                                                <p className="col-10 small-regular primary-text">
                                                     I agree to the {" "}
-                                                    <Link to="#" className="react-link" >
+                                                    <Link to="#" className="react-link small-semibold" 
+                                                    style={{color: "var(--Primary, #457900)"}}>
                                                         Terms of Service {" "}
                                                     </Link>
                                                     and {""}
-                                                    <Link to="#" className="react-link">
+                                                    <Link to="#" className="react-link small-semibold"
+                                                    style={{color: "var(--Primary, #457900)"}}>
                                                         Privacy Policy.
                                                     </Link>
                                                 </p>
@@ -134,8 +136,7 @@ export default function CreatePassword(){
                                         <div className="col-12">
                                             <button 
                                             type='submit' 
-                                            name="createButton" 
-                                            className="col-12"
+                                            className="col-12 body-bold auth-accept-button"
                                             >
                                                 Create Account
                                             </button>
@@ -150,9 +151,10 @@ export default function CreatePassword(){
                                 <div
                                 className="col-12" 
                                 onClick={() => {navigate("/auth/login");}}>
-                                    <p className='auth-center-aligned-text'>
+                                    <p className='auth-center-aligned-text body-regular primary-text'>
                                         Already have an account ? {" "} 
-                                        <span className='login-button'>
+                                        <span className='body-semibold'
+                                        style={{color: "var(--Primary, #457900)"}}>
                                             Login
                                         </span>
                                     </p>
@@ -160,7 +162,7 @@ export default function CreatePassword(){
                             </div> 
                         </div>
         
-                        <div className="col-6">
+                        <div className="col-0 col-md-6 d-none d-md-flex">
                             <img src='/shamba_bot_logo.svg' alt='logo'
                             style={{width: "100%"}}/>
                         </div>

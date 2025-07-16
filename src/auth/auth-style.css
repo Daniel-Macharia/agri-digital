@@ -12,9 +12,17 @@
 }
 
 .auth-accept-button{
-    
+    border-radius: 8px;
+    background: var(--Primary, #457900);
+    color:  var(--cards-form-bg, #FFF);
+    border-style: none;
+    padding: 10px;
 }
 
 .auth-white-button{
-
+    border-radius: 8px;
+    background: var(--cards-form-bg, #FFF);
+    color: var(--Primary-Text, #333);
+    border-style: none;
+    padding: 10px;
 }

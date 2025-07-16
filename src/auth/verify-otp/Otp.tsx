@@ -8,25 +8,86 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import axios from 'axios';
 import { storageDelete, storageGet, storagePut } from "../../farmer/utils/StorageUtils";
+import { useRef, useState } from "react";
 
 const Otp : React.FC = () => {
+    const  otpLength = 7;
     let navigate = useNavigate();
+    const [isVerifying, setIsVerifying] = useState<boolean>(false);
 
-    const initialValues = {
-        enteredOtp: '',
+    const [otp, setOtp] = useState(new Array(otpLength).fill(''));
+    const inputsRef = useRef([]);
+
+    const handleOtpChange = (element, index) => {
+        const value = element.value.replace(/[^0-9]/g, '');
+
+        if( !value )
+            return;
+        
+        const newOtp = [...otp];
+        newOtp[index] = value.charAt(0);
+
+        setOtp(newOtp);
+        
+        if( index <  (otpLength - 1) )
+            inputsRef.current[index + 1].focus();
+
+        if( index ===  (otpLength - 1) && newOtp.every( d => (d !== '')))
+            handleSubmit(newOtp.join(''));
     };
 
-    const validationSchema = Yup.object({
-        enteredOtp: Yup.string().required("Required"),
-    });
+    const handleKeyDown = (event, index) => {
+        if( event.key === "Backspace")
+        {
+            if(otp[index])
+            {
+                const newOtp = [...otp];
+                newOtp[index] = '';
+                setOtp(newOtp);
+            }
+            else if( index > 0 ){
+                inputsRef.current[index -1].focus();
+            }
+        }
+    };
+
+    const handlePaste = (event) => {
+        event.preventDefault();
+        const pastedData = event.clipboardData().getData('Text').slice(0, otpLength);
+
+        const newOtp = [...otp];
+
+        for( let i = 0; i < otpLength; i++ )
+        {
+            newOtp[i] = pastedData[i] || '';
+        }
+
+        setOtp(newOtp);
+
+        if( newOtp.every((v) => (v !== '')))
+        {
+            handleSubmit(newOtp.join(''));
+        }
+    };
+
+    const handleSubmit = (num:string) => {
+        setIsVerifying(true);
+        console.log(num);
+
+        for( let i = 0; i < 1000; i++ )
+        {
+            console.log("i");
+        }
+
+        setIsVerifying(false);
+    };
 
     // {phoneOrEmail} = location.state || {};
     const phoneOrEmail = storageGet("phoneOrEmail");
 
 
-    const verifyOtp = async ( values: typeof initialValues, {}: any ) => {
-        let enteredOtp = values.enteredOtp;
-
+    const verifyOtp = async ( phone: string, enteredOtp: string ) => {
+        
         try{
             console.log(`Otp sent to: ${phoneOrEmail}`);
             const response = await axios.post(
@@ -64,66 +125,67 @@ const Otp : React.FC = () => {
         return (
             <>
                 <div className="col-12" style={{backgroundColor: "var(--Background, #F5F5F5)"}}>
-                    <div className="row justify-content-center align-items-center">
-                        <div className="col-4" >
+                    <div className="row justify-content-center align-items-center px-4">
+                        <div className="col-12 col-md-5" >
                             <div className="col-12">
                                 <p className="h1-bold primary-text mb-0">
-                                    Login to your account.
+                                    Enter Verification Code.
                                 </p>
                                 <p className=" body-regular primary-text">
-                                    Join the Future of Farming - Easy, Fast and Reliable.
+                                   We've sent you the One Time Password(OTP)
                                 </p>
                             </div>
                         
                             <div className="col-12">
-                                <Formik
-                                initialValues={initialValues}
-                                validationSchema={validationSchema}
-                                onSubmit={verifyOtp}
-                                >
+                                <div className='sign-up-form'>
+                                    {/* <label className="body-regular primary-text" htmlFor='otp' >
+                                        One-time Pin(O.T.P)
+                                    </label> */}
 
-                                    {({isSubmitting}) => (
-                                        <Form className='sign-up-form'>
-                                            <label className="" htmlFor='otp' >
-                                                One-time Pin(O.T.P)
-                                            </label>
+                                    <div className="d-flex gap-2 justify-content-center" onPaste={handlePaste}>
+                                        {
+                                            otp.map((digit, index) => <input 
+                                            key={index}
+                                            type="text"
+                                            inputMode="numeric"
+                                            maxLength={1}
+                                            className="form-control h2-semibold "
+                                            value={digit}
 
-                                            <div className="col-12 mb-3">
-                                                <Field 
-                                                tabIndex={0} 
-                                                name="enteredOtp" 
-                                                className='form-control body-regular mb-0' 
-                                                type='text' 
-                                                placeholder='enter OTP here..'
-                                                />
-                                                <div className="text-danger small my-0" >
-                                                    <ErrorMessage name='enteredOtp'/>
-                                                </div>
-                                            </div>
-                                            
-                                            <div className="col-12">
-                                                <button 
-                                                type='submit' 
-                                                name="create-button" 
-                                                className="col-12"
-                                                >
-                                                    { isSubmitting ? 'verifrying otp ...' : 'verify'}
-                                                </button>
-                                            </div>
+                                            ref={(el) => (inputsRef.current[index] = el )}
+                                            onChange={(e) => handleOtpChange(e.target, index)}
+                                            onKeyDown={(e) => handleKeyDown(e, index) }
 
-                                        </Form>
-                                    )}
-                                </Formik>
-            
+                                            style={{color: "var(--Dark-500, #16151C)"}}
+                                            />)
+                                        }
+                                    </div>
+                                    
+                                    <div className="col-12">
+                                        <button 
+                                        type='submit' 
+                                        name="create-button" 
+                                        className="col-12 body-bold auth-accept-button"
+                                        disabled={isVerifying}
+                                        style={{opacity: ( isVerifying ? "0.8" : "1")}}
+
+                                        onClick={event => handleSubmit(otp.join(''))}
+                                        >
+                                            { isVerifying ? 'verifrying otp ...' : 'verify'}
+                                        </button>
+                                    </div>
+
+                                </div>
                             </div>
 
                             <div className="col-12">
                                 <div
                                 className="col-12" 
                                 onClick={() => {navigate("/auth/sign-up");}}>
-                                    <p className='auth-center-aligned-text'>
+                                    <p className='auth-center-aligned-text body-regular primary-text'>
                                         Do not have an account ? {" "} 
-                                        <span className='login-button'>
+                                        <span className='body-semibold'
+                                        style={{color: " var(--Primary, #457900)"}}>
                                             Sign up
                                         </span>
                                     </p>
@@ -131,7 +193,7 @@ const Otp : React.FC = () => {
                             </div> 
                         </div>
 
-                        <div className="col-6" >
+                        <div className="col-0 col-md-6 d-none d-md-flex" >
                             <img src='/shamba_bot_logo.svg' alt='logo'
                             style={{width: "100%"}}/>
                         </div>
