@@ -1,28 +1,39 @@
-
-.auth-start-aligned-text{
+.auth-start-aligned-text {
     text-align: start;
 }
 
-.auth-end-aligned-text{
+.auth-end-aligned-text {
     text-align: end;
 }
 
-.auth-center-aligned-text{
+.auth-center-aligned-text {
     text-align: center;
 }
 
-.auth-accept-button{
+.auth-accept-button {
     border-radius: 8px;
     background: var(--Primary, #457900);
-    color:  var(--cards-form-bg, #FFF);
+    color: var(--cards-form-bg, #FFF);
     border-style: none;
     padding: 10px;
 }
 
-.auth-white-button{
+.auth-white-button {
     border-radius: 8px;
     background: var(--cards-form-bg, #FFF);
     color: var(--Primary-Text, #333);
     border-style: none;
     padding: 10px;
+}
+
+.auth-transparent-round-btn {
+    border: 2px solid #6c757d !important;
+    /* transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out; */
+    width: 32px;
+    height: 32px;
+}
+
+.auth-transparent-round-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: #5a6268;
 }

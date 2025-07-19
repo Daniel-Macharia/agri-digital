@@ -117,9 +117,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onUpdate, onDelete, 
                 </span>
             </div>
             
-            <div className="card-body p-3">
+            <div className="card-body p-2">
                 {/* Product Name and Actions Row */}
-                <div className="d-flex justify-content-between  align-items-center mb-2">
+                <div className="d-flex justify-content-between  align-items-center mb-1">
                     <div className="flex-grow-1 d-flex align-items-center">
                         {isEditing && !isMergedProduct ? (
                             <input 
@@ -264,7 +264,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onUpdate, onDelete, 
                     className="btn btn-success w-100 fw-medium"
                     onClick={onUpdate}
                     style={{ 
-                        backgroundColor: '#28a745',
+                        backgroundColor: '#556B2F',
                         borderColor: '#28a745',
                         borderRadius: '8px',
                         padding: '10px',

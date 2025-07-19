@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Saved from "../../Shared/Saved";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
   area: Yup.string().required("Area is required"),
@@ -19,6 +20,7 @@ const initialValues = {
 
 const Space: React.FC = () => {
   const [showSaved, setShowSaved] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -37,7 +39,7 @@ const Space: React.FC = () => {
             justifyContent: "center",
           }}
         >
-          <Saved onDone={() => setShowSaved(false)} />
+          <Saved onDone={() => navigate("/farmer/projects/livestock/housing/results")}/>
         </div>
       )}
       <div className="w-100 rounded-4 bg-white border mt-3 p-4">

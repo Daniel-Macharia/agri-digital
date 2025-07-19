@@ -128,14 +128,14 @@ const TrackOrderPage: React.FC = () => {
     return (
         <div style={{ backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
             {/* Back button at extreme left margin - for main content */}
-            <div className="pt-3" style={{ paddingLeft: '15px' }}>
+            <div className="col-3 pt-3" style={{ paddingLeft: '5px' }}>
                 <Button 
                     variant="link" 
                     onClick={() => navigate(-1)} 
                     className="text-dark mb-3 p-0 d-flex align-items-center" 
                     style={{ textDecoration: 'none' }}
                 >
-                    <FiArrowLeft className="me-2" /> Back
+                    <FiArrowLeft className="me-0" /> Back
                 </Button>
             </div>
             

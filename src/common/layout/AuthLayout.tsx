@@ -1,24 +1,34 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import Login from "../../auth/sign-in/Login";
-import SignUp from "../../auth/sign-up/SignUp";
-import NotFound from "../exceptions/NotFound";
-import Otp from "../../auth/verify-otp/Otp";
-import EnterPassword from "../../auth/sign-in/EnterPassword";
-import CreatePassword from "../../auth/sign-up/CreatePassword";
+import { APP_ROUTES } from "../../lib/Routes";
+
+const NotFound = lazy(() => import("../exceptions/NotFound"));
+const Login = lazy(() => import("../../auth/sign-in/Login"));
+const SignUp = lazy(() => import("../../auth/sign-up/SignUp"));
+const ForgotPassword = lazy(
+  () => import("../../auth/password-reset/ForgotPassword")
+);
+const ResetPassword = lazy(
+  () => import("../../auth/password-reset/ResetPassword")
+);
 
 const AuthLayout: React.FC = () => {
   return (
     <div className="auth-body">
       <Routes>
-        <Route path="/login" element={<Login /> } />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/create-password" element={<CreatePassword />} />
+        <Route path={APP_ROUTES.AUTH.LOGIN} element={<Login />} />
+        <Route path={APP_ROUTES.AUTH.SIGN_UP} element={<SignUp />} />
+        <Route
+          path={APP_ROUTES.AUTH.FORGOT_PASSWORD}
+          element={<ForgotPassword />}
+        />
+        <Route
+          path={APP_ROUTES.AUTH.RESET_PASSWORD}
+          element={<ResetPassword />}
+        />
+        {/* <Route path="/create-password" element={<CreatePassword />} /> */}
 
-        <Route path="/enter-password" element={<EnterPassword />} />
-        <Route path="/enter-otp" element={<Otp />} />
-
-        <Route path="*" element={ <NotFound /> } />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

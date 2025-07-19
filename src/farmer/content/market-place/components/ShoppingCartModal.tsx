@@ -1,6 +1,6 @@
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
-import { FiX, FiPlus, FiMinus, FiTrash2 } from 'react-icons/fi';
+import { Modal, Button, Col, Row } from 'react-bootstrap';
+import { FiPlus, FiMinus, FiTrash2 } from 'react-icons/fi';
 
 export interface Product {
     id: number;
@@ -88,25 +88,29 @@ const ShoppingCartModal: React.FC<ShoppingCartModalProps> = ({
                                         </div>
                                         
                                         <div className="d-flex align-items-center justify-content-center justify-content-sm-end flex-nowrap gap-1">
+                                          <div className="btn-group rounded-pill" style={{backgroundColor: '#cefae3'}}>
                                             <Button
                                                 variant="outline-secondary"
                                                 size="sm"
-                                                className="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                                                className="rounded-circle border-0 d-flex align-items-center justify-content-center flex-shrink-0"
                                                 style={{ 
-                                                    width: '28px', 
+                                                    width: '28x', 
                                                     height: '28px', 
                                                     padding: 0,
-                                                    minWidth: '28px'
+                                                    backgroundColor: '#FFFFFF',
+                                                    minWidth: '28px',
+                                                    fontSize: '1rem'
                                                 }}
                                                 onClick={() => handleQuantityChange(item, -1)}
                                             >
-                                                <FiMinus size={10} />
+                                                <FiMinus size={16} />
                                             </Button>
                                             
-                                            <span className="fw-bold mx-1 flex-shrink-0" style={{ 
+                                            <span className="fw-bold mx-1 py-1 flex-shrink-0" style={{ 
                                                 minWidth: '24px', 
                                                 textAlign: 'center',
-                                                fontSize: '0.9rem'
+                                                minHeight: '38px',
+                                                fontSize: '1rem'
                                             }}>
                                                 {item.quantity}
                                             </span>
@@ -114,18 +118,21 @@ const ShoppingCartModal: React.FC<ShoppingCartModalProps> = ({
                                             <Button
                                                 variant="outline-secondary"
                                                 size="sm"
-                                                className="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                                                className="rounded-circle border-0 d-flex align-items-center justify-content-center flex-shrink-0"
                                                 style={{ 
                                                     width: '28px', 
-                                                    height: '28px', 
+                                                    height: '28px',
+                                                    backgroundColor: '#FFFFFF', 
                                                     padding: 0,
-                                                    minWidth: '28px'
+                                                    minWidth: '28px',
+                                                    fontSize: '0.9rem'
                                                 }}
                                                 onClick={() => handleQuantityChange(item, 1)}
                                             >
-                                                <FiPlus size={10} />
+                                                <FiPlus size={16} />
                                             </Button>
-                                            
+                                          </div>
+                                                 
                                             <button
                                                 className="btn btn-link text-danger p-0 ms-1 flex-shrink-0"
                                                 style={{ 
@@ -157,11 +164,13 @@ const ShoppingCartModal: React.FC<ShoppingCartModalProps> = ({
             </Modal.Body>
             
             {cartItems.length > 0 && (
-                <Modal.Footer className="border-0 pt-0 px-2 px-sm-3 px-md-4">
-                    <div className="d-flex flex-column flex-sm-row gap-2 w-100">
+                <Modal.Footer className="border-0 pt-0 px-2 px-sm-2 px-md-4">
+                    <div className="d-flex  flex-column flex-sm-row justify-content-between align-items-center gap-2 w-100">
+                        <Row className="gap-2 px-2">
+                        <Col lg={6} sm={12}>
                         <Button
                             variant="success"
-                            className="flex-fill flex-nowrap text-nowrap"
+                            className="flex-fill flex-nowrap text-nowrap w-100"
                             style={{ 
                                 whiteSpace: 'nowrap',
                                 minHeight: '38px'
@@ -171,18 +180,23 @@ const ShoppingCartModal: React.FC<ShoppingCartModalProps> = ({
                             <span className="d-none d-sm-inline">Proceed To Checkout</span>
                             <span className="d-inline d-sm-none">payment</span>
                         </Button>
+                        </Col>
+                        <Col lg={6} sm={12}>
                         <Button
-                            variant="outline-success"
-                            className="flex-fill flex-nowrap text-nowrap"
+                            variant="outline-warning"
+                            className="flex-fill flex-nowrap text-nowrap w-100"
                             style={{ 
                                 whiteSpace: 'nowrap',
-                                minHeight: '38px'
+                                minHeight: '38px',
+                                
                             }}
                             onClick={onContinueShopping}
                         >
                             <span className="d-none d-sm-inline">Continue Shopping</span>
                             <span className=" d-inline d-sm-none">Shop</span>
                         </Button>
+                        </Col>
+                        </Row>
                     </div>
                 </Modal.Footer>
             )}

@@ -9,6 +9,7 @@ import NavBar from './NavBar';
 import FeedingWeight from './Weight';
 import FeedingSchedule from './FeedingSchedule';
 import RequestForm from './RequestForm';
+import Results from './Results';
 
 
 // Helper to wrap pages with NavBar
@@ -27,6 +28,7 @@ const FeedsNutrition = () => {
       <Route path="weight" element={WithNavBar(FeedingWeight)} />
       <Route path="schedule" element={WithNavBar(FeedingSchedule)} />
       <Route path="form" element={WithNavBar(RequestForm)} />   
+      <Route path="results" element={<Results />}  />  
     </Routes>
   );
 }

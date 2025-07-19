@@ -1,0 +1,10 @@
+{
+    "VITE_APP_NAME": "ShambaBot",
+    "VITE_APP_DEFAULT_TIMEZONE": "Africa/Nairobi",
+    "VITE_APP_IDLE_TIMEOUT_MS": 300000,
+    "VITE_APP_IDLE_PROMPT_BEFORE_TIMEOUT_MS": 30000,
+    "VITE_API_ENV": "development",
+    "VITE_APP_API_PROD": "https://api.shambabot.com",
+    "VITE_APP_API_DEV": "http://localhost:6178",
+    "VITE_APP_OTP_LENGTH": 6
+}
