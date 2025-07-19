@@ -12,7 +12,7 @@ import NotFound from "../../../../common/exceptions/NotFound";
 
 
 
-export default function LivestockRoutes() {
+export default function LivestockRoutes() { 
   return (
     <Routes>
       

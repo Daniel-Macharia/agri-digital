@@ -1,15 +1,14 @@
-import "./index.css";
+import { Route, Routes } from "react-router-dom";
+import TransactionHistory from "./Components/TransactionHistory";
 
-export default function Wallet()
-{
 
-    const render = () =>{
-        return (<>
-        <div id="wallet-page-content">
-            <h1>This is the wallet page content</h1>
-        </div>
-        </>);
-    };
+const WalletRoutes = () => {
+  return (
+    <Routes>
+      <Route path="" element={<TransactionHistory />} />
+ 
+    </Routes>
+  );
+};
 
-    return render();
-}
+export default WalletRoutes;
