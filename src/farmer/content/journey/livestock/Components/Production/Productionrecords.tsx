@@ -1,4 +1,4 @@
-import React from "react";
+
 
 const sampleData = [
   { id: 1, name: "Hannah" },

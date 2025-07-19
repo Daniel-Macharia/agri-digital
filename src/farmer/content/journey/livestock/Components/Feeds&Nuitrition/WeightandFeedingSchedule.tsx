@@ -71,7 +71,7 @@ const WeightandFeedingSchedule = () => {
                 </tr>
               </thead>
               <tbody>
-                {filteredData.map((row, idx) => (
+                {filteredData.map((row) => (
                   <tr key={row.id}>
                     <td className="text-nowrap">{`${row.id}. ${row.name}`}</td>
                     <td className="text-nowrap d-none d-md-table-cell">Lorem Ipsum</td> 

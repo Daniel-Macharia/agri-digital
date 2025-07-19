@@ -1,24 +1,36 @@
 import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import Saved from "../../Shared/Saved";
 import { useNavigate } from "react-router-dom";  
 
+// 1. Define form values type
+interface FormValues {
+  type: string;
+  quality: string;
+  photo: File | null;
+  notes: string;
+}
+
+// 2. Use type guards in Yup validation
 const validationSchema = Yup.object({
   type: Yup.string().required("Type is required"),
   quality: Yup.string().required("Quality is required"),
   photo: Yup.mixed()
-    .test("fileSize", "File too large", (value) =>
-      !value || value.size <= 10 * 1024 * 1024
-    )
-    .test("fileType", "Unsupported file format", (value) =>
-      !value ||
-      ["application/pdf", "image/png", "image/jpeg"].includes(value.type)
-    ),
+    .test("fileSize", "File too large", (value) => {
+      if (!value) return true;
+      return value instanceof File ? value.size <= 10 * 1024 * 1024 : true;
+    })
+    .test("fileType", "Unsupported file format", (value) => {
+      if (!value) return true;
+      return value instanceof File
+        ? ["application/pdf", "image/png", "image/jpeg"].includes(value.type)
+        : true;
+    }),
   notes: Yup.string(),
 });
 
-const initialValues = {
+const initialValues: FormValues = {
   type: "",
   quality: "",
   photo: null,
@@ -53,10 +65,11 @@ const Ventilation: React.FC = () => {
         <h5 className="mb-4 text-start" style={{ color: "#333" }}>
           Ventilation 
         </h5>
-        <Formik
+        {/* 3. Type Formik with FormValues */}
+        <Formik<FormValues>
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting, resetForm }) => {
+          onSubmit={(values, { setSubmitting, resetForm }: FormikHelpers<FormValues>) => {
             setTimeout(() => {
               setShowSaved(true);
               setSubmitting(false);
@@ -143,9 +156,10 @@ const Ventilation: React.FC = () => {
                       className="position-absolute w-100 h-100 opacity-0"
                       style={{ cursor: "pointer", top: 0, left: 0 }}
                       onChange={(event) => {
-                        setFieldValue("photo", event.currentTarget.files?.[0]);
+                        setFieldValue("photo", event.currentTarget.files?.[0] ?? null);
                       }}
                     />
+                    {/* 4. Type guard for values.photo */}
                     {values.photo ? (
                       <span className="body-regular" style={{ color: "#333" }}>
                         {values.photo.name}
