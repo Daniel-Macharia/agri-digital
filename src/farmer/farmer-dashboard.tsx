@@ -5,7 +5,6 @@ import TopBar from "./top-bar";
 import SideBar from "./side-bar";
 import Content from "./content";
 
-import Home from "./content/home-content";
 import Journey from "./content/journey";
 import MarketPlaceRouter from "./content/market-place";
 import Products from "./content/products/index.tsx";
@@ -19,6 +18,7 @@ import Weather from "./content/weather";
 import Settings from "./content/settings";
 import Invite from "./content/invite";
 import NotFound from "../common/exceptions/NotFound";
+import FarmerHome from "./content/home/home.tsx";
 
 export default function Dashboard() {
     const [isSidebarVisible, setSidebarVisible] = useState(false);
@@ -58,7 +58,7 @@ export default function Dashboard() {
                     <TopBar toggleSidebar={toggleSidebar} />
                     <Content> 
                         <Routes>
-                            <Route path="/home" element={<Home />} />
+                            <Route path="/home" element={<FarmerHome />} />
                             <Route path="/projects/*" element={<Journey />} />
                             <Route path="/products" element={<Products />} />
                             <Route path="/market-place/*" element={<MarketPlaceRouter />} />
