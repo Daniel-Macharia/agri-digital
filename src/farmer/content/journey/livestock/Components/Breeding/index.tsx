@@ -5,7 +5,7 @@ import ErusDetection from "./ErusDetection";
 import NewBorns from "./NewBorns";
 import Gestigation from "./Gestigation";
 import Results from "./Results";
-import { TYPE_ROUTES } from "../Type&Breed/Type.Route";
+import { BREED_ROUTES } from "./Breed.Route";
 
 // Helper to wrap pages with NavBar
 const WithNavBar = (Component: React.FC) => (
@@ -18,11 +18,11 @@ const WithNavBar = (Component: React.FC) => (
 const Breeding = () => {
   return (
     <Routes>
-      <Route path={TYPE_ROUTES.LANDING} element={<LandingPage />} />
-      <Route path={TYPE_ROUTES.ERUS} element={WithNavBar(ErusDetection)} />
-      <Route path={TYPE_ROUTES.GEST} element={WithNavBar(Gestigation)} />
-      <Route path={TYPE_ROUTES.NEW} element={WithNavBar(NewBorns)} />
-      <Route path={TYPE_ROUTES.RESULTS} element={<Results />} />
+      <Route path={BREED_ROUTES.LANDING} element={<LandingPage />} />
+      <Route path={BREED_ROUTES.ERUS} element={WithNavBar(ErusDetection)} />
+      <Route path={BREED_ROUTES.GEST} element={WithNavBar(Gestigation)} />
+      <Route path={BREED_ROUTES.NEW} element={WithNavBar(NewBorns)} />
+      <Route path={BREED_ROUTES.RESULTS} element={<Results />} />
     </Routes>
   );
 };
