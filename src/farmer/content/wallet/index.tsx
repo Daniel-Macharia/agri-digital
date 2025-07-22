@@ -3,6 +3,7 @@ import TransactionHistory from "./Components/TransactionHistory";
 import Topup from "./Components/Topup";
 import Vouchers from "./Components/Vouchers";
 import Beneficiaries from "./Components/Beneficiaries";
+import CreatingVoucher from "./Components/CreatingVoucher";
 
 const WalletRoutes = () => {
   return (
@@ -11,7 +12,7 @@ const WalletRoutes = () => {
       <Route path="topup" element={<Topup />} />
       <Route path="vouchers" element={<Vouchers />} />
       <Route path="beneficiaries" element={<Beneficiaries />} />
-
+      <Route path="creating" element={<CreatingVoucher />} />
     </Routes>
   );
 };
