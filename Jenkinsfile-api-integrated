@@ -1,0 +1,44 @@
+pipeline {
+    agent {
+        docker {
+            image 'node:20'
+            args '-u root' // Run as root to avoid permission issues
+        }
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/charlesnyakumbo/AgridigitalClient.git',
+                    credentialsId: 'GITHUB_TOKEN',
+                    branch: 'api-integrated'
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Run Tests and Coverage') {
+            steps {
+                sh 'npm run test -- --coverage'
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                        npm install -g sonarqube-scanner
+                        sonar-scanner
+                    '''
+                }
+            }
+        }
+        // stage('Quality Gate') {
+        //     steps {
+        //         timeout(time: 5, unit: 'MINUTES') {
+        //             waitForQualityGate abortPipeline: true
+        //         }
+        //     }
+        // }
+    }
+}
