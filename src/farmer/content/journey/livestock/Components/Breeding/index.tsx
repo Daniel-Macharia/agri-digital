@@ -23,8 +23,9 @@ const Breeding = () => {
       <Route path={BREED_ROUTES.GEST} element={WithNavBar(Gestigation)} />
       <Route path={BREED_ROUTES.NEW} element={WithNavBar(NewBorns)} />
       <Route path={BREED_ROUTES.RESULTS} element={<Results />} />
-    </Routes>
+    </Routes> 
   );
 };
 
 export default Breeding;
+ 

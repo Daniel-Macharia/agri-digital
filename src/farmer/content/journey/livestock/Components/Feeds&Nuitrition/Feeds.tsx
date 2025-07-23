@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Saved from "../../Shared/Saved";
 import { useNavigate } from "react-router-dom";
+import { FEED_ROUTES } from "./Feeds.Route";
 
 const validationSchema = Yup.object({
   feedName: Yup.string()
@@ -110,7 +111,7 @@ const FeedsForm: React.FC = () => {
             minWidth: "200px",
           
           }}
-          onClick={() => navigate("/farmer/projects/livestock/feeds/form")}
+          onClick={() => navigate(FEED_ROUTES.FORM)}
         >
           Request for Feeds
         </button>
@@ -122,7 +123,7 @@ const FeedsForm: React.FC = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting, resetForm }) => {
+          onSubmit={(_, { setSubmitting, resetForm }) => {
             setTimeout(() => {
               setShowSaved(true);
               setSubmitting(false);
@@ -470,4 +471,4 @@ const FeedsForm: React.FC = () => {
   );
 };
 
-export default FeedsForm;
+export default FeedsForm; 
