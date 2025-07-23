@@ -26,7 +26,11 @@ const initialValues = {
   additionalNotes: "",
 };
 
-const PostMatingForm: React.FC = () => {
+interface Props {
+  onSaved: () => void;
+}
+
+const PostMatingForm: React.FC<Props> = ({ onSaved }) => {
   const [showSaved, setShowSaved] = useState(false);
   const navigate = useNavigate();
 
