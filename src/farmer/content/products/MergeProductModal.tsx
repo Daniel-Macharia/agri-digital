@@ -271,7 +271,7 @@ const MergeProductModal: React.FC<MergeProductModalProps> = ({
 
     return (
         <div className="modal d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-            <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-dialog modal-dialog-centered d-flex align-items-center justify-content-center">
                 <div className="modal-content">
                     <div className="modal-header p-0 ">
                         <h5 className="modal-title text-nowrap m-3 text-start">Add Merged Products</h5>

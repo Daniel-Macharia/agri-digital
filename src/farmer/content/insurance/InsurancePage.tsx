@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {  
   FaShieldAlt,
@@ -145,11 +145,11 @@ const InsurancePage = () => {
   };
 
   return (
-    <div className="container-fluid bg-light min-vh-100">
+    <div className="container-fluid min-vh-100" style={{ backgroundColor: '#eeeeeeff' }}>
       {/* Tab Navigation */}
-        <div className="row mt-0">
+        <div className="row mt-0 pt-5">
   <div className="col-12">
-    <div className="d-flex px-2 px-sm-3 gap-1 gap-sm-2 flex-nowrap align-items-start">
+    <div className="d-flex px-2 px-sm-3 gap-3 gap-sm-2 flex-nowrap align-items-start">
       <button
         className={`btn px-2 px-sm-4 py-2  fw-normal  flex-fill flex-sm-grow-0 text-nowrap ${
           activeTab === 'all'

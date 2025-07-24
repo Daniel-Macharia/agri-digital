@@ -1,34 +1,21 @@
-// types/index.ts
-export type TabType = 'Loans' | 'Withdraw' | 'Deposit' | 'Active Loans';
-
-export interface LoanData {
-  id: number;
+// Types
+export interface LoanCardProps {
+  icon: React.ReactNode;
   title: string;
-  bank: string;
+  subtitle: string;
   interestRate: string;
   term: string;
-  image: string;
-  bgColor: string;
+  imageUrl: string;
+  onViewMore: () => void;
 }
 
-export interface ActiveLoan {
-  id: number;
-  title: string;
-  totalAmount: string;
-  remaining: string;
-  dueDate: string;
+export interface ModalProps {
+  show: boolean;
+  onHide: () => void;
+  children: React.ReactNode;
 }
 
-export interface WithdrawFormData {
-  amount: string;
-  reason: string;
-  method: string;
-  date: string;
-}
-
-export interface DepositFormData {
-  amount: string;
-  method: string;
-  transactionId: string;
-  date: string;
+export interface FormData {
+  bankName: string;
+  bankEmail: string;
 }

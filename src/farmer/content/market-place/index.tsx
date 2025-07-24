@@ -1,10 +1,11 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { lazy } from 'react';
 
-import MarketplacePage from './pages/MarketplacePage';
-import CheckoutPage from './pages/CheckoutPage';
-import TrackOrderPage from './pages/TrackOrderPage';
-import ProductDetailsPage from './pages/ProductDetailsPage';
+const MarketplacePage = lazy(() => import('./pages/MarketplacePage'));
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
+const TrackOrderPage = lazy(() => import('./pages/TrackOrderPage'));
+const ProductDetailsPage = lazy(() => import('./pages/ProductDetailsPage'));
 
 const MarketPlaceRouter: React.FC = () => {
     return (
