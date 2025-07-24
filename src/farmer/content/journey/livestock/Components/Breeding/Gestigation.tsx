@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PreMatingForm from './PreMatingForm';
 import PostMatingForm from './PostMatingForm';
 
-const Gestigation = () => {
+const Gestation = () => {
   const [activeTab, setActiveTab] = useState<'pre' | 'post'>('pre');
-  const [showSaved, setShowSaved] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSaved = () => {
+    // Navigate to the results page relative to breeding
+    navigate('results');
+  };
 
   return (
     <div className="w-100 rounded-4 bg-white border mt-3 p-4">
-      <h5 className="mb-4 text-start" style={{ color: '#333' }}>Gestation</h5>
+      <h5 className="mb-4 text-start" style={{ color: '#333' }}>Gestation</h5> 
+
       <div className="d-flex mb-4">
         <button
           type="button"
@@ -25,15 +32,14 @@ const Gestigation = () => {
           Post-Mating
         </button>
       </div>
+
       {activeTab === 'pre' ? (
-        <PreMatingForm onSaved={() => setShowSaved(true)} />
+        <PreMatingForm onSaved={handleSaved} />
       ) : (
-        <PostMatingForm onSaved={() => setShowSaved(true)} />
+        <PostMatingForm />
       )}
     </div>
   );
 };
 
-export default Gestigation;
-
-
+export default Gestation;

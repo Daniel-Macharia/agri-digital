@@ -47,25 +47,7 @@ const navItems = [
 
 const Results = () => {
   // Placeholder data for tables
-  const feedStockData = Array(8).fill({
-    feedName: 'Lorem Ipsum',
-    feedType: 'Lorem Ipsum',
-    feedVariety: 'Lorem Ipsum',
-    feedWeight: 'Lorem Ipsum',
-    quantity: 'Lorem Ipsum',
-    date: 'Lorem Ipsum',
-    status: 'Lorem Ipsum',
-  });
-  const livestockData = [
-    { id: 1, name: 'J. Smith' },
-    { id: 2, name: 'J. Alex' },
-    { id: 3, name: 'J. Alex' },
-    { id: 4, name: 'J. Alex' },
-    { id: 5, name: 'J. Alex' },
-    { id: 6, name: 'J. Alex' },
-    { id: 7, name: 'J. Alex' },
-    { id: 8, name: 'J. Alex' },
-  ];
+
 
   return (
 

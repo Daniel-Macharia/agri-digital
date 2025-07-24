@@ -73,7 +73,7 @@ const FeedingSchedule: React.FC = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting, resetForm }) => {
+          onSubmit={(_values, { setSubmitting, resetForm }) => {
             setTimeout(() => {
               setShowSaved(true);
               setSubmitting(false);

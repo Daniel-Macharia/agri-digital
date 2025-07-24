@@ -71,7 +71,7 @@ const ErusDetection: React.FC = () => {
         <Formik<FormValues>
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting, resetForm }) => {
+          onSubmit={(_, { setSubmitting, resetForm }) => {
             setTimeout(() => {
               setShowSaved(true);
               setSubmitting(false);
@@ -79,11 +79,9 @@ const ErusDetection: React.FC = () => {
             }, 400);
           }}
         >
-          {({ isSubmitting, resetForm, setFieldValue, values }: {
+          {({ isSubmitting, resetForm }: {
             isSubmitting: boolean;
             resetForm: () => void;
-            setFieldValue: (field: keyof FormValues, value: any) => void;
-            values: FormValues;
           }) => (
             <Form>
               {/* Identification */}

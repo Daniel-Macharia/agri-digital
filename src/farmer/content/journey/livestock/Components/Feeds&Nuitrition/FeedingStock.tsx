@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaSearch, FaPen } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const mockData = Array.from({ length: 10 }).map((_, i) => ({
+const mockData = Array.from({ length: 10 }).map(() => ({
   feedName: "Lorem Ipsum",
   feedType: "Lorem Ipsum",
   feedVariety: "Lorem Ipsum",

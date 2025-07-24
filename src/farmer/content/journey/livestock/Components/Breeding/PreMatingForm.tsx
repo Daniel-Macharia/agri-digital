@@ -27,9 +27,11 @@ const initialValues = {
   notes: '',
 };
 
-type PreMatingFormProps = { onSaved: () => void };
+interface Props {
+  onSaved: () => void;
+}
 
-const PreMatingForm: React.FC<PreMatingFormProps> = ({ onSaved }) => {
+const PreMatingForm: React.FC<Props> = ({ onSaved }) => {
   const [showSaved, setShowSaved] = useState(false);
 
   return (
@@ -56,7 +58,7 @@ const PreMatingForm: React.FC<PreMatingFormProps> = ({ onSaved }) => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting, resetForm }) => {
+          onSubmit={(_, { setSubmitting, resetForm }) => {
             setTimeout(() => {
               setShowSaved(true);
               setSubmitting(false);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 // import Saved from "../../Shared/Saved"; // Uncomment if you want to show a saved modal
@@ -37,7 +37,7 @@ const initialValues = {
 };
 
 const NewBorns = () => {
-  const [showSaved, setShowSaved] = useState(false);
+  const [, setShowSaved] = useState(false);
   // const navigate = useNavigate();
 
   // Dummy options for Identification dropdown
@@ -55,7 +55,7 @@ const NewBorns = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting, resetForm }) => {
+        onSubmit={(_values, { setSubmitting, resetForm }) => {
           setTimeout(() => {
             setShowSaved(true);
             setSubmitting(false);
@@ -63,7 +63,7 @@ const NewBorns = () => {
           }, 400);
         }}
       >
-        {({ isSubmitting, resetForm, setFieldValue, values }) => (
+        {({ isSubmitting, setFieldValue, values }) => (
           <Form>
             {/* Identification */}
             <div className="row mb-3 align-items-center">

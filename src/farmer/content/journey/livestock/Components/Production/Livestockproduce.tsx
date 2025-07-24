@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 // import Saved from "../../Shared/Saved"; // Uncomment if you have a Saved component
@@ -52,7 +52,7 @@ const Livestockproduce = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting, resetForm }) => {
+          onSubmit={(_values, { setSubmitting, resetForm }) => {
             setShowSaved(true);
             setSubmitting(false);
             setTimeout(() => setShowSaved(false), 1200);

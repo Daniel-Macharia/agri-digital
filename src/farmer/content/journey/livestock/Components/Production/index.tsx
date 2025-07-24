@@ -4,6 +4,7 @@ import NavBar from "../../Shared/NavBar";
 import Livestockproduce from "./Livestockproduce";
 import Meat from "./Meat";
 import Productionrecords from "./Productionrecords";
+import { PRODUCTION_ROUTES } from "./Production.Route";
 
 
 const navItems = [
@@ -56,10 +57,13 @@ const WithNavBar = (Component: React.FC) => (
 const Production = () => {
   return (
     <Routes>
-      <Route path="" element={<LandingPage />} />
-      <Route path="produce" element={WithNavBar(Livestockproduce)} />
-      <Route path="meat" element={WithNavBar(Meat)} />
-      <Route path="production-records" element={WithNavBar(Productionrecords)} />      
+
+<Route path={PRODUCTION_ROUTES.LANDING} element={<LandingPage />} />
+      <Route path={PRODUCTION_ROUTES. PRODUCTION_RECORDS} element={WithNavBar(Productionrecords)} />
+      <Route path={PRODUCTION_ROUTES.PRODUCE} element={WithNavBar(Livestockproduce)} />
+      <Route path={PRODUCTION_ROUTES.MEAT} element={WithNavBar(Meat)} />    
+     
+         
     </Routes> 
   )
 }

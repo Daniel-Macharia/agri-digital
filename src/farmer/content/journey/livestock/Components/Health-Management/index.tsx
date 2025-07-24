@@ -4,6 +4,7 @@ import NavBar from "./NavBar"
 import LandingPage from "./LandingPage";
 import HealthDiseases from "./HealthDiseases";
 import Vaccines from "./Vaccines";
+import { HEALTH_ROUTES } from "./Health.Route";
 
 // Helper to wrap pages with NavBar
 const WithNavBar = (Component: React.FC) => (
@@ -16,9 +17,17 @@ const WithNavBar = (Component: React.FC) => (
 const Housing = () => {
   return (
     <Routes>
-      <Route path="" element={<LandingPage />} />
-      <Route path="diseases" element={WithNavBar(HealthDiseases)} />
-      <Route path="vaccines" element={WithNavBar(Vaccines)} />      
+
+     
+
+      
+      <Route path={HEALTH_ROUTES.LANDING} element={<LandingPage />} />
+      <Route path={HEALTH_ROUTES.DISEASES} element={WithNavBar(HealthDiseases)} />
+      <Route path={HEALTH_ROUTES.VACCINES} element={WithNavBar(Vaccines)} />
+      
+
+
+
     </Routes>
   )
 }
