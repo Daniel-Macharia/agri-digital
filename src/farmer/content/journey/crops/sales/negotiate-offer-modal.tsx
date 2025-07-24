@@ -26,147 +26,143 @@ const NegotiateOfferModal: React.FC<SalesNegotiationProductProps> = ( props: Sal
         props.setShow(false);
     };
 
-    const render = () => {
-        return (<>
-        <Modal
-        show={props.show}
-        onHide={() => props.setShow(false) }
+    return (<>
+    <Modal
+    show={props.show}
+    onHide={() => props.setShow(false) }
 
-        centered
+    centered
 
-        dialogClassName="mx-auto"
-        >
-            {/* <Modal.Header>
-                <Modal.Title>
-                    <p className="h3-semibold">Suggested Offer</p>
-                </Modal.Title>
-            </Modal.Header> */}
-
-            <Modal.Body>
-
+    dialogClassName="mx-auto"
+    >
+        {/* <Modal.Header>
+            <Modal.Title>
                 <p className="h3-semibold">Suggested Offer</p>
+            </Modal.Title>
+        </Modal.Header> */}
 
-                <div className="row col-sm-12" >
-                    <div className="col-sm-5">
-                        <img 
-                        src={props.productImageUrl}
-                        className="col-sm-12"
+        <Modal.Body>
 
-                        />
-                    </div>
+            <p className="h3-semibold">Suggested Offer</p>
 
-                    <div className="col-sm-7" >
-                        <p className="body-semibold my-1">
-                            {props.productName}
-                        </p>
+            <div className="row col-sm-12" >
+                <div className="col-sm-5">
+                    <img 
+                    src={props.productImageUrl}
+                    className="col-sm-12"
 
-                        <p className="small-regular my-1" style={{color: "var(--primary)"}}>
-                            {props.productSeller}
-                        </p>
-
-                        <p className="body-regular col-sm-12 my-1" style={{padding: "0px"}}>
-                            Current Price: 
-                            <span className="h3-semibold" style={{color: "var(--primary)"}}> KES {props.productUnitPrice}</span>
-                            <span className="body-regular" style={{color: "var(--primary)"}}> per {props.productUnitName}</span>
-                        </p>
-                    </div>
+                    />
                 </div>
 
-                <div className="col-sm-12">
-                    <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={handleSubmitOffer}
+                <div className="col-sm-7" >
+                    <p className="body-semibold my-1">
+                        {props.productName}
+                    </p>
 
-                    >
-                        {({}) => (
-                            <Form className="col-sm-12">
+                    <p className="small-regular my-1" style={{color: "var(--primary)"}}>
+                        {props.productSeller}
+                    </p>
+
+                    <p className="body-regular col-sm-12 my-1" style={{padding: "0px"}}>
+                        Current Price: 
+                        <span className="h3-semibold" style={{color: "var(--primary)"}}> KES {props.productUnitPrice}</span>
+                        <span className="body-regular" style={{color: "var(--primary)"}}> per {props.productUnitName}</span>
+                    </p>
+                </div>
+            </div>
+
+            <div className="col-sm-12">
+                <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmitOffer}
+
+                >
+                    {({}) => (
+                        <Form className="col-sm-12">
+                            <div className="col-sm-12">
                                 <div className="col-sm-12">
-                                    <div className="col-sm-12">
-                                        <label 
-                                        className="form-label col-sm-12"
-                                        htmlFor="proposedPrice" 
-                                        style={{margin: "0px"}} >
-                                            Proposed price
-                                        </label>
+                                    <label 
+                                    className="form-label col-sm-12"
+                                    htmlFor="proposedPrice" 
+                                    style={{margin: "0px"}} >
+                                        Proposed price
+                                    </label>
 
-                                        <div 
-                                        className="col-sm-12" 
-                                        style={{
-                                            margin: "0px", 
-                                            padding: "0px"
-                                        }}>
-                                            <Field
-                                            name="proposedPrice"
-                                            className="form-control col-sm-12"
-                                            
-                                            placeholder="KES 120 PER KG"
-                                            />
-                                            <div className="col-sm-12 text-danger small" 
-                                            style={{margin: "0px",
-                                                textAlign: "start"
-                                            }}
-                                            >
-                                                <ErrorMessage name="proposedPrice" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-sm-12">
-                                        <label 
-                                        className="form-label col-sm-12"
-                                        htmlFor="message" 
-                                        style={{margin: "0px"}} >
-                                            Message
-                                        </label>
-
-                                        <div 
-                                        className="col-sm-12" 
-                                        style={{
-                                            margin: "0px", 
-                                            padding: "0px"
-                                        }}>
-                                            <textarea
-                                            name="message"
-                                            className="form-control col-sm-12" 
-                                            
-                                            placeholder="make your offer to the seller..."
-                                            style={{height: "88px"}}
-                                            />
-                                            <div className="col-sm-12 text-danger small" 
-                                            style={{margin: "0px",
-                                                textAlign: "start"
-                                            }}
-                                            >
-                                                <ErrorMessage name="message" />
-                                            </div>
+                                    <div 
+                                    className="col-sm-12" 
+                                    style={{
+                                        margin: "0px", 
+                                        padding: "0px"
+                                    }}>
+                                        <Field
+                                        name="proposedPrice"
+                                        className="form-control col-sm-12"
+                                        
+                                        placeholder="KES 120 PER KG"
+                                        />
+                                        <div className="col-sm-12 text-danger small" 
+                                        style={{margin: "0px",
+                                            textAlign: "start"
+                                        }}
+                                        >
+                                            <ErrorMessage name="proposedPrice" />
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="col-sm-12">
-                                    <button
-                                    className="crops-other-button col-sm-12 mx-0"
-                                    type="submit"
-                                    >
-                                        Submit Offer
-                                    </button>
+                                    <label 
+                                    className="form-label col-sm-12"
+                                    htmlFor="message" 
+                                    style={{margin: "0px"}} >
+                                        Message
+                                    </label>
+
+                                    <div 
+                                    className="col-sm-12" 
+                                    style={{
+                                        margin: "0px", 
+                                        padding: "0px"
+                                    }}>
+                                        <textarea
+                                        name="message"
+                                        className="form-control col-sm-12" 
+                                        
+                                        placeholder="make your offer to the seller..."
+                                        style={{height: "88px"}}
+                                        />
+                                        <div className="col-sm-12 text-danger small" 
+                                        style={{margin: "0px",
+                                            textAlign: "start"
+                                        }}
+                                        >
+                                            <ErrorMessage name="message" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </Form>
-                        )}
-                    </Formik>
-                </div>
+                            </div>
 
-            </Modal.Body>
+                            <div className="col-sm-12">
+                                <button
+                                className="crops-other-button col-sm-12 mx-0"
+                                type="submit"
+                                >
+                                    Submit Offer
+                                </button>
+                            </div>
+                        </Form>
+                    )}
+                </Formik>
+            </div>
 
-            {/* <Modal.Footer className="col-sm-12">
-                nothing here for now
-            </Modal.Footer> */}
-        </Modal>
-        </>);
-    };
+        </Modal.Body>
 
-    return render();
+        {/* <Modal.Footer className="col-sm-12">
+            nothing here for now
+        </Modal.Footer> */}
+    </Modal>
+    </>);
 };
 
 export default NegotiateOfferModal;

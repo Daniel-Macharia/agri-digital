@@ -19,7 +19,8 @@ import Weather from "./content/weather";
 import Settings from "./content/settings";
 import Invite from "./content/invite";
 import NotFound from "../common/exceptions/NotFound";
-import FarmerHome from "./content/home/home.tsx";
+import FarmerHomeRouter from "./content/home/farmer-home-router.tsx";
+import { FARMER_ROUTES } from "./farmer-routes.ts";
 
 export default function Dashboard() {
     const [isSidebarVisible, setSidebarVisible] = useState(false);
@@ -59,21 +60,22 @@ export default function Dashboard() {
                     <TopBar toggleSidebar={toggleSidebar} />
                     <Content> 
                         <Routes>
-                            <Route path="/home" element={<FarmerHome />} />
-                            <Route path="/projects/*" element={<Journey />} />
-                            <Route path="/products" element={<Products />} />
-                            <Route path="/market-place/*" element={<MarketPlaceRouter />} />
-                            <Route path="/banks" element={<Banks />} />
-                            <Route path="/insurance/*" element={<Insurance />} />
-                            <Route path="/sponsors" element={<Sponsors />} />
-                            <Route path="/wallet" element={<Wallet />} />
-                            <Route path="/package" element={<Package />} />
-                            <Route path="/quality-score" element={<QualityScore />} />
-                            <Route path="/weather" element={<Weather />} />
-                            <Route path="/resources" element={<Resources />} />
-                            <Route path="/settings" element={<Settings />} />
-                            <Route path="/invite" element={<Invite />} />
-                            <Route path="*" element={<NotFound />} />
+                            <Route path={FARMER_ROUTES.HOME} element={<FarmerHomeRouter />} />
+
+                            <Route path={FARMER_ROUTES.JOURNEY} element={<Journey />} />
+                            <Route path={FARMER_ROUTES.PRODUCTS} element={<Products />} />
+                            <Route path={FARMER_ROUTES.MARKET_PLACE} element={<MarketPlaceRouter />} />
+                            <Route path={FARMER_ROUTES.BANKS} element={<Banks />} />
+                            <Route path={FARMER_ROUTES.INSURANCE} element={<Insurance />} />
+                            <Route path={FARMER_ROUTES.SPONSORS} element={<Sponsors />} />
+                            <Route path={FARMER_ROUTES.WALLET} element={<Wallet />} />
+                            <Route path={FARMER_ROUTES.PACKAGE} element={<Package />} />
+                            <Route path={FARMER_ROUTES.QUALITY_SCORE} element={<QualityScore />} />
+                            <Route path={FARMER_ROUTES.WEATHER} element={<Weather />} />
+                            <Route path={FARMER_ROUTES.RESOURCES} element={<Resources />} />
+                            <Route path={FARMER_ROUTES.SETTINGS} element={<Settings />} />
+                            <Route path={FARMER_ROUTES.INVITE} element={<Invite />} />
+                            <Route path={FARMER_ROUTES.OTHER} element={<NotFound />} />
                         </Routes>
                     </Content>
                 </div>

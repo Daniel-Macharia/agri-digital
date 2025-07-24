@@ -17,9 +17,6 @@ export default function Projects(){
     const [showCropModal, setShowCropModal] = useState<boolean>(false);
 
     // New Project Modal handlers
-    const handleAddNewProduct = (): void => {
-        setShowProjectSelection(true);
-    };
 
     const handleCloseProjectSelection = (): void => {
         setShowProjectSelection(false);
@@ -65,105 +62,101 @@ export default function Projects(){
 
     const journeyItems: ProjectProps[] | null =  loadProjects();
 
-    const render = ()=>{
-        return (<>
-            <div className="col-12" >
-                <div className="col-12 d-flex" >
-                    <div className="col-6">
-                        <div className="row justify-content-start">
-                            <div className="col-4 col-sm-2">
-                                <img className="crops-start-aligned-text col-12 col-sm-6"
-                                    src="/assets/images/back-icon.svg"
-                                    onClick={() => {navigate("/farmer/home");}}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-6">
-                        <div className="row justify-content-end">
-                            <button 
-                            onClick={ () => setShowProjectSelection( true ) }
-                            className="col-12 col-sm-6 crops-accept-button mx-2"
-                            >
-                                Add a new project
-                            </button>
+    return (<>
+        <div className="col-12" >
+            <div className="col-12 d-flex" >
+                <div className="col-6">
+                    <div className="row justify-content-start">
+                        <div className="col-4 col-sm-2">
+                            <img className="crops-start-aligned-text col-12 col-sm-6"
+                                src="/assets/images/back-icon.svg"
+                                onClick={() => {navigate("/farmer/home");}}
+                            />
                         </div>
                     </div>
                 </div>
-                <div className="col-12 " >
-                    <div className="col-12 crops-container bg-white " >
-                        <div className="col-12">
-                            <h3 className="h3-semibold primary-text crops-start-aligned-text my-0">
-                                Current Project
-                            </h3>
-                        </div>
-
-                        <JourneyItem 
-                        projectId={journeyItems[0].projectId}
-                        projectName={journeyItems[0].projectName} 
-                        projectDuration={journeyItems[0].projectDuration} 
-                        overallScore={journeyItems[0].overallScore} 
-                        completionDate={journeyItems[0].completionDate}
-                        currentStage={journeyItems[0].currentStage}
-                        projectType={journeyItems[0].projectType}
-                        />
-
-                    </div>
-
-                    <div className="col-12 crops-container bg-white my-3" >
-                        <div className="col-12" >
-                            <h3 className="h3-semibold primary-text crops-start-aligned-text my-0">
-                                Completed Projects
-                            </h3>
-                        </div>
-                        
-                        <div className="col-12" >
-                            {
-                                journeyItems.map((journeyItem, index) => {
-                                    if( index === 0 )//skip first project
-                                        return  "";
-                                    else
-                                        return (<JourneyItem 
-                                            projectId={journeyItem.projectId}
-                                            projectName={journeyItem.projectName} 
-                                            projectDuration={journeyItem.projectDuration} 
-                                            overallScore={journeyItem.overallScore}
-                                            completionDate={journeyItem.completionDate}
-                                            currentStage={journeyItem.currentStage}
-                                            projectType={journeyItem.projectType}
-                                            />);
-                                })
-                                
-                            }
-                        </div>
+                <div className="col-6">
+                    <div className="row justify-content-end">
+                        <button 
+                        onClick={ () => setShowProjectSelection( true ) }
+                        className="col-12 col-sm-6 crops-accept-button mx-2"
+                        >
+                            Add a new project
+                        </button>
                     </div>
                 </div>
             </div>
+            <div className="col-12 " >
+                <div className="col-12 crops-container bg-white " >
+                    <div className="col-12">
+                        <h3 className="h3-semibold primary-text crops-start-aligned-text my-0">
+                            Current Project
+                        </h3>
+                    </div>
 
-            {/* New Project Modals */}
-            <ProjectSelectionModal
-                show={showProjectSelection}
-                onHide={handleCloseProjectSelection}
-                onCropProject={handleCropProject}
-                onLivestockProject={handleLivestockProject}
-            />
+                    <JourneyItem 
+                    projectId={journeyItems[0].projectId}
+                    projectName={journeyItems[0].projectName} 
+                    projectDuration={journeyItems[0].projectDuration} 
+                    overallScore={journeyItems[0].overallScore} 
+                    completionDate={journeyItems[0].completionDate}
+                    currentStage={journeyItems[0].currentStage}
+                    projectType={journeyItems[0].projectType}
+                    />
 
-            <LivestockProjectModal
-                show={showLivestockModal}
-                onHide={handleCloseLivestockModal}
-                onBack={handleBackToProjectSelection}
-                onSubmit={handleLivestockSubmit}
-            />
+                </div>
 
-            <CropProjectModal
-                show={showCropModal}
-                onHide={handleCloseCropModal}
-                onBack={handleBackToProjectSelection}
-                onSubmit={handleCropSubmit}
-            />
-            
-        </>);
-    };
+                <div className="col-12 crops-container bg-white my-3" >
+                    <div className="col-12" >
+                        <h3 className="h3-semibold primary-text crops-start-aligned-text my-0">
+                            Completed Projects
+                        </h3>
+                    </div>
+                    
+                    <div className="col-12" >
+                        {
+                            journeyItems.map((journeyItem, index) => {
+                                if( index === 0 )//skip first project
+                                    return  "";
+                                else
+                                    return (<JourneyItem 
+                                        projectId={journeyItem.projectId}
+                                        projectName={journeyItem.projectName} 
+                                        projectDuration={journeyItem.projectDuration} 
+                                        overallScore={journeyItem.overallScore}
+                                        completionDate={journeyItem.completionDate}
+                                        currentStage={journeyItem.currentStage}
+                                        projectType={journeyItem.projectType}
+                                        />);
+                            })
+                            
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    return render();
+        {/* New Project Modals */}
+        <ProjectSelectionModal
+            show={showProjectSelection}
+            onHide={handleCloseProjectSelection}
+            onCropProject={handleCropProject}
+            onLivestockProject={handleLivestockProject}
+        />
+
+        <LivestockProjectModal
+            show={showLivestockModal}
+            onHide={handleCloseLivestockModal}
+            onBack={handleBackToProjectSelection}
+            onSubmit={handleLivestockSubmit}
+        />
+
+        <CropProjectModal
+            show={showCropModal}
+            onHide={handleCloseCropModal}
+            onBack={handleBackToProjectSelection}
+            onSubmit={handleCropSubmit}
+        />
+        
+    </>);
 }

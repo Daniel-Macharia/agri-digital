@@ -1,8 +1,7 @@
 import { ManagementActivityProps } from "../crops-models";
 
 export default function ManagementActivity( activity: ManagementActivityProps){
-    const render = () => {
-        return (<>
+    return (<>
         <div className="col-12 card p-1" >
             <div className="row p-0 d-flex" >
                 <div className="col-2" style={{alignSelf: "center"}}>
@@ -40,7 +39,4 @@ export default function ManagementActivity( activity: ManagementActivityProps){
             </div>
         </div>
         </>);
-    };
-
-    return render();
 };

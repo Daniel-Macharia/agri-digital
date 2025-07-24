@@ -23,6 +23,7 @@ export function loadProjects() : ProjectProps[] {
 
 export function loadProjectReviews(projectId: number): ProjectReviewProps[]{
     try{
+        console.log(`livestock projectId: ${projectId}`);
         let reviews: ProjectReviewProps[] = [
             {username: "Julius Kiptoo",
             userAccountState: "verified",
@@ -68,21 +69,22 @@ export function loadProjectReviews(projectId: number): ProjectReviewProps[]{
 export function loadLivestockProjectDetails(projectId: number): LivestockProjectSummaryProps[]
 {
     try{
+        console.log(`livestock projectId: ${projectId}`);
         let details: LivestockProjectSummaryProps[] = [
-            {livestockName: "Gift", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
-            {livestockName: "Lucky", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
-            {livestockName: "Jimmy", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
-            {livestockName: "Blacky", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
-            {livestockName: "Jane", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
-            {livestockName: "Mary", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
-            {livestockName: "Joe", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
-            {livestockName: "Whitey", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
-            {livestockName: "Donald", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
-            {livestockName: "Jerry", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
-            {livestockName: "Tom", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
-            {livestockName: "Sam", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
-            {livestockName: "Chris", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
-            {livestockName: "Burner", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockId: 1, livestockName: "Gift", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockId: 2, livestockName: "Lucky", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockId: 3, livestockName: "Jimmy", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockId: 4, livestockName: "Blacky", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockId: 5, livestockName: "Jane", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockId: 6, livestockName: "Mary", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockId: 7, livestockName: "Joe", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockId: 8, livestockName: "Whitey", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockId: 9, livestockName: "Donald", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockId: 10, livestockName: "Jerry", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockId: 11, livestockName: "Tom", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockId: 12, livestockName: "Sam", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockId: 13, livestockName: "Chris", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
+            {livestockId: 14, livestockName: "Burner", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
         ];
 
         return details;
@@ -96,6 +98,7 @@ export function loadLivestockProjectDetails(projectId: number): LivestockProject
 
 export function loadCropProjectDetails(projectId: number) :CropProjectSummaryProps[] {
     try{
+        console.log(`livestock projectId: ${projectId}`);
         let details: CropProjectSummaryProps[] = [
             {cropProjectStage: 1, stageScore: 92, cropProjectDescription: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. At consequuntur tempore a, eos nostrum amet dolorem unde aliquam doloremque quam est neque accusantium, dolores asperiores labore, consequatur quaerat? Tempore aliquid sint saepe? Quibusdam tempore magni officiis, aliquid consectetur necessitatibus odit nulla amet obcaecati est exercitationem animi magnam nam at repellendus."},
             {cropProjectStage: 2, stageScore: 72, cropProjectDescription: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. At consequuntur tempore a, eos nostrum amet dolorem unde aliquam doloremque quam est neque accusantium, dolores asperiores labore, consequatur quaerat? Tempore aliquid sint saepe? Quibusdam tempore magni officiis, aliquid consectetur necessitatibus odit nulla amet obcaecati est exercitationem animi magnam nam at repellendus."},
