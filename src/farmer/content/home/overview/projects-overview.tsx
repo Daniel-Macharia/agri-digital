@@ -1,7 +1,7 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ProgressBar from "../../journey/projects/journey-item/progress-bar";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { CropFormData, LivestockFormData } from "../../products";
 import ProjectSelectionModal from "../../products/ProjectSelectionModal";
 import LivestockProjectModal from "../../products/LivestockProjectModal";
@@ -19,9 +19,6 @@ export default function ProjectsOverview(data: ProjectsOverviewProps){
     const [showCropModal, setShowCropModal] = useState<boolean>(false);
 
     // New Project Modal handlers
-    const handleAddNewProduct = (): void => {
-        setShowProjectSelection(true);
-    };
 
     const handleCloseProjectSelection = (): void => {
         setShowProjectSelection(false);
@@ -85,28 +82,45 @@ export default function ProjectsOverview(data: ProjectsOverviewProps){
         return currentStageName;
     };
 
+    const handleUpdateProject = () => {
+        console.log("update current project");
+        alert("update current project");
+    };
+
+
+    useCallback(handleUpdateProject, []);
+
     const render = ()=>{
         return (<>
         <div className="col-12 farmer-home-container"> 
             <div className="farmer-home-container p-4 mx-0 col-12" style={{backgroundColor: "whitesmoke"}}>
-                <p className="">
+                <p className="body-semibold secondary-text">
                     {data.projectName}
                 </p>
 
                 <div className=" my-3">
-                    <p className=" mb-0" style={{textAlign: "start"}}>
+                    <p className=" mb-0 small-regular primary-text" style={{textAlign: "start"}}>
                         {getCurrentStageName(data.currentProjectStage)}
                     </p>
                     <ProgressBar max={100} value={currentProgress} />
                 </div>
 
-                <div className="row justify-content-center">
-                    <img src="/assets/images/arrow.svg"
-                    style={{width: "32px"}}
-                    alt="more"
-                    className="col-6 pe-0"
-                    />
-                    <p className="col-6 ps-0">Update Project</p>
+                <div className="row justify-content-center" 
+                onClick={handleUpdateProject}
+                >
+                    <div className="col-6 d-flex justify-content-end align-items-center pe-0" >
+                        <img src="/assets/images/arrow.svg"
+                        style={{width: "14px", height: "14px"}}
+                        alt="more"
+                        className="pe-0 mb-0 me-1 justify-self-end self-align-end"
+                        />
+                    </div>
+                    <div className="col-6 ps-0">
+                        <p className="col-12 ms-1 mb-0 small-medium secondary-text self-align-center"
+                        >
+                            Update Project
+                        </p>
+                    </div>
                 </div>
             </div>
 

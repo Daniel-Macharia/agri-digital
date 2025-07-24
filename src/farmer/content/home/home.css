@@ -5,17 +5,44 @@
 }
 
 .farmer-home-accept-button{
-    background-color: green;
-    color: white;
     border-style: solid;
     border-width: 1px;
-    border-color: green;
+    border-color: var(--Primary, #457900);
+
+    padding: 6px 17px;
+    border-radius: 8px;
+    background: var(--Primary, #457900);
+
+    color: var(--cards-form-bg, #FFF);
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22.4px; /* 160% */
 }
 
 .farmer-home-other-button{
-    background-color: white;
-    color: orange;
     border-style: solid;
     border-width: 1px;
-    border-color: orange;
+
+    padding: 6px 17px;
+    border-radius: 8px;
+    border: 1px solid var(--Secondary, #FF9800);
+    background: var(--cards-form-bg, #FFF);
+
+    color: var(--Secondary, #FF9800);
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22.4px; /* 160% */
+}
+
+
+.farmer-home-start-aligned-text{
+    text-align: start;
+}
+
+.farmer-home-end-aligned-text{
+    text-align: end;
 }
