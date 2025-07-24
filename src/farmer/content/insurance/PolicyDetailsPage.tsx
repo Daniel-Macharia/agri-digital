@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaCheck } from 'react-icons/fa';
-import { getPolicyById, PolicyData } from './InsurancePage';
+import { getPolicyById, /*PolicyData*/ } from './InsurancePage';
 
 const PolicyDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -21,7 +21,7 @@ const PolicyDetailsPage: React.FC = () => {
 
   const handlePayPolicy = (policyId: string) => {
     console.log(`Paying for policy ${policyId}`);
-    //alert('Policy payment functionality would be implemented here');
+    //alert('Policy payment functionality implemented here');
     navigate(`/farmer/insurance/payment`);
     //  navigate to a payment page
     // navigate(`/payment/${policyId}`);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Button, Modal, Form, Alert } from 'react-bootstrap';
-import { FiArrowLeft, FiShoppingCart, FiShare2, FiStar } from 'react-icons/fi';
+import { FiArrowLeft, FiStar } from 'react-icons/fi';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Product } from '../types';
 

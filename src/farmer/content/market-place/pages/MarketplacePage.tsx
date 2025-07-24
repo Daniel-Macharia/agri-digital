@@ -8,6 +8,7 @@ import { Product, CartItem } from '../types';
 import Pagination from '../components/Pagination';
 import ShoppingCartModal from '../components/ShoppingCartModal';
 import GiftModal from '../components/GiftModal';
+import '../components/Market.css';
 
 // Extended product list with farming-related items
 const initialProducts: Product[] = [
@@ -21,7 +22,7 @@ const initialProducts: Product[] = [
     { id: 8, name: 'Sweet Corn', seller: 'Sunny Acres', price: 120, unit: 'per dozen', rating: 5, image: 'https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=400&h=300&fit=crop', category: 'vegetables' },
     { id: 9, name: 'Greenhouse Kit', seller: 'AgriStructures', price: 8500, unit: 'per unit', rating: 4, image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop', category: 'equipment' },
     { id: 10, name: 'Dairy Goats', seller: 'Diel Man', price: 15000, unit: 'per Buck/Billy', rating: 4, image: 'https://plus.unsplash.com/premium_photo-1681882343875-0c709293d624?w=600&auto=format&fit=crop', category: 'livestock' },
-    { id: 11, name: 'Rose Flower', seller: 'Quality Seeds Co', price: 800, unit: 'per 10kg', rating: 5, image: 'https://images.unsplash.com/photo-1523437237164-d442d57cc3c9?w=600&auto=format&fit=crop', category: 'Hoticulture' },
+    { id: 11, name: 'Rose Flower', seller: 'Quality Seeds Co', price: 800, unit: 'per 10kg', rating: 5, image: 'https://images.unsplash.com/photo-1523437237164-d442d57cc3c9?w=600&auto=format&fit=crop', category: 'Horticulture' },
     { id: 12, name: 'Chicks', seller: 'AgriExperts', price: 100, unit: 'per chick', rating: 5, image: 'https://images.unsplash.com/photo-1589923188651-268a9765e432?w=600&auto=format&fit=crop', category: 'poultry' }
 ];
 
@@ -56,7 +57,12 @@ const MarketplacePage: React.FC = () => {
     const [cartCount, setCartCount] = useState(0);
     const productsPerPage = 6;
 
-    // Simulate API call to fetch more products
+    // Update cartCount when cartItems change
+    useEffect(() => {
+        setCartCount(cartItems.reduce((sum, item) => sum + item.quantity, 0));
+    }, [cartItems]);
+
+    //API call to fetch more products
     const fetchMoreProducts = async (): Promise<LoadMoreResponse> => {
         return new Promise((resolve) => {
             setTimeout(() => {
@@ -133,9 +139,8 @@ const MarketplacePage: React.FC = () => {
             }
             return [...prev, { ...product, quantity: 1 }];
         });
-        setCartCount(prev => prev + 1);
         setNotification(`"${product.name}" added successfully to your cart`);
-        setTimeout(() => setNotification(''), 30000);
+        setTimeout(() => setNotification(''), 3000);
     };
     
     const handleUpdateQuantity = (itemId: number, quantity: number) => {
@@ -174,20 +179,20 @@ const MarketplacePage: React.FC = () => {
             'seeds': 'secondary',
             'livestock': 'danger',
             'poultry': 'dark',
-            'Hoticulture': 'success'
+            'Horticulture': 'success'
         };
         return colors[category] || 'secondary';
     };
 
     return (
-        <div className="market-place">
-            <div style={{ backgroundColor: 'grey', minHeight: '100vh' }}>
-                <Container fluid className="py-3 px-3" style={{ backgroundColor: '#EEEEEE' }}>
+        <div className="mkt-marketplace">
+            <div className="mkt-bg-container">
+                <Container fluid className="mkt-container-fluid py-4 px-0" style={{backgroundColor: "#efeeeeff"}}>
                     {/* Header Section */}
-                   {/* Header Section <Row className="mb-4">
+                    <Row className="mkt-header-row mb-4">
                         <Col xs={12}>
-                            <h2 className="fw-bold mb-2 fs-3 fs-md-2">Market Place</h2>
-                            <p className="text-muted mb-0 d-none d-md-block">
+                            <h2 className="mkt-title fw-bold mb-2">Market Place</h2>
+                            <p className="mkt-subtitle text-muted mb-0 d-none d-md-block">
                                 Discover quality farming products, services, and equipment
                             </p>
                         </Col>
@@ -195,53 +200,54 @@ const MarketplacePage: React.FC = () => {
                     
                     {/* Notification */}
                     {notification && (
-                        <Row className="mb-3">
+                        <Row className="mkt-notification-row mb-3">
                             <Col xs={12}>
-                                <Alert variant="success" className="d-flex align-items-center py-2">
-                                    <FaRegCheckCircle className="me-2" />
-                                    <span>{notification}</span>
+                                <Alert variant="success" className="mkt-notification-alert d-flex align-items-center py-2 mb-3">
+                                    <FaRegCheckCircle className="mkt-check-icon me-0 me-sm-2" />
+                                    <span className="mkt-notification-text">{notification}</span>
                                 </Alert>
                             </Col>
                         </Row>
                     )}
 
                     {/* Controls Section */}
-                    <Row className="mb-4">
-                        <Col xs={12} lg={6} className="mb-3 mb-lg-0">
-                            <div className="d-flex flex-wrap gap-3 align-items-center">
+                    <Row className="mkt-controls-row mb-4">
+                        <Col xs={12} lg={6} className="mkt-controls-left mb-3 mb-lg-0">
+                            <div className="mkt-nav-links d-flex gap-4 align-items-center">
                                 <Button 
                                     variant="link" 
-                                    className="text-dark p-0 text-decoration-none d-flex align-items-center" 
+                                    className="mkt-track-order-btn text-dark p-0 text-decoration-none d-flex align-items-center" 
                                     onClick={() => navigate('track-order')}
                                 >
-                                    <FiPackage className="me-1" size={14} /> 
-                                    <span className="fw-semibold">Track Order</span>
+                                    <FiPackage className="mkt-track-icon me-2" size={16} /> 
+                                    <span className="mkt-track-text fw-normal">Track Order</span>
                                 </Button>
                                 <Button 
                                     variant="link" 
-                                    className="text-dark p-0 text-decoration-none d-flex align-items-center position-relative" 
+                                    className="mkt-cart-btn text-dark p-0 text-decoration-none d-flex align-items-center position-relative" 
                                     onClick={() => setShowCart(true)}
                                 >
-                                    <FiShoppingCart className="me-1" size={14} /> 
-                                    <span className="fw-semibold">My Cart</span>
-                                    {cartItems.length > 0 && (
+                                     {cartCount > 0 && (
                                         <Badge 
-                                            bg="success" 
-                                            className="position-absolute top-0 start-100 translate-middle rounded-pill"
-                                            style={{ backgroundColor: '#556B2F' }}
+                                            bg="#556B2F" 
+                                            className="mkt-cart-badge position-relative mb-3 rounded-pill"
                                         >
-                                            {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+                                            {cartCount}
                                         </Badge>
                                     )}
+                                    <FiShoppingCart className="mkt-cart-icon me-2" size={16} /> 
+                                    <span className="mkt-cart-text fw-normal">My Cart</span>
+                                
                                 </Button>
                             </div>
                         </Col>
-                        <Col xs={12} lg={6}>
-                            <div className="d-flex flex-column flex-sm-row gap-3 justify-content-lg-end">
+                        <Col xs={12} lg={6} className="mkt-controls-right">
+                            <div className="mkt-controls-wrapper d-flex gap-3 justify-content-lg-end align-items-center">
                                 <Form.Select 
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
-                                    style={{ maxWidth: '250px' }}
+                                    className="mkt-sort-select"
+                                    style={{ maxWidth: '200px' }}
                                 >
                                     <option value="rating">Sort by: Best Ratings</option>
                                     <option value="price-low">Price: Low to High</option>
@@ -253,17 +259,17 @@ const MarketplacePage: React.FC = () => {
                                         variant="outline-success"
                                         onClick={handleLoadMore}
                                         disabled={loading}
-                                        className="d-flex align-items-center justify-content-center"
+                                        className="mkt-load-more-btn d-flex align-items-center justify-content-center"
                                         style={{ minWidth: '120px' }}
                                     >
                                         {loading ? (
                                             <>
-                                                <Spinner size="sm" className="me-2" />
+                                                <Spinner size="sm" className="mkt-spinner me-2" />
                                                 Loading...
                                             </>
                                         ) : (
                                             <>
-                                                <FiRefreshCw className="me-2" />
+                                                <FiRefreshCw className="mkt-refresh-icon me-2" />
                                                 Load More
                                             </>
                                         )}
@@ -275,9 +281,9 @@ const MarketplacePage: React.FC = () => {
 
                     {/* Error Alert */}
                     {error && (
-                        <Row className="mb-3">
+                        <Row className="mkt-error-row mb-3">
                             <Col xs={12}>
-                                <Alert variant="danger" dismissible onClose={() => setError(null)}>
+                                <Alert variant="danger" dismissible onClose={() => setError(null)} className="mkt-error-alert">
                                     {error}
                                 </Alert>
                             </Col>
@@ -285,74 +291,65 @@ const MarketplacePage: React.FC = () => {
                     )}
 
                     {/* Products Grid */}
-                    <Row xs={1} sm={2} lg={3} xl={3} className="g-4 mb-5">
+                    <Row xs={1} sm={2} lg={3} className="mkt-products-grid g-4 mb-5">
                         {currentProducts.map(product => (
-                            <Col key={product.id}>
-                                <Card className="card-img-top h-100 shadow-sm border-0 overflow-hidden">
+                            <Col key={product.id} className="mkt-product-col">
+                                <Card className="mkt-product-card h-100 shadow-sm border-0">
                                     <div 
-                                        className="card-img-top position-relative overflow-hidden mb-3"
-                                        style={{ cursor: 'pointer', height: '200px' }}
+                                        className="mkt-card-img-container position-relative"
                                         onClick={() => handleProductClick(product.id)}
                                     >
                                         <img 
                                             src={product.image} 
                                             alt={product.name}
-                                            className="w-100 h-100 p"
-                                            style={{
-                                                objectFit: 'cover',
-                                                transition: 'transform 0.3s ease',
-                                                position: 'absolute',
-                                                top: 0,
-                                                left: 0,
-                                                right: 0
-                                            }}
+                                            className="mkt-card-img w-100"
                                             onError={(e) => {
                                                 e.currentTarget.src = 'https://via.placeholder.com/400x300?text=No+Image';
                                             }}
                                         />
-                                        <div className="position-absolute top-0 end-0 m-2">
+                                        <div className="mkt-category-badge-container position-absolute top-0 end-0 m-2">
                                             <Badge 
                                                 bg={getCategoryBadgeColor(product.category)}
-                                                className="text-capitalize"
+                                                className="mkt-category-badge text-capitalize"
                                             >
                                                 {product.category}
                                             </Badge>
                                         </div>
                                     </div>
-                                    <Card.Body className="d-flex flex-column p-0 text-start">
-                                        <Card.Title className="fs-5 mb-1 text-truncate">
+                                    <Card.Body className="mkt-card-body d-flex flex-column p-3">
+                                        <Card.Title className="mkt-product-name h5 mb-1 text-truncate">
                                             {product.name}
                                         </Card.Title>
-                                        <Card.Text className="text small mb-2" style={{ color: '#556B2F' }}>
+                                        <Card.Text className="mkt-seller-name text-muted small mb-2">
                                             {product.seller}
                                         </Card.Text>
-                                        <div className="text-warning mb-2" style={{ fontSize: '0.9rem' }}>
+                                        <div className="mkt-rating text-warning mb-2">
                                             {'★'.repeat(product.rating)}{'☆'.repeat(5 - product.rating)}
                                         </div>
-                                        <Card.Text className="fw-bold mb-3">
-                                            <FiTag className="text me-2" />
-                                            KES {product.price.toLocaleString()} 
-                                            <span className="fw-semibold text ms-1">{product.unit}</span>
-                                        </Card.Text>
-                                        <div className="mt-auto d-flex column-flex align-items-center justify-content-between">
-                                            <Row className="g-5 px-2">
-                                                <Col xs={6} sm={6}>
+                                        <div className="mkt-price-container d-flex align-items-center mb-3">
+                                            <FiTag className="mkt-price-icon me-1" size={14} />
+                                            <span className="mkt-price fw-bold">
+                                                KES {product.price.toLocaleString()}
+                                            </span>
+                                            <span className="mkt-unit text-muted ms-1">{product.unit}</span>
+                                        </div>
+                                        <div className="mkt-buttons-container mt-auto">
+                                            <Row className="mkt-buttons-row g-5">
+                                                <Col xs={6}>
                                                     <Button 
                                                         variant="success" 
                                                         onClick={(e) => {
                                                             e.stopPropagation();
                                                             handleAddToCart(product);
                                                         }}
-                                                        className="w-100 d-flex align-items-center justify-content-center"
-                                                        style={{ backgroundColor: '#556B2F', borderColor: '#556B2F' }}
+                                                        className="mkt-add-to-cart-btn w-100 d-flex align-items-center justify-content-center"
                                                         size="sm"
                                                     >
-                                                        <FiShoppingCart className="me-0" size={14} />
-                                                        <span className="d-none d-sm-inline">Add to Cart</span>
-                                                        <span className="d-sm-none">Add to Cart</span>
+                                                        <FiShoppingCart className="mkt-cart-btn-icon me-1" size={14} />
+                                                        <span className="mkt-cart-btn-text">Add to Cart</span>
                                                     </Button>
                                                 </Col>
-                                                <Col xs={6} sm={6}>
+                                                <Col xs={6}>
                                                     <Button 
                                                         variant="outline-warning" 
                                                         onClick={(e) => {
@@ -360,12 +357,11 @@ const MarketplacePage: React.FC = () => {
                                                             setSelectedProduct(product); 
                                                             setShowGiftModal(true);
                                                         }}
-                                                        className="w-100 d-flex align-items-center justify-content-center"
+                                                        className="mkt-gift-btn w-100 d-flex align-items-center justify-content-center"
                                                         size="sm"
                                                     >
-                                                        <FiGift className="me-0" size={14} />
-                                                        <span className="d-none d-sm-inline">Gift This</span>
-                                                        <span className="d-sm-none">Gift This</span>
+                                                        <FiGift className="mkt-gift-icon me-1" size={14} />
+                                                        <span className="mkt-gift-text">Gift This</span>
                                                     </Button>
                                                 </Col>
                                             </Row>
@@ -378,8 +374,8 @@ const MarketplacePage: React.FC = () => {
                     
                     {/* Pagination */}
                     {totalPages > 1 && (
-                        <Row className="mt-5">
-                            <Col xs={12} className="d-flex justify-content-center">
+                        <Row className="mkt-pagination-row mt-5">
+                            <Col xs={12} className="mkt-pagination-col d-flex justify-content-center">
                                 <Pagination 
                                     currentPage={currentPage} 
                                     totalPages={100} 
@@ -391,9 +387,9 @@ const MarketplacePage: React.FC = () => {
 
                     {/* No More Products Message */}
                     {!hasMoreProducts && products.length > initialProducts.length && (
-                        <Row className="mt-4">
-                            <Col xs={12} className="text-center">
-                                <p className="text-muted">
+                        <Row className="mkt-no-more-row mt-4">
+                            <Col xs={12} className="mkt-no-more-col text-center">
+                                <p className="mkt-no-more-text text-muted">
                                     🎉 You've seen all available products! Check back later for new items.
                                 </p>
                             </Col>
@@ -419,15 +415,7 @@ const MarketplacePage: React.FC = () => {
                 product={selectedProduct}
                 onSendGift={handleSendGift}
             />
-             <style> {`
-                .card-img-top {
-                    height: 200px;
-                    object-fit: cover;
-                    border-top-left-radius: 1rem;
-                    border-top-right-radius: 1rem;
-                }
-            `}
-        </style>
+            
         </div>
     );
 };

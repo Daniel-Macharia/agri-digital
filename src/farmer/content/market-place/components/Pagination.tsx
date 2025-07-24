@@ -137,7 +137,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
                         backgroundColor: '#6B8E23',
                         borderColor: '#6B8E23',
                         fontWeight: '300',
-                        //position: 'sticky',
+                        position: 'sticky',
                     }}
                 >
                     Next

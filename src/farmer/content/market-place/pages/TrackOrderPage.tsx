@@ -35,7 +35,9 @@ const TrackOrderPage: React.FC = () => {
         return (
             <div style={{ backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
                 {/* Back button at extreme left margin - for no order condition */}
-                <div className="pt-3" style={{ paddingLeft: '15px' }}>
+                <div className="pt-3" style={{
+                     paddingLeft: '15px',
+                     }}>
                     <Button 
                         variant="link" 
                         onClick={() => navigate(-1)} 
@@ -45,13 +47,23 @@ const TrackOrderPage: React.FC = () => {
                         <FiArrowLeft className="me-2" /> Back
                     </Button>
                 </div>
-                <Container style={{paddingLeft: '100px'}}>
-                    <div className="text-center py-5">
+                <Container style={{paddingLeft: '0px'}}>
+                    <div className="text-fit"
+                        style={{ maxWidth: '1200px', minHeight: '800px', margin: '0 auto', 
+                        backgroundImage: "url('https://images.unsplash.com/photo-1547889249-c100483858cd?w=600&auto=format&fit=crop&q=80')",
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+
+                        }}>
+                        <div className='text-center py-5' style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}>
                         <h4>Order Not Found</h4>
-                        <p className="text-muted">It seems you navigated to this page directly without an order. Please go back to the marketplace and try again.</p>
+                        <p className="text-dark">It seems you navigated to this page directly without an order. Please go back to the marketplace and try again.</p>
+                        <img src="https://images.unsplash.com/photo-1547889249-c100483858cd?w=600&auto=format&fit=crop&q=80" alt="" sizes='1000px' />
                         <Button variant="primary" onClick={() => navigate('../')}>
                             Go to Marketplace
                         </Button>
+                         </div>   
                     </div>
                 </Container>
             </div>

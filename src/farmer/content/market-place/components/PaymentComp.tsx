@@ -1,30 +1,31 @@
 import React, { useState } from 'react';
-import { Modal, Button, Form, Alert } from 'react-bootstrap';
+import { Alert, Button, Form, Container, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { PaymentData } from '../types';
 
-interface PaymentModalProps {
-    show: boolean;
-    onHide: () => void;
-    onPaymentSuccess: (paymentData: PaymentData) => void;
-    total: number;
-    // Add these props to get order details
-    orderData?: {
-        cartItems: any[];
-        deliveryMethod: string;
-        deliveryDate: string;
-        tipAmount: string | number;
-        isGift?: boolean;
-        giftData?: any;
-    };
+interface PaymentData {
+    paymentMethod: string;
+    mpesaPhone?: string;
+    cardNumber?: string;
+    cardholderName?: string;
+    expiryDate?: string;
+    cvv?: string;
+    barterDescription?: string;
 }
 
-const PaymentModal: React.FC<PaymentModalProps> = ({ 
-    show, 
-    onHide, 
+interface PaymentPageProps {
+    onPaymentSuccess: (paymentData: PaymentData) => void;
+    total: number;
+    title?: string;
+    description?: string;
+    onCancel?: () => void;
+}
+
+const PaymentPage: React.FC<PaymentPageProps> = ({ 
     onPaymentSuccess, 
     total,
-    orderData 
+    title = "Payment",
+    description,
+    onCancel
 }) => {
     const navigate = useNavigate();
     const [selectedPayment, setSelectedPayment] = useState('');
@@ -119,13 +120,6 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
         return true;
     };
 
-    const generateTrackingNumber = () => {
-        const prefix = 'KAA';
-        const random = Math.floor(Math.random() * 999) + 100;
-        const suffix = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-        return `${prefix}${random}${suffix}`;
-    };
-
     const handleSubmit = () => {
         if (!validateForm()) return;
 
@@ -136,46 +130,16 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
             ...(selectedPayment === 'barter' && { barterDescription })
         };
 
-        // Create complete order object for tracking
-        const completeOrder = {
-            id: Date.now(), // Generate unique order ID
-            items: orderData?.cartItems || [],
-            status: 'Processing' as const,
-            totalAmount: total,
-            orderDate: new Date().toLocaleDateString('en-GB'),
-            trackingNumber: generateTrackingNumber(),
-            paymentMethod: selectedPayment,
-            deliveryMethod: orderData?.deliveryMethod || 'courier',
-            deliveryDate: orderData?.deliveryDate || '',
-            tipAmount: orderData?.tipAmount || 0,
-            isGift: orderData?.isGift || false,
-            giftData: orderData?.giftData || null,
-            seller: orderData?.cartItems?.[0]?.seller || 'AgriFarmer Limited',
-            deliveryAddress: 'Your default address', // You can get this from user profile
-            estimatedDelivery: 'Within 2-3 business days',
-            // Add payment details
-            paymentDetails: paymentData
-        };
-
-        // Call the original success handler
+        // Call the success handler
         onPaymentSuccess(paymentData);
-        
-        // Close the modal
-        onHide();
-        
-        // Show success message
-        const message = orderData?.isGift 
-            ? `Gift sent successfully to ${orderData.giftData?.recipient}!` 
-            : "Order placed successfully!";
-        
-        // Navigate to track order page with complete order data
-        setTimeout(() => {
-            alert(message);
-            navigate('../track-order', { 
-                state: { order: completeOrder },
-                replace: true 
-            });
-        }, 100);
+    };
+
+    const handleCancel = () => {
+        if (onCancel) {
+            onCancel();
+        } else {
+            navigate(-1); // Go back to previous page
+        }
     };
 
     const formatCardNumber = (value: string) => {
@@ -203,6 +167,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
 
     const renderPaymentOption = (method: string, icon: React.ReactNode, label: string, brandIcon?: React.ReactNode) => (
         <div 
+            key={method}
             className={`payment-option ${selectedPayment === method ? 'selected' : ''}`}
             onClick={() => handlePaymentSelect(method)}
         >
@@ -225,12 +190,6 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
         </div>
     );
 
-    const CloseIcon = () => (
-        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-        </svg>
-    );
-
     const MpesaIcon = () => (
         <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
             <path d="M15.5 2C13.5 2 12 3.5 12 5.5c0 1.26.64 2.4 1.69 3.07L12 16l-1.69-7.43C11.36 7.9 12 6.76 12 5.5 12 3.5 10.5 2 8.5 2S5 3.5 5 5.5c0 1.26.64 2.4 1.69 3.07L8 16h8l1.31-7.43C18.36 7.9 19 6.76 19 5.5 19 3.5 17.5 2 15.5 2z"/>
@@ -238,10 +197,10 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
     );
 
     const CreditCardIcon = () => (
-    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.11-.9-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
-    </svg>
-);
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.11-.9-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+        </svg>
+    );
 
     const WalletIcon = () => (
         <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
@@ -251,10 +210,10 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
     );
 
     const BarterIcon = () => (
-    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
-    </svg>
-);
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+        </svg>
+    );
 
     const FriendIcon = () => (
         <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
@@ -263,290 +222,311 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
     );
 
     return (
-        <Modal show={show} onHide={onHide} centered size="lg" className="payment-modal">
-            <Modal.Header className="border-0 pb-0">
-                <Modal.Title className="modal-title">Choose Payment Method</Modal.Title>
-                <Button 
-                    variant="link" 
-                    onClick={onHide}
-                    className="p-0 text-muted close-btn"
-                    style={{ border: 'none', background: 'none' }}
-                >
-                    <CloseIcon />
-                </Button>
-            </Modal.Header>
-            
-            <Modal.Body className="pt-2">
-                {error && (
-                    <Alert variant="danger" dismissible onClose={() => setError('')} className="error-alert">
-                        {error}
-                    </Alert>
-                )}
-
-                <div className="payment-options">
-                    {renderPaymentOption(
-                        'mpesa',
-                        <MpesaIcon />,
-                        'Mpesa',
-                        <div className="mpesa-brand">
-                            M-PESA
-                        </div>
-                    )}
-
-                    {renderPaymentOption(
-                        'card',
-                        <CreditCardIcon />,
-                        'Credit Card',
-                        <div className="d-flex gap-1">
-                            <div className="visa-brand">
-                                VISA
+        <Container className="py-4">
+            <div className="row justify-content-center">
+                <div className="col-lg-6 col-md-8">
+                    <Card className="shadow-sm">
+                        <Card.Header className="bg-white border-0 pt-4 pb-0">
+                            <div className="d-flex justify-content-between align-items-center">
+                                <h4 className="payment-title mb-0">{title}</h4>
+                                <Button 
+                                    variant="outline-secondary" 
+                                    size="sm"
+                                    onClick={handleCancel}
+                                    className="cancel-btn"
+                                >
+                                    Cancel
+                                </Button>
                             </div>
-                            <div className="mastercard-brand">
-                                MC
+                            {description && (
+                                <p className="text-muted mt-2 mb-0">{description}</p>
+                            )}
+                        </Card.Header>
+                        
+                        <Card.Body className="pt-3">
+                            <div className="text-center mb-4">
+                                <h5 className="payment-amount">
+                                    Total Amount: <span className="text-success fw-bold">KES {total.toFixed(2)}</span>
+                                </h5>
                             </div>
-                        </div>
-                    )}
 
-                    {renderPaymentOption(
-                        'wallet',
-                        <WalletIcon />,
-                        'Wallet',
-                        <div className="wallet-brand">
-                            W
-                        </div>
-                    )}
+                            {error && (
+                                <Alert variant="danger" dismissible onClose={() => setError('')} className="error-alert">
+                                    {error}
+                                </Alert>
+                            )}
 
-                    {renderPaymentOption(
-                        'barter',
-                        <BarterIcon />,
-                        'Barter Wallet',
-                        <div className="barter-icon">
-                            🔄
-                        </div>
-                    )}
+                            <div className="payment-options">
+                                {renderPaymentOption(
+                                    'mpesa',
+                                    <MpesaIcon />,
+                                    'M-Pesa',
+                                    <div className="mpesa-brand">
+                                        M-PESA
+                                    </div>
+                                )}
 
-                    {renderPaymentOption(
-                        'friend',
-                        <FriendIcon />,
-                        'Ask a Friend to Pay',
-                        <div className="friend-icon">
-                            👥
-                        </div>
-                    )}
+                                {renderPaymentOption(
+                                    'card',
+                                    <CreditCardIcon />,
+                                    'Credit Card',
+                                    <div className="d-flex gap-1">
+                                        <div className="visa-brand">
+                                            VISA
+                                        </div>
+                                        <div className="mastercard-brand">
+                                            MC
+                                        </div>
+                                    </div>
+                                )}
+
+                                {renderPaymentOption(
+                                    'wallet',
+                                    <WalletIcon />,
+                                    'Wallet',
+                                    <div className="wallet-brand">
+                                        W
+                                    </div>
+                                )}
+
+                                {renderPaymentOption(
+                                    'barter',
+                                    <BarterIcon />,
+                                    'Barter Wallet',
+                                    <div className="barter-icon">
+                                        🔄
+                                    </div>
+                                )}
+
+                                {renderPaymentOption(
+                                    'friend',
+                                    <FriendIcon />,
+                                    'Ask a Friend to Pay',
+                                    <div className="friend-icon">
+                                        👥
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Payment Details Forms */}
+                            {selectedPayment === 'mpesa' && (
+                                <div className="payment-form">
+                                    <Form.Group className="mb-3">
+                                        <Form.Label className="form-label">Phone Number</Form.Label>
+                                        <Form.Control
+                                            type="tel"
+                                            placeholder="Enter phone number (e.g., 0712345678)"
+                                            value={mpesaPhone}
+                                            onChange={(e) => setMpesaPhone(e.target.value)}
+                                            className="form-input"
+                                            required
+                                        />
+                                        <Form.Text className="form-text">
+                                            Enter your M-Pesa registered phone number
+                                        </Form.Text>
+                                    </Form.Group>
+                                </div>
+                            )}
+
+                            {selectedPayment === 'card' && (
+                                <div className="payment-form">
+                                    <Form.Group className="mb-3">
+                                        <Form.Label className="form-label">Card Number</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="1234 5678 9012 3456"
+                                            value={cardDetails.cardNumber}
+                                            onChange={handleCardNumberChange}
+                                            className="form-input"
+                                            maxLength={19} // 16 digits + 3 spaces
+                                            required
+                                        />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label className="form-label">Cardholder Name</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="John Doe"
+                                            value={cardDetails.cardholderName}
+                                            onChange={(e) => setCardDetails(prev => ({ ...prev, cardholderName: e.target.value.toUpperCase() }))}
+                                            className="form-input"
+                                            required
+                                        />
+                                    </Form.Group>
+                                    <div className="row">
+                                        <div className="col-6">
+                                            <Form.Group>
+                                                <Form.Label className="form-label">Expiry Date</Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder="MM/YY"
+                                                    value={cardDetails.expiryDate}
+                                                    onChange={handleExpiryDateChange}
+                                                    className="form-input"
+                                                    maxLength={5}
+                                                    required
+                                                />
+                                            </Form.Group>
+                                        </div>
+                                        <div className="col-6">
+                                            <Form.Group>
+                                                <Form.Label className="form-label">CVV</Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder="123"
+                                                    value={cardDetails.cvv}
+                                                    onChange={(e) => {
+                                                        const value = e.target.value.replace(/\D/g, '');
+                                                        if (value.length <= 4) {
+                                                            setCardDetails(prev => ({ ...prev, cvv: value }));
+                                                        }
+                                                    }}
+                                                    className="form-input"
+                                                    maxLength={4}
+                                                    required
+                                                />
+                                            </Form.Group>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {selectedPayment === 'wallet' && (
+                                <div className="payment-form">
+                                    <Form.Group>
+                                        <Form.Label className="form-label">Wallet Balance</Form.Label>
+                                        <Form.Select className="form-input">
+                                            <option>Current Balance: KES 2,500.00</option>
+                                            <option>Use partial balance</option>
+                                        </Form.Select>
+                                    </Form.Group>
+                                </div>
+                            )}
+
+                            {selectedPayment === 'barter' && (
+                                <div className="payment-form">
+                                    <Form.Group>
+                                        <Form.Label className="form-label">Barter Details</Form.Label>
+                                        <Form.Control
+                                            as="textarea"
+                                            rows={4}
+                                            placeholder="Describe what you're offering in exchange (e.g., 5kg of maize, farm labor for 2 days, etc.)"
+                                            value={barterDescription}
+                                            onChange={(e) => setBarterDescription(e.target.value)}
+                                            className="form-input"
+                                            style={{ resize: 'vertical' }}
+                                            required
+                                        />
+                                    </Form.Group>
+                                </div>
+                            )}
+
+                            {selectedPayment === 'friend' && (
+                                <div className="mt-3">
+                                    <div className="text-center mb-3">
+                                        <p className="fw-bold mb-2">Payment Amount: KES {total.toFixed(0)}</p>
+                                    </div>
+                                    <div className="d-grid mb-3 d-flex justify-content-center mt-3 col-12">
+                                        <Button 
+                                            variant="success" 
+                                            className="text-nowrap fw-bold btn btn-primary w-50"
+                                            style={{ whiteSpace: 'nowrap'}}
+                                        >
+                                            Share to friends
+                                        </Button>
+                                    </div>
+                                    <div className="d-flex justify-content-around">
+                                        <div className="text-center">
+                                            <div className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
+                                                 style={{ width: '40px', height: '40px', backgroundColor: '#25D366', color: 'white', border: 'none' }}>
+                                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.531 3.542"/>
+                                                </svg>
+                                            </div>
+                                            <small className="d-block text-muted">WhatsApp</small>
+                                        </div>
+                                        <div className="text-center">
+                                            <div className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
+                                                 style={{ width: '40px', height: '40px', backgroundColor: '#0084FF', color: 'white', border: 'none' }}>
+                                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M12 0C5.374 0 0 4.975 0 11.111c0 3.497 1.745 6.616 4.472 8.652V24l4.086-2.242c1.09.301 2.246.464 3.442.464 6.626 0 12-4.974 12-11.111C24 4.975 18.626 0 12 0z"/>
+                                                </svg>
+                                            </div>
+                                            <small className="d-block text-muted">Messenger</small>
+                                        </div>
+                                        <div className="text-center">
+                                            <div className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
+                                                 style={{ width: '40px', height: '40px', backgroundColor: '#34B7F1', color: 'white', border: 'none' }}>
+                                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                                                </svg>
+                                            </div>
+                                            <small className="d-block text-muted">SMS</small>
+                                        </div>
+                                        <div className="text-center">
+                                            <div className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
+                                                 style={{ width: '40px', height: '40px', backgroundColor: '#6c757d', color: 'white', border: 'none' }}>
+                                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                                                </svg>
+                                            </div>
+                                            <small className="d-block text-muted">Copy link</small>
+                                        </div>
+                                        <div className="text-center">
+                                            <div className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
+                                                 style={{ width: '40px', height: '40px', backgroundColor: '#28a745', color: 'white', border: 'none' }}>
+                                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                                                </svg>
+                                            </div>
+                                            <small className="d-block text-muted">More</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Action Buttons */}
+                            {selectedPayment && (
+                                <div className="d-grid gap-2 mt-4">
+                                    <Button 
+                                        variant="success" 
+                                        onClick={handleSubmit}
+                                        className="process-payment-btn"
+                                        size="lg"
+                                    >
+                                        Process Payment
+                                    </Button>
+                                </div>
+                            )}
+                        </Card.Body>
+                    </Card>
                 </div>
-
-                {/* Payment Details Forms */}
-                {selectedPayment === 'mpesa' && (
-                    <div className="payment-form">
-                        <Form.Group className="mb-3">
-                            <Form.Label className="form-label">Phone Number</Form.Label>
-                            <Form.Control
-                                type="tel"
-                                placeholder="Enter phone number (e.g., 0712345678)"
-                                value={mpesaPhone}
-                                onChange={(e) => setMpesaPhone(e.target.value)}
-                                className="form-input"
-                                required
-                            />
-                            <Form.Text className="form-text">
-                                Enter your M-Pesa registered phone number
-                            </Form.Text>
-                        </Form.Group>
-                    </div>
-                )}
-
-                {selectedPayment === 'card' && (
-                    <div className="payment-form">
-                        <Form.Group className="mb-3">
-                            <Form.Label className="form-label">Card Number</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="1234 5678 9012 3456"
-                                value={cardDetails.cardNumber}
-                                onChange={handleCardNumberChange}
-                                className="form-input"
-                                maxLength={19} // 16 digits + 3 spaces
-                                required
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label className="form-label">Cardholder Name</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="John Doe"
-                                value={cardDetails.cardholderName}
-                                onChange={(e) => setCardDetails(prev => ({ ...prev, cardholderName: e.target.value.toUpperCase() }))}
-                                className="form-input"
-                                required
-                            />
-                        </Form.Group>
-                        <div className="row">
-                            <div className="col-6">
-                                <Form.Group>
-                                    <Form.Label className="form-label">Expiry Date</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="MM/YY"
-                                        value={cardDetails.expiryDate}
-                                        onChange={handleExpiryDateChange}
-                                        className="form-input"
-                                        maxLength={5}
-                                        required
-                                    />
-                                </Form.Group>
-                            </div>
-                            <div className="col-6">
-                                <Form.Group>
-                                    <Form.Label className="form-label">CVV</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="123"
-                                        value={cardDetails.cvv}
-                                        onChange={(e) => {
-                                            const value = e.target.value.replace(/\D/g, '');
-                                            if (value.length <= 4) {
-                                                setCardDetails(prev => ({ ...prev, cvv: value }));
-                                            }
-                                        }}
-                                        className="form-input"
-                                        maxLength={4}
-                                        required
-                                    />
-                                </Form.Group>
-                            </div>
-                        </div>
-                    </div>
-                )}
-
-                {selectedPayment === 'wallet' && (
-                    <div className="payment-form">
-                        <Form.Group>
-                            <Form.Label className="form-label">Wallet Balance</Form.Label>
-                            <Form.Select className="form-input">
-                                <option>Current Balance: KES 2,500.00</option>
-                                <option>Use partial balance</option>
-                            </Form.Select>
-                        </Form.Group>
-                    </div>
-                )}
-
-                {selectedPayment === 'barter' && (
-                    <div className="payment-form">
-                        <Form.Group>
-                            <Form.Label className="form-label">Barter Details</Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                rows={4}
-                                placeholder="Describe what you're offering in exchange (e.g., 5kg of maize, farm labor for 2 days, etc.)"
-                                value={barterDescription}
-                                onChange={(e) => setBarterDescription(e.target.value)}
-                                className="form-input"
-                                style={{ resize: 'vertical' }}
-                                required
-                            />
-                        </Form.Group>
-                    </div>
-                )}
-             {selectedPayment === 'friend' && (
-                    <div className="mt-3">
-                        <div className="text-center mb-3">
-                            <p className="fw-bold mb-2">Payment Amount: Ksh {total.toFixed(0)}</p>
-                        </div>
-                        <div className="d-grid mb-3 d-flex justify-content-center mt-3 col-12">
-                            <Button 
-                                variant="success" 
-                                className="text-nowrap fw-bold btn btn-primary w-50"
-                                style={{ whiteSpace: 'nowrap'}}
-                                
-                            >
-                                Share to friends
-                            </Button>
-                        </div>
-                        <div className="d-flex justify-content-around">
-                            <div className="text-center">
-                                <div className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
-                                     style={{ width: '40px', height: '40px', backgroundColor: '#25D366', color: 'white', border: 'none' }}>
-                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.531 3.542"/>
-                                    </svg>
-                                </div>
-                                <small className="d-block text-muted">WhatsApp</small>
-                            </div>
-                            <div className="text-center">
-                                <div className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
-                                     style={{ width: '40px', height: '40px', backgroundColor: '#0084FF', color: 'white', border: 'none' }}>
-                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 0C5.374 0 0 4.975 0 11.111c0 3.497 1.745 6.616 4.472 8.652V24l4.086-2.242c1.09.301 2.246.464 3.442.464 6.626 0 12-4.974 12-11.111C24 4.975 18.626 0 12 0z"/>
-                                    </svg>
-                                </div>
-                                <small className="d-block text-muted">Messenger</small>
-                            </div>
-                            <div className="text-center">
-                                <div className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
-                                     style={{ width: '40px', height: '40px', backgroundColor: '#34B7F1', color: 'white', border: 'none' }}>
-                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
-                                    </svg>
-                                </div>
-                                <small className="d-block text-muted">SMS</small>
-                            </div>
-                            <div className="text-center">
-                                <div className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
-                                     style={{ width: '40px', height: '40px', backgroundColor: '#6c757d', color: 'white', border: 'none' }}>
-                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-                                    </svg>
-                                </div>
-                                <small className="d-block text-muted">Copy link</small>
-                            </div>
-                            <div className="text-center">
-                                <div className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
-                                     style={{ width: '40px', height: '40px', backgroundColor: '#28a745', color: 'white', border: 'none' }}>
-                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
-                                    </svg>
-                                </div>
-                                <small className="d-block text-muted">More</small>
-                            </div>
-                        </div>
-                    </div>
-                )}
-
-                {/* Always show Place Order button when a payment method is selected */}
-                {selectedPayment && (
-                    <div className="d-grid mt-4">
-                        <Button 
-                            variant="success" 
-                            onClick={handleSubmit}
-                            className="place-order-btn w-100"
-                        >
-                            Place Order
-                        </Button>
-                    </div>
-                )}
-            </Modal.Body>
+            </div>
 
             <style>{`
-                .payment-modal .modal-dialog {
-                    max-width: 500px;
-                    margin: 1rem auto;
-                }
-
-                .payment-modal .modal-title {
-                    font-size: 1.25rem;
+                .payment-title {
+                    font-size: 1.5rem;
                     font-weight: bold;
                     color: #28a745;
                 }
 
-                .payment-modal .close-btn {
-                    text-decoration: none;
+                .payment-amount {
+                    font-size: 1.25rem;
+                    margin-bottom: 0;
                 }
 
-                .payment-modal .close-btn:hover {
-                    color: #dc3545 !important;
+                .cancel-btn {
+                    border-radius: 20px;
+                    padding: 0.375rem 1rem;
                 }
 
-                .payment-modal .error-alert {
+                .cancel-btn:hover {
+                    background-color: #dc3545;
+                    border-color: #dc3545;
+                    color: white;
+                }
+
+                .error-alert {
                     font-size: 0.875rem;
                     margin-bottom: 1rem;
                 }
@@ -655,8 +635,8 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
                     }
                 }
             `}</style>
-        </Modal>
+        </Container>
     );
 };
 
-export default PaymentModal;
+export default  PaymentPage;

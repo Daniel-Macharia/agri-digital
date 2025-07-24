@@ -497,8 +497,8 @@ const CheckoutPage: React.FC = () => {
                                         size="lg" 
                                         onClick={handleProceedToPayment}
                                         disabled={isSubmitting}
-                                        className="fw-bold pt-0 pb-1 d-flex align-items-center fit-content w-100 justify-content-center py-2 py-sm-0"
-                                        style={{ fontSize: '0.9rem' }}
+                                        className="fw-bold pt-03 pb-1 d-flex align-items-center fit-content w-100 justify-content-center py-2 py-sm-0"
+                                        style={{ fontSize: '1.5rem' }}
                                     >
                                         {isGift && <FiGift className="me-2" size={16} />}
                                         {isSubmitting ? 'Processing...' : (isGift ? 'Complete Gift Payment' : 'Proceed to Payment')}
