@@ -36,7 +36,7 @@ const Gestation = () => {
       {activeTab === 'pre' ? (
         <PreMatingForm onSaved={handleSaved} />
       ) : (
-        <PostMatingForm onSaved={handleSaved} />
+        <PostMatingForm />
       )}
     </div>
   );

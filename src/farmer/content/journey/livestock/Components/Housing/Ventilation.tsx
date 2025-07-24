@@ -69,7 +69,7 @@ const Ventilation: React.FC = () => {
         <Formik<FormValues>
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting, resetForm }: FormikHelpers<FormValues>) => {
+          onSubmit={(_values, { setSubmitting, resetForm }: FormikHelpers<FormValues>) => {
             setTimeout(() => {
               setShowSaved(true);
               setSubmitting(false);

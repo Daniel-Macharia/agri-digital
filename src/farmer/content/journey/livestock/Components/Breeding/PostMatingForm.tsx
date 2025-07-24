@@ -26,11 +26,7 @@ const initialValues = {
   additionalNotes: "",
 };
 
-interface Props {
-  onSaved: () => void;
-}
-
-const PostMatingForm: React.FC<Props> = ({ onSaved }) => {
+const PostMatingForm: React.FC = () => {
   const [showSaved, setShowSaved] = useState(false);
   const navigate = useNavigate();
 
@@ -58,7 +54,7 @@ const PostMatingForm: React.FC<Props> = ({ onSaved }) => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting, resetForm }) => {
+          onSubmit={(_values, { setSubmitting, resetForm }) => {
             setTimeout(() => {
               setShowSaved(true);
               setSubmitting(false);

@@ -66,7 +66,7 @@ const Vaccines: React.FC = () => {
         <Formik<FormValues>
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, { setSubmitting, resetForm }) => {
+          onSubmit={(_values, { setSubmitting, resetForm }) => {
             setTimeout(() => {
               setShowSaved(true);
               setSubmitting(false);
@@ -74,12 +74,7 @@ const Vaccines: React.FC = () => {
             }, 400);
           }}
         >
-          {({ isSubmitting, values, setFieldValue, resetForm }: {
-            isSubmitting: boolean;
-            values: FormValues;
-            setFieldValue: (field: keyof FormValues, value: any) => void;
-            resetForm: () => void;
-          }) => (
+          {({ isSubmitting, values, setFieldValue, resetForm }) => (
             <Form>
               {/* Identification */}
               <div className="row mb-3 align-items-center">

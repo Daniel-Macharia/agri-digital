@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import Activities from "../Feeds&Nuitrition/Activities";
 
 const Results = () => {
