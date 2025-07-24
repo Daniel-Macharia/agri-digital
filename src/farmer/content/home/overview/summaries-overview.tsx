@@ -47,7 +47,7 @@ const SummariesOverview: React.FC = () => {
             itemTitle: "Quality score", 
             itemCount: 4.8, 
             itemDesc: "Your rating is average. Improve to grow business.",
-            detailsUrl: FARMER_ROUTES.QUALITY_SCORE
+            detailsUrl: `.${FARMER_ROUTES.QUALITY_SCORE}`
         },
     ];
     return (<>
