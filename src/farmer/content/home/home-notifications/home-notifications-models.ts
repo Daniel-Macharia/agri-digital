@@ -1,13 +1,17 @@
 
-export interface Notification{
-    notificationType: "order" | "sponsorship"
+export interface NotificationProps{
+    receivedAt: string,
+    notificationDesc: string,
+    notificationType: "order" | "sponsorship" | "other"
 };
 
-export interface OrdertNotificationItemProps extends Notification{
+export interface GeneralNotificationProps extends NotificationProps{
+    notificationType: "other"
+}
+
+export interface OrdertNotificationItemProps extends NotificationProps{
     username: string,
-    receivedAt: string,
     orderItemName: string,
-    notificationDesc: string,
     orderBudget: number,
     orderUnitName: string,
     orderUnitCount: number,
@@ -15,12 +19,10 @@ export interface OrdertNotificationItemProps extends Notification{
     notificationType: "order"
 };
 
-export interface SponsorshipNotificationItemProps extends Notification{
+export interface SponsorshipNotificationItemProps extends NotificationProps{
     bankName: string,
     notificationTitle: string,
-    notificationDesc: string,
     sponsorshipAmount: number,
-    receivedAt: string,
     sponsorshipStatus: string,
     sponsorshipType: string,
     notificationType: "sponsorship"
