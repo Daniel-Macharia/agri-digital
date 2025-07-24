@@ -9,6 +9,8 @@ import DisplayCropDetails from "./crops/planting/display-crop-details";
 import RequestForTesting from "./crops/soil-testing/request-for-testing";
 import SelectFarmingEnvironment from "./crops/select-farming-environment";
 import ProjectInformation from "./projects/project-info";
+import { JOURNEY_ROUTES } from "./journey-routes";
+import { CROP_ROUTES } from "./crops/crop-routes";
 
 export default function Journey()
 {
@@ -16,20 +18,19 @@ export default function Journey()
         return (<>
         
         <Routes>
-            {/* <Route path="" element={<JourneyHome /> } /> */}
-            <Route path="" element={<Projects /> } />
-            <Route path="/info" element={<ProjectInformation /> } />
-            <Route path="/livestock/*" element={<Livestock />} />
+            <Route path={JOURNEY_ROUTES.ROOT} element={<Projects /> } />
+            <Route path={JOURNEY_ROUTES.INFO} element={<ProjectInformation /> } />
+            <Route path={JOURNEY_ROUTES.LIVESTOCK} element={<Livestock />} />
 
-            <Route path="/crops/assessment" element={<ProjectAssessment />} />
-            <Route path="/crops/request-for-service" element={<RequestForService />} />
-            <Route path="/crops/request-for-soil-testing" element={<RequestForTesting />} />
-            <Route path="/crops/display-crop-details" element={<DisplayCropDetails />} />
+            <Route path={`${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_ASSESSMENT}`} element={<ProjectAssessment />} />
+            <Route path={`${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_REQUEST_FOR_SERVICE}`} element={<RequestForService />} />
+            <Route path={`${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_REQUEST_FOR_SOIL_TESTING}`} element={<RequestForTesting />} />
+            <Route path={`${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_DISPLAY_CROP_DETAILS}`} element={<DisplayCropDetails />} />
 
-            <Route path="/crops/select-farming-environment" element={<SelectFarmingEnvironment />} />
-            <Route path="/crops/*"  element={<Crops />} />
+            <Route path={`${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_SELECT_FARMING_ENVIRONMENT}`} element={<SelectFarmingEnvironment />} />
+            <Route path={JOURNEY_ROUTES.CROPS_OTHER}  element={<Crops />} />
 
-            <Route path="/*" element={<NotFound />} />
+            <Route path={JOURNEY_ROUTES.OTHER} element={<NotFound />} />
 
 
         </Routes>

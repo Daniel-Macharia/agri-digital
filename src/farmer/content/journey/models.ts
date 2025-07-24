@@ -18,6 +18,7 @@ export interface ProjectReviewProps{
 };
 
 export interface LivestockProjectSummaryProps{
+    livestockId: number,
     livestockName: string,
     shortDescription: string
 };

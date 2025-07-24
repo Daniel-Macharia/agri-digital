@@ -13,27 +13,25 @@ const OnelineNotifications: React.FC = () => {
           "urgency": 0
         }
     ];
-    const render = () => {
-        return (<>
-        <div className="col-12 pb-0" >
-            <h3 className="col-12 h3-bold primary-text crops-start-aligned-text my-0 pb-0" >
-                Notifications
-            </h3>
-            <div className="col-12 mb-0" >
-                {
-                    onelineNotifications.map( notification => <div className="col-12">
-                        <OnelineNotificationItem 
-                        notificationDescription={notification.notificationDescription} 
-                        urgency={notification.urgency}
-                        />
-                        </div>)
-                }
-            </div>
+    
+    
+    return (<>
+    <div className="col-12 pb-0" >
+        <h3 className="col-12 h3-bold primary-text crops-start-aligned-text my-0 pb-0" >
+            Notifications
+        </h3>
+        <div className="col-12 mb-0" >
+            {
+                onelineNotifications.map( notification => <div className="col-12">
+                    <OnelineNotificationItem 
+                    notificationDescription={notification.notificationDescription} 
+                    urgency={notification.urgency}
+                    />
+                    </div>)
+            }
         </div>
-        </>);
-    };
-
-    return render();
+    </div>
+    </>);
 };
 
 export default OnelineNotifications;

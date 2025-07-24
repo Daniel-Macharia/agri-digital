@@ -52,24 +52,19 @@ const HistoricalRecords: React.FC = () => {
         {date: new Date().toDateString(), ph: 7, moisture: "45%", npk: "N: Low, P: Medium, K: Medium", height: 45, stage: "Germination"}
     ];
 
-    const render = () => {
-
-        return (<>
-        <div className="col-12 px-0 mx-0 mb-3">
-            <DataTable
-            className="col-12 mx-0"
-            title={"Historical Records"}
-            columns={columns}
-            data={data}
-            pagination
-            
-            
-            />
-        </div>
-        </>);
-    };
-
-    return render();
+    return (<>
+    <div className="col-12 px-0 mx-0 mb-3">
+        <DataTable
+        className="col-12 mx-0"
+        title={"Historical Records"}
+        columns={columns}
+        data={data}
+        pagination
+        
+        
+        />
+    </div>
+    </>);
 };
 
 export default HistoricalRecords;

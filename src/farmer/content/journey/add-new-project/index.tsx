@@ -83,118 +83,61 @@ export default function StartNewProjectModal( props: StartProjectProps){
         setLivestockName( livestockChosen );
     };
 
-    const render = ()=>{
-        return (<>
-        <Modal
-            show={props.show}
-            onHide={() => {
-                props.setShow(false);
-                setCropSelected(false);
-                setLivestockSelected(false);
-            } }
-            centered
-            className="modal-container"
-            >
+    
+    
+    return (<>
+    <Modal
+        show={props.show}
+        onHide={() => {
+            props.setShow(false);
+            setCropSelected(false);
+            setLivestockSelected(false);
+        } }
+        centered
+        className="modal-container"
+        >
 
-                <Modal.Header className="modal-header">
-                    <Modal.Title className="modal-title col-sm-12"
-                    style={{display: "flex", flexDirection: "column", alignItems: "center"}}
+            <Modal.Header className="modal-header">
+                <Modal.Title className="modal-title col-sm-12"
+                style={{display: "flex", flexDirection: "column", alignItems: "center"}}
+                >
+                    <img src="/assets/images/question.svg" />
+                    <p className="body-semibold">Project</p>
+                </Modal.Title>
+                
+            </Modal.Header>
+
+            <Modal.Body className="modal-body">
+                <div id="step-one" 
+                style={
+                    (cropSelected || livestockSelected) ?({ display: "none" }): ( {display: 'flex', flexDirection: "column", alignItems: "center"})}>
+                    <p>Ready to start your farming adventure ?</p>
+                    <p>Choose your journey</p>
+                </div>
+
+                
+                <div id="step-two-crops"
+                style={{display: cropSelected ? "flex" : "none"}}
+                >
+                    <Formik
+                    initialValues={cropInitialValues}
+                    validationSchema={cropValidationSchema}
+                    onSubmit={handleCropSubmitAction}
                     >
-                        <img src="/assets/images/question.svg" />
-                        <p className="body-semibold">Project</p>
-                    </Modal.Title>
-                    
-                </Modal.Header>
-
-                <Modal.Body className="modal-body">
-                    <div id="step-one" 
-                    style={
-                        (cropSelected || livestockSelected) ?({ display: "none" }): ( {display: 'flex', flexDirection: "column", alignItems: "center"})}>
-                        <p>Ready to start your farming adventure ?</p>
-                        <p>Choose your journey</p>
-                    </div>
-
-                    
-                    <div id="step-two-crops"
-                    style={{display: cropSelected ? "flex" : "none"}}
-                    >
-                        <Formik
-                        initialValues={cropInitialValues}
-                        validationSchema={cropValidationSchema}
-                        onSubmit={handleCropSubmitAction}
-                        >
-                        {({}) => (
-                            <Form>
-                                <div className="modal-input-group" >
-                                    <label className="modal-label" htmlFor="cropName" >
-                                        Crop Name
-                                    </label>
-
-                                    <Field
-                                    placeholder="Maize"
-                                    type="text"
-                                    name="cropName"
-                                    />
-                                </div>
-                                
-                                <div id="step-two" className="row col-sm-12"
-                                >
-                                    <div className="col-sm-12">
-                                        <Button
-                                        type="submit"
-                                        className="col-sm-12"
-
-                                        style={{margin: "opx"}}
-                                        >
-                                            Start Journey
-                                        </Button>
-                                    </div>
-                                </div>
-                            </Form>
-                        )}
-                    </Formik>
-                                </div>
-                    
-
-                    <div id="step-two-livestock"
-                    style={{display: livestockSelected ? "flex" : "none"}}
-                    >
-                        <Formik
-                        initialValues={livestockInitialValues}
-                        validationSchema={livestockValidationSchema}
-                        onSubmit={handleLivestockSubmitAction}
-                        >
-                        {({}) => (
-                            <Form>
-
-                                <div className="modal-input-group">
-                                    <label className="modal-input-label" htmlFor="livestockProjectName">
-                                        Project Name
-                                    </label>
-                                    <Field
-                                    type="text"
-                                    placeholder="livetock name here"
-                                    name="livestockProjectName"
-                                    />
-                                </div>
+                    {({}) => (
+                        <Form>
                             <div className="modal-input-group" >
-
-                                <label className="modal-label" htmlFor="livestockName" >
-                                    Select Livestock
+                                <label className="modal-label" htmlFor="cropName" >
+                                    Crop Name
                                 </label>
 
-
-                                <select
-                                name="livestockName"
-                                className="modal-input-field"
-                                onChange={handleLivestockValueChange}
-                                >
-                                    <option>SELECT</option>
-                                    <option>Cattle</option>
-                                    <option>Sheep</option>
-                                </select>
+                                <Field
+                                placeholder="Maize"
+                                type="text"
+                                name="cropName"
+                                />
                             </div>
-
+                            
                             <div id="step-two" className="row col-sm-12"
                             >
                                 <div className="col-sm-12">
@@ -208,48 +151,103 @@ export default function StartNewProjectModal( props: StartProjectProps){
                                     </Button>
                                 </div>
                             </div>
-                            </Form>
-                            )}
-                        </Formik>
-                    </div>
-                </Modal.Body>
+                        </Form>
+                    )}
+                </Formik>
+                            </div>
+                
 
-                <Modal.Footer className="modal-footer col-sm-12">
-                    <div id="step-one" className="col-sm-12"
-                    style={{ padding: '8px',
-                        display: (cropSelected || livestockSelected) ? "none" : 'flex', 
-                        flexDirection: 'row'}}
+                <div id="step-two-livestock"
+                style={{display: livestockSelected ? "flex" : "none"}}
+                >
+                    <Formik
+                    initialValues={livestockInitialValues}
+                    validationSchema={livestockValidationSchema}
+                    onSubmit={handleLivestockSubmitAction}
                     >
-                        <div className="col-sm-4"
-                        >
-                            <Button
-                            type="button"
-                            onClick={handleStartCropProject}
-                            className="col-sm-12"
-                            
-                            style={{margin: '0px'}}
+                    {({}) => (
+                        <Form>
+
+                            <div className="modal-input-group">
+                                <label className="modal-input-label" htmlFor="livestockProjectName">
+                                    Project Name
+                                </label>
+                                <Field
+                                type="text"
+                                placeholder="livetock name here"
+                                name="livestockProjectName"
+                                />
+                            </div>
+                        <div className="modal-input-group" >
+
+                            <label className="modal-label" htmlFor="livestockName" >
+                                Select Livestock
+                            </label>
+
+
+                            <select
+                            name="livestockName"
+                            className="modal-input-field"
+                            onChange={handleLivestockValueChange}
                             >
-                                Crops
-                            </Button>
+                                <option>SELECT</option>
+                                <option>Cattle</option>
+                                <option>Sheep</option>
+                            </select>
                         </div>
 
-                        <div className="col-sm-4 offset-4"
+                        <div id="step-two" className="row col-sm-12"
                         >
-                            <Button
-                            type="button"
-                            onClick={handleStartLivestockProject}
-                            className="col-sm-12"
+                            <div className="col-sm-12">
+                                <Button
+                                type="submit"
+                                className="col-sm-12"
 
-                            style={{margin: '0px'}}
-                            >
-                                Livestock
-                            </Button>
+                                style={{margin: "opx"}}
+                                >
+                                    Start Journey
+                                </Button>
+                            </div>
                         </div>
+                        </Form>
+                        )}
+                    </Formik>
+                </div>
+            </Modal.Body>
+
+            <Modal.Footer className="modal-footer col-sm-12">
+                <div id="step-one" className="col-sm-12"
+                style={{ padding: '8px',
+                    display: (cropSelected || livestockSelected) ? "none" : 'flex', 
+                    flexDirection: 'row'}}
+                >
+                    <div className="col-sm-4"
+                    >
+                        <Button
+                        type="button"
+                        onClick={handleStartCropProject}
+                        className="col-sm-12"
+                        
+                        style={{margin: '0px'}}
+                        >
+                            Crops
+                        </Button>
                     </div>
-                </Modal.Footer>
-            </Modal>
-        </>);
-    };
 
-    return render();
+                    <div className="col-sm-4 offset-4"
+                    >
+                        <Button
+                        type="button"
+                        onClick={handleStartLivestockProject}
+                        className="col-sm-12"
+
+                        style={{margin: '0px'}}
+                        >
+                            Livestock
+                        </Button>
+                    </div>
+                </div>
+            </Modal.Footer>
+        </Modal>
+    </>);
 }

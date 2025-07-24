@@ -5,6 +5,8 @@ import CropsNotification from "../crops-notification/crops-notification";
 import ManagementSummary from "../management/management-summary";
 import OnelineNotifications from "./oneline-notifications";
 import StorageInformation from "./storage-information";
+import { JOURNEY_ROUTES } from "../../journey-routes";
+import { CROP_ROUTES } from "../crop-routes";
 
 const PostHarvesting: React.FC = ()=>{
 
@@ -37,93 +39,91 @@ const PostHarvesting: React.FC = ()=>{
     ];
 
     const handleRequestForService = () => {
-        navigate("/farmer/projects/crops/request-for-service", {state: "/farmer/projects/crops/post-harvesting"});
+        navigate(`..${CROP_ROUTES.CROP_REQUEST_FOR_SERVICE}`, {state:`..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_POST_HARVESTING}`});
     };
 
     const handleContinueAction = () => {
-        navigate("/farmer/projects/crops/sales");
+        navigate(`..${CROP_ROUTES.CROP_SALES}`);
     };
-    const render = ()=>{
-        return (<>
-        <div className="col-12">
+    
+    
+    return (<>
+    <div className="col-12">
 
-            <div className="col-12 my-3">
-                <CropsNotification iconUrl={"/assets/images/warning.svg"} message={"Use ventilated plastic crates for tomatoes to reducee spoilage"} />
+        <div className="col-12 my-3">
+            <CropsNotification iconUrl={"/assets/images/warning.svg"} message={"Use ventilated plastic crates for tomatoes to reducee spoilage"} />
+        </div>
+
+        <div className="crops-container m-0">
+
+            <div className="col-12">
+                <div className="row justify-content-end my-2">
+                    <button className="col-12 col-md-4 crops-accept-button" 
+                    onClick={handleRequestForService}
+                    >
+                        Request for Service
+                    </button>
+                </div>
             </div>
 
-            <div className="crops-container m-0">
 
-                <div className="col-12">
-                    <div className="row justify-content-end my-2">
-                        <button className="col-12 col-md-4 crops-accept-button" 
-                        onClick={handleRequestForService}
-                        >
-                            Request for Service
-                        </button>
+            <div className="col-12">
+                <div className="row">
+                    <div className="col-12 col-md-7 mt-2" >
+                        <StorageInformation />
+                    </div>
+
+                    <div className="col-12 col-md-5 mt-2 p-1" >
+                        {
+                            sideSummaries.map( sideSummary => <div className="col-12 px-2">
+                                <ManagementSummary 
+                                title={sideSummary.title} 
+                                items={sideSummary.items} 
+                                />
+                            </div>)
+                        }
                     </div>
                 </div>
+            </div>
 
-
-                <div className="col-12">
-                    <div className="row">
-                        <div className="col-12 col-md-7 mt-2" >
-                            <StorageInformation />
-                        </div>
-
-                        <div className="col-12 col-md-5 mt-2 p-1" >
+            <div className="col-12 mt-2">
+                <div className="row">
+                    <div className="col-12 col-md-8" >
+                        <div className="row">
                             {
-                                sideSummaries.map( sideSummary => <div className="col-12 px-2">
-                                    <ManagementSummary 
-                                    title={sideSummary.title} 
-                                    items={sideSummary.items} 
-                                    />
+                                otherSummaries.map( otherSummary => <div className="col-12 col-md-6 px-2">
+                                    <ManagementSummary
+                                    title={otherSummary.title}
+                                    items={otherSummary.items} />
                                 </div>)
                             }
                         </div>
                     </div>
-                </div>
 
-                <div className="col-12 mt-2">
-                    <div className="row">
-                        <div className="col-12 col-md-8" >
-                            <div className="row">
-                                {
-                                    otherSummaries.map( otherSummary => <div className="col-12 col-md-6 px-2">
-                                        <ManagementSummary
-                                        title={otherSummary.title}
-                                        items={otherSummary.items} />
-                                    </div>)
-                                }
-                            </div>
-                        </div>
-
-                        <div className="col-12 col-md-4 crops-container bg-white pb-0" >
-                            <OnelineNotifications />
-                        </div>
+                    <div className="col-12 col-md-4 crops-container bg-white pb-0" >
+                        <OnelineNotifications />
                     </div>
                 </div>
-
-                <div className="col-12 mt-2">
-                    <ActivityAddAndReview />
-                </div>
-
-                <div className="col-12 mt-2">
-                    <div className="row justify-content-end" >
-                        <button 
-                        className="col-12 col-md-4 crops-accept-button"
-                        onClick={handleContinueAction}
-                        >
-                        Continue
-                        </button>
-                    </div>
-                </div>
-
             </div>
-        </div>
-        </>);
-    };
 
-    return render();
+            <div className="col-12 mt-2">
+                <ActivityAddAndReview />
+            </div>
+
+            <div className="col-12 mt-2">
+                <div className="row justify-content-end" >
+                    <button 
+                    className="col-12 col-md-4 crops-accept-button"
+                    onClick={handleContinueAction}
+                    >
+                    Continue
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </>);
 }
 
 export default PostHarvesting;

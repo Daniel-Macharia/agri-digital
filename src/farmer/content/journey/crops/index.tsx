@@ -12,30 +12,26 @@ import PostHarvesting from "./post-harvesting";
 
 import "react-datepicker/dist/react-datepicker.css";
 import NotFound from "../../../../common/exceptions/NotFound";
+import { CROP_ROUTES } from "./crop-routes";
 
 export default function Crops(){
 
-    const render = () => {
-        return (<>
-        <div className="col-12">
-            <CropsTopBar />
-            <div className="col-12"
-            >
-                <Routes>
-                    <Route path="/soil-testing" element={ <SoilTesting /> } />
-                    <Route path="/planting" element={ <Planting /> } />
-                    <Route path="/management" element={ <Management /> } />
-                    <Route path="/harvesting/*" element={ <Harvesting /> } />
-                    <Route path="/post-harvesting" element={ <PostHarvesting /> } />
-                    <Route path="/sales" element={ <Sales /> } />
+    return (<>
+    <div className="col-12">
+        <CropsTopBar />
+        <div className="col-12"
+        >
+            <Routes>
+                <Route path={CROP_ROUTES.CROP_SOIL_TESTING} element={ <SoilTesting /> } />
+                <Route path={CROP_ROUTES.CROP_PLANTING} element={ <Planting /> } />
+                <Route path={CROP_ROUTES.CROP_MANAGEMENT} element={ <Management /> } />
+                <Route path={CROP_ROUTES.CROP_HARVEST_OTHER} element={ <Harvesting /> } />
+                <Route path={CROP_ROUTES.CROP_POST_HARVESTING} element={ <PostHarvesting /> } />
+                <Route path={CROP_ROUTES.CROP_SALES} element={ <Sales /> } />
 
-                    <Route path="*" element={ <NotFound />} />
-                </Routes>
-            </div>
+                <Route path={CROP_ROUTES.CROP_OTHER} element={ <NotFound />} />
+            </Routes>
         </div>
-        </>);
-    };
-
-
-    return render();
+    </div>
+    </>);
 }

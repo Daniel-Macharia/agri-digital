@@ -18,35 +18,31 @@ const SalesLineChart: React.FC = () => {
 
     let yTicks: number[] = [25,30,35,40,45,50,55,60,65,70,75,80,85,90];
 
-    const render = () => {
-        return(
-        <ResponsiveContainer
-        height={300}
-        width="100%"
-        className="mx-0"
+    return(
+    <ResponsiveContainer
+    height={300}
+    width="100%"
+    className="mx-0"
+    >
+
+        <LineChart 
+        data={insightsData}
+        margin={{top: 20, right: 20, bottom: 20, left: 20}}
         >
+            <CartesianGrid strokeDasharray={"3 10"}/>
+            <XAxis dataKey={"period"} />
+            <YAxis domain={[25, 90]} ticks={yTicks}/>
+            <Tooltip />
+            <Legend />
+            <Line 
+            type={"monotone"} 
+            dataKey={"value"}
+            stroke="var(--primary)"
+            activeDot={{ r : 8 }}/>
+        </LineChart>
 
-            <LineChart 
-            data={insightsData}
-            margin={{top: 20, right: 20, bottom: 20, left: 20}}
-            >
-                <CartesianGrid strokeDasharray={"3 10"}/>
-                <XAxis dataKey={"period"} />
-                <YAxis domain={[25, 90]} ticks={yTicks}/>
-                <Tooltip />
-                <Legend />
-                <Line 
-                type={"monotone"} 
-                dataKey={"value"}
-                stroke="var(--primary)"
-                activeDot={{ r : 8 }}/>
-            </LineChart>
-
-        </ResponsiveContainer>
-        );
-    };
-
-    return render();
+    </ResponsiveContainer>
+    );
 };
 
 

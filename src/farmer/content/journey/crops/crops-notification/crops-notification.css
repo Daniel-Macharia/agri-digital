@@ -1,5 +1,5 @@
 .notification-container{
-    background-color: var(--secondary);
+    background: var(--yellow, #F8C813);
 
     border-radius: 20px;
     border-style: none;

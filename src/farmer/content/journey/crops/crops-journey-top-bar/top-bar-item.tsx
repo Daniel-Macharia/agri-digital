@@ -14,34 +14,30 @@ const CropsTopBarItem: React.FC<CropsTopBarItemProps> = ({iconUrl, itemName, pag
       navigate(pageUrl);  
     };
 
-    const render = ()=>{
-        return (<>
-        <NavLink
-        to={pageUrl} end
-        className="nav-link col-12 px-1"
-        >
-            {({isActive}) => (
-                <div className=" col-12 m-0" 
-                onClick={handleClickItem} 
+    return (<>
+    <NavLink
+    to={pageUrl} end
+    className="nav-link col-12 px-1"
+    >
+        {({}) => (
+            <div className=" col-12 m-0" 
+            onClick={handleClickItem} 
+            >
+
+                <img src={iconUrl} 
+                style={{width: "32px", height: "32px"}}
+                />
+
+                <p className=" col-12 mx-0 my-0" 
+                style={{ textWrap:  "nowrap"}}
                 >
+                    {itemName}
+                </p>
 
-                    <img src={iconUrl} 
-                    style={{width: "32px", height: "32px"}}
-                    />
-
-                    <p className=" col-12 mx-0 my-0" 
-                    style={{ textWrap:  "nowrap"}}
-                    >
-                        {itemName}
-                    </p>
-
-                </div>
-            )}
-        </NavLink>
-        </>)
-    };
-
-    return render();
+            </div>
+        )}
+    </NavLink>
+    </>);
 }
 
 export default CropsTopBarItem;
