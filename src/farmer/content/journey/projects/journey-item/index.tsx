@@ -80,7 +80,7 @@ const JourneyItem: React.FC<ProjectProps> = (journeyItemData: ProjectProps) =>{
                 <div className="row justify-content-end">
                     <p className="crops-end-aligned-text">{getCurrentStage()}</p>
                 </div>
-                <ProgressBar max={100} value={projectProgress} />
+                <ProgressBar max={100} value={projectProgress} fillColor={"var(--Primary, #457900)"} backColor={"white"} />
             </div>
         </div>
     </div>

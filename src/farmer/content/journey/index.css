@@ -1,56 +1,18 @@
-button{
-    background: #457900;
-    color: white;
-    border-style: none;
-    border-radius: 4px;
-    font-size: large;
-    padding: 8px;
-    width: 24%;
-}
-
-#content{
-    background-color: inherit;
-}
-
-#journey-actions{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 0px;
-}
-
-
-#journey-content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-
-}
 
 .project-container{
-    margin: 4px;
-    border-radius: 4px;
+    border-radius: 8px;
     border-style: none;
-    background-color: white;
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.overall-title{
-    align-self: flex-start;
-    margin: 8px;
-    margin-bottom: 0px;
-    
-    color: black;
-    font-size: large;
 }
 
 
+.project-end-aligned-text{
+    text-align: end;
+}
+
+.project-start-aligned-text{
+    text-align: start;
+}
+
+.project-center-aligned-text{
+    text-align: center;
+}

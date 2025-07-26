@@ -1,6 +1,5 @@
 export const JOURNEY_ROUTES = {
-    ROOT: "",
-    INFO: "/info/*",
+    INFO: "/*",
     LIVESTOCK: "/livestock/*",
     CROPS: "/crops",
     CROPS_OTHER: "/crops/*",

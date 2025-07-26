@@ -8,6 +8,9 @@ import LivestockProjectModal from "../../products/LivestockProjectModal";
 import CropProjectModal from "../../products/CropProjectModal";
 import { ProjectProps } from "../models";
 import JourneyItem from "./journey-item";
+import { FARMER_ROUTES } from "../../../farmer-routes";
+import { CROP_ROUTES } from "../crops/crop-routes";
+import { JOURNEY_ROUTES } from "../journey-routes";
 
 export default function Projects(){
 
@@ -55,7 +58,7 @@ export default function Projects(){
 
     const handleCropSubmit = (formData: CropFormData): void => {
         console.log('Crop Project Data:', formData);
-        navigate("/farmer/projects/crops/assessment");
+        navigate(`..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_ASSESSMENT}`);
         
         setShowCropModal(false);
     };
@@ -70,7 +73,7 @@ export default function Projects(){
                         <div className="col-4 col-sm-2">
                             <img className="crops-start-aligned-text col-12 col-sm-6"
                                 src="/assets/images/back-icon.svg"
-                                onClick={() => {navigate("/farmer/home");}}
+                                onClick={() => {navigate(`..${FARMER_ROUTES.HOME}`);}}
                             />
                         </div>
                     </div>
