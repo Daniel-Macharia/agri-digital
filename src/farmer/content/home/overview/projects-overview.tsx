@@ -102,7 +102,7 @@ export default function ProjectsOverview(data: ProjectsOverviewProps){
                     <p className=" mb-0 small-regular primary-text" style={{textAlign: "start"}}>
                         {getCurrentStageName(data.currentProjectStage)}
                     </p>
-                    <ProgressBar max={100} value={currentProgress} />
+                    <ProgressBar max={100} value={currentProgress} fillColor="var(--Primary, #457900)" backColor="white" />
                 </div>
 
                 <div className="row justify-content-center" 

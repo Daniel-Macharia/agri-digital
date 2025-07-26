@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { LivestockProjectSummaryProps } from "../../models";
+import { PROJECTS_ROUTES } from "../projects-routes";
 
 
 const LivestockProjectSummary: React.FC<LivestockProjectSummaryProps> = (data: LivestockProjectSummaryProps) => {
     const navigate = useNavigate();
     const handleViewMore = () => {
-        navigate("/livestock-more-info", {state: data.livestockId});
+        console.log(`livestock ID: ${data.livestockId}`);
+        navigate(`..${PROJECTS_ROUTES.LIVESTOCK_PROJECT_MORE_INFO}`, {state: data.livestockId});
     };
     
     return (<>

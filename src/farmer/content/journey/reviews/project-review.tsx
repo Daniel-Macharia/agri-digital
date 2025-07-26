@@ -1,5 +1,5 @@
 import { FaStar } from "react-icons/fa";
-import { ProjectReviewProps } from "../../models";
+import { ProjectReviewProps } from "../models";
 
 
 const ProjectReview: React.FC<ProjectReviewProps> = (data: ProjectReviewProps) => {
@@ -23,12 +23,12 @@ const ProjectReview: React.FC<ProjectReviewProps> = (data: ProjectReviewProps) =
     <div className="col-12 m-0 p-0 my-4 ">
         <div className="col-12 m-0 d-flex mb-2">
             {/* <div className="col-12 d-flex"> */}
-                <div className="col-5">
+                <div className="me-2 ">
                     <p className="body-regular primary-text crops-start-aligned-text m-0">
                         {data.username}
                     </p>
                 </div>
-                <div className="col-7">
+                <div className="col-7 ms-4">
                     <div className="row justify-content-start" >
                         <p className="caption-medium crops-center-aligned-text px-3 py-1 m-0" 
                         style={{borderRadius: "20px",
@@ -45,25 +45,18 @@ const ProjectReview: React.FC<ProjectReviewProps> = (data: ProjectReviewProps) =
             {/* </div> */}
         </div>
 
-        <div className="col-12 my-1 " >
-            <div className="row">
-
-                <div className="col-4 my-0 py-0">
-                    <div className="col-12 my-0 py-0">
-                        <p className="col-12 crops-start-aligned-text my-0 py-0" > 
-                            {getRatings()}
-                        </p>
-                    </div>
+        <div className="col-12 my-1 d-flex " >
+            <div className="my-0 py-0">
+                <p className="crops-start-aligned-text my-0 py-0" > 
+                    {getRatings()}
+                </p>
+            </div>
+            <div className="col-7 my-0 py-0 mx-4">
+                <div className="col-12 my-0 py-0">
+                    <p className="caption-medium col-12 my-0 py-1">
+                        {data.reviewDate.toDateString()}
+                    </p>
                 </div>
-
-                <div className="col-8 my-0 py-0">
-                    <div className="col-12 my-0 py-0">
-                        <p className="caption-medium col-12 my-0 py-1">
-                            {data.reviewDate.toDateString()}
-                        </p>
-                    </div>
-                </div>
-
             </div>
         </div>
 

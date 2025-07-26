@@ -1,10 +1,12 @@
 import { CropProjectSummaryProps, LivestockProjectSummaryProps, ProjectProps, ProjectReviewProps } from "../../models";
 import { useLocation, useNavigate } from "react-router-dom";
 import { loadCropProjectDetails, loadLivestockProjectDetails, loadProjectReviews } from "../../utils/load-project-data";
-import ProjectReview from "./project-review";
+
 import LivestockProjectSummary from "./livestock-project-summary";
 import CropProjectSummary from "./crop-project-summary";
 import ProgressBar from "../journey-item/progress-bar";
+import ProjectReview from "../../reviews/project-review";
+import { PROJECTS_ROUTES } from "../projects-routes";
 
 
 const ProjectInformation: React.FC = () => {
@@ -23,6 +25,11 @@ const ProjectInformation: React.FC = () => {
     const isCompleted = (): boolean => {
         return ( data.projectType == "crop" && data.currentStage == 6 )
         || (data.projectType == "livestock" && data.currentStage == 7 );
+    };
+
+
+    const handleViewMoreReviews = () => {
+        navigate(`..${PROJECTS_ROUTES.MORE_PROJECT_REVIEWS}`)
     };
 
     return (<>
@@ -63,6 +70,8 @@ const ProjectInformation: React.FC = () => {
                             <ProgressBar
                             max={100}
                             value={ ( data.currentStage / 6 ) * 100}
+                            fillColor={"var(--Primary, #457900)"}
+                            backColor={"#fff"}
                             />
                         </div>
                     </div>
@@ -117,7 +126,6 @@ const ProjectInformation: React.FC = () => {
 
                     <div className="col-12 col-md-4 px-0 ps-md-2 mt-3 mt-md-0">
                         <div className="col-12 m-0 crops-container bg-white p-3">
-
                             <div className="col-12">
                                 <div className="row p-0">
                                     <div className="col-6 p-0 m-0">
@@ -131,7 +139,9 @@ const ProjectInformation: React.FC = () => {
                                         style={{color: "var(--Primary, #457900)",
                                             backgroundColor: "white",
                                             borderStyle: "none"
-                                        }}>
+                                        }}
+                                        onClick={handleViewMoreReviews}
+                                        >
                                             View all reviews
                                         </button>
                                     </div>
@@ -141,14 +151,14 @@ const ProjectInformation: React.FC = () => {
                             <div className="col-12 p-0 m-0 mt-4">
                                 {/* <ul className="col-12" style={{listStyle: "none"}}> */}
                                 {
-                                    projectReviews.map( (projectReview, index: number) =>{ {/* <li className="col-12"> */}
+                                    projectReviews.map( (review, index: number) =>{ {/* <li className="col-12"> */}
                                         return (<>
                                         <ProjectReview
-                                        username={projectReview.username}
-                                        userAccountState={projectReview.userAccountState}
-                                        rating={projectReview.rating}
-                                        comment={projectReview.comment}
-                                        reviewDate={projectReview.reviewDate}
+                                        username={review.username}
+                                        userAccountState={review.userAccountState}
+                                        rating={review.rating}
+                                        comment={review.comment}
+                                        reviewDate={review.reviewDate}
                                         /> 
 
                                         {/* Add a horizontal rule after each review provided it is not the last review */}
