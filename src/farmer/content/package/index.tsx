@@ -1,15 +1,29 @@
-import "./index.css";
+import { Route, Routes } from "react-router-dom";
 
-export default function Package()
-{
+import NavBar from "./NavBar";
+import AllPackages from "./AllPackages";
+import { PACKAGES_ROUTES } from "./Package.Route";
+import Advertisements from "./Advertisements";
 
-    const render = () =>{
-        return (<>
-        <div id="package-page-content">
-            <h1>This is the package page content</h1>
-        </div>
-        </>);
-    };
+// Helper to wrap pages with NavBar
+const WithNavBar = (Component: React.FC) => (
+  <>
+    <NavBar />
+    <Component />
+  </>
+);
 
-    return render();
-}
+const Breeding = () => {
+  return (
+    <Routes>
+      
+      <Route path={PACKAGES_ROUTES.ALL} element={WithNavBar( AllPackages)} /> 
+      <Route path={PACKAGES_ROUTES.ADVERTISEMENTS} element={<Advertisements />} />
+
+      
+    </Routes> 
+  );
+};
+
+export default Breeding;
+ 

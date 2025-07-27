@@ -65,7 +65,7 @@ export default function Dashboard() {
                             <Route path="/banks" element={<Banks />} />
                             <Route path="/sponsors" element={<Sponsors />} />
                             <Route path="/wallet/*" element={<Wallet />} />
-                            <Route path="/package" element={<Package />} />
+                            <Route path="/package/*" element={<Package />} />
                             <Route path="/quality-score" element={<QualityScore />} />
                             <Route path="/weather" element={<Weather />} />
                             <Route path="/resources" element={<Resources />} />
