@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { FaArrowLeft, FaCheck } from 'react-icons/fa';
 import ProjectSelectionModal from '../../products/ProjectSelectionModal';
 import ProjectTypeSelectionModal from '../ProjectTypeSelectionModal';
+import LivestockProjectModal from '../../products/LivestockProjectModal';
+import CropProjectModal from '../../products/CropProjectModal';
+import { CropFormData, LivestockFormData } from '../../products';
 
 export interface LoanDetailsProps {
   loanData?: {
@@ -55,21 +58,52 @@ const LoanDetails: React.FC<LoanDetailsProps> = ({
     }, 300);
   };
 
-  const handleCloseProjectSelectionModal = () => {
-    setShowProjectSelectionModal(false);
-  };
+  const [, setShowProjectSelection] = useState(true);
+    const [showLivestockModal, setShowLivestockModal] = useState(false);
+    const [showCropModal, setShowCropModal] = useState(false);
+  
+      const handleCropProject = (): void => {
+          setShowProjectSelectionModal(false);
+          setShowCropModal(true);
+      };
+  
+      const handleLivestockProject = (): void => {
+          setShowProjectSelection(false);
+          setShowLivestockModal(true);
+      };
+  
+      const handleBackToProjectSelection = (): void => {
+          setShowLivestockModal(false);
+          setShowCropModal(false);
+          setShowProjectSelection(true);
+      };
 
-  const handleCropProject = () => {
-    setShowProjectSelectionModal(false);
-    console.log('Creating crop project...');
-    onApplyNow();
-  };
-
-  const handleLivestockProject = () => {
-    setShowProjectSelectionModal(false);
-    console.log('Creating livestock project...');
-    onApplyNow();
-  };
+      const handleCloseProjectSelectionModal = () => {
+  setShowProjectSelectionModal(false);}
+  
+      const handleCloseLivestockModal = (): void => {
+          setShowLivestockModal(false);
+      };
+  
+      const handleCloseCropModal = (): void => {
+          setShowCropModal(false);
+      };
+  
+      const handleLivestockSubmit = (formData: LivestockFormData): void => {
+          console.log('Livestock Project Data:', formData);
+          // Close the livestock modal
+          setShowLivestockModal(false);
+          // Navigate to loan application form
+          onApplyNow();
+      };
+  
+      const handleCropSubmit = (formData: CropFormData): void => {
+          console.log('Crop Project Data:', formData);
+          // Close the crop modal
+          setShowCropModal(false);
+          // Navigate to loan application form
+          onApplyNow();
+      };
 
   return (
     <div className="loan-details-container bg-light min-vh-100 px-0">
@@ -185,6 +219,19 @@ const LoanDetails: React.FC<LoanDetailsProps> = ({
         onCropProject={handleCropProject}
         onLivestockProject={handleLivestockProject}
       />
+      <LivestockProjectModal
+       show={showLivestockModal}
+       onHide={handleCloseLivestockModal}
+       onBack={handleBackToProjectSelection}
+       onSubmit={handleLivestockSubmit}
+      />
+
+      <CropProjectModal
+       show={showCropModal}
+       onHide={handleCloseCropModal}
+       onBack={handleBackToProjectSelection}
+       onSubmit={handleCropSubmit}
+        />
     </div>
   );
 };

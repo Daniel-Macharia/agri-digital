@@ -1,15 +1,12 @@
 import "./index.css";
+import SponsorsLandingPage from "./Pages/SponsorsLandingPage";
 
-export default function Sponsor()
-{
+const Sponsor: React.FC = () => {
+  return (
+    <div id="sponsors-page-content">
+      <SponsorsLandingPage />
+    </div>
+  );
+};
 
-    const render = () =>{
-        return (<>
-        <div id="sponsors-page-content">
-            <h1>This is the sponsors page content</h1>
-        </div>
-        </>);
-    };
-
-    return render();
-}
+export default Sponsor;

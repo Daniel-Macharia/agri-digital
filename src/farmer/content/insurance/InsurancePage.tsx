@@ -6,6 +6,7 @@ import {
 } from 'react-icons/fa';
 import { PiMoneyWavyFill } from "react-icons/pi";
 import { CiClock2 } from "react-icons/ci";
+//import { getPolicyById } from './PolicyUtils';
 
 export interface PolicyData {
   id: string;
@@ -190,8 +191,8 @@ const InsurancePage = () => {
                 <img 
                   src={policy.image} 
                   alt={policy.title}
-                  className="card-img-top w-100 h-100"
-                  style={{ objectFit: 'cover' }}
+                  className=" w-100 h-100"
+                  style={{ objectFit: 'cover', objectPosition: 'center', borderRadius: '20px 20px 20px 20px' }}
                 />
                 {/* Purchase Status Badge */}
                 {policy.isPurchased && (
@@ -255,6 +256,7 @@ const InsurancePage = () => {
     </div>
   );
 };
+
 
 // Export the policies data for use in other components
 export const getPolicyById = (id: string): PolicyData | undefined => {

@@ -93,7 +93,7 @@ const MarketplacePage: React.FC = () => {
             } else {
                 setHasMoreProducts(false);
             }
-        } catch (err) {
+        } catch  {
             setError('Failed to load more products. Please try again.');
         } finally {
             setLoading(false);
@@ -160,7 +160,7 @@ const MarketplacePage: React.FC = () => {
         navigate('checkout', { state: { cartItems: cartItems } });
     };
 
-    const handleSendGift = (giftData: any) => {
+    const handleSendGift = (giftData: unknown) => {
         console.log("Gift Sent:", giftData);
         setShowGiftModal(false);
     };
@@ -303,6 +303,7 @@ const MarketplacePage: React.FC = () => {
                                             src={product.image} 
                                             alt={product.name}
                                             className="mkt-card-img w-100"
+                                            style={{ height: '200px', objectFit: 'cover', objectPosition: 'center', borderRadius: '30px 30px 0 0' }}
                                             onError={(e) => {
                                                 e.currentTarget.src = 'https://via.placeholder.com/400x300?text=No+Image';
                                             }}
