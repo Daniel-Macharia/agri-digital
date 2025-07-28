@@ -2,6 +2,11 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaCheck } from 'react-icons/fa';
 import { getPolicyById, /*PolicyData*/ } from './InsurancePage';
+import ProjectTypeSelectionModal from '../banks/ProjectTypeSelectionModal';
+import ProjectSelectionModal from '../products/ProjectSelectionModal';
+import LivestockProjectModal from '../products/LivestockProjectModal';
+import CropProjectModal from '../products/CropProjectModal';
+import { CropFormData, LivestockFormData } from '../products';
 
 const PolicyDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -9,29 +14,94 @@ const PolicyDetailsPage: React.FC = () => {
   
   const policy = id ? getPolicyById(id) : null;
 
+  const [showProjectSelectionModal, setShowProjectSelectionModal] = React.useState(false);
+  const [showProjectTypeSelectionModal, setShowProjectTypeSelectionModal] = React.useState(false);
+  const [showLivestockProjectModal, setShowLivestockProjectModal] = React.useState(false);
+  const [showCropProjectModal, setShowCropProjectModal] = React.useState(false);
+
   const handleBack = () => {
     navigate(-1); // Go back to previous page
   };
 
   const handlePurchase = (policyId: string) => {
-    console.log(`Purchasing policy ${policyId}`);
-    // Navigate to purchase form page
-    navigate(`/farmer/insurance/purchase-policy/${policyId}`);
+    console.log(`Starting purchase process for policy ${policyId}`);
+    // Start the modal flow by showing project type selection
+    setShowProjectTypeSelectionModal(true);
   };
 
   const handlePayPolicy = (policyId: string) => {
     console.log(`Paying for policy ${policyId}`);
-    //alert('Policy payment functionality implemented here');
     navigate(`/farmer/insurance/payment`);
-    //  navigate to a payment page
-    // navigate(`/payment/${policyId}`);
   };
 
   const handleFileClaim = (policyId: string) => {
     console.log(`Filing claim for policy ${policyId}`);
     navigate(`/farmer/insurance/file-claim/${policyId}`);
-    //  navigate to a claims page
-    // navigate(`/claims/${policyId}`);
+  };
+
+  // Modal handlers for project type selection
+  const handleCloseProjectTypeModal = () => {
+    setShowProjectTypeSelectionModal(false);
+  };
+
+  const handleAddNowClick = () => {
+    console.log("HandleAddNowClick fired");
+    setShowProjectTypeSelectionModal(false);
+    setTimeout(() => {
+      console.log("Opening second modal: ProjectSelectionModal");
+      setShowProjectSelectionModal(true);
+    }, 300);
+  };
+
+  // Modal handlers for project selection
+  const handleCloseProjectSelectionModal = () => {
+    setShowProjectSelectionModal(false);
+  };
+
+  const handleCropProject = (): void => {
+    setShowProjectSelectionModal(false);
+    setShowCropProjectModal(true);
+  };
+
+  const handleLivestockProject = (): void => {
+    setShowProjectSelectionModal(false);
+    setShowLivestockProjectModal(true);
+  };
+
+  const handleBackToProjectSelection = (): void => {
+    setShowLivestockProjectModal(false);
+    setShowCropProjectModal(false);
+    setShowProjectSelectionModal(true);
+  };
+
+  // Modal handlers for livestock project
+  const handleCloseLivestockModal = (): void => {
+    setShowLivestockProjectModal(false);
+  };
+
+  const handleLivestockSubmit = (formData: LivestockFormData): void => {
+    console.log('Livestock Project Data:', formData);
+    // Close the livestock modal
+    setShowLivestockProjectModal(false);
+    // Navigate to purchase form page
+    if (policy) {
+      navigate(`/farmer/insurance/purchase-policy/${policy.id}`);
+    }
+  };
+
+  // Modal handlers for crop project
+  const handleCloseCropModal = (): void => {
+    setShowCropProjectModal(false);
+  };
+
+  const handleCropSubmit = (formData: CropFormData): void => {
+    console.log('Crop Project Data:', formData);
+    // Close the crop modal
+    setShowCropProjectModal(false);
+    // Navigate to purchase form page
+    if (policy) {
+      navigate(`/farmer/insurance/purchase-policy/${policy.id}`);
+    }
   };
 
   // If policy not found, show error
@@ -168,6 +238,36 @@ const PolicyDetailsPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Project Type Selection Modal */}
+      <ProjectTypeSelectionModal
+        show={showProjectTypeSelectionModal}
+        onHide={handleCloseProjectTypeModal}
+        onAddNow={handleAddNowClick}
+      />
+
+      {/* Project Selection Modal */}
+      <ProjectSelectionModal
+        show={showProjectSelectionModal}
+        onHide={handleCloseProjectSelectionModal}
+        onCropProject={handleCropProject}
+        onLivestockProject={handleLivestockProject}
+      />
+
+      <LivestockProjectModal
+       show={showLivestockProjectModal}
+       onHide={handleCloseLivestockModal}
+       onBack={handleBackToProjectSelection}
+       onSubmit={handleLivestockSubmit}
+      />
+
+      <CropProjectModal
+       show={showCropProjectModal}
+       onHide={handleCloseCropModal}
+       onBack={handleBackToProjectSelection}
+       onSubmit={handleCropSubmit}
+        />
+
       <style>
         {`
           .rounded-top-5 {

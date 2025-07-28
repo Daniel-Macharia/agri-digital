@@ -27,7 +27,7 @@ const BankPageLoanCard: React.FC<LoanCardProps> = ({
             src={imageUrl} 
             alt={title}
             className="bankpage-card__image card-img-top"
-            style={{ height: '180px', objectFit: 'cover' }}
+            style={{ height: '180px', objectFit: 'cover', objectPosition: 'center', borderRadius: '20px 20px 20px 20px' }}
           />
          {/* <div className="bankpage-card__icon position-absolute top-50 start-50 translate-middle">
             {icon}

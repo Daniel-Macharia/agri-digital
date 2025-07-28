@@ -170,7 +170,7 @@ const PurchasePolicyForm = () => {
       
       // Move to payment step
       setCurrentStep('payment');
-    } catch (error) {
+    } catch{
       alert('Error submitting application. Please try again.');
     } finally {
       setIsSubmitting(false);
