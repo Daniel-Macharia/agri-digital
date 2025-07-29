@@ -27,7 +27,7 @@ const FeedsNutrition = () => {
       <Route path={FEED_ROUTES.WEIGHT} element={WithNavBar(FeedingWeight)} />
       <Route path={FEED_ROUTES.SCHEDULE} element={WithNavBar(FeedingSchedule)} />
       <Route path={FEED_ROUTES.FORM} element={WithNavBar(RequestForm)} />
-      <Route path={FEED_ROUTES.RESULTS} element={<Results />} />
+      <Route path={FEED_ROUTES.RESULTS} element={<Results />} /> 
 
      
     </Routes>

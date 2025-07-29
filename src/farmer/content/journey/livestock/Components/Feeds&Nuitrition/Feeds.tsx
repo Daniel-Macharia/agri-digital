@@ -105,13 +105,12 @@ const FeedsForm: React.FC = () => {
       {/* Request for Feeds Button */}
       <div className="w-100 d-flex justify-content-end small-medium  ">
         <button
-          type="button"
-          className="rounded small-medium bg-primary text-white border-0"
+          className="btn btn-primary d-flex justify-content-center align-items-center gap-2 px-3 py-2 rounded"
           style={{
             minWidth: "200px",
           
           }}
-          onClick={() => navigate(FEED_ROUTES.FORM)}
+          onClick={() => navigate("/farmer/projects/livestock/feeds/form")}
         >
           Request for Feeds
         </button>

@@ -3,13 +3,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Saved from "../../Shared/Saved";
+import RequestSuccessful from "../../Shared/RequestSuccessful";
 import { useNavigate } from "react-router-dom";
+import Popup from 'reactjs-popup';
 
 const validationSchema = Yup.object({
-  serviceType: Yup.string()
-    .oneOf(["consultation", "repair", "installation"], "Invalid Service Type")
-    .required("Service Type is required"),
+  feedType: Yup.string()
+    .required("Feed Type is required"),
   dateOfService: Yup.date()
     .min(new Date(), "Date of Service cannot be in the past")
     .required("Date of Service is required"),
@@ -26,10 +26,10 @@ const validationSchema = Yup.object({
 });
 
 const initialValues = {
-  serviceType: "",
+  feedType: "",
   dateOfService: null,
-  location: "Kiamvu",
-  contactInfo: "+254712345678",
+  location: "Kiambu",
+  contactInfo: "+254 712345678",
 };
 
 const RequestForm: React.FC = () => {
@@ -38,24 +38,23 @@ const RequestForm: React.FC = () => {
 
   return (
     <>
-      {showSaved && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: "rgba(0,0,0,0.2)",
-            zIndex: 9999,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Saved onDone={() => navigate("/farmer/projects/livestock/feeds/results")}/>
+      <Popup
+        open={showSaved}
+        modal
+        closeOnDocumentClick={false}
+        onClose={() => setShowSaved(false)}
+        contentStyle={{ borderRadius: '1rem', padding: 0, maxWidth: 400 }}
+      >
+        <div className="d-flex flex-column align-items-center justify-content-center p-4">
+          <button
+            type="button"
+            className="btn-close align-self-end mb-2"
+            aria-label="Close"
+            onClick={() => setShowSaved(false)}
+          ></button>
+          <RequestSuccessful onDone={() => navigate("/farmer/projects/livestock/feeds/results")} />
         </div>
-      )}
+      </Popup>
       <div className="w-100 rounded-4 bg-white border mt-3 p-4">
         <h5 className="mb-4 text-start" style={{ color: "#333" }}>
           Request Form
@@ -73,28 +72,29 @@ const RequestForm: React.FC = () => {
         >
           {({ setFieldValue, isSubmitting, values, resetForm }) => (
             <Form>
-              {/* Service Type */}
+              {/* Feed Type */}
               <div className="row mb-3 align-items-center">
                 <label
-                  htmlFor="serviceType"
+                  htmlFor="feedType"
                   className="col-md-2 col-form-label d-flex align-self-stretch text-primary-custom body-regular"
                 >
-                  Service Type
+                  Feed Type
                 </label>
                 <div className="col-md-10">
                   <Field
                     as="select"
-                    id="serviceType"
-                    name="serviceType"
+                    id="feedType"
+                    name="feedType"
                     className="form-select bg-light"
                   >
-                    <option value="" label="Select a service" />
-                    <option value="consultation" label="Consultation" />
-                    <option value="repair" label="Repair" />
-                    <option value="installation" label="Installation" />
+                    <option value="" label="Feed Type" />
+                    <option value="concentrate" label="Concentrate Feed" />
+                    <option value="forage" label="Forage Feed" />
+                    <option value="supplement" label="Supplement Feed" />
+                    <option value="mixed" label="Mixed Feed" />
                   </Field>
                   <ErrorMessage
-                    name="serviceType"
+                    name="feedType"
                     component="div"
                     className="text-danger small text-start"
                   />
@@ -192,7 +192,7 @@ const RequestForm: React.FC = () => {
                   style={{ backgroundColor: "#457900", color: "white", borderRadius: "0.375rem", padding: "0.375rem 1.25rem", fontSize: "0.95rem", minWidth: "100px", border: "none" }}
                   disabled={isSubmitting}
                 >
-                  Save
+                  Continue
                 </button>
               </div>
               <style>{`

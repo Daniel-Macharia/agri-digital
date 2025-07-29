@@ -54,8 +54,8 @@ const Results = () => {
               <div className="d-flex align-items-center justify-content-between w-100">
                 <span className="fw-bold">Ventilation</span>
                 <div className="d-flex align-items-center gap-2">
-                  <span className="badge bg-success px-3 py-2">Excellent</span>
-                  <FaPen style={{ color: "#5B8C51", cursor: "pointer" }} />
+                  <span className="badge px-3 py-2" style={{ backgroundColor: "#457900", color: "white" }}>Excellent</span>
+                  <FaPen style={{ color: "#457900", cursor: "pointer" }} />
                 </div>
               </div>
               <div className="w-100">
@@ -76,8 +76,8 @@ const Results = () => {
               <div className="d-flex align-items-center justify-content-between w-100">
                 <span className="fw-bold">Space</span>
                 <div className="d-flex align-items-center gap-2">
-                  <span className="badge bg-success px-3 py-2">Excellent</span>
-                  <FaPen style={{ color: "#5B8C51", cursor: "pointer" }} />
+                  <span className="badge px-3 py-2" style={{ backgroundColor: "#457900", color: "white" }}>Excellent</span>
+                  <FaPen style={{ color: "#457900", cursor: "pointer" }} />
                 </div>
               </div>
               <div className="w-100">
@@ -106,8 +106,8 @@ const Results = () => {
               <div className="d-flex align-items-center justify-content-between w-100">
                 <span className="fw-bold">Waste Management</span>
                 <div className="d-flex align-items-center gap-2">
-                  <span className="badge bg-success px-3 py-2">Excellent</span>
-                  <FaPen style={{ color: "#5B8C51", cursor: "pointer" }} />
+                  <span className="badge px-3 py-2" style={{ backgroundColor: "#457900", color: "white" }}>Excellent</span>
+                  <FaPen style={{ color: "#457900", cursor: "pointer" }} />
                 </div>
               </div>
               <div className="w-100">
@@ -152,7 +152,7 @@ const Results = () => {
                   <input
                     type="date"
                     className="form-control"
-                    defaultValue="2025-02-27"
+                    placeholder="YYYY/MM/DD"
                   />
                 </div>
                 <div className="mb-3">
@@ -160,14 +160,14 @@ const Results = () => {
                   <input
                     type="time"
                     className="form-control"
-                    defaultValue="10:00"
+                    placeholder="10:00 AM"
                   />
                 </div>
                 <div className="mb-3">
                   <label className="form-label">Description</label>
                   <input type="text" className="form-control" placeholder="" />
                 </div>
-                <button type="submit" className="btn btn-success px-4">
+                <button type="submit" className="btn px-4" style={{ backgroundColor: "#457900", borderColor: "#457900", color: "white" }}>
                   Add Activity
                 </button>
               </form>
@@ -177,27 +177,37 @@ const Results = () => {
           <div className="col-12 col-md-6">
             <div className="bg-white rounded-4 p-4 h-100 shadow-sm">
               <h6 className="fw-bold mb-3">Upcoming Activities</h6>
-              <div className="mb-3 p-3 rounded-3 border">
-                <div className="d-flex align-items-center justify-content-between mb-1">
-                  <span className="fw-bold">Waste Disposal</span>
-                  <span className="text-primary" style={{ fontSize: "0.95em" }}>
-                    2025/12/03{" "}
-                    <span className="text-decoration-underline">8:00am</span>
-                  </span>
-                </div>
-                <div className="text-secondary" style={{ fontSize: "0.95em" }}>
-                  Lorem Ipsum
+              <div className="mb-3 p-3 rounded-3 border d-flex align-items-start gap-3">
+                <input type="checkbox" style={{ width: 20, height: 20, marginTop: 2 }} />
+                <div className="flex-grow-1">
+                  <div className="d-flex align-items-center justify-content-between mb-1">
+                    <span className="fw-bold">Waste Disposal</span>
+                    <span className="text-primary" style={{ fontSize: "0.95em" }}>
+                      2025/12/03 <span className="text-decoration-underline">8:00am</span>
+                    </span>
+                  </div>
+                  <div className="text-secondary" style={{ fontSize: "0.95em" }}>
+                    Lorem Ipsum
+                  </div>
                 </div>
               </div>
-              <div className="mb-3 p-3 rounded-3 border">
-                <div className="d-flex align-items-center justify-content-between mb-1">
-                  <span className="fw-bold">Check Ventilation System</span>
-                  <span className="text-success" style={{ fontSize: "0.95em" }}>
-                    <span className="fw-bold">Done</span>
-                  </span>
-                </div>
-                <div className="text-secondary" style={{ fontSize: "0.95em" }}>
-                  Lorem Ipsum
+              <div className="mb-3 p-3 rounded-3 border d-flex align-items-start gap-3">
+                <span style={{ color: '#457900', fontSize: 20, marginTop: 2 }}>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="20" height="20" rx="4" fill="#457900"/>
+                    <path d="M6 10.5L9 13.5L14 8.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+                <div className="flex-grow-1">
+                  <div className="d-flex align-items-center justify-content-between mb-1">
+                    <span className="fw-bold">Check Ventilation System</span>
+                    <span style={{ color: "#457900", fontSize: "0.95em" }}>
+                      <span className="fw-bold">Done</span>
+                    </span>
+                  </div>
+                  <div className="text-secondary" style={{ fontSize: "0.95em" }}>
+                    Lorem Ipsum
+                  </div>
                 </div>
               </div>
             </div>
@@ -218,7 +228,7 @@ const Results = () => {
                     className="text-secondary"
                     style={{ fontSize: "0.95em" }}
                   >
-                    2023/03/07
+                    2025/03/07
                   </div>
                   <div
                     className="text-secondary"
@@ -227,7 +237,7 @@ const Results = () => {
                     AgriFarm
                   </div>
                 </div>
-                <button className="btn btn-outline-success px-4 mt-3 mt-md-0">
+                <button className="btn px-4 mt-3 mt-md-0" style={{ backgroundColor: "#457900", borderColor: "#457900", color: "white" }}>
                   View Report
                 </button>
               </div>

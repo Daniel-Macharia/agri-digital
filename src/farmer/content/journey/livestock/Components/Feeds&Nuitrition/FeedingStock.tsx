@@ -51,7 +51,7 @@ const FeedingStock = () => {
               {/* Add Button */}
               <button className="btn btn-success px-3 px-md-4 rounded-3 fw-semibold text-nowrap"
                 style={{ backgroundColor: '#457900', color: 'white' }}
-                onClick={() => navigate('/farmer/projects/livestock/feeds/feeds')}
+                onClick={() => navigate('/farmer/projects/livestock/form')}
               >
                 <span className="d-none d-sm-inline">+ Add Feed</span>
                 <span className="d-sm-none">+ Add</span>
