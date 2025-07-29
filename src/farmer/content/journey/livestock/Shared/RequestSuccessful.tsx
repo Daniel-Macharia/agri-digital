@@ -10,13 +10,13 @@ const FolderIcon = () => (
 
 
 
-const RequestSuccessful: React.FC = () => {
+interface RequestSuccessfulProps {
+  onDone?: () => void;
+}
+
+const RequestSuccessful: React.FC<RequestSuccessfulProps> = ({ onDone }) => {
   return (
-    <Container 
-      fluid 
-      className="d-flex align-items-center justify-content-center vh-100" 
-      style={{ backgroundColor: '#f8f9fa' }}
-    >
+    <div className="d-flex flex-column align-items-center justify-content-center">
       <Card 
         className="text-center p-4 shadow-sm"
         style={{ width: '25rem', border: 'none', borderRadius: '1rem' }}
@@ -36,12 +36,13 @@ const RequestSuccessful: React.FC = () => {
             className="body-bold"
             size="lg" 
             style={{ backgroundColor: '#457900', borderColor: '#457900', padding: '0.75rem 1.5rem' }}
+            onClick={onDone}
           >
             Done
           </Button>
         </Card.Body>
       </Card>
-    </Container>
+    </div>
   );
 };
 

@@ -4,9 +4,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Saved from "../../Shared/Saved";
+import RequestSuccessful from "../../Shared/RequestSuccessful";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBack } from 'react-icons/io5';
+import Popup from 'reactjs-popup';
 
 const validationSchema = Yup.object({
   serviceType: Yup.string()
@@ -45,29 +46,28 @@ const RequestForm: React.FC = () => {
 
   return (
     <>
+      <Popup
+        open={showSaved}
+        modal
+        closeOnDocumentClick={false}
+        onClose={() => setShowSaved(false)}
+        contentStyle={{ borderRadius: '1rem', padding: 0, maxWidth: 400 }}
+      >
+        <div className="d-flex flex-column align-items-center justify-content-center p-4">
+          <button
+            type="button"
+            className="btn-close align-self-end mb-2"
+            aria-label="Close"
+            onClick={() => setShowSaved(false)}
+          ></button>
+          <RequestSuccessful onDone={handleDone} />
+        </div>
+      </Popup>
       {/* Back Arrow Icon */}
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem', cursor: 'pointer', width: 'fit-content' }} onClick={() => navigate('/farmer/projects/livestock/typebreed')}>
         <IoArrowBack size={22} />
         
       </div>
-      {showSaved && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0, 
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: "rgba(0,0,0,0.2)",
-            zIndex: 9999,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Saved onDone={handleDone} />
-        </div>
-      )}
       <div className="w-100 rounded-4 bg-white border mt-3 p-4">
         <h5 className="mb-4 text-start" style={{ color: "#333" }}>
           Request Form
