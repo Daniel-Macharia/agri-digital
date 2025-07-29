@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const navItems = [
   { label: "Ventilation", path: "ventilation" },
   { label: "Space", path: "space" },
-  { label: "Waste Management", path: "waste-management" },
+  { label: "Waste Management", path: "waste" },
   { label: "Livestock Protection", path: "protection" },
 ];
 

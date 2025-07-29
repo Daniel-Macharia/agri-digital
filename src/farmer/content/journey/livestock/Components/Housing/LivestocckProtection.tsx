@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Saved from "../../Shared/Saved";
+import RequestSuccessful from "../../Shared/RequestSuccessful";
 import { useNavigate } from "react-router-dom";
+import Popup from 'reactjs-popup';
 
 const validationSchema = Yup.object({
   livestockType: Yup.string().required("Livestock Type is required"),
@@ -26,24 +27,26 @@ const LivestockProtection: React.FC = () => {
 
   return (
     <>
-      {showSaved && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: "rgba(0,0,0,0.2)",
-            zIndex: 9999,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Saved onDone={() => navigate("/farmer/projects/livestock/housing/results")}/>
+      <Popup
+        open={showSaved}
+        modal
+        closeOnDocumentClick={false}
+        onClose={() => setShowSaved(false)}
+        contentStyle={{ borderRadius: '1rem', padding: 0, maxWidth: 400 }}
+      >
+        <div className="d-flex flex-column align-items-center justify-content-center p-4">
+          <button
+            type="button"
+            className="btn-close align-self-end mb-2"
+            aria-label="Close"
+            onClick={() => setShowSaved(false)}
+          ></button>
+          <RequestSuccessful onDone={() => {
+            setShowSaved(false);
+            navigate("/farmer/projects/livestock/housing/results");
+          }} />
         </div>
-      )}
+      </Popup>
       <div className="w-100 rounded-4 bg-white border mt-3 p-4">
         <h5 className="mb-4 text-start" style={{ color: "#333" }}>
           Livestock Protection
@@ -195,7 +198,7 @@ const LivestockProtection: React.FC = () => {
                   style={{ backgroundColor: "#457900", color: "white", borderRadius: "0.375rem", padding: "0.375rem 1.25rem", fontSize: "0.95rem", minWidth: "100px", border: "none" }}
                   disabled={isSubmitting}
                 >
-                  Save
+                  Request Service
                 </button>
               </div>
             </Form>
