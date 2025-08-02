@@ -143,7 +143,7 @@ const ShoppingCartModal: React.FC<ShoppingCartModalProps> = ({
           <Row className="w-100 gx-2">
             <Col xs={12} md={6}>
               <Button
-                variant="success"
+                variant="success py-2"
                 className="w-100"
                 style={{ minHeight: '40px', borderRadius: '6px' }}
                 onClick={onProceedToCheckout}

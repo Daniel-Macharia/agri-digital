@@ -223,7 +223,8 @@ const PolicyPayment: React.FC<PaymentPageProps> = ({
     );
 
     return (
-        <Container className="py-4">
+        <Container className="py-4" style={{backgroundImage: `url('https://plus.unsplash.com/premium_photo-1728889749470-97eb0a2e2028?w=600&auto=format&fit=crop&q=60')`, backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundSize: 'cover'}}>
+            
             <div className="row justify-content-center">
                 <div className="col-lg-6 col-md-8">
                     <Card className="shadow-sm">
