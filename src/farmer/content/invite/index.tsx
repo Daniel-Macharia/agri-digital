@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import "./index.css";
 import { BenefitItemProps } from "./invite-models";
-import { FARMER_ROUTES } from "../../farmer-routes";
 import InviteTopBar from "./invite-top-bar";
 import InviteViaLink from "./invite-via-link";
 import InviteViaEmail from "./invite-via-email";
 import { useState } from "react";
 import { InviteType } from "./invite-enums";
+import { FARMER_HOME_ROUTES } from "../home/home-routes";
 
 
 const BenefitItem: React.FC<BenefitItemProps> = 
@@ -47,7 +47,7 @@ export default function Invite()
     ];
 
     const handleGoBackHome = () => {
-        navigate(`..${FARMER_ROUTES.HOME.replace("/*", "")}`);
+        navigate(`${FARMER_HOME_ROUTES.HOME_FULL}`);
     };
 
     const renderContent = () => {

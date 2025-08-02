@@ -11,6 +11,7 @@ import JourneyItem from "./journey-item";
 import { FARMER_ROUTES } from "../../../farmer-routes";
 import { CROP_ROUTES } from "../crops/crop-routes";
 import { JOURNEY_ROUTES } from "../journey-routes";
+import { FARMER_HOME_ROUTES } from "../../home/home-routes";
 
 export default function Projects(){
 
@@ -73,7 +74,7 @@ export default function Projects(){
                         <div className="col-4 col-sm-2">
                             <img className="crops-start-aligned-text col-12 col-sm-6"
                                 src="/assets/images/back-icon.svg"
-                                onClick={() => {navigate(`..${FARMER_ROUTES.HOME}`);}}
+                                onClick={() => {navigate(`${FARMER_HOME_ROUTES.HOME_FULL}`);}}
                             />
                         </div>
                     </div>

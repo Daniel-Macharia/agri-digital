@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import CropsNotification from "../journey/crops/crops-notification/crops-notification";
 import "./index.css";
-import { FARMER_ROUTES } from "../../farmer-routes";
 import React from "react";
 import { AgriculturalAdvisoryItemProps, WeatherForecastItemProps, WeatherKeyValuePairProps } from "./weather-models";
 import AgriculturalAdvisoryItem from "./agricultural-advisory-item";
 import WeatherKeyValuePairItem from "./weather-key-value-pair-item";
 import WeatherForecastItem from "./weather-forecast-item";
+import { FARMER_HOME_ROUTES } from "../home/home-routes";
 
 const Weather: React.FC = 
 () => {
@@ -144,7 +144,7 @@ const Weather: React.FC =
 
 
     const handleGoBackHome = () => {
-        navigate(`..${FARMER_ROUTES.HOME.replace("/*", "")}`);
+        navigate(`${FARMER_HOME_ROUTES.HOME_FULL}`);
     };
 
     
