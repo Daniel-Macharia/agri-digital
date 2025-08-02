@@ -1,15 +1,13 @@
+import React from "react";
 import "./index.css";
+import TrainingResourcesLanding from "./LandingPage/TrainingResourcesLanding";
 
-export default function Resources()
-{
-
-    const render = () =>{
-        return (<>
+const Resources: React.FC = () => {
+    return (
         <div id="resources-page-content">
-            <h1>This is the resources page content</h1>
+            <TrainingResourcesLanding />
         </div>
-        </>);
-    };
+    );
+};
 
-    return render();
-}
+export default Resources;
