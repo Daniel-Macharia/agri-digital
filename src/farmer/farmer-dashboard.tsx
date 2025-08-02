@@ -32,13 +32,13 @@ export default function Dashboard() {
     return ( 
         <div
   className="container-fluid position-absolute top-0 start-0 vh-100 w-100 overflow-x-hidden "
-  style={{ backgroundColor: '#ececec' }}
+  style={{ backgroundColor: '#ececec', height: "100vh" }}
 >
 
             <div className="row h-100">
                 {/* Sidebar - collapsible on small screens */}
                 <div
-                    className={`col-9 col-sm-6 col-lg-3 col-xl-2 bg-white h-100 p-0 ${
+                    className={`col-9 col-sm-6 col-lg-3 col-xl-2 bg-white h-100 p-0 overflow-auto ${
                         isSidebarVisible ? "position-fixed start-0 top-0 z-3 shadow" : "d-none d-lg-block"
                     }`}
                     style={{ zIndex: isSidebarVisible ? 1200 : undefined }}
@@ -56,8 +56,12 @@ export default function Dashboard() {
                 )}
 
                 {/* Main content area */}
-                <div className="col-12 col-lg-9 col-xl-10 d-flex flex-column flex-grow-1 px-0">
+                <div className="col-12 col-lg-9 col-xl-10 d-flex flex-column flex-grow-1 px-0"
+                style={{height: "100vh"}}>
+                    
                     <TopBar toggleSidebar={toggleSidebar} />
+
+                    <div className="overflow-auto">
                     <Content> 
                         <Routes>
                             <Route path={FARMER_ROUTES.HOME} element={<FarmerHomeRouter />} />
@@ -78,6 +82,7 @@ export default function Dashboard() {
                             <Route path={FARMER_ROUTES.OTHER} element={<NotFound />} />
                         </Routes>
                     </Content>
+                    </div>
                 </div>
             </div>
         </div>
