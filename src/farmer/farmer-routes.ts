@@ -12,6 +12,8 @@ export const FARMER_ROUTES = {
     WEATHER: "/weather",
     RESOURCES: "/resources",
     SETTINGS: "/settings",
-    INVITE: "/invite",
-    OTHER: "*"
+    INVITE: "/invite/*",
+    OTHER: "*",
+
+    FULL: "/farmer/"
 };

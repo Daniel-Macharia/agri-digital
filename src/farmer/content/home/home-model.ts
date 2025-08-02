@@ -47,7 +47,7 @@ export interface HomeTaskItemProps{
 
 export interface TaskItemProps{
     taskTitle: string, 
-    taskDate: string,
+    taskDate: Date,
     taskDesc: string
 };
 

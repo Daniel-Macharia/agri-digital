@@ -4,6 +4,9 @@ import { GeneralNotificationProps, OrdertNotificationItemProps, SponsorshipNotif
 import SponsorshipNotificationItem from "./sponsorship-notification";
 import OrderNotificationItem from "./order-notification";
 import GeneralNotificationItem from "./general-notification";
+import { useEffect, useState } from "react";
+import { HomeNotificationType } from "./home-enums";
+import { FARMER_HOME_ROUTES } from "../home-routes";
 
 
 const HomeNotifications: React.FC = () => {
@@ -12,101 +15,115 @@ const HomeNotifications: React.FC = () => {
     type NotificationItem = SponsorshipNotificationItemProps | OrdertNotificationItemProps | GeneralNotificationProps;
 
     let notifications: NotificationItem[] = [];
-    let o1: OrdertNotificationItemProps = {
-        username: "Millicent",
-        receivedAt: "3",
-        orderItemName: "organic tomatoes",
-        notificationDesc: "Looking for fresh organic tomatoes for a local restaurant. Need regular supply.",
-        orderBudget: 300,
-        orderUnitCount: 10,
-        orderUnitName: "Kg",
-        orderStatus: "new",
-        notificationType: "order",
-    };
-    let s1: SponsorshipNotificationItemProps ={
-        bankName: "AgriGrow Foundation",
+
+    for( let i = 0; i < 25; i++ )
+    {
+        notifications.push({
+            username: `Millicent ${i + 1}`,
+            receivedAt: new Date(2025, 11, 24, 5, 28),
+            orderItemName: "organic tomatoes",
+            notificationDesc: "Looking for fresh organic tomatoes for a local restaurant. Need regular supply.",
+            orderBudget: 300,
+            orderUnitCount: 10,
+            orderUnitName: "Kg",
+            orderStatus: "rejected",
+            notificationType: HomeNotificationType.ORDER_NOTIFICATION,
+        });
+
+    notifications.push({
+        bankName: `AgriGrow Foundation ${i + 1}`,
         notificationTitle: "Inrtervention Name",
         notificationDesc: "Your sponsorship request has been accepted! We’re excited to support you.",
         sponsorshipAmount: 25000,
-        receivedAt: "3",
+        receivedAt: new Date(2025, 11, 25, 4, 50),
         sponsorshipStatus: "accepted",
-        notificationType: "sponsorship",
+        notificationType: HomeNotificationType.SPONSORSHIP_NOTIFICATION,
         sponsorshipType: "voucher"
-    };
-    let g1: GeneralNotificationProps = {
-        notificationDesc: "This is a new notification type 1",
-        receivedAt: "3",
-        notificationType: "other"
-    };
+    });
 
-    let o2: OrdertNotificationItemProps ={
-        username: "Millicent 2",
-        receivedAt: "3",
-        orderItemName: "organic tomatoes",
-        notificationDesc: "Looking for fresh organic tomatoes for a local restaurant. Need regular supply.",
-        orderBudget: 300,
-        orderUnitCount: 10,
-        orderUnitName: "Kg",
-        orderStatus: "negotiating",
-        notificationType: "order",
-    };
-    let s2: SponsorshipNotificationItemProps = {
-        bankName: "AgriGrow Foundation 2",
-        notificationTitle: "Inrtervention Name",
-        notificationDesc: "Your sponsorship request has been accepted! We’re excited to support you.",
-        sponsorshipAmount: 25000,
-        receivedAt: "3",
-        sponsorshipStatus: "accepted",
-        notificationType: "sponsorship",
-        sponsorshipType: "other"
-    };
-    let g2: GeneralNotificationProps = {
-        notificationDesc: "This is a new notification type 2.",
-        receivedAt: "3",
-        notificationType: "other"
-    };
-
-    let o3: OrdertNotificationItemProps = {
-        username: "Millicent 3",
-        receivedAt: "3",
-        orderItemName: "organic tomatoes",
-        notificationDesc: "Looking for fresh organic tomatoes for a local restaurant. Need regular supply.",
-        orderBudget: 300,
-        orderUnitCount: 10,
-        orderUnitName: "Kg",
-        orderStatus: "rejected",
-        notificationType: "order",
-    };
-    let s3: SponsorshipNotificationItemProps = {
-        bankName: "AgriGrow Foundation 3",
-        notificationTitle: "Inrtervention Name",
-        notificationDesc: "Your sponsorship request has been accepted! We’re excited to support you.",
-        sponsorshipAmount: 25000,
-        receivedAt: "3",
-        sponsorshipStatus: "accepted",
-        notificationType: "sponsorship",
-        sponsorshipType: "voucher"
-    };
-    let g3: GeneralNotificationProps = {
-        notificationDesc: "This is a new notification type 2.",
-        receivedAt: "3",
-        notificationType: "other"
-    };
-
-    notifications.push(o1);
-    notifications.push(s1);
-    notifications.push(g1);
-    notifications.push(o2);
-    notifications.push(s2);
-    notifications.push(g2);
-    notifications.push(o3);
-    notifications.push(s3);
-    notifications.push(g3);
+    notifications.push({
+        notificationDesc: `This is a new notification type ${i + 1}`,
+        receivedAt: new Date(2025, 11, 24, 6, 38),
+        notificationType: HomeNotificationType.GENERAL_NOTIFICATION
+    });
+    }
 
     const handleGoBackHome = () => {
-        alert("going back Home");
-        navigate("/farmer/home");
+        navigate(`${FARMER_HOME_ROUTES.HOME_FULL}`);
     };
+
+
+    const [listData, setListData] = useState<NotificationItem[]>(notifications);
+    const sortOptions: string[] = ["request", "time"];
+    const [sortBy, setSortBy] = useState<string>(sortOptions[0]);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [currentStartIndex, setCurrentStartIndex] = useState<number>(0);
+    
+    let dataSize: number = notifications.length;
+    let pageSize: number = dataSize >= 10 ? 10 : dataSize;
+
+    let numberOfPages: number = Math.trunc(dataSize / pageSize);
+    
+    if( numberOfPages === 0 )
+        numberOfPages = 1;
+    else if( (numberOfPages * pageSize) < dataSize )
+        numberOfPages = numberOfPages + 1;
+
+    console.log(numberOfPages);
+    let pages: number[] = [];
+
+    for( let count = 1; count <= numberOfPages; count++ )
+    {
+        pages.push(count);
+    }
+
+    useEffect(() => {
+        dataSize = listData.length;
+        //setCurrentStartIndex(0);
+        pageSize = dataSize >= 10 ? 10 : dataSize;
+    }, [listData]);
+
+    useEffect(() => {
+        //toast("sort altered");
+        setListData(listData.sort((notification1, notification2) => {
+            switch(sortBy)
+            {
+                case "time":
+                    if(notification1.receivedAt < notification2.receivedAt)
+                        return -1;
+                    else if( notification1.receivedAt === notification2.receivedAt)
+                            return 0;
+
+                    else
+                        return 1;
+                case "request":
+                    if( notification1.notificationType < notification2.notificationType)
+                            return -1;
+                    else if( notification1.notificationType == notification2.notificationType)
+                            return 0;
+                    else
+                        return 1;
+                default:
+                    return 0;
+            }
+            }
+        ));
+    listData.forEach(item => console.log(item));
+    }, [sortBy]);
+    
+    const handleMoveToNext = () => {
+        console.log("moving to the next page");
+        setCurrentPage( (currentPage < numberOfPages) ? (currentPage + 1) : 1)
+    }
+
+    useEffect( () => {
+        let startIndex: number = Math.trunc( currentPage * pageSize) - pageSize;
+        let endIndex: number = Math.trunc(currentPage * pageSize);
+
+        setCurrentStartIndex(startIndex);
+
+        setListData(notifications.slice( startIndex, endIndex));
+    }, [currentPage]);
 
     return (<>
     <div className="col-12">
@@ -124,25 +141,70 @@ const HomeNotifications: React.FC = () => {
         </div>
 
         <div className="col-12">
+            <div className="row m-0 p-2 justify-content-end align-items-center">
+                <p className="m-0 p-0 body-regular"
+                style={{width: "max-content"}}>
+                    {`Showing ${currentStartIndex + 1} to ${ currentStartIndex + listData.length} of ${dataSize} Notifications`}
+                </p>
+                <div className="m-0"
+                style={{width: "max-content"}}>
+                    <div className="row p-0 m-0" 
+                    style={{width: "max-content"}}>
+                        <p className=" m-0 p-2 invite-end-aligned-text body-regular"
+                        style={{width: "max-content"}}>
+                            Sort by: 
+                        </p>
+                        <select 
+                        className="m-0 p-0 body-bold"
+                        onChange={(event) => {
+                            const value = event.target?.value;
+                            //toast.info(`Selected: ${value}`);
+                            setSortBy(value);
+                        }}
+                        
+                        style={{
+                            width: "max-content",
+                            backgroundColor: "var(--Background, #F5F5F5)",
+                            borderStyle: "none",
+                            borderRadius: "4px", 
+                        }}
+                        >
+                            {
+                                sortOptions.map( (sortOption, index) => <option 
+                                key={index} 
+                                value={sortOption}
+                                className="m-0 p-1"
+                                style={{
+                                    backgroundColor: "var(--Background, #F5F5F5)",
+                                    borderStyle: "none"
+                                }}
+                                >
+                                    {sortOption}
+                                </option>)
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
 
             <div className="col-12">
                 {
-                    notifications.map((notification) => 
+                    listData.map((notification) => 
                         {
-                            if( notification.notificationType === "sponsorship" )
+                            if( notification.notificationType === HomeNotificationType.SPONSORSHIP_NOTIFICATION )
                             {
                                 
                                 return (<SponsorshipNotificationItem 
                                 data={notification}
                                 /> );
                             }
-                            else if(notification.notificationType == "order")
+                            else if(notification.notificationType == HomeNotificationType.ORDER_NOTIFICATION)
                             {
                                 return (<OrderNotificationItem 
                                 data={notification} 
                                 />);
                             }
-                            else if(notification.notificationType == "other")
+                            else if(notification.notificationType == HomeNotificationType.GENERAL_NOTIFICATION)
                             {
                                 return (<GeneralNotificationItem 
                                 data={notification} 
@@ -152,6 +214,43 @@ const HomeNotifications: React.FC = () => {
                 
                 
                 }
+            </div>
+
+            <div className="row m-0 p-0 justify-content-center">
+                {
+                    pages.map( (pageNumber, index) => 
+                        <div className=" body-medium p-2 m-2 text-align-center"
+                        style={{color: " var(--Primary, #457900)", 
+                        backgroundColor: ( (index + 1) == currentPage ) ? "var(--Accent, #DAFFE7)" : "#ffffff",
+                        borderStyle: "none",
+                        borderRadius: "8px",
+                        width: "40px",
+                        textAlign: "center"}}
+                        
+                        onClick={() => {
+                            setCurrentPage(index + 1);
+                        }}
+                        >
+                            {pageNumber}
+                        </div>
+                    )
+                }
+
+                <div className="col-1 m-0">
+                    <button 
+                    className="small-medium m-2"
+                    style={{
+                        color: "var(--cards-form-bg, #FFF)",
+                        borderStyle: "none",
+                        borderRadius: "8px",
+                        padding: "8px",
+                        backgroundColor: "var(--Primary, #457900)"
+                    }}
+                    onClick={handleMoveToNext}
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
         </div>
     </div>

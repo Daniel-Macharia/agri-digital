@@ -8,7 +8,7 @@ function GeneralNotificationItem({data}: {data: GeneralNotificationProps})
     };
 
     return (<>
-    <div className="col-12 farmer-home-container bg-white"
+    <div className="col-12 farmer-home-container bg-white my-4"
     >
         <div className="row">
             <div className="col-12 col-sm-2 col-md-1 align-content-start">
@@ -33,7 +33,7 @@ function GeneralNotificationItem({data}: {data: GeneralNotificationProps})
                         />
                     <p className="col-10 my-0 small-regular start-aligned-text"
                     style={{color: "var(--Primary, #457900)"}}>
-                        {`${data.receivedAt} minutes ago`}
+                        {`${data.receivedAt} `}
                     </p>
                 </div>
 
