@@ -36,7 +36,7 @@ function SponsorshipNotificationItem({data}: {data: SponsorshipNotificationItemP
                         />
                     <p className="col-10 my-0 small-regular start-aligned-text"
                     style={{color: "var(--Primary, #457900)"}}>
-                        {`${data.receivedAt} minutes ago`}
+                        {`${data.receivedAt}`}
                     </p>
                 </div>
 

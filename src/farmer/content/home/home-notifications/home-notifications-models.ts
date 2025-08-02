@@ -1,12 +1,13 @@
+import { HomeNotificationType } from "./home-enums"
 
 export interface NotificationProps{
-    receivedAt: string,
+    receivedAt: Date,
     notificationDesc: string,
-    notificationType: "order" | "sponsorship" | "other"
+    notificationType: HomeNotificationType
 };
 
 export interface GeneralNotificationProps extends NotificationProps{
-    notificationType: "other"
+    notificationType: HomeNotificationType.GENERAL_NOTIFICATION
 }
 
 export interface OrdertNotificationItemProps extends NotificationProps{
@@ -16,7 +17,7 @@ export interface OrdertNotificationItemProps extends NotificationProps{
     orderUnitName: string,
     orderUnitCount: number,
     orderStatus: string,
-    notificationType: "order"
+    notificationType: HomeNotificationType.ORDER_NOTIFICATION
 };
 
 export interface SponsorshipNotificationItemProps extends NotificationProps{
@@ -25,7 +26,7 @@ export interface SponsorshipNotificationItemProps extends NotificationProps{
     sponsorshipAmount: number,
     sponsorshipStatus: string,
     sponsorshipType: string,
-    notificationType: "sponsorship"
+    notificationType: HomeNotificationType.SPONSORSHIP_NOTIFICATION
 };
 
 
