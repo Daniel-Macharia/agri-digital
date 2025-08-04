@@ -107,6 +107,7 @@ const Vouchers = () => {
                 fontSize: 16,
                 minWidth: 200,
               }}
+              onClick={() => navigate("/farmer/wallet/creating")}
             >
               Create New Voucher
             </button>
