@@ -3,7 +3,9 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Saved from "../../Shared/Saved";
+import RequestSuccessful from "../../Shared/RequestSuccessful";
+import Popup from 'reactjs-popup';
+import { useNavigate } from "react-router-dom";
 
 interface FormValues {
   identification: string;
@@ -15,8 +17,8 @@ interface FormValues {
 const validationSchema = Yup.object({
   identification: Yup.string().required("Identification is required"),
   vaccineName: Yup.string().required("Name of Vaccines is required"),
-  previousVaccination: Yup.date().nullable(),
-  observations: Yup.string(),
+  previousVaccination: Yup.date().nullable(), 
+  observations: Yup.string(), 
 });
 
 const initialValues: FormValues = {
@@ -34,31 +36,32 @@ const identificationOptions = [
 const vaccineOptions = [
   { value: "", label: "Lorem Ipsum" },
   { value: "anthrax", label: "Anthrax" },
-  { value: "rabies", label: "Rabies" },
+  { value: "rabies", label: "Rabies" },   
 ];
 
 const Vaccines: React.FC = () => {
-  const [showSaved, setShowSaved] = useState(false);
+  const [showRequestSuccessful, setShowRequestSuccessful] = useState(false);
+  const navigate = useNavigate();
+
   return (
     <>
-      {showSaved && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: "rgba(0,0,0,0.2)",
-            zIndex: 9999,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Saved onDone={() => setShowSaved(false)} />
+      <Popup
+        open={showRequestSuccessful}
+        modal
+        closeOnDocumentClick={false}
+        onClose={() => setShowRequestSuccessful(false)}
+        contentStyle={{ borderRadius: '1rem', padding: 0, maxWidth: 400 }}
+      >
+        <div className="d-flex flex-column align-items-center justify-content-center p-4">
+          <button
+            type="button"
+            className="btn-close align-self-end mb-2"
+            aria-label="Close"
+            onClick={() => setShowRequestSuccessful(false)}
+          ></button>
+          <RequestSuccessful onDone={() => navigate("/farmer/projects/livestock/health/results")} />
         </div>
-      )}
+      </Popup>
       <div className="w-100 rounded-4 bg-white border mt-3 p-4">
         <h5 className="mb-4 text-start" style={{ color: "#333" }}>
           Vaccines
@@ -68,7 +71,7 @@ const Vaccines: React.FC = () => {
           validationSchema={validationSchema}
           onSubmit={(_values, { setSubmitting, resetForm }) => {
             setTimeout(() => {
-              setShowSaved(true);
+              setShowRequestSuccessful(true);
               setSubmitting(false);
               resetForm();
             }, 400);

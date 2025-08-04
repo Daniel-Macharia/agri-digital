@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Card, Button } from 'react-bootstrap';
+import {Card, Button } from 'react-bootstrap';
 
 
 const FolderIcon = () => (
