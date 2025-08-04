@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Saved from "../../Shared/Saved";
 import { useNavigate } from "react-router-dom";  
 
 const validationSchema = Yup.object({
@@ -27,36 +26,17 @@ const initialValues = {
 };
 
 const PostMatingForm: React.FC = () => {
-  const [showSaved, setShowSaved] = useState(false);
   const navigate = useNavigate();
 
   return (
     <>
-      {showSaved && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: "rgba(0,0,0,0.2)",
-            zIndex: 9999,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Saved onDone={() => navigate("/farmer/projects/livestock/housing/results")} />
-        </div>
-      )}
       <div className="w-100 rounded-4 bg-white border mt-3 p-4">  
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(_values, { setSubmitting, resetForm }) => {
             setTimeout(() => {
-              setShowSaved(true);
+              navigate('/farmer/projects/livestock/breeding/new');
               setSubmitting(false);
               resetForm();
             }, 400);
@@ -237,7 +217,7 @@ const PostMatingForm: React.FC = () => {
                       <Field type="radio" name="veterinaryVisits" value="no" className="custom-radio-input" />
                       <span className="custom-radio-span ms-2"></span>
                       No
-                    </label>
+                    </label> 
                   </div>
                   <ErrorMessage
                     name="veterinaryVisits"

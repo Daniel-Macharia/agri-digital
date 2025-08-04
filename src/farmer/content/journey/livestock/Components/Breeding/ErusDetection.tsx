@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Saved from "../../Shared/Saved";
+import { useNavigate } from "react-router-dom";
 
 // Example livestock options (should be replaced with real data source if available)
 const identificationOptions = [
@@ -45,27 +45,9 @@ const validationSchema = Yup.object({
 });
 
 const ErusDetection: React.FC = () => {
-  const [showSaved, setShowSaved] = useState(false);
+  const navigate = useNavigate();
   return (
     <>
-      {showSaved && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: "rgba(0,0,0,0.2)",
-            zIndex: 9999,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Saved onDone={() => setShowSaved(false)} />
-        </div>
-      )}
       <div className="w-100 rounded-4 bg-white border mt-3 p-4">
         <h5 className="mb-4 text-start" style={{ color: "#333" }}>Estrus Detection</h5>
         <Formik<FormValues>
@@ -73,7 +55,7 @@ const ErusDetection: React.FC = () => {
           validationSchema={validationSchema}
           onSubmit={(_, { setSubmitting, resetForm }) => {
             setTimeout(() => {
-              setShowSaved(true);
+              navigate('/farmer/projects/livestock/breeding/gestigation');
               setSubmitting(false);
               resetForm();
             }, 400);
@@ -196,7 +178,7 @@ const ErusDetection: React.FC = () => {
                   style={{ backgroundColor: "#457900", color: "white", borderRadius: "0.375rem", padding: "0.375rem 1.25rem", fontSize: "0.95rem", minWidth: "100px", border: "none" }}
                   disabled={isSubmitting}
                 >
-                  Save
+                  Continue
                 </button>
               </div>
               <style>{`

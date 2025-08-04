@@ -1,16 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import PreMatingForm from './PreMatingForm';
 import PostMatingForm from './PostMatingForm';
 
 const Gestation = () => {
   const [activeTab, setActiveTab] = useState<'pre' | 'post'>('pre');
-  const navigate = useNavigate();
-
-  const handleSaved = () => {
-    // Navigate to the results page relative to breeding
-    navigate('results');
-  };
 
   return (
     <div className="w-100 rounded-4 bg-white border mt-3 p-4">
@@ -34,7 +27,7 @@ const Gestation = () => {
       </div>
 
       {activeTab === 'pre' ? (
-        <PreMatingForm onSaved={handleSaved} />
+        <PreMatingForm />
       ) : (
         <PostMatingForm />
       )}
