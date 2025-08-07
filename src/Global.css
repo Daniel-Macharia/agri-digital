@@ -44,6 +44,19 @@
   --dark-green: #578158;
   --light-yellow: #fff5d1;
 
+
+  .custom-alert {
+    background-color: #F8C813 !important;
+    color: #000; /* Optional: Ensure text contrast */
+    border: none;
+  }
+  
+
+
+
+
+
+
   /* ================
      TYPOGRAPHY TOKENS
      ================ */
