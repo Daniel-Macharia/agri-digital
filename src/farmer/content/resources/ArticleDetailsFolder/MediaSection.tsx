@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BiPlay, BiDownload } from 'react-icons/bi';
 import { FaImage, FaVideo } from 'react-icons/fa';
 import { MediaItem } from '../types';
+import { TfiGallery } from 'react-icons/tfi';
 
 interface MediaSectionProps {
   isPurchased: boolean;
@@ -100,8 +101,8 @@ const MediaSection: React.FC<MediaSectionProps> = ({
       <div className="ard-media-section bg-white p-4 mb-4 shadow-sm">
         <div className="d-flex align-items-center justify-content-between mb-4">
           <h5 className="ard-section-title fw-bold mb-0 d-flex align-items-center">
-            <span className="me-2">🎬</span>
-            Media Gallery
+            <TfiGallery className="me-2" />
+            Images & Videos
             <span className="badge bg-primary ms-2">{mockMediaItems.length}</span>
           </h5>
           <small className="text-muted">

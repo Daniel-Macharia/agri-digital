@@ -7,30 +7,6 @@ import LivestockProjectModal from "./LivestockProjectModal";
 import CropProjectModal from "./CropProjectModal";
 import{Product, LivestockFormData, CropFormData, LivestockType} from './index';
 
-// Type definitions
-/*interface Product {
-    id: number;
-    name: string;
-    price: number;
-    quantity: number;
-    quality: string | null;
-    image: string;
-    status: string;
-    projectName?: string;
-    type?: 'livestock' | 'crop';
-    livestockType?: string;
-}
-
-interface LivestockFormData {
-    projectName: string;
-    livestockType: string;
-}
-
-interface CropFormData {
-    projectName: string;
-}
-
-type LivestockType = 'cow' | 'pig' | 'goat';*/
 
 function ProductsPage(): JSX.Element {
     const [showModal, setShowModal] = useState<boolean>(false);

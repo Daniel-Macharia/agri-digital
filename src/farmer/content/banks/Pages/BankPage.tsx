@@ -1,6 +1,8 @@
 import React, { useState, Suspense } from 'react';
 import { lazy } from 'react';
 
+import { LoanData } from '../type';
+
 const BankPageHeader = lazy(() => import('../BankPageHeader'));
 const BankPageNavigation = lazy(() => import('../BankPageNavigation'));
 const BankPageLoanGrid = lazy(() => import('../BankPageLoanGrid'));
@@ -20,7 +22,7 @@ const LoadingSpinner = () => (
 );
 
 interface BankPageProps {
-  onViewMore: (loanData?: any) => void;
+  onViewMore: (loanData?: LoanData) => void;
   activeTab: string;
   onTabChange: (tab: string) => void;
 }

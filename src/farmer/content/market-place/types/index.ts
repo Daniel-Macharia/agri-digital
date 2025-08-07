@@ -50,17 +50,6 @@ export interface GiftInfo {
     recipientNumber: string;
     message: string;
 }
-export interface MarketplacePageProps {
-    // No props needed for now as it will manage its own state
-}
-
-export interface CheckoutPageProps {
-    // No props needed for now, will use router state
-}
-
-export interface TrackOrderPageProps {
-     // No props needed for now, will use router state
-}
 
 export interface ShoppingCartModalProps {
   show: boolean;
