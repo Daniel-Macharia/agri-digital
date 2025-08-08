@@ -128,7 +128,7 @@ const VendorHomeSummaries: React.FC = () => {
             />
             </div>}
             <div key={index} 
-            className={`col-12 col-md-3 m-0 vendor-item-container mt-3 mt-md-0 px-0 ${(index === 0) ? "ps-0" : ( (index === 2) ? "pe-0" : "px-md-2")} `} >
+            className={`col-12 col-md-3 m-0 vendor-item-container mt-3 mt-md-0 px-0 ${(index === 0) ? "ps-0" : ( (index === 2) ? "pe-0" : "ps-md-2")} `} >
                 <VendorHomeSummaryItem 
                 itemTitle={summaryItem.itemTitle} 
                 itemCount={summaryItem.itemCount} 

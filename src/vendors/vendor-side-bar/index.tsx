@@ -46,6 +46,9 @@ export default function VendorSideBar({ toggleSidebar }: { toggleSidebar: () => 
                 <VendorSideBarItem name="Quality Score" iconUrl="/assets/images/quality_score.svg" contentUrl="/vendor/quality-score" />
                 <VendorSideBarItem name="Weather" iconUrl="/assets/images/sunny.svg" contentUrl="/vendor/weather" />
                 <VendorSideBarItem name="Training & Resources" iconUrl="/assets/images/articles.svg" contentUrl="/vendor/resources" />
+                
+                <VendorSideBarItem name="Manage Users" iconUrl="/assets/images/vendor/user.svg" contentUrl="/vendor/manage-users" />
+                
                 <VendorSideBarItem name="Settings" iconUrl="/assets/images/settings.svg" contentUrl="/vendor/settings" />
                 <VendorSideBarItem name="Invite a Friend" iconUrl="/assets/images/invite.svg" contentUrl="/vendor/invite" />
             </div>

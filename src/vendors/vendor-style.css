@@ -62,3 +62,24 @@
     border-style: none;
     background-color: #FFFFFF;
 }
+
+.vendor-selected-tab-button{
+  border-style: "solid";
+  border-width: "0px";
+  border-bottom-width: "2px";
+  border-color: "red";
+}
+
+.user-status-label{
+  border-style: "none";
+  border-radius: 20px;
+  color: var(--cards-form-bg, #FFF);
+  text-align: center;
+}
+
+.vendor-accept-button{
+  border-style: none;
+  border-radius: 8px;
+  color: var(--cards-form-bg, #FFF);
+  background-color: var(--Primary, #457900);
+}

@@ -9,6 +9,7 @@ import { VENDOR_ROUTES } from "./vendor-routes";
 import VendorSideBar from "./vendor-side-bar";
 
 import "./vendor-style.css";
+import VendorManageUsers from "./user-management/user-management";
 
 
 const VendorRouter: React.FC = () => {    
@@ -55,6 +56,8 @@ const VendorRouter: React.FC = () => {
                                 <Route path={VENDOR_ROUTES.VENDOR_HOME} element={<VendorHome />} />
                                 <Route path={VENDOR_ROUTES.VENDOR_MY_PRODUCTS} element={<VendorMyProducts />} />
                                 <Route path={VENDOR_ROUTES.VENDOR_MY_SERVICES} element={<VendorMyServices />} />
+
+                                <Route path={VENDOR_ROUTES.VENDOR_MANAGE_USERS} element={<VendorManageUsers />} />
                                 
                                 <Route path={VENDOR_ROUTES.VENDOR_OTHER} element={<NotFound />} />
                             </Routes>

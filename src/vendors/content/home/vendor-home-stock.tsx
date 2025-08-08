@@ -1,9 +1,184 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { VendorStockItemProps } from "./vendor-home-models";
 import OverviewHeader from "../../../farmer/content/home/overview/overview-header";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { KeyValuePair } from "../../../farmer/content/journey/crops/crops-models";
 
+
+const VendorStockBarGraph: React.FC = () => {
+
+    enum SelectedPeriod{
+        MONTHLY = 1,
+        WEEKLY = 2,
+        YEARLY = 3
+    };
+
+    const [period, setPeriod] = useState<SelectedPeriod>(SelectedPeriod.MONTHLY);
+
+    const [data, setData] = useState<KeyValuePair[]>([]);
+
+    const months: string[] = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    const daysOfWeek: string[] = ["Monday", "Tuesday", "Wednesday","Thursday", "Friday",
+        "Saturday", "Sunday"
+    ];
+
+    const years: string[] = ["2023", "2024", "2025"];
+
+    const stockItems: string[] = ["Needles", "Pesticides", "Horse pipes", "Hay", "Jembe"];
+    
+    const [stockItem, setStockItem] = useState<string>(stockItems[0]);
+    useEffect( () => {
+
+        if(stockItem === "")
+            return;
+        
+        const newData: KeyValuePair[] = [];
+        switch( period )
+        {
+            case SelectedPeriod.WEEKLY:
+                daysOfWeek.map((day) => 
+                newData.push(
+                    {
+                        period: day.slice(0,3),
+                        value: (Math.random() + 1)
+                    })
+                )
+                break;
+            case SelectedPeriod.MONTHLY:
+                months.map((month) => 
+                newData.push(
+                    {
+                        period: month.slice(0,3),
+                        value: (Math.random() + 1)
+                    })
+                );
+                break;
+            case SelectedPeriod.YEARLY:
+                years.map((year) => 
+                newData.push(
+                    {
+                        period: year,
+                        value: (Math.random() + 1)
+                    })
+                )
+                break;
+        }
+
+        setData(newData);
+    }, [period, stockItem]);
+
+    return (<>
+    <div className="col-12">
+            <div className="col-12 d-flex m-0 p-0"
+            style={{
+                justifyContent: "space-between"
+            }}>
+                <div className="col-6">
+                    <div className="d-flex m-0 p-0">
+                        <button
+                        className="m-0 mx-1 p-0 vendor-tab-button vendor-selected-tab-button"
+                        onClick={() => {
+                            console.log("clicked weekly");
+                            setPeriod(SelectedPeriod.WEEKLY);
+                        }}
+                        >
+                            Weekly
+                        </button>
+                        <button
+                        className={`m-0 mx-1 p-0 vendor-tab-button ${ (period == SelectedPeriod.MONTHLY) ? "vendor-bargraph-tab" : ""}`}
+                        onClick={() => {
+                            console.log("clicked Monthly");
+                            setPeriod(SelectedPeriod.MONTHLY);
+                        }}
+                        >
+                            Monthly
+                        </button>
+                        <button
+                        className="m-0 mx-1 p-0 vendor-tab-button "
+                        onClick={() => {
+                            console.log("clicked Yearly");
+                            setPeriod(SelectedPeriod.YEARLY);
+                        }}
+                        >
+                            Yearly
+                        </button>
+                    </div>
+                </div>
+                <div className="col-5 d-flex col-md-2 align-items-center">
+                    <p className="col-5 caption-medium secondary-text m-0 p-0">
+                        Sort by:
+                    </p>
+                    <select
+                    className="caption-medium col-7 m-0 p-0"
+                    onChange={(event) => {
+                        const val = event.target?.value;
+
+                        console.log(`Clicked ${val}`);
+                        setStockItem(val);
+                    }}
+                    style={{
+                        color: "var(--Primary, #457900)",
+                        borderStyle: "none"
+                    }}
+                    >
+                        {
+                            (stockItems).map((item) =>
+                            <option 
+                            className="caption-medium col-12 m-0 p-0" 
+                            value={item}
+                            style={{
+                                color: "var(--Primary, #457900)"
+                            }}>
+                                {item}
+                            </option>)
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div className="col-12 m-0 p-0 my-2">
+                <p className="m-0 p-0 caption-medium secondary-text">
+                    Sales
+                </p>
+            </div>
+            <ResponsiveContainer 
+            height={300}
+            width={"100%"}
+            className={"mx-0 px-0"}
+            >
+                <BarChart
+                data={data}
+                margin={{top: 20, right: 20, bottom: 20, left: 0}}
+                >
+                    <CartesianGrid strokeDasharray={"3 10"} />
+                    <XAxis dataKey={"period"} />
+                    <YAxis domain={[0, 10]}  ticks={[0,2,4,6,8,10,12]}/>
+
+                    <Tooltip />
+                    <Legend />
+                    <Bar 
+                    
+                    onClick={(data:unknown) => {
+                        console.log(`Value: ${(data as KeyValuePair).period}`);
+                    }}
+                    dataKey={"value"}
+                    stroke="var(--primary, #457900)"
+                    fill="var(--primary, #457900)"
+
+                    style={{
+                        borderStyle: "none",
+                        borderTopLeftRadius: "20px",
+                        borderTopRightRadius: "20px"
+                    }}
+                    />
+                </BarChart>
+            </ResponsiveContainer>
+        </div>
+    </>);
+};
 
 const VendorStockItem: React.FC<VendorStockItemProps> = (data: VendorStockItemProps) => {
 
@@ -82,14 +257,6 @@ const VendorHomeStockSalesAndLevel: React.FC = () => {
         }
     ];
 
-    const data: KeyValuePair[] = [];
-    stockItems.forEach( item => data.push(
-        { 
-            period: item.itemName, 
-            value: ((item.itemQuantity * 12) / 10000)
-        }
-    ));
-
     return (<>
     <div className="col-12">
          <OverviewHeader
@@ -97,103 +264,7 @@ const VendorHomeStockSalesAndLevel: React.FC = () => {
          viewMoreUrl="#"
          />
 
-        <div className="col-12">
-            <div className="col-12 d-flex m-0 p-0"
-            style={{
-                justifyContent: "space-between"
-            }}>
-                <div className="col-6">
-                    <div className="d-flex m-0 p-0">
-                        <button
-                        className="m-0 mx-1 p-0 vendor-tab-button "
-                        onClick={() => {
-                            console.log("clicked weekly");
-                        }}
-                        >
-                            Weekly
-                        </button>
-                        <button
-                        className="m-0 mx-1 p-0 vendor-tab-button "
-                        onClick={() => {
-                            console.log("clicked Monthly");
-                        }}
-                        >
-                            Monthly
-                        </button>
-                        <button
-                        className="m-0 mx-1 p-0 vendor-tab-button "
-                        onClick={() => {
-                            console.log("clicked Yearly");
-                        }}
-                        >
-                            Yearly
-                        </button>
-                    </div>
-                </div>
-                <div className="col-5 d-flex col-md-2 align-items-center">
-                    <p className="col-5 caption-medium secondary-text m-0 p-0">
-                        Sort by:
-                    </p>
-                    <select
-                    className="caption-medium col-7 m-0 p-0"
-                    onChange={(event) => {
-                        const val = event.target?.value;
-
-                        console.log(`Clicked ${val}`);
-                    }}
-                    style={{
-                        color: "var(--Primary, #457900)",
-                        borderStyle: "none"
-                    }}
-                    >
-                        {
-                            stockItems.map((item) =>
-                            <option 
-                            className="caption-medium col-12 m-0 p-0" 
-                            value={item.itemName}
-                            style={{
-                                color: "var(--Primary, #457900)"
-                            }}>
-                                {item.itemName}
-                            </option>)
-                        }
-                    </select>
-                </div>
-            </div>
-            <ResponsiveContainer 
-            height={300}
-            width={"100%"}
-            className={"mx-0 px-0"}
-            >
-                <BarChart
-                data={data}
-                margin={{top: 20, right: 20, bottom: 20, left: 0}}
-                >
-                    <CartesianGrid strokeDasharray={"3 10"} />
-                    <XAxis dataKey={"period"} />
-                    <YAxis domain={[0, 10]}  ticks={[0,2,4,6,8,10,12]}/>
-
-                    <Tooltip />
-                    <Legend />
-                    <Bar 
-                    
-                    onClick={(data:any) => {
-                        console.log(`Value: ${data.payload.period}`);
-                        //navigate("/farmer/projects/info", { state: projects.find((project) => project.projectName === data.payload.period) } );
-                    }}
-                    dataKey={"value"}
-                    stroke="var(--primary, #457900)"
-                    fill="var(--primary, #457900)"
-
-                    style={{
-                        borderStyle: "none",
-                        borderTopLeftRadius: "20px",
-                        borderTopRightRadius: "20px"
-                    }}
-                    />
-                </BarChart>
-            </ResponsiveContainer>
-        </div>
+        <VendorStockBarGraph />
 
         <div className="col-12">
             <p className="col-12 m-0 p-0 h3-semibold primary-text">
