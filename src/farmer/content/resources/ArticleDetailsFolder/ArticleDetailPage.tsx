@@ -110,10 +110,10 @@ const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
       </div>
 
       {/* Content */}
-      <div className="container py-4">
+      <div className="container py-4" style={{ borderRadius: '30px 30px 0 0' }}>
         <div className="row">
           <div className="col-lg-12 mx-auto">
-            <div className="mb-4">
+            <div className="mb-4" style={{ borderRadius: '30px 30px 0 0'}}>
               <ArticleHeader 
                 article={article}
                 isPurchased={isPurchased}

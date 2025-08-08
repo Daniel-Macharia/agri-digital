@@ -10,6 +10,14 @@ interface WithdrawFormData {
   date: string;
 }
 
+// Define proper error types
+interface FormErrors {
+  amount?: string;
+  reason?: string;
+  method?: string;
+  date?: string;
+}
+
 // Validation Schemas
 const withdrawValidationSchema = Yup.object({
   amount: Yup.number()
@@ -36,7 +44,7 @@ const WithdrawForm: React.FC = () => {
     method: '',
     date: '2025/02/10'
   });
-  const [errors, setErrors] = useState<any>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleBack = () => {
@@ -52,8 +60,8 @@ const WithdrawForm: React.FC = () => {
       [name]: name === 'amount' ? Number(value) : value
     }));
 
-    if (errors[name]) {
-      setErrors((prev: any) => ({
+    if (errors[name as keyof FormErrors]) {
+      setErrors((prev: FormErrors) => ({
         ...prev,
         [name]: undefined
       }));
@@ -71,9 +79,11 @@ const WithdrawForm: React.FC = () => {
       alert('Withdrawal request submitted successfully!');
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
-        const validationErrors: any = {};
+        const validationErrors: FormErrors = {};
         error.inner.forEach((err) => {
-          if (err.path) validationErrors[err.path] = err.message;
+          if (err.path) {
+            validationErrors[err.path as keyof FormErrors] = err.message;
+          }
         });
         setErrors(validationErrors);
       }
@@ -87,7 +97,7 @@ const WithdrawForm: React.FC = () => {
 
   return (
     <div className="withdraw-form-wrapper">
-      <div className="container-fluid bg-light min-vh-100 p-0 px-0 ms-0" style={{ backgroundColor: '#eeeeeeff' }}>
+      <div className="container-fluid bg-light min-vh-100 p-0 px-0 ms-0" style={{ backgroundColor: '#eeeeeeee' }}>
         {/* Header */}
         <div className="row">
           <div className="col-2">

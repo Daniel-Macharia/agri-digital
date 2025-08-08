@@ -1,6 +1,13 @@
 import { useState, Suspense } from 'react';
 import { lazy } from "react";
 
+// Import types
+import type { 
+  LoanData, 
+  ApplicationData, 
+  NavigationState,
+} from "./type";
+
 const BankPageNavigation = lazy(() => import("./BankPageNavigation"));
 const BankPage = lazy(() => import("./Pages/BankPage"));
 const LoanDetails = lazy(() => import("./Pages/LoanDetails"));
@@ -18,19 +25,7 @@ const LoadingSpinner = () => (
   </div>
 );
 
-// Navigation states - expanded to include all tabs
-type NavigationState = 'loans' | 'withdraw' | 'deposit' | 'active-loans' | 'details' | 'application';
 
-// Loan data interface
-interface LoanData {
-  title: string;
-  provider: string;
-  loanAmount: string;
-  interestRate: string;
-  repaymentPeriod: string;
-  collateral: string;
-  eligibility: string[];
-}
 
 const Banks = () => {
   const [currentView, setCurrentView] = useState<NavigationState>('loans');
@@ -89,7 +84,6 @@ const Banks = () => {
 
   // Navigation handlers for loan flow
   const handleViewMore = (loanData?: LoanData) => {
-    // If specific loan data is provided, use it; otherwise use sample data
     setSelectedLoan(loanData || sampleLoanData);
     setCurrentView('details');
   };
@@ -103,16 +97,9 @@ const Banks = () => {
     setSelectedLoan(null);
   };
 
-  const handleSubmitApplication = (applicationData: any) => {
-    // Handle application submission here
+  const handleSubmitApplication = (applicationData: ApplicationData) => {
+    // Handle application submission
     console.log('Application submitted:', applicationData);
-    
-    // Add your submission logic here, such as:
-    // - Send data to backend API
-    // - Show success message
-    // - Navigate to success page
-    
-    // For now, show an alert and navigate back
     alert('Application submitted successfully! We will contact you within 3-5 business days.');
     setCurrentView('loans');
   };

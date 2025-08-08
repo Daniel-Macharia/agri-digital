@@ -59,7 +59,7 @@ const TrainingDetailPage: React.FC<TrainingDetailPageProps> = ({
       <div className="container-fluid" style={{ backgroundColor: '#eeeeee', minHeight: '100vh', padding: '0' }}>
         <div className="container py-4">
           {/* Back Button */}
-          <div className="mb-4">
+          <div className="mb-2">
             <button 
               className="btn btn-link text-muted p-0 d-flex align-items-center"
               onClick={onBackClick}
@@ -74,7 +74,7 @@ const TrainingDetailPage: React.FC<TrainingDetailPageProps> = ({
           <div className="mb-4">
             
           {/* Training Header */}
-          <div className="bg-white rounded-4 p-4 mb-4 shadow-sm">
+          <div className="bg-white p-4 mb-4 shadow-sm" style={{ borderRadius: '30px 30px 0 0' }}>
             <div className="position-relative">
               <img
                 src={training.image || 'https://images.unsplash.com/photo-1730659370558-e2472828a61d?w=600&auto=format&fit=crop&q=60'}

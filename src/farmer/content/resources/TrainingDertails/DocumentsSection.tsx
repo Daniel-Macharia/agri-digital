@@ -136,7 +136,7 @@ Consider factors such as climate, soil type, market demands, and available resou
   return (
     <>
       <div className="p-3 bg-white rounded shadow-sm">
-        <h5 className="mb-3 d-flex align-items-center text-muted">
+        <h5 className="mb-3 d-flex align-items-center text-dark">
           <BiFileBlank className="me-2" size={20} />
           Attached Documents
         </h5>
@@ -144,9 +144,9 @@ Consider factors such as climate, soil type, market demands, and available resou
           <div key={doc.id} className="d-flex align-items-center justify-content-between p-2 mb-2 bg-light rounded">
             <div className="d-flex align-items-center">
               {getFileIcon(doc.type)}
-              <div className="ms-2">
+              <div className="ms-2 text-success">
                 <div className="fw-bold text-truncate" style={{ maxWidth: '200px' }}>{doc.name}</div>
-                <small className="text-muted">{doc.size}</small>
+                <small className="text-success">{doc.size}</small>
               </div>
             </div>
             <div className="d-flex gap-2">

@@ -1,5 +1,4 @@
-// Updated TrainingResourcesLanding with Library Tab Support
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Article, Training } from '../types';
 import ArticlesSection from './ArticlesSection';
 import WebinarsSection from './WebinarsSection';
@@ -11,7 +10,13 @@ import PolicyPayment from '../../insurance/PolicyPayment';
 import TrainingRegistrationModal from './TrainingRegistrationModal';
 import ArticleDetailPage from '../ArticleDetailsFolder/ArticleDetailPage';
 import TrainingDetailPage from '../TrainingDertails/TrainingDetail';
+import MyArticlesTrainings from '../MyArticleTraining/MyArticlesTrainings';
+import AddArticle from '../MyArticleTraining/AddArticle';
+import AddTraining from '../MyArticleTraining/AddTraining';
+import MyArticleDetail from '../MyArticleTraining/MyArticleDetail';
+import MyTrainingDetail from '../MyArticleTraining/MyTrainingDetail';
 import { TrainingResourcesProvider, useTrainingResources } from '../TrainingResourcesContext';
+import { MyContent, MyArticle, MyTraining } from '../MyArticleTraining/MyArticlesTrainings';
 
 interface Tab {
   id: string;
@@ -47,6 +52,12 @@ interface TrainingResourcesLandingProps {
   onLibraryTrainingAccess?: (training: Training) => void;
   onLibraryTrainingCertificate?: (training: Training) => void;
   
+  // My Content specific handlers
+  onMyContentCreateClick?: () => void;
+  onMyContentViewDetails?: (item: unknown) => void;
+  onMyContentEdit?: (item: unknown) => void;
+  onMyContentDelete?: (item: unknown) => void;
+  
   // Customization props
   articlesTitle?: string;
   trainingsTitle?: string;
@@ -64,8 +75,9 @@ interface TrainingResourcesLandingProps {
 // Inner component that uses the context
 const TrainingResourcesContent: React.FC<Omit<TrainingResourcesLandingProps, 'onTabChange' | 'onSearchChange' | 'onArticlePurchase' | 'onArticleClick' | 'onTrainingRegister' | 'onTrainingClick'>> = ({
   tabs = [
-    { id: 'all', label: 'All' },
-    { id: 'library', label: 'My Library' }
+    { id: 'all', label: 'All Articles & Trainings' },
+    { id: 'library', label: 'My Library' },
+    { id: 'my-content', label: 'My Articles & Trainings' }
   ],
   showSearch = true,
   showFilter = true,
@@ -78,6 +90,10 @@ const TrainingResourcesContent: React.FC<Omit<TrainingResourcesLandingProps, 'on
   onLibraryArticleDownload,
   onLibraryTrainingAccess,
   onLibraryTrainingCertificate,
+  onMyContentCreateClick,
+  onMyContentViewDetails,
+  onMyContentEdit,
+  onMyContentDelete,
   articlesTitle = "Articles",
   trainingsTitle = "Webinars and Trainings",
   libraryArticlesTitle = "Purchased Articles",
@@ -88,6 +104,14 @@ const TrainingResourcesContent: React.FC<Omit<TrainingResourcesLandingProps, 'on
   articleCardProps = {},
   trainingCardProps = {}
 }) => {
+  // Track which screen we're on
+  type Screen = 'main' | 'addArticle' | 'addTraining' | 'articleDetail' | 'trainingDetail';
+  const [currentScreen, setCurrentScreen] = useState<Screen>('main');
+  
+  // State for detail views
+  const [selectedMyArticle, setSelectedMyArticle] = useState<MyArticle | null>(null);
+  const [selectedMyTraining, setSelectedMyTraining] = useState<MyTraining | null>(null);
+
   const {
     activeTab,
     searchValue,
@@ -116,6 +140,38 @@ const TrainingResourcesContent: React.FC<Omit<TrainingResourcesLandingProps, 'on
     handleArticleImageClick,
     handleTrainingImageClick,
   } = useTrainingResources();
+
+  // Handlers for screen navigation
+  const handleCreateArticle = () => {
+    setCurrentScreen('addArticle');
+  };
+  
+  const handleCreateTraining = () => {
+    setCurrentScreen('addTraining');
+  };
+  
+  const handleBackFromAdd = () => {
+    setCurrentScreen('main');
+  };
+
+  // Handlers for My Content detail views
+  const handleMyContentViewDetails = (item: MyContent) => {
+    if (item.type === 'Article') {
+      setSelectedMyArticle(item as MyArticle);
+      setCurrentScreen('articleDetail');
+    } else {
+      setSelectedMyTraining(item as MyTraining);
+      setCurrentScreen('trainingDetail');
+    }
+    // Also call the external handler if provided
+    onMyContentViewDetails?.(item);
+  };
+
+  const handleBackFromMyContentDetail = () => {
+    setCurrentScreen('main');
+    setSelectedMyArticle(null);
+    setSelectedMyTraining(null);
+  };
 
   // Default sample data (fallback)
   const defaultArticles: Article[] = [
@@ -419,10 +475,10 @@ const TrainingResourcesContent: React.FC<Omit<TrainingResourcesLandingProps, 'on
   const handleLibraryArticleRead = (article: Article) => {
     console.log('Reading article from library:', article.title);
     if (onLibraryArticleRead) {
-  onLibraryArticleRead(article);
-} else {
-  handleArticleImageClick(article);
-}
+      onLibraryArticleRead(article);
+    } else {
+      handleArticleImageClick(article);
+    }
   };
 
   const handleLibraryArticleDownload = (article: Article) => {
@@ -466,6 +522,36 @@ const TrainingResourcesContent: React.FC<Omit<TrainingResourcesLandingProps, 'on
     }
   };
 
+  // Show full-screen AddArticle component
+  if (currentScreen === 'addArticle') {
+    return <AddArticle onBack={handleBackFromAdd} />;
+  }
+
+  // Show full-screen AddTraining component
+  if (currentScreen === 'addTraining') {
+    return <AddTraining onBack={handleBackFromAdd} />;
+  }
+
+  // Show full-screen MyArticleDetail component
+  if (currentScreen === 'articleDetail' && selectedMyArticle) {
+    return (
+      <MyArticleDetail
+        article={selectedMyArticle}
+        onBackClick={handleBackFromMyContentDetail}
+      />
+    );
+  }
+
+  // Show full-screen MyTrainingDetail component
+  if (currentScreen === 'trainingDetail' && selectedMyTraining) {
+    return (
+      <MyTrainingDetail
+        training={selectedMyTraining}
+        onBackClick={handleBackFromMyContentDetail}
+      />
+    );
+  }
+
   // Show article detail page
   if (showArticleDetail && selectedArticle) {
     return (
@@ -491,6 +577,7 @@ const TrainingResourcesContent: React.FC<Omit<TrainingResourcesLandingProps, 'on
   }
 
   const isLibraryMode = activeTab === 'library';
+  const isMyContentMode = activeTab === 'my-content';
 
   return (
     <>
@@ -504,7 +591,7 @@ const TrainingResourcesContent: React.FC<Omit<TrainingResourcesLandingProps, 'on
         />
       ) : (
         <div 
-          className={`container-fluid py-4 trl-main-container ${containerClassName}`} 
+          className={`container-fluid py-4 trl-main-container p-0 ${containerClassName}`} 
           style={{ backgroundColor: '#eeeeee', padding: '0px' }}
         >
           <div className="container">
@@ -522,7 +609,17 @@ const TrainingResourcesContent: React.FC<Omit<TrainingResourcesLandingProps, 'on
               showFilter={showFilter}
             />
             
-            {isLibraryMode ? (
+            {isMyContentMode ? (
+              // My Content Mode - Show user's articles and trainings list
+              <MyArticlesTrainings
+                onCreateClick={onMyContentCreateClick}
+                onViewDetails={handleMyContentViewDetails}
+                onEdit={onMyContentEdit}
+                onDelete={onMyContentDelete}
+                onCreateArticle={handleCreateArticle}
+                onCreateTraining={handleCreateTraining}
+              />
+            ) : isLibraryMode ? (
               // Library Mode - Show purchased/registered items
               <>
                 <LibraryArticlesSection 
