@@ -66,7 +66,7 @@ const RequestForService: React.FC = () => {
         handleBackNavigation();
     }
 
-    const handleRequestForService = (data: RequestForServiceProps, {}: any) => {
+    const handleRequestForService = (data: RequestForServiceProps) => {
 
         if( selectedDate == null )
         {
@@ -269,7 +269,7 @@ const RequestForService: React.FC = () => {
                                 <img  src={previewUrl || "/assets/images/upload_photo.svg"}
                                 className={previewUrl ? "col-10 col-md-6" : "col-1"}
                                 style={{
-                                
+                                    maxWidth: previewUrl ? "40%" : "10%"
                                 }}/>
 
                                 <input
@@ -294,7 +294,8 @@ const RequestForService: React.FC = () => {
                                 style={{display:"none"}}
                                 />
 
-                                <p>Upload Photo of the Product<br/>PDF,PNG,JPG up to 10 MB </p>
+                                <p
+                                className="small-regular secondary-text text-center">Upload Photo of the Product<br/>PDF,PNG,JPG up to 10 MB </p>
                                 <div className="text-danger small">
                                     <ErrorMessage name="previewUrl" />
                                 </div>

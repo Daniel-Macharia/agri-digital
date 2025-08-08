@@ -3,7 +3,10 @@ import { ManagementSummaryProps } from "../crops-models";
 
 export default function ManagementSummary( summary: ManagementSummaryProps ){
     return (<>
-    <div className="col-12 card p-2" >
+    <div className="col-12 card p-2"
+    style={{
+        height: "100%"
+    }} >
         <div className="row d-flex"
         style={{alignItems: "center"}}>
 

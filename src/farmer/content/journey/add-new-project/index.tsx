@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 interface StartProjectProps{
     show:boolean,
-    setShow: Function
+    setShow: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 export default function StartNewProjectModal( props: StartProjectProps){
@@ -124,7 +124,7 @@ export default function StartNewProjectModal( props: StartProjectProps){
                     validationSchema={cropValidationSchema}
                     onSubmit={handleCropSubmitAction}
                     >
-                    {({}) => (
+                    {() => (
                         <Form>
                             <div className="modal-input-group" >
                                 <label className="modal-label" htmlFor="cropName" >
@@ -165,7 +165,7 @@ export default function StartNewProjectModal( props: StartProjectProps){
                     validationSchema={livestockValidationSchema}
                     onSubmit={handleLivestockSubmitAction}
                     >
-                    {({}) => (
+                    {() => (
                         <Form>
 
                             <div className="modal-input-group">

@@ -3,7 +3,7 @@ import { CropProjectSummaryProps, LivestockProjectSummaryProps, ProjectProps, Pr
 
 export function loadProjects() : ProjectProps[] {
     try{
-        let projects: ProjectProps[] = [
+        const projects: ProjectProps[] = [
             { projectId: 1, projectName: "Maize", projectDuration: 12, overallScore: 42, completionDate: "25/06/2025", currentStage: 5, projectType: "crop"},
             { projectId: 2, projectName: "Rabbits", projectDuration: 10, overallScore: 38, completionDate: "25/06/2025", currentStage: 7, projectType: "livestock"},
             { projectId: 3, projectName: "Potatoes", projectDuration: 16, overallScore: 93, completionDate: "25/06/2025", currentStage: 6, projectType: "crop"},
@@ -18,7 +18,7 @@ export function loadProjects() : ProjectProps[] {
     }
     catch(error)
     {
-        console.log("Failed to load projects");
+        console.log("Failed to load projects", error);
         return [];
     }
 }
@@ -27,7 +27,7 @@ export function loadProjects() : ProjectProps[] {
 export function loadProjectReviews(projectId: number): ProjectReviewProps[]{
     try{
         console.log(`livestock projectId: ${projectId}`);
-        let reviews: ProjectReviewProps[] = [
+        const reviews: ProjectReviewProps[] = [
             {username: "Julius Kiptoo",
             userAccountState: "verified",
             reviewDate: new Date("06/24/2025"),
@@ -61,9 +61,9 @@ export function loadProjectReviews(projectId: number): ProjectReviewProps[]{
 
         return reviews;
     }
-    catch( Error )
+    catch( error )
     {
-        console.log("Failed loading errors");
+        console.log("Failed loading errors", error);
         return [];
     }
 }
@@ -73,7 +73,7 @@ export function loadLivestockProjectDetails(projectId: number): LivestockProject
 {
     try{
         console.log(`livestock projectId: ${projectId}`);
-        let details: LivestockProjectSummaryProps[] = [
+        const details: LivestockProjectSummaryProps[] = [
             {livestockId: 1, livestockName: "Gift", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
             {livestockId: 2, livestockName: "Lucky", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
             {livestockId: 3, livestockName: "Jimmy", shortDescription: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum delectus praesentium ipsa! Debitis quae quibusdam perferendis sequi numquam et!"},
@@ -91,9 +91,9 @@ export function loadLivestockProjectDetails(projectId: number): LivestockProject
         ];
 
         return details;
-    }catch(Error)
+    }catch(error)
     {
-        console.log("Error getting details", Error);
+        console.log("Error getting details", error);
         return [];
     }
 }
@@ -102,7 +102,7 @@ export function loadLivestockProjectDetails(projectId: number): LivestockProject
 export function loadCropProjectDetails(projectId: number) :CropProjectSummaryProps[] {
     try{
         console.log(`livestock projectId: ${projectId}`);
-        let details: CropProjectSummaryProps[] = [
+        const details: CropProjectSummaryProps[] = [
             {cropProjectStage: 1, stageScore: 92, cropProjectDescription: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. At consequuntur tempore a, eos nostrum amet dolorem unde aliquam doloremque quam est neque accusantium, dolores asperiores labore, consequatur quaerat? Tempore aliquid sint saepe? Quibusdam tempore magni officiis, aliquid consectetur necessitatibus odit nulla amet obcaecati est exercitationem animi magnam nam at repellendus."},
             {cropProjectStage: 2, stageScore: 72, cropProjectDescription: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. At consequuntur tempore a, eos nostrum amet dolorem unde aliquam doloremque quam est neque accusantium, dolores asperiores labore, consequatur quaerat? Tempore aliquid sint saepe? Quibusdam tempore magni officiis, aliquid consectetur necessitatibus odit nulla amet obcaecati est exercitationem animi magnam nam at repellendus."},
             {cropProjectStage: 3, stageScore: 88, cropProjectDescription: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. At consequuntur tempore a, eos nostrum amet dolorem unde aliquam doloremque quam est neque accusantium, dolores asperiores labore, consequatur quaerat? Tempore aliquid sint saepe? Quibusdam tempore magni officiis, aliquid consectetur necessitatibus odit nulla amet obcaecati est exercitationem animi magnam nam at repellendus."},
@@ -113,9 +113,9 @@ export function loadCropProjectDetails(projectId: number) :CropProjectSummaryPro
 
         return details;
     }
-    catch(Error)
+    catch(error)
     {
-        console.log("Error: ", Error);
+        console.log("Error: ", error);
         return [];
     }
 }

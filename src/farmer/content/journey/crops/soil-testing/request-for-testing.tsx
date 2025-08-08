@@ -50,7 +50,7 @@ const RequestForTesting: React.FC = ()=>{
 
     const navigate = useNavigate();
 
-    const handleRequestForTesting = (data: RequestForTestingProps, {} : any) => {
+    const handleRequestForTesting = (data: RequestForTestingProps) => {
         console.log("requesting..");
 
         if( selectedDate == null )
@@ -70,15 +70,14 @@ const RequestForTesting: React.FC = ()=>{
     return (<>
     <div className="col-12">
 
-        <div className="row justify-content-start">
-            <div className="col-2 col-md-1 px-0 mx-0"
-            >
-                <div className="row justify-content-start px-0 mx-0">
-                    <img src="/assets/images/back-icon.svg" 
-                    onClick={() => navigate(`..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_SOIL_TESTING}`)}
-                    />
-                </div>
-            </div>
+        <div className="col-12 d-flex justify-content-start my-2">
+            <img src="/assets/images/back-icon.svg" 
+            onClick={() => navigate(`..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_SOIL_TESTING}`)}
+
+            style={{
+                width: "24px"
+            }}
+            />
         </div>
 
         <div className="col-12 crops-container bg-white p-4">

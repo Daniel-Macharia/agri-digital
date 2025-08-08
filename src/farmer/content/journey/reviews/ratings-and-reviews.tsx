@@ -5,19 +5,20 @@ import { PROJECTS_ROUTES } from "../projects/projects-routes";
 import ProjectReview from "./project-review";
 import { FaStar } from "react-icons/fa";
 import { FARMER_ROUTES } from "../../../farmer-routes";
+import { ReactNode } from "react";
 
 
 const RatingAndReviews:React.FC = () => {
-    let overallRating: number = 4.5;
-    let totalRating: number = 5;
-    let basisOfRating: string = "Lorem, ipsum dolor";
+    const overallRating: number = 4.5;
+    const totalRating: number = 5;
+    const basisOfRating: string = "Lorem, ipsum dolor";
 
     let projectReviews: ProjectReviewProps[] = loadProjectReviews( 3 );
     if( projectReviews.length > 3 )
         projectReviews = projectReviews.slice(0, 3);
 
-    const getRatingStars = () :any[] => {
-        let stars: any[] = [];
+    const getRatingStars = ():ReactNode[] => {
+        const stars: ReactNode[] = [];
         
         for( let i = 1; i <= totalRating; i++ )
         {

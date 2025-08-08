@@ -12,7 +12,7 @@ const PostHarvesting: React.FC = ()=>{
 
     const navigate = useNavigate();
 
-    let sideSummaries: ManagementSummaryProps[] = [
+    const sideSummaries: ManagementSummaryProps[] = [
         {"title": "Sorting & Grading", "items": [{"label": "Grade", "value": "Grade 1 (Export)"},
             {"label": "Harvest Date", "value": "2025/02/10"},
             {"label": "Quantity", "value": "25Kg"},
@@ -23,7 +23,7 @@ const PostHarvesting: React.FC = ()=>{
         }
     ];
 
-    let otherSummaries: ManagementSummaryProps[] = [
+    const otherSummaries: ManagementSummaryProps[] = [
         {"title": "Value Addition", "items": [{"label": "Processing Methods", "value": "Drying"},
             {"label": "Final Product", "value": "--"},
             {"label": "Processing Costs", "value": "KES 12,000"},
@@ -69,13 +69,16 @@ const PostHarvesting: React.FC = ()=>{
 
             <div className="col-12">
                 <div className="row">
-                    <div className="col-12 col-md-7 mt-2" >
+                    <div className="col-12 col-md-7 mt-2 px-0" >
                         <StorageInformation />
                     </div>
 
-                    <div className="col-12 col-md-5 mt-2 p-1" >
+                    <div className="col-12 col-md-5 mt-2 px-0" 
+                    style={{
+                        height: "100%"
+                    }}>
                         {
-                            sideSummaries.map( sideSummary => <div className="col-12 px-2">
+                            sideSummaries.map( (sideSummary, index) => <div className={`col-12 px-0 ps-md-2 ${(index === (sideSummaries.length-1)) ? "mt-2" : ""}`}>
                                 <ManagementSummary 
                                 title={sideSummary.title} 
                                 items={sideSummary.items} 
@@ -87,23 +90,19 @@ const PostHarvesting: React.FC = ()=>{
             </div>
 
             <div className="col-12 mt-2">
-                <div className="row">
-                    <div className="col-12 col-md-8" >
-                        <div className="row">
-                            {
-                                otherSummaries.map( otherSummary => <div className="col-12 col-md-6 px-2">
-                                    <ManagementSummary
-                                    title={otherSummary.title}
-                                    items={otherSummary.items} />
-                                </div>)
-                            }
-                        </div>
-                    </div>
+                <div className="row ">
+                    {
+                        otherSummaries.map( (otherSummary, index) => <div className={`col-12 col-md-4 mt-2 mt-md-0 p-0 px-md-2 ${ index  === 0 ? "ps-md-0" : ""}`}>
+                            <ManagementSummary
+                            title={otherSummary.title}
+                            items={otherSummary.items} />
+                        </div>)
+                    }
 
-                    <div className="col-12 col-md-4 crops-container bg-white pb-0" >
+                    <div className="col-12 col-md-4 p-0 ps-0 ps-md-2 mt-2 mt-md-0 m-0 " >
                         <OnelineNotifications />
                     </div>
-                </div>
+                </div> 
             </div>
 
             <div className="col-12 mt-2">

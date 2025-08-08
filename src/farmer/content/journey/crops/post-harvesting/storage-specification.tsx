@@ -4,7 +4,10 @@ const StorageSpecification: React.FC<StorageSpecificationItemProps> = (item:Stor
     
     
     return (<>
-    <div className="col-12 card p-1">
+    <div className="col-12 card p-1"
+    style={{
+        height: "100%"
+    }}>
         <h3 className="body-medium primary-text col-12 crops-start-aligned-text my-1">
             {item.itemName}
         </h3>

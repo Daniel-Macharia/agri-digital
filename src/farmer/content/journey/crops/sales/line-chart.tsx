@@ -4,7 +4,7 @@ import { KeyValuePair } from "../crops-models";
 
 const SalesLineChart: React.FC = () => {
 
-    let insightsData: KeyValuePair[] = [
+    const insightsData: KeyValuePair[] = [
         {"period": "March 31", "value": 78},
         {"period": "April 5", "value": 79},
         {"period": "April 10", "value": 75},
@@ -16,7 +16,7 @@ const SalesLineChart: React.FC = () => {
 
     
 
-    let yTicks: number[] = [25,30,35,40,45,50,55,60,65,70,75,80,85,90];
+    const yTicks: number[] = [25,30,35,40,45,50,55,60,65,70,75,80,85,90];
 
     return(
     <ResponsiveContainer

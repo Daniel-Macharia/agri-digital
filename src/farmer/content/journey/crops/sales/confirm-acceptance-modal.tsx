@@ -1,8 +1,9 @@
+import React from "react";
 import { Modal } from "react-bootstrap";
 
 interface ConfirmAcceptanceProps{
     show: boolean,
-    setShow: Function
+    setShow: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ConfirmAcceptanceModal: React.FC<ConfirmAcceptanceProps> = (props: ConfirmAcceptanceProps) => {

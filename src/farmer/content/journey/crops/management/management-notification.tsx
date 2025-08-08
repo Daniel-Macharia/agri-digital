@@ -4,6 +4,7 @@ export default function ManagementNotification( data: ManagementNotificationProp
 {
     return (<>
     <div className="card col-12 p-1 m-0"
+    style={{height: "100%"}}
     >
         <h3 className=" body-semibold primary-text crops-start-aligned-text col-12 m-0"
         >

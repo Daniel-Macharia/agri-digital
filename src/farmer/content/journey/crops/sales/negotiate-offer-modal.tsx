@@ -78,7 +78,7 @@ const NegotiateOfferModal: React.FC<SalesNegotiationProductProps> = ( props: Sal
                 onSubmit={handleSubmitOffer}
 
                 >
-                    {({}) => (
+                    {() => (
                         <Form className="col-sm-12">
                             <div className="col-sm-12">
                                 <div className="col-sm-12">

@@ -11,12 +11,12 @@ const SoilTesting: React.FC  = ()=>{
 
     const [show, setShow] = useState<boolean>(false);
 
-    let pHLevel = "Acidic";
-    let nutrientLevels = ["Nitroge low",
+    const pHLevel = "Acidic";
+    const nutrientLevels = ["Nitroge low",
     "Phosphorous Medium",
     "Potassium High"];
 
-    let recommendations = ["Apply lime(agricultural lime or dolomite) to balance acidity.",
+    const recommendations = ["Apply lime(agricultural lime or dolomite) to balance acidity.",
         "Apply composed manure or nitrogen based fertilisers.",
         "Loamy soil (ideal for most crops) suitable for corn, wheat, vegetables and fruits."];
 
@@ -44,7 +44,7 @@ const SoilTesting: React.FC  = ()=>{
 
     const navigate = useNavigate();
 
-    const handleSoilTesting = (values: typeof initialValues, {} : any )=>{
+    const handleSoilTesting = (values: typeof initialValues)=>{
         console.log("testing");
         console.log(values);
 
@@ -103,7 +103,7 @@ const SoilTesting: React.FC  = ()=>{
                 className="col-12"
                 
                 >
-                    {({})=>(
+                    {()=>(
                         <Form className="col-12">
                             <div
                             className="row"

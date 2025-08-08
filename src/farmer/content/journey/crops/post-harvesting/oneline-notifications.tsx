@@ -2,7 +2,7 @@ import { OnelineNotificationItemProps } from "../crops-models";
 import OnelineNotificationItem from "./oneline-notification-item";
 
 const OnelineNotifications: React.FC = () => {
-    let onelineNotifications: OnelineNotificationItemProps[] = [
+    const onelineNotifications: OnelineNotificationItemProps[] = [
         {"notificationDescription": "Cold storage temperature is too high. Adjust immediately.",
           "urgency": 2
         },
@@ -16,7 +16,10 @@ const OnelineNotifications: React.FC = () => {
     
     
     return (<>
-    <div className="col-12 pb-0" >
+    <div className="col-12 pb-0 crops-container bg-white p-2" 
+    style={{
+      height: "100%"
+    }}>
         <h3 className="col-12 h3-bold primary-text crops-start-aligned-text my-0 pb-0" >
             Notifications
         </h3>

@@ -2,35 +2,36 @@ import { FaStar } from "react-icons/fa";
 import ProgressBar from "../projects/journey-item/progress-bar";
 import { ProjectReviewProps } from "../models";
 import ProjectReview from "./project-review";
+import { ReactNode } from "react";
 
 
 const MoreProjectReviews: React.FC = () => {
-    let fiveStarCount: number = 234;
-    let fourStarCount: number = 25;
-    let threeStarCount: number = 3;
-    let twoStarCount: number = 0;
-    let oneStarCount: number = 0;
+    const fiveStarCount: number = 234;
+    const fourStarCount: number = 25;
+    const threeStarCount: number = 3;
+    const twoStarCount: number = 0;
+    const oneStarCount: number = 0;
 
-    let reviewsTitle: string = "Employee Reviews";
-    let averageRating: number = 4.8;
-    let totalRating: number = 5;
+    const reviewsTitle: string = "Employee Reviews";
+    const averageRating: number = 4.8;
+    const totalRating: number = 5;
 
-    const getRatingStars = () :any[] => {
-        let stars: any[] = [];
+    const getRatingStars = () :ReactNode[] => {
+        const stars: ReactNode[] = [];
         
         for( let i = 1; i <= totalRating; i++ )
         {
             stars.push(
-                <FaStar 
-                size={20}
-                color={ i < averageRating ? "var(--yellow, #F8C813)" : "#e4e5e9"}
-                />
+                (<FaStar
+                    size={20}
+                    color={i < averageRating ? "var(--yellow, #F8C813)" : "#e4e5e9"} /> 
+                )
             );
         }
         return stars;
     };
 
-    let reviews: ProjectReviewProps[] = [
+    const reviews: ProjectReviewProps[] = [
             {username: "Julius Kiptoo",
             userAccountState: "verified",
             reviewDate: new Date("06/24/2025"),

@@ -24,9 +24,9 @@ const LivestockProjectMoreInfo: React.FC = () => {
 
     console.log("ID received: " + livestockId);
     
-    let productionStatus: string = "Sold";
+    const productionStatus: string = "Sold";
 
-    let generalInfo: ProjectKeyValuePairItemProps[] = [
+    const generalInfo: ProjectKeyValuePairItemProps[] = [
         {itemKey: "Sex", itemValue: "Lorem, ipsum"},
         {itemKey: "Weight at birth", itemValue: "Lorem, ipsum"},
         {itemKey: "Breed", itemValue: "Lorem, ipsum"},
@@ -34,7 +34,7 @@ const LivestockProjectMoreInfo: React.FC = () => {
         {itemKey: "Vital status", itemValue: "Lorem, ipsum"}
     ];
 
-    let feedingAndNutrition: ProjectKeyValuePairItemProps[] = [
+    const feedingAndNutrition: ProjectKeyValuePairItemProps[] = [
         {itemKey: "Weight", itemValue: "Lorem, ipsum"},
         {itemKey: "Type of feed", itemValue: "Lorem, ipsum"},
         {itemKey: "Quantity of feed", itemValue: "Lorem, ipsum"},
@@ -42,7 +42,7 @@ const LivestockProjectMoreInfo: React.FC = () => {
         {itemKey: "Status", itemValue: "Lorem, ipsum"}
     ];
 
-    let production: ProjectKeyValuePairItemProps[] = [
+    const production: ProjectKeyValuePairItemProps[] = [
         {itemKey: "Collection records", itemValue: "Lorem, ipsum"},
         {itemKey: "Feed conversion ratio", itemValue: "Lorem, ipsum"},
         {itemKey: "Slaughter age", itemValue: "Lorem, ipsum"},
@@ -50,7 +50,7 @@ const LivestockProjectMoreInfo: React.FC = () => {
         {itemKey: "Milk produce", itemValue: "Lorem, ipsum"}
     ];
 
-    let pestAndDiseaseManagement: ProjectKeyValuePairItemProps[] = [
+    const pestAndDiseaseManagement: ProjectKeyValuePairItemProps[] = [
         {itemKey: "Issues", itemValue: "Lorem, ipsum"},
         {itemKey: "Symptoms", itemValue: "Lorem, ipsum"},
         {itemKey: "Diagnosis", itemValue: "Lorem, ipsum"},
@@ -58,7 +58,7 @@ const LivestockProjectMoreInfo: React.FC = () => {
         {itemKey: "Quarantine", itemValue: "Lorem, ipsum"}
     ];
 
-    let breedingAndReproduction: ProjectKeyValuePairItemProps[] = [
+    const breedingAndReproduction: ProjectKeyValuePairItemProps[] = [
         {itemKey: "Estrus detection", itemValue: "Lorem, ipsum"},
         {itemKey: "Next action", itemValue: "Lorem, ipsum"},
         {itemKey: "Conception date", itemValue: "Lorem, ipsum"},

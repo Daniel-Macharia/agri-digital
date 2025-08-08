@@ -22,7 +22,7 @@ const DisplayCropDetails: React.FC = ()=>{
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
 
-    let details: CropDetails = useLocation().state;
+    const details: CropDetails = useLocation().state;
 
     let activities: PlantingActivity[] | null = storageGet<PlantingActivity[]>("plantingActivity");
 
@@ -37,7 +37,7 @@ const DisplayCropDetails: React.FC = ()=>{
     });
 
 
-    const handleAddActivity = ( data: PlantingActivity, {} : any)=>{
+    const handleAddActivity = ( data: PlantingActivity)=>{
 
         if( selectedDate == null )
         {

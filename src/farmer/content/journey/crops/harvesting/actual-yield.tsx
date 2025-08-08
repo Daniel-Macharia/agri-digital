@@ -290,9 +290,18 @@ const ActualYield: React.FC = ()=>{
                                 style={{display: "none"}}
                                 />
 
-                                <img src={previewUrl || "/assets/images/upload_photo.svg"} 
-                                className={previewUrl ? "col-sm-8" : "col-sm-1"}/>
-                                <p>Upload Photo of the Product<br/>PDF,PNG,JPG up to 10 MB </p>
+                                <div className="col-12 d-flex justify-content-center">
+                                    <img src={previewUrl || "/assets/images/upload_photo.svg"} 
+                                    className={previewUrl ? "col-sm-8" : "col-sm-1"}
+                                    
+                                    style={{
+                                        maxWidth: previewUrl ? "40%" : "10%",
+                                    }}
+                                    />
+                                </div>
+                                <p className="text-center small-regular secondary-text">
+                                    Upload Photo of the Product<br/>PDF,PNG,JPG up to 10 MB 
+                                </p>
                                 <div className="text-danger small harvesting-input-label col-sm-12"
                                 style={{margin: "0px", textAlign: "center"}}
                                 >

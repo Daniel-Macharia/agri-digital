@@ -30,7 +30,7 @@ const ExpectedYield: React.FC = ()=>{;
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
         >
-            {({}) => (
+            {() => (
                 <Form className="col-12">
                     <div 
                     className="row"

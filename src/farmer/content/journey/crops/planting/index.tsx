@@ -23,7 +23,7 @@ const Planting: React.FC = ()=>{
     
 
     return (<>
-    <div className="col-12">
+    <div className="col-12 mb-4">
 
         <div className="col-12 my-3" >
             <CropsNotification 
@@ -47,17 +47,19 @@ const Planting: React.FC = ()=>{
 
                     <div className="col-12 col-md-8 crops-container bg-white p-4">
                         <div className="col-sm-12">
-                            <img 
-                            src="/assets/images/planting-calendar-icon.svg"
-                            style={{width: "64px"}}
-                            />
+                            <div className="col-12 d-flex justify-content-center">
+                                <img 
+                                src="/assets/images/planting-calendar-icon.svg"
+                                style={{width: "64px"}}
+                                />
+                            </div>
 
-                            <h3 className="h3-bold primary-text crops-center-aligned-text col-sm-12" >
+                            <h3 className="h3-bold primary-text text-center col-sm-12" >
                                 Create your Planting<br/>Calendar!
                             </h3>
 
                             <p
-                            className="col-sm-12 body-medium secondary-text">
+                            className="col-sm-12 body-medium secondary-text text-center">
                                 Start planning your growing season by adding your first crop.
                             </p>
 

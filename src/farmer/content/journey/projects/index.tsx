@@ -8,7 +8,6 @@ import LivestockProjectModal from "../../products/LivestockProjectModal";
 import CropProjectModal from "../../products/CropProjectModal";
 import { ProjectProps } from "../models";
 import JourneyItem from "./journey-item";
-import { FARMER_ROUTES } from "../../../farmer-routes";
 import { CROP_ROUTES } from "../crops/crop-routes";
 import { JOURNEY_ROUTES } from "../journey-routes";
 import { FARMER_HOME_ROUTES } from "../../home/home-routes";

@@ -85,5 +85,5 @@ export interface SalesNegotiationProductProps{
 
     //for showing and hiding modal
     show: boolean,
-    setShow: Function
+    setShow: React.Dispatch<React.SetStateAction<boolean>>
 };

@@ -9,7 +9,7 @@ const SalesOffer: React.FC<SalesOfferProps> = (sale: SalesOfferProps) => {
 
     const [showNegotiateModal, setShowNegotiateModal] = useState<boolean>(false);
 
-    let negotiatedProduct: SalesNegotiationProductProps = {
+    const negotiatedProduct: SalesNegotiationProductProps = {
         "productImageUrl" : "/assets/images/organic_tomatoes_side.png",
         "productName": "Organic Tomatoes",
         "productSeller": "My Products",
@@ -113,27 +113,23 @@ const SalesOffer: React.FC<SalesOfferProps> = (sale: SalesOfferProps) => {
         {sale.negotiationStatus ? "" : (<div className="col-12" >
                     <div className="row">
                         <div className="col-12 col-md-6">
-                            <div className="row pe-1 justify-content-start">
-                                <button
-                                type="button"
-                                className="col-12 mx-0 crops-accept-button"
-                                onClick={handleAcceptAction}
-                                >
-                                    Accept
-                                </button>
-                            </div>
+                            <button
+                            type="button"
+                            className="col-12 mx-0 crops-accept-button"
+                            onClick={handleAcceptAction}
+                            >
+                                Accept
+                            </button>
                         </div>
                         
-                        <div className="col-12 col-md-6">
-                            <div className="row ps-1 justify-content-end" >
-                                <button
-                                type="button"
-                                className="col-12 other-button mx-0 crops-other-button"
-                                onClick={handleNegotiateAction}
-                                >
-                                    Negotiate
-                                </button>
-                            </div>
+                        <div className="col-12 col-md-6 mt-2 mt-md-0">
+                            <button
+                            type="button"
+                            className="col-12 other-button mx-0 crops-other-button"
+                            onClick={handleNegotiateAction}
+                            >
+                                Negotiate
+                            </button>
                         </div>
                     </div>
                 </div>)

@@ -1,11 +1,12 @@
 import { FaStar } from "react-icons/fa";
 import { ProjectReviewProps } from "../models";
+import { ReactNode } from "react";
 
 
 const ProjectReview: React.FC<ProjectReviewProps> = (data: ProjectReviewProps) => {
 
-    const getRatings = () => {
-        let stars: any[] = [];
+    const getRatings = ():ReactNode[] => {
+        const stars: ReactNode[] = [];
         for( let i = 0; i < 5; i++ )
         {
             stars.push(

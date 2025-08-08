@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 interface AddNewCropModalProps{
     show: boolean,
-    setShow: Function
+    setShow: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 const AddNewCropModal: React.FC<AddNewCropModalProps> = (props: AddNewCropModalProps) => {
@@ -49,7 +49,7 @@ const AddNewCropModal: React.FC<AddNewCropModalProps> = (props: AddNewCropModalP
         setStep(2)
     };
 
-    const handleAddCrop = (data: CropDetails, {}:any)=>{
+    const handleAddCrop = (data: CropDetails)=>{
 
         if( selectedPlantingDate == null )
         {

@@ -2,9 +2,9 @@ import { ManagementActivityProps } from "../crops-models";
 
 export default function ManagementActivity( activity: ManagementActivityProps){
     return (<>
-        <div className="col-12 card p-1" >
-            <div className="row p-0 d-flex" >
-                <div className="col-2" style={{alignSelf: "center"}}>
+        <div className="col-12 card p-1 my-1" >
+            <div className="row p-0 d-flex align-items-center" >
+                <div className="col-2 col-md-1 d-flex justify-content-end">
                     <input
                     type="checkbox"
                     checked={activity.activityCompleted}

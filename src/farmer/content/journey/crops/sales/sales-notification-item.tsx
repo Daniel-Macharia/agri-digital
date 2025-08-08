@@ -7,7 +7,7 @@ const SalesNotificationItem: React.FC<SalesNotificationItemProps> = (salesNotifi
         <>
         <div className="row mb-2"
         >
-            <div className="col-2">
+            <div className="col-2 d-flex col-md-1 justify-content-end">
                 <img src={salesNotification.iconUrl} 
                 style={{width: "24px", height: "24px"}}
                 />

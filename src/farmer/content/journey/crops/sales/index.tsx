@@ -18,7 +18,7 @@ const Sales: React.FC = ()=>{
         fileInputRef.current?.click();
     };
 
-    let salesOffers: SalesOfferProps[] = [
+    const salesOffers: SalesOfferProps[] = [
         {
             "customerName": "Global Foods Inc.",
             "buyerType": "Wholesale distributor",
@@ -39,7 +39,7 @@ const Sales: React.FC = ()=>{
         }
     ];
 
-    let myCrops = {
+    const myCrops = {
       name: "Tomatoes" ,
       variety: "Money Maker",
       quantity: 400,
@@ -49,7 +49,7 @@ const Sales: React.FC = ()=>{
       storageMethod: "Cold Storage"
     };
 
-    let myProducts = {
+    const myProducts = {
         name: "Tomatoes",
         variety: "Roma VF",
         quantity: 500,
@@ -201,7 +201,7 @@ const Sales: React.FC = ()=>{
                                                 >
                                                     Upload Photo
                                                 </p>
-                                                <div className="col-12 form-control"
+                                                <div className="col-12 form-control jusitify-content-center"
                                                 style={{borderStyle: 'dashed',
                                                     borderWidth: '1px', 
                                                     marginTop: '0px'}}
@@ -229,10 +229,15 @@ const Sales: React.FC = ()=>{
                                                         }
                                                     }}
                                                     />
-                                                    <img src={previewUrl || "/assets/images/upload_photo.svg"} 
-                                                    className={previewUrl ? "col-12" : "col-sm-1"}
-                                                    />
-                                                    <p className="body-regular secondary-text" >
+                                                    <div className="col-12 d-flex justify-content-center">
+                                                        <img src={previewUrl || "/assets/images/upload_photo.svg"} 
+                                                        className={previewUrl ? "col-12" : "col-sm-1"}
+                                                        style={{
+                                                            maxWidth: previewUrl ? "40%" : "10%"
+                                                        }}
+                                                        />
+                                                    </div>
+                                                    <p className="body-regular secondary-text text-center" >
                                                         Upload Photo of the Product
                                                         <br/>
                                                         <span className="small-regular secondary-text">
@@ -327,10 +332,10 @@ const Sales: React.FC = ()=>{
                                                 </div>
                                             </div>
 
-                                            <div className="col-12 mt-2 px-1">
+                                            <div className="d-flex justify-content-start mt-2 px-1">
                                                 <button
                                                 type="submit"
-                                                className="col-12 mx-0 crops-accept-button body-semibold"
+                                                className="col-6 col-md-4 m-0 crops-accept-button body-semibold"
                                                 >
                                                     Add Product
                                                 </button>
@@ -352,11 +357,13 @@ const Sales: React.FC = ()=>{
                                 <SalesLineChart />
                             </div>
 
-                            <div className="col-12 card m-1 p-1" >
+                            <div className="col-12 card m-1 p-3" >
                                 <div className="'col-12">
                                     <div className="row" >
-                                        <div className="col-2 p-0 m-0">
+                                        <div className="col-2 d-flex col-md-1 p-0 pe-2 m-0 justify-content-end"
+                                        >
                                             <img src="/assets/images/notification_bell_icon.svg" 
+                                            className="p-0 m-0"
                                             style={{width: "24px", height: "24px"}}
                                             />
                                         </div>
@@ -373,7 +380,7 @@ const Sales: React.FC = ()=>{
                                 <div className="col-12" >
                                     {
                                         marketInsights.map( insight => <div className="col-12">
-                                                <SalesNotificationItem 
+                                            <SalesNotificationItem 
                                             iconUrl={insight.iconUrl}
                                             itemName={insight.itemName}
                                             itemDescription={insight.itemDescription}
@@ -486,7 +493,7 @@ const Sales: React.FC = ()=>{
                             </div>
 
                             {
-                                salesOffers.map( offer => <div className="col-12 card">
+                                salesOffers.map( (offer, index) => <div className={`col-12 card ${index !== 0 ? "mt-2" : "mt-0"}`}>
                                     <SalesOffer 
                                     customerName={offer.customerName}
                                     negotiationStatus={offer.negotiationStatus}

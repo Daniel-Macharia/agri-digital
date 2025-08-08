@@ -10,7 +10,7 @@ import { CROP_ROUTES } from "../crop-routes";
 import { JOURNEY_ROUTES } from "../../journey-routes";
 
 const Management: React.FC = ()=>{
-    let managementNotifications: ManagementNotificationProps[] = [
+    const managementNotifications: ManagementNotificationProps[] = [
         {
             "name": "Active Tasks",
             "description": "2",
@@ -34,7 +34,7 @@ const Management: React.FC = ()=>{
     ];
 
 
-    let managementSummary: ManagementSummaryProps[] = [
+    const managementSummary: ManagementSummaryProps[] = [
         {
         "title": "Soil Health Monitoring",
         "items": [{ "label": "Soil PH", "value": "6.5"},
@@ -54,7 +54,7 @@ const Management: React.FC = ()=>{
             "items": [{ "label": "Crop Height", "value": "75cm"},
                 { "label": "Growth Stage", "value": "Flowering"},
                 { "label": "Expected Yield", "value": "25Kg"},
-                { "label": "Current Price per Kg", "value": "Ksh 150"}]
+                { "label": "Current Price per K", "value": "Ksh 150"}]
         }
     ];
 
@@ -77,18 +77,20 @@ const Management: React.FC = ()=>{
         </div>
         
         <div className="col-12 crops-container">
-            <div className="row justify-content-end px-1 my-2 mx-0" >
+
+            <div className="row justify-content-end" >
                 <button
                 className="col-12 col-md-4 m-0 crops-accept-button"
                 onClick={handleRequestAService}
                 >Request a Service</button>
             </div>
 
-            <div className="row  px-0 mx-0 mt-2 " >
+            <div className="row mt-2 " >
                 
                 {
-                    managementNotifications.map( notification => 
-                    <div className="col-12 col-md-3 mx-0 px-0 px-md-4 py-1">
+                    managementNotifications.map( (notification, index) => 
+                    <div className={`col-12 col-md-3 m-0 mt-2 mt-md-0 py-0 px-0 px-md-2 ${ index === 0 ? "ps-md-0" : index === 3 ? "pe-md-0" : ""}`}
+                    >
                         <ManagementNotification 
                         name={notification.name} 
                         description={notification.description} 
@@ -103,11 +105,12 @@ const Management: React.FC = ()=>{
                 <ActivityAddAndReview />
             </div>
 
-            <div className="row px-0 mx-0 mt-2 ">
+            <div className="row mt-2 ">
                 {
                     managementSummary.map(
-                        summary => 
-                        <div className="col-12 col-md-4 mx-0 px-0 px-md-1 p-1">
+                        (summary, index) => 
+                        <div className={`col-12 col-md-4 m-0 mt-2 mt-md-0 p-0 px-0 px-md-2 ${index === 0 ? "ps-md-0" : (index === 2) ? "pe-md-0" : ""}`}
+                        >
                             <ManagementSummary 
                             title={summary.title}
                             items={summary.items}
@@ -117,7 +120,7 @@ const Management: React.FC = ()=>{
                 }
             </div>
 
-            <div className="col-12 px-0 mt-2">
+            <div className="col-12 mt-2">
                 <HistoricalRecords />
             </div>
 

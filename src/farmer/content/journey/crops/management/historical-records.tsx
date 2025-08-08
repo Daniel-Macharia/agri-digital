@@ -53,7 +53,7 @@ const HistoricalRecords: React.FC = () => {
     ];
 
     return (<>
-    <div className="col-12 px-0 mx-0 mb-3">
+    <div className="col-12 m-0 bg-white mb-3">
         <DataTable
         className="col-12 mx-0"
         title={"Historical Records"}

@@ -12,13 +12,15 @@ import { PROJECTS_ROUTES } from "../projects-routes";
 const ProjectInformation: React.FC = () => {
     const cropProjectStages: string[] = ["Soil Testing", "Planting", "Management", "Harvesting", "Post-harvesting", "Sales"];
 
-    let data: ProjectProps = useLocation().state;
+    const data: ProjectProps = useLocation().state;
 
     const isCropProject: boolean = data.projectType == "crop" ? true : false;
 
-    let projectReviews: ProjectReviewProps[] = loadProjectReviews( data.projectId );
+    const projectReviews: ProjectReviewProps[] = loadProjectReviews( data.projectId );
 
-    const projectSummary: any[] = isCropProject ? loadCropProjectDetails( data.projectId ) : loadLivestockProjectDetails( data.projectId );
+    type ProjectType = LivestockProjectSummaryProps | CropProjectSummaryProps;
+
+    const projectSummary: ProjectType[] = isCropProject ? loadCropProjectDetails( data.projectId ) : loadLivestockProjectDetails( data.projectId );
 
     const navigate = useNavigate();
 
@@ -107,17 +109,17 @@ const ProjectInformation: React.FC = () => {
                         <div className="col-12 m-0 p-3">
                             {
                                 isCropProject ? (
-                                    projectSummary.map( (summary: CropProjectSummaryProps) => <CropProjectSummary
-                                        stageScore={summary.stageScore}
-                                        cropProjectStage={summary.cropProjectStage}
-                                        cropProjectDescription={summary.cropProjectDescription}
+                                    projectSummary.map( (summary: ProjectType) => <CropProjectSummary
+                                        stageScore={(summary as CropProjectSummaryProps).stageScore}
+                                        cropProjectStage={(summary as CropProjectSummaryProps).cropProjectStage}
+                                        cropProjectDescription={(summary as CropProjectSummaryProps).cropProjectDescription}
                                         />)
                                 ) 
                                 : (
-                                    projectSummary.map( (summary: LivestockProjectSummaryProps) => <LivestockProjectSummary
-                                        livestockId={summary.livestockId}
-                                        livestockName={summary.livestockName}
-                                        shortDescription={summary.shortDescription}
+                                    projectSummary.map( (summary: ProjectType) => <LivestockProjectSummary
+                                        livestockId={(summary as LivestockProjectSummaryProps).livestockId}
+                                        livestockName={(summary as LivestockProjectSummaryProps).livestockName}
+                                        shortDescription={(summary as LivestockProjectSummaryProps).shortDescription}
                                         />)
                                 )
                             }

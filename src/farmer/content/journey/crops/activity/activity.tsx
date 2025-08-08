@@ -23,7 +23,7 @@ export default function ActivityAddAndReview() {
     const [selectedDate, setSelectedDate] = useState<Date|null>(null);
     const [selectedTime, setSelectedTime] = useState<string|null>(null);
 
-    let managementActivities: ManagementActivityProps[] = [
+    const managementActivities: ManagementActivityProps[] = [
         {"activityName" : "Weed the vegetables",
             "activityDescription": "Apply herbicides", 
             "activityCompletionDate": (new Date()).toDateString(),

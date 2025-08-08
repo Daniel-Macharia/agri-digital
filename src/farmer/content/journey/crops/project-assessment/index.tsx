@@ -39,7 +39,7 @@ const ProjectAssessment: React.FC = ()=>{
 
     const navigate = useNavigate();
 
-    const handleProjectAssessment = (data: typeof initialValues, {}: any ) => {
+    const handleProjectAssessment = (data: typeof initialValues) => {
         console.log('assessing project..');
         console.log(data);
         navigate(`..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_SOIL_TESTING}`);
@@ -57,7 +57,7 @@ const ProjectAssessment: React.FC = ()=>{
             validationSchema={validationSchema}
             onSubmit={handleProjectAssessment}
             >
-                {({})=>(
+                {()=>(
                     <Form className="col-12 ">
                         <div className="col-12">
                             <p className="h3-semibold primary-text col-12 crops-start-aligned-text">

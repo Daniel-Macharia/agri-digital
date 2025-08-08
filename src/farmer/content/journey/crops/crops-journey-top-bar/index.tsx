@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { JOURNEY_ROUTES } from "../../journey-routes";
 import { CROP_ROUTES } from "../crop-routes";
 import CropsTopBarItem from "./top-bar-item";
@@ -10,7 +11,9 @@ interface TopBarItemProps{
 
 const CropsTopBar: React.FC = ()=>{
 
-    let topBarItems: TopBarItemProps[] = [
+    const [selectedTab, setSelectedTab] = useState<string>("Soil Testing");
+
+    const topBarItems: TopBarItemProps[] = [
         { iconUrl: "/assets/images/soil-testing.svg", itemName: "Soil Testing", pageUrl: `..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_SOIL_TESTING}` },
         { iconUrl: "/assets/images/planting.svg", itemName: "Planting", pageUrl: `..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_PLANTING}` },
         { iconUrl: "/assets/images/management.svg", itemName: "Management", pageUrl: `..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_MANAGEMENT}` },
@@ -29,6 +32,8 @@ const CropsTopBar: React.FC = ()=>{
                     iconUrl={topBarItem.iconUrl} 
                     itemName={topBarItem.itemName}
                     pageUrl={topBarItem.pageUrl} 
+                    selectedTab={selectedTab}
+                    setSelectedTab={setSelectedTab}
                     />
                 </div>)
             }

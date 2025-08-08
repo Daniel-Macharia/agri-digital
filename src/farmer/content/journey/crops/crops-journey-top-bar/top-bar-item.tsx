@@ -1,42 +1,53 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface CropsTopBarItemProps{
     iconUrl: string,
     itemName: string,
-    pageUrl: string
+    pageUrl: string,
+    selectedTab: string,
+    setSelectedTab: React.Dispatch<React.SetStateAction<string>>
 };
 
-const CropsTopBarItem: React.FC<CropsTopBarItemProps> = ({iconUrl, itemName, pageUrl})=>{
+const CropsTopBarItem: React.FC<CropsTopBarItemProps> = ({iconUrl, itemName, pageUrl, selectedTab, setSelectedTab})=>{
 
     const navigate = useNavigate();
 
     const handleClickItem = ()=>{
+        setSelectedTab(itemName);
       navigate(pageUrl);  
+
     };
 
     return (<>
-    <NavLink
-    to={pageUrl} end
-    className="nav-link col-12 px-1"
+    <div
+    className="nav-link col-12 p-1"
+    onClick={handleClickItem} 
     >
-        {({}) => (
-            <div className=" col-12 m-0" 
-            onClick={handleClickItem} 
-            >
-
-                <img src={iconUrl} 
-                style={{width: "32px", height: "32px"}}
-                />
-
-                <p className=" col-12 mx-0 my-0" 
-                style={{ textWrap:  "nowrap"}}
-                >
-                    {itemName}
-                </p>
-
+        <div className="col m-0 justify-content-center" 
+        >
+            <div className="d-flex justify-content-center">
+            <img src={iconUrl} 
+            className="m-0 p-1 rounded-circle"
+            style={{
+                borderStyle: "solid",
+                borderWidth: "2px",
+                width: "48px", 
+                height: "48px",
+                borderColor: (selectedTab === itemName) ? "var(--Primary, #457900)" : "var(--Primary-Text, #333)" 
+            }}
+            />
             </div>
-        )}
-    </NavLink>
+
+            <p className=" col-12 m-0 text-center text-nowrap" 
+            style={{ 
+                color: (selectedTab === itemName) ? "var(--Primary, #457900)" : "var(--Primary-Text, #333)"
+            }}
+            >
+                {itemName}
+            </p>
+
+        </div>
+    </div>
     </>);
 }
 

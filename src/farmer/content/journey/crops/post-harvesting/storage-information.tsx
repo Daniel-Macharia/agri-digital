@@ -12,18 +12,18 @@ interface StorageConditions{
 };
 
 const StorageInformation: React.FC = () => {
-    let storageSpecs:StorageSpecificationItemProps[] = [
+    const storageSpecs:StorageSpecificationItemProps[] = [
         {itemName: "Inventory Level", itemValue : "3,500Kg"},
         {itemName: "Storage Duration", itemValue : "10days"},
         {itemName: "Storage Fee", itemValue : "KES 5,000/Month"}
     ];
 
-    let storageConditions: StorageConditions = {
+    const storageConditions: StorageConditions = {
         humidity: 45,
         temperature: 24
     };
 
-    let storageInfo: StorageInfo = {storageType: "Cold Storage", 
+    const storageInfo: StorageInfo = {storageType: "Cold Storage", 
         storagePurpose: "preserve freshness"};
 
     return (<>
@@ -101,7 +101,7 @@ const StorageInformation: React.FC = () => {
 
             <div className="row px-1 mx-0 ">
                 {
-                    storageSpecs.map( (storageSpec, index: number) => <div className={`col-12 col-md-4 mx-0 px-1 ${ (index === 0 ) ? "ps-0" : ""} ${( index === (storageSpecs.length - 1)) ? "pe-0" : "" }`} >
+                    storageSpecs.map( (storageSpec, index: number) => <div className={`col-12 col-md-4 mt-2 mt-md-0 mx-0 px-0 px-md-1 ${ (index === 0 ) ? "ps-md-0" : ( index === (storageSpecs.length - 1)) ? "pe-md-0" : "" }`} >
                         <StorageSpecification 
                         itemName={storageSpec.itemName} 
                         itemValue={storageSpec.itemValue} />
