@@ -3,8 +3,25 @@ import { AxiosError } from "axios";
 import moment from "moment-timezone";
 import { StylesConfig } from "react-select";
 import * as Yup from "yup";
+import { ManagementSummaryItem } from "../../farmer/content/journey/crops/crops-models";
 import { DEFAULT_OTP_LENGTH } from "../model/AuthModel";
-import { ApiResponse } from "../model/Model";
+import {
+  CropManagementHistory,
+  GrowthAnalysisPayload,
+  PostHarvestCropValueAddition,
+  PostHarvestPackaging,
+  PostHarvestSortingAndGrading,
+  PostHarvestTransport,
+  SoilHealthPayload,
+  WeatherConditionPayload,
+} from "../model/CropJourneyModel";
+import {
+  ApiResponse,
+  CropJourneyStageType,
+  DEFAULT_SYSTEM_WIDE_LOCALE,
+  ListItem,
+  TodoStatus,
+} from "../model/Model";
 
 export const UsernameValidation = Yup.string()
   .required("Email or Phone is required")
@@ -81,6 +98,36 @@ export const customSelectStyles: StylesConfig = {
     },
   }),
 };
+
+export const formatDateTimeToHumanReadableDateTime = (date: Date) => {
+  return moment(date).format("DD/MM/YYYY hh:mm A");
+};
+
+export const formatDateTimeToHumanReadableDate = (date: Date) => {
+  return moment(date).format("DD/MM/YYYY");
+};
+
+export const formatDateTimeToHumanReadableTime = (date: Date) => {
+  return moment(date).format("hh:mm A");
+};
+
+export const formatMonthOnly = (date: Date) => {
+  return moment(date).format("MMM");
+};
+
+export const dateStringToJsDate = (date: string) => {
+  return moment(date).toDate();
+};
+
+export const dateStringToFormattedDate = (date: string, dateFormat: string) => {
+  return moment(date).format(dateFormat).toString();
+};
+
+export const formatToCustomDate = (date: Date, format: string) => {
+  return moment(date).format(format);
+};
+
+export const dateStringToDate = (date: string) => moment(date).toDate();
 
 export const parseFormData = (
   data: Record<any, any>,
@@ -166,7 +213,6 @@ export const parseFormDatav3 = (
   dateFormat?: string
 ) => {
   const transform = (input: any): any => {
-    // ✅ Return File objects as-is
     if (input instanceof File) {
       return input;
     }
@@ -184,8 +230,7 @@ export const parseFormDatav3 = (
     }
 
     if (input && typeof input === "object") {
-      const isSelectObject =
-        Object.keys(input).length === 2 && "value" in input && "label" in input;
+      const isSelectObject = "value" in input && "label" in input;
 
       if (isSelectObject) {
         return input.value !== null ? input.value : undefined;
@@ -204,6 +249,196 @@ export const parseFormDatav3 = (
   return transform(data);
 };
 
+export const capitalize = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 export const delayExecution = async (ms: number) => {
   await new Promise((resolve) => setTimeout(resolve, ms));
+};
+
+export const formatNumber = (number: number) => {
+  return new Intl.NumberFormat(DEFAULT_SYSTEM_WIDE_LOCALE, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    useGrouping: true,
+  }).format(number);
+};
+
+export const extractFormErrorMessage = (fullMessage: string) => {
+  const lastDotIndex = fullMessage.lastIndexOf(".");
+  if (lastDotIndex === -1) return fullMessage;
+  const message = fullMessage.slice(lastDotIndex + 1).trim();
+  const firstSpaceIndex = message.indexOf(" ");
+  const finalMessage = message.slice(firstSpaceIndex + 1).trim();
+  const anotherFirstSpaceIndex = finalMessage.indexOf(" ");
+  return capitalize(
+    finalMessage.substring(0, anotherFirstSpaceIndex) +
+      " " +
+      finalMessage.substring(anotherFirstSpaceIndex + 1, finalMessage.length)
+  );
+};
+
+export const parseNPKStatus = (data: CropManagementHistory) => {
+  let npkStatus = "";
+  if (data.nitrogen) {
+    npkStatus += `N: ${data.nitrogen.name} `;
+  }
+  if (data.phosphorus) {
+    npkStatus += `P: ${data.phosphorus.name} `;
+  }
+  if (data.potassium) {
+    npkStatus += `K: ${data.potassium.name} `;
+  }
+
+  npkStatus = npkStatus.trim();
+  return npkStatus.length !== 0 ? npkStatus : "-";
+};
+
+export const parseNPKStatusFromSoilHealthPayload = (
+  data: SoilHealthPayload
+) => {
+  let npkStatus = "";
+  if (data.nitrogen) {
+    npkStatus += `N: ${data.nitrogen.name} `;
+  }
+  if (data.phosphorus) {
+    npkStatus += `P: ${data.phosphorus.name} `;
+  }
+  if (data.potassium) {
+    npkStatus += `K: ${data.potassium.name} `;
+  }
+
+  npkStatus = npkStatus.trim();
+  return npkStatus.length !== 0 ? npkStatus : "-";
+};
+
+export const parseSoilHealthManagementSummary = (
+  data: SoilHealthPayload
+): ManagementSummaryItem[] => {
+  return [
+    { label: "Soil PH", value: `${data.ph}` },
+    { label: "Moisture", value: `${data.moisture}` },
+    { label: "Type", value: "-" },
+    {
+      label: "Nutrients Level",
+      value: parseNPKStatusFromSoilHealthPayload(data),
+    },
+  ];
+};
+
+export const parseWeatherConditionManagementSummary = (
+  data: WeatherConditionPayload
+): ManagementSummaryItem[] => {
+  return [
+    {
+      label: "Recent Rainfall",
+      value: `${data.rainfallAmount} ${
+        data.rainfallAmountUnit ? data.rainfallAmountUnit.name : ""
+      }`,
+    },
+    { label: "Humidity", value: `${data.humidity}` },
+    {
+      label: "Temperature",
+      value: `${data.temperature} ${data.temperatureUnit.name}`,
+    },
+    {
+      label: "Wind Speed 3",
+      value: `${data.windSpeed} ${data.windSpeedUnit.name}`,
+    },
+  ];
+};
+
+export const parseGrowthAnalysisManagementSummary = (
+  data: GrowthAnalysisPayload
+): ManagementSummaryItem[] => {
+  return [
+    {
+      label: "Crop Height",
+      value: `${data.height} ${data.heightMeasurementUnit.name}`,
+    },
+    { label: "Growth Stage", value: data.growthStage.name },
+    {
+      label: "Expected Yield",
+      value: `${data.expectedYield} ${data.expectedYieldUnit.name}`,
+    },
+    {
+      label: "Current Price per Kg",
+      value: formatNumber(data.currentUnitPrice),
+    },
+  ];
+};
+
+export const todoStatusIsComplete = (data: TodoStatus) =>
+  data === TodoStatus.COMPLETED;
+
+export const parseValidActivityTypes = (
+  data: ListItem[],
+  isCropStage: boolean,
+  cropStageType?: CropJourneyStageType
+): ListItem[] => {
+  if (data.length === 0 || (isCropStage && !cropStageType)) return [];
+
+  if (isCropStage) {
+    return data.filter(
+      (item) =>
+        item.cropStageTypes &&
+        item.cropStageTypes.find((stage) => stage === cropStageType)
+    );
+  }
+
+  return [];
+};
+
+export const parsePostHarvestSortingAndGradingSummary = (
+  data: PostHarvestSortingAndGrading
+): ManagementSummaryItem[] => {
+  return [
+    { label: "Grade", value: data.grade.name },
+    {
+      label: "Harvest Date",
+      value: dateStringToFormattedDate(data.harvestDate, "DD/MM/YYYY"),
+    },
+    { label: "Quantity", value: `${data.quantity} ${data.quantityUnit.name}` },
+    {
+      label: "Notes",
+      value: data.notes && data.notes.length > 0 ? data.notes.join(",") : "---",
+    },
+  ];
+};
+
+export const parsePostHarvestPackagingSummary = (
+  data: PostHarvestPackaging
+): ManagementSummaryItem[] => {
+  return [
+    { label: "Packaging Method", value: data.packagingMethod.name },
+    { label: "Packaging Costs (KES)", value: formatNumber(data.packagingCost) },
+  ];
+};
+
+export const parsePostHarvestCropValueAdditionSummary = (
+  data: PostHarvestCropValueAddition
+): ManagementSummaryItem[] => {
+  return [
+    { label: "Processing Methods", value: data.processingMethod.name },
+    { label: "Final Product", value: data.finalProduct || "--" },
+    { label: "Processing Costs", value: formatNumber(data.processingCost) },
+    { label: "Marketing Price", value: formatNumber(data.marketPrice) },
+    {
+      label: "Profitability Analysis",
+      value: data.profitabilityAnalysis || "--",
+    },
+  ];
+};
+
+export const parsePostHarvestTransportSummary = (
+  data: PostHarvestTransport
+): ManagementSummaryItem[] => {
+  return [
+    { label: "Method", value: data.transportMethod.name },
+    { label: "Vehicle Type", value: data.vehicleType.name },
+    { label: "Pickup Location", value: data.pickupLocation },
+    { label: "Destination", value: data.destination },
+    { label: "Estimated Costs", value: formatNumber(data.estimatedCost) },
+  ];
 };

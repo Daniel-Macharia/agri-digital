@@ -5,6 +5,6 @@
     "VITE_APP_IDLE_PROMPT_BEFORE_TIMEOUT_MS": 30000,
     "VITE_API_ENV": "development",
     "VITE_APP_API_PROD": "https://api.shambabot.com",
-    "VITE_APP_API_DEV": "http://localhost:6178",
+    "VITE_APP_API_DEV": "http://localhost:6179",
     "VITE_APP_OTP_LENGTH": 6
 }
