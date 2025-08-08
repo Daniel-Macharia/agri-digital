@@ -10,14 +10,20 @@ import HomeTasksOverview from "./overview/tasks-overview";
 import HomeArticlesOverview from "./overview/articles-overview";
 import HomeTrainingOverview from "./overview/training-overview";
 import HomeNotificationOverview from "./overview/notification-overview";
+import HomeAdvertChain from "./home-advert-chain";
 
 
 export default function FarmerHome(){
-    let projectsOverview: ProjectsOverviewProps = {projectName: "Maize", currentProjectStage: 4, projectType: "crop"};
+    const projectsOverview: ProjectsOverviewProps = {projectName: "Maize", currentProjectStage: 4, projectType: "crop"};
 
 
     return(<>
     <div className="col-12 farmer-home-container">
+
+        <div className="row p-0">
+            <HomeAdvertChain />
+        </div>
+        
         <div className="row ">
             <div className="col-12 col-md-8 px-0 pe-md-2">
                 <div className="farmer-home-container bg-white col-12 p-4" >

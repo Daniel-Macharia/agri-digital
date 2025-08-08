@@ -3,7 +3,7 @@ import { HomeProductItemProps } from "../home-model";
 import OverviewHeader from "./overview-header";
 
 
-const HomeProductItem: React.FC<HomeProductItemProps> = (data: HomeProductItemProps) => {
+export function HomeProductItem(data: HomeProductItemProps) {
     const handleSeeMoreAction = () => {
         console.log("see more info");
     };

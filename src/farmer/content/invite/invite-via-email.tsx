@@ -20,7 +20,7 @@ const InviteViaEmail: React.FC = () => {
     const [showSuccess, setShowSuccess] = useState<boolean>(false);
     const [showFailed, setShowFailed] = useState<boolean>(false);
 
-    let linkToShare = "https://shambabot.com/farmer-username";
+    const linkToShare = "https://shambabot.com/farmer-username";
 
     const handleSendInvites = (values: typeof initialValues) => {
         console.log(`sending ${linkToShare}`);

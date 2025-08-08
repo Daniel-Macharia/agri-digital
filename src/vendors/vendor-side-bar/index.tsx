@@ -1,0 +1,66 @@
+import VendorSideBarItem from "./vendor-side-bar-item";
+
+export default function VendorSideBar({ toggleSidebar }: { toggleSidebar: () => void }) {
+    return (
+        <div className="container-fluid d-flex flex-column align-items-center p-0 bg-white">
+            {/* Logo and close button */}
+            <div
+  className="w-100 bg-white text-center d-flex align-items-center justify-content-center position-relative "
+  style={{
+    maxWidth: "14.4375rem",
+    height: "4.375rem",
+    flexShrink: 0,
+    aspectRatio: "33 / 10",
+    background: "lightgray 50% / cover no-repeat",
+  }}
+>
+  <img
+    src="/assets/images/app_name.svg"
+    className="img-fluid w-75"
+    alt="App Logo"
+    style={{ maxHeight: "100%", objectFit: "contain" }}
+  />
+  <button
+    className="btn btn-link text-dark position-absolute top-0 end-0 d-lg-none"
+    onClick={toggleSidebar}
+    style={{ fontSize: "1.5rem" }}
+  >
+    <i className="fas fa-times"></i>
+  </button>
+</div>
+
+
+            <hr className="w-100 my-2" />
+
+            {/* Sidebar Items */}
+            <div className="w-100 d-flex flex-column">
+                <VendorSideBarItem name="Home" iconUrl="/assets/images/home.svg" contentUrl="/vendor/home" />
+                <VendorSideBarItem name="My Products" iconUrl="/assets/images/group.svg" contentUrl="/vendor/my-products" />
+                <VendorSideBarItem name="My Services" iconUrl="/assets/images/journey.svg" contentUrl="/vendor/my-services" />
+                <VendorSideBarItem name="Market Place" iconUrl="/assets/images/marketplace.svg" contentUrl="/vendor/market-place" />
+                <VendorSideBarItem name="Banks" iconUrl="/assets/images/bank.svg" contentUrl="/vendor/banks" />
+                <VendorSideBarItem name="Insurance" iconUrl="/assets/images/bank.svg" contentUrl="/vendor/insurance" />
+                <VendorSideBarItem name="Sponsors" iconUrl="/assets/images/success.svg" contentUrl="/vendor/sponsors" />
+                <VendorSideBarItem name="Wallets" iconUrl="/assets/images/wallet.svg" contentUrl="/vendor/wallet" />
+                <VendorSideBarItem name="Packages" iconUrl="/assets/images/package.svg" contentUrl="/vendor/package" />
+                <VendorSideBarItem name="Quality Score" iconUrl="/assets/images/quality_score.svg" contentUrl="/vendor/quality-score" />
+                <VendorSideBarItem name="Weather" iconUrl="/assets/images/sunny.svg" contentUrl="/vendor/weather" />
+                <VendorSideBarItem name="Training & Resources" iconUrl="/assets/images/articles.svg" contentUrl="/vendor/resources" />
+                <VendorSideBarItem name="Settings" iconUrl="/assets/images/settings.svg" contentUrl="/vendor/settings" />
+                <VendorSideBarItem name="Invite a Friend" iconUrl="/assets/images/invite.svg" contentUrl="/vendor/invite" />
+            </div>
+
+            {/* Assistance Section */}
+            <div className="mt-3 p-3 bg-success rounded text-white text-start w-100">
+                <div className="mb-2">
+                    <img src="/assets/images/help.svg" alt="Help Icon" />
+                </div>
+                <p className="fw-bold mb-1">Need assistance ?</p>
+                <p className="mb-2">Check our documentation</p>
+                <div className="d-grid">
+                    <button className="btn btn-light text-dark fw-semibold rounded-pill">DOCUMENTATION</button>
+                </div>
+            </div>
+        </div>
+    );
+}
