@@ -12,7 +12,7 @@ import RequestForTesting from "./crops/soil-testing/request-for-testing";
 import { JOURNEY_ROUTES } from "./journey-routes";
 import Livestock from "./livestock";
 import Projects from "./projects";
-import ProjectInformation from "./projects/project-info";
+// import ProjectInformation from "./projects/project-info";
 
 export default function Journey() {
   const render = () => {
@@ -20,8 +20,8 @@ export default function Journey() {
       <CropJourneyProvider>
         <CropStateManager />
         <Routes>
-          <Route path={JOURNEY_ROUTES.ROOT} element={<Projects />} />
-          <Route path={JOURNEY_ROUTES.INFO} element={<ProjectInformation />} />
+          <Route path={JOURNEY_ROUTES.INFO} element={<Projects />} />
+          {/* <Route path={JOURNEY_ROUTES.INFO} element={<ProjectInformation />} /> */}
           <Route path={JOURNEY_ROUTES.LIVESTOCK} element={<Livestock />} />
 
           <Route

@@ -8,7 +8,7 @@ import { ProjectProps } from "../models";
 import { loadProjects } from "../utils/load-project-data";
 import JourneyItem from "./journey-item";
 
-export default function Projects() {
+export default function ProjectsOld() {
   const navigate = useNavigate();
   const [showProjectSelection, setShowProjectSelection] =
     useState<boolean>(false);

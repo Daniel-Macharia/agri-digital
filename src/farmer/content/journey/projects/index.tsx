@@ -14,8 +14,8 @@ import { CropFormData, LivestockFormData } from "../../products";
 import CropProjectModal from "../../products/CropProjectModal";
 import LivestockProjectModal from "../../products/LivestockProjectModal";
 import ProjectSelectionModal from "../../products/ProjectSelectionModal";
-import { ProjectProps } from "../models";
-import { loadProjects } from "../utils/load-project-data";
+// import { ProjectProps } from "../models";
+// import { loadProjects } from "../utils/load-project-data";
 import JourneyItem from "./journey-item";
 const apiClient = new ApiClient();
 
@@ -76,13 +76,14 @@ export default function Projects() {
     setShowCropModal(false);
   };
 
-  const journeyItems: ProjectProps[] | null = loadProjects();
+  //const journeyItems: ProjectProps[] | null = loadProjects();
   const [fetching, setFetching] = useState<boolean>(false);
   const [projects, setProjects] = useState<CropJourneySummaryPayload[]>([]);
 
   const fetchCropJourneys = useCallback(async () => {
     try {
       setFetching(true);
+      console.log(`fetching items: ${fetching}`);
       const dataResponse = await apiClient.get<
         ListApiResponse<CropJourneySummaryPayload>
       >({

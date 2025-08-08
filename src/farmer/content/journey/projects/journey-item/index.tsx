@@ -8,8 +8,8 @@ const JourneyItem: React.FC<ProjectProps> = (journeyItemData: ProjectProps) =>{
 
     let projectProgress = 100;
 
-    let cropProjectStages = ["Soil Testing", "Planting", "Management", "Harvesting", "Post-harvesting", "Sales"];
-    let livestockProjectStages = ["Type and Breed", "Housing", "Feeding", "Health Management", "Breeding", "Production", "Sales"];
+    const cropProjectStages = ["Soil Testing", "Planting", "Management", "Harvesting", "Post-harvesting", "Sales"];
+    const livestockProjectStages = ["Type and Breed", "Housing", "Feeding", "Health Management", "Breeding", "Production", "Sales"];
 
     if( journeyItemData.projectType == "crop" ) //a crop project
     {
