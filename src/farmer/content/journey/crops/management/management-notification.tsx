@@ -3,7 +3,7 @@ import { ManagementNotificationProps } from "../crops-models";
 export default function ManagementNotification( data: ManagementNotificationProps)
 {
     return (<>
-    <div className="card col-12 p-1 m-0"
+    <div className="card col-12 py-3 px-2 m-0"
     style={{height: "100%"}}
     >
         <h3 className=" body-semibold primary-text crops-start-aligned-text col-12 m-0"

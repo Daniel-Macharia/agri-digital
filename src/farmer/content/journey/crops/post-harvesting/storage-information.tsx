@@ -86,17 +86,17 @@ const StorageInformation: React.FC = () => {
       />
       <div className="col-12 crops-container bg-white">
         <div className="row my-0 py-0">
-          <div className="col-11">
+          <div className="col-10 col-md-11">
             <h3 className="h3-bold primary-text crops-start-aligned-text col-12 my-1">
               Storage
             </h3>
           </div>
 
-          <div className="col-1 p-0">
+          <div className="col-2 col-md-1 d-flex justify-content-end p-2">
             <img
-              src="/assets/images/edit.svg"
+              src="/assets/images/edit.svg" 
               alt="edit"
-              className="col-12 m-0"
+              className="m-0"
               style={{ width: "24px", cursor: "pointer" }}
               onClick={() => setShowCropStorageModal(true)}
             />
@@ -108,8 +108,8 @@ const StorageInformation: React.FC = () => {
           postHarvestDetails.postHarvest.cropStorage && (
             <Fragment>
               <div className="row p-2">
-                <div className="col-12 col-md-6  p-2">
-                  <div className="col-12 card m-0 p-2">
+                <div className="col-12 col-md-6  p-2 px-0 px-md-2">
+                  <div className="col-12 card m-0 p-2" style={{height: "100%"}}>
                     <h3 className="body-medium primary-text col-12  crops-start-aligned-text my-1">
                       Storage Type
                     </h3>
@@ -127,7 +127,7 @@ const StorageInformation: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="col-12 col-md-6 p-2">
+                <div className="col-12 col-md-6 p-2  px-0 px-md-2">
                   <div className="col-12 card m-0 p-2">
                     <h3 className="body-medium primary-text col-12 crops-start-aligned-text my-1">
                       Containers
@@ -167,13 +167,13 @@ const StorageInformation: React.FC = () => {
                 </div>
               </div>
 
-              <div className="col-12 px-0">
-                <div className="row px-1 mx-0 ">
+              <div className="col-12">
+                <div className="row p-0 p-md-3">
                   {storageSpecs.map((storageSpec, index: number) => (
                     <div
-                      className={`col-12 col-md-4 mx-0 px-1 ${
-                        index === 0 ? "ps-0" : ""
-                      } ${index === storageSpecs.length - 1 ? "pe-0" : ""}`}
+                      className={`col-12 col-md-4 mx-0 px-2 mt-2 mt-md-0 ${
+                        index === 0 ? "ps-md-0 pe-md-2" : ""
+                      } ${index === storageSpecs.length - 1 ? "pe-md-0 ps-md-2" : ""}`}
                     >
                       <StorageSpecification
                         itemName={storageSpec.itemName}

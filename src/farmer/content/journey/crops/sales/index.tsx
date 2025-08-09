@@ -493,7 +493,7 @@ const Sales: React.FC = ()=>{
                             </div>
 
                             {
-                                salesOffers.map( (offer, index) => <div className={`col-12 card ${index !== 0 ? "mt-2" : "mt-0"}`}>
+                                salesOffers.map( (offer, index) => <div className={`col-12 ${index !== 0 ? "mt-2" : "mt-0"}`}>
                                     <SalesOffer 
                                     customerName={offer.customerName}
                                     negotiationStatus={offer.negotiationStatus}

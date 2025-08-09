@@ -81,7 +81,7 @@ const Planting: React.FC = () => {
           </div>
           <div className="col-12 ">
             <div className="row justify-content-center">
-                    <div className="col-12 col-md-8 crops-container bg-white p-4">
+                    <div className="col-12 col-md-8 crops-container bg-white py-4 px-2">
                         <div className="col-sm-12">
                             <div className="col-12 d-flex justify-content-center">
                                 <img 
@@ -99,15 +99,13 @@ const Planting: React.FC = () => {
                                 Start planning your growing season by adding your first crop.
                             </p>
 
-                            <div className="col-12">
-                                <div className="row justify-content-center px-2">
-                                    <button 
-                                    onClick={()=> setShow(true) }
-                                    className="col-12 col-md-4 crops-accept-button"
-                                    >
-                                        Add your first crop
-                                    </button>
-                                </div>
+                            <div className="col-12 d-flex justify-content-center">
+                                <button 
+                                onClick={()=> setShow(true) }
+                                className="col-12 col-md-4 crops-accept-button"
+                                >
+                                    Add your first crop
+                                </button>
                             </div>
                         </div>
                     </div>

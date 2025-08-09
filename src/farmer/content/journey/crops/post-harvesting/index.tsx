@@ -277,14 +277,14 @@ const PostHarvesting: React.FC = () => {
           </div>
 
           <div className="col-12">
-            <div className="row">
-              <div className="col-12 col-md-7 mt-2">
+            <div className="row p-0" >
+              <div className="col-12 col-md-7 mt-2 p-0 pe-md-2">
                 <StorageInformation />
               </div>
 
-              <div className="col-12 col-md-5 mt-2 p-1">
-                {sideSummaries.map((sideSummary) => (
-                  <div className="col-12 px-2">
+              <div className="col-12 col-md-5 mt-2 p-0">
+                {sideSummaries.map((sideSummary, index) => (
+                  <div className={`col-12 p-0 ps-md-2 ${index !== 0 ? "mt-2" : ""} `}>
                     <ManagementSummary
                       title={sideSummary.title}
                       items={sideSummary.items}
@@ -296,25 +296,19 @@ const PostHarvesting: React.FC = () => {
             </div>
           </div>
 
-          <div className="col-12 mt-2">
-            <div className="row">
-              <div className="col-12 col-md-8">
-                <div className="row">
-                  {otherSummaries.map((otherSummary) => (
-                    <div className="col-12 col-md-6 px-2">
-                      <ManagementSummary
-                        title={otherSummary.title}
-                        items={otherSummary.items}
-                        onActionRequired={otherSummary.onActionRequired}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
+          <div className="row mt-2 p-0" >
+            {otherSummaries.map((otherSummary, index) => (
+            <div className={`col-12 col-md-4 p-0 px-md-2 ${index === 0 ? "ps-md-0 pe-md-2" : "mt-2 mt-md-0"}`}>
+                <ManagementSummary
+                title={otherSummary.title}
+                items={otherSummary.items}
+                onActionRequired={otherSummary.onActionRequired}
+                />
+            </div>
+            ))}
 
-              <div className="col-12 col-md-4 crops-container bg-white pb-0">
+            <div className="col-12 col-md-4 p-0 ps-md-2 mt-2 mt-md-0">
                 <OnelineNotifications />
-              </div>
             </div>
           </div>
 

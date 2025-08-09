@@ -2,32 +2,32 @@ import { ManagementSummaryProps } from "../crops-models";
 
 export default function ManagementSummary( summary: ManagementSummaryProps ){
     return (<>
-    <div className="col-12 card p-2"
+    <div className="col-12 card py-3 px-2"
     style={{
         height: "100%"
     }} >
-        <div className="row d-flex"
-        style={{alignItems: "center"}}>
+        <div className="col-12 d-flex align-items-center">
 
-            <p className="col-9 h3-bold primary-text crops-start-aligned-text mb-0">
+            <p className="col-9 h3-bold primary-text text-start m-0">
                 {summary.title}
             </p>
-            
-            <img
-            src="/assets/images/edit.svg"
-            alt="edit"
-            style={{
-                alignSelf: "center",
-                height: "max-content",
-                width: "max-content",
-                cursor: "pointer",
-            }}
-            onClick={() => {
-                if (summary.onActionRequired) {
-                summary.onActionRequired();
-                }
-            }}
-            />
+
+            <div className="col-3 m-0 p-0 d-flex justify-content-end">
+                <img
+                src="/assets/images/edit.svg"
+                alt="edit"
+                style={{
+                    width: "24px",
+                }}
+                onClick={() => {
+                    if (summary.onActionRequired) {
+                    summary.onActionRequired();
+                    }
+                }}
+
+                className="m-0"
+                />
+            </div>
         </div>
 
         <div className="col-12">

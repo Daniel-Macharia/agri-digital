@@ -336,36 +336,28 @@ const SoilTesting: React.FC = () => {
             </div>
             <FormikProvider value={formik}>
               <Form className="col-12">
-                <div className="row">
-                  <div className="col-12 col-md-4">
+                <div className="row mb-4">
+                  <div className="col-12 col-md-4 my-0 ">
                     <label
-                      className="crops-start-aligned-text body-regular primary-text col-12 "
+                      className="crops-start-aligned-text body-regular primary-text col-12 my-0"
                       style={{ textAlign: "start" }}
                     >
                       Farm size
                     </label>
                   </div>
 
-                  <div className="col-12 col-md-8">
+                  <div className="col-12 col-md-8 my-0">
                     <Row>
                       <Col md={6}>
                         <Field
-                          className="form-control col-12 body-regular"
+                          className="form-control col-12 body-regular m-0"
                           step="any"
                           type="number"
                           name="areaSize"
                           placeholder="2.5"
-                          style={{ margin: "0px" }}
                         />
                         <div
-                          className="text-danger small col-12"
-                          style={{
-                            padding: "0px",
-                            margin: "0px",
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "start",
-                          }}
+                          className="text-danger small col-12 p-0 m-0"
                         >
                           <ErrorMessage name="areaSize" />
                         </div>
@@ -382,6 +374,8 @@ const SoilTesting: React.FC = () => {
                           onBlur={() =>
                             formik.setFieldTouched("areaUnit", true)
                           }
+
+                          className="py-1 mt-2 mt-md-0"
                         />
                         <div
                           className="text-danger small col-12"
@@ -400,9 +394,9 @@ const SoilTesting: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="row mt-2">
+                <div className="row mb-4">
                   <div className="col-12 col-md-4">
-                    <label className="crops-start-aligned-text body-regular col-12 primary-text">
+                    <label className="crops-start-aligned-text body-regular col-12 my-0 primary-text">
                       Soil Texture
                     </label>
                   </div>
@@ -433,9 +427,9 @@ const SoilTesting: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="row mt-2">
+                <div className="row mb-4">
                   <div className="col-12 col-md-4">
-                    <label className="col-12 crops-start-aligned-text body-regular primary-text">
+                    <label className="col-12 crops-start-aligned-text body-regular primary-text my-0">
                       Soil Color
                     </label>
                   </div>
@@ -466,9 +460,9 @@ const SoilTesting: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="row mt-2">
+                <div className="row mb-4">
                   <div className="col-12 col-md-4">
-                    <label className="crops-start-aligned-text col-12 body-regular primary-text">
+                    <label className="crops-start-aligned-text col-12 body-regular primary-text my-0">
                       Moisture Level
                     </label>
                   </div>
@@ -501,9 +495,9 @@ const SoilTesting: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="row mt-2">
+                <div className="row mb-4">
                   <div className="col-12 col-md-4">
-                    <label className="crops-start-aligned-text col-12 body-regular primary-text">
+                    <label className="crops-start-aligned-text col-12 body-regular primary-text my-0">
                       Current Crops
                     </label>
                   </div>
@@ -537,10 +531,10 @@ const SoilTesting: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="row mt-2">
+                <div className="row mb-4">
                   <div className="col-12 col-md-4">
                     <label
-                      className="crops-start-aligned-text col-12 body-regular primary-text"
+                      className="crops-start-aligned-text col-12 body-regular primary-text my-0"
                       style={{ textAlign: "start" }}
                     >
                       Nutrient Deficiency
@@ -575,9 +569,9 @@ const SoilTesting: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="row mt-2">
+                <div className="row mb-4">
                   <div className="col-12 col-md-4">
-                    <label className="crops-start-aligned-text col-12 body-regular primary-text">
+                    <label className="crops-start-aligned-text col-12 body-regular primary-text my-0">
                       Irrigation Method
                     </label>
                   </div>
@@ -610,9 +604,9 @@ const SoilTesting: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="row mt-2">
+                <div className="row mb-4">
                   <div className="col-12 col-md-4">
-                    <label className="crops-start-aligned-text col-12 body-regular primary-text">
+                    <label className="crops-start-aligned-text col-12 body-regular primary-text my-0">
                       Comments
                     </label>
                   </div>
@@ -731,31 +725,23 @@ const SoilTesting: React.FC = () => {
         </Modal.Body>
 
         <Modal.Footer className="col-12">
-          <div className="col-12 px-0">
-            <div className="row mx-0">
-              <div className="col-12 col-md-6">
-                <div className="row mx-0 justify-content-start">
-                  <button
-                    className="col-12 col-md-8 mx-0 crops-other-button"
-                    onClick={handleModalDownloadAction}
-                  >
-                    Download
-                  </button>
-                </div>
-              </div>
-
-              <div className="col-12 col-md-6 ">
-                <div className="row px-0 justify-content-end">
-                  <button
-                    className="col-12 col-md-8 mx-0 crops-accept-button"
-                    onClick={handleModalContinueAction}
-                  >
-                    Continue
-                  </button>
-                </div>
-              </div>
+            <div className="col-12 col-md-6 d-flex m-0 justify-content-start">
+                <button
+                className="col-12 col-md-8 m-0 crops-other-button"
+                onClick={handleModalDownloadAction}
+                >
+                Download
+                </button>
             </div>
-          </div>
+
+            <div className="col-12 col-md-6 d-flex m-0 justify-content-end">
+                <button
+                className="col-12 col-md-8 m-0 mt-2 mt-md-0 crops-accept-button"
+                onClick={handleModalContinueAction}
+                >
+                Continue
+                </button>
+            </div>
         </Modal.Footer>
       </Modal>
     </>

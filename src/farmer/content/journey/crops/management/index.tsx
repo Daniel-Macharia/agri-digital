@@ -279,7 +279,7 @@ const Management: React.FC = ()=>{
         </div>
 
         <div className="col-12 crops-container">
-          <div className="row justify-content-end px-1 my-2 mx-0">
+          <div className="col-12 d-flex justify-content-end m-0 p-0">
             <button
               className="col-12 col-md-4 m-0 crops-accept-button"
               // onClick={handleRequestAService}
@@ -288,9 +288,9 @@ const Management: React.FC = ()=>{
             </button>
           </div>
 
-          <div className="row  px-0 mx-0 mt-2 ">
-            {managementNotifications.map((notification) => (
-              <div className="col-12 col-md-3 mx-0 px-0 px-md-4 py-1">
+          <div className="row mt-2">
+            {managementNotifications.map((notification, index) => (
+              <div className={`col-12 col-md-3 m-0 p-0 px-md-2${ (index === 0) ? "ps-md-0 pe-md-2" : (index === (managementNotifications.length-1)) ? "pe-md-0 ps-md-2" : ""}`}>
                 <ManagementNotification
                   name={notification.name}
                   description={notification.description}
@@ -306,11 +306,11 @@ const Management: React.FC = ()=>{
             />
           </div>
 
-          <div className="row px-0 mx-0 mt-2 ">
+          <div className="row mt-2 ">
             {managementSummary.map((summary, index) => (
               <div
                 key={index}
-                className="col-12 col-md-4 mx-0 px-0 px-md-1 p-1"
+                className={`col-12 col-md-4 m-0 p-0 ${(index === 0) ? "ps-md-0 pe-md-2" : (index === (managementSummary.length-1)) ? "pe-md-0 ps-md-2" : "px-md-2"}`}
               >
                 <ManagementSummary
                   title={summary.title}

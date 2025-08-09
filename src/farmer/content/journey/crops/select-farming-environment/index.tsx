@@ -75,11 +75,13 @@ const SelectFarmingEnvironment: React.FC = () => {
             className="col-8 col-md-4 offset-md-1 crops-farming-environment"
             onClick={() => updateEnvironment(FarmEnvironmentType.OPEN)}
           >
-            <img
-              src="/assets/images/open-field.svg"
-              className="environment-icon col-12"
-              style={{ width: "88px", height: "88px" }}
-            />
+            <div className="col-12 d-flex justify-content-center">
+                <img
+                src="/assets/images/open-field.svg"
+                className="environment-icon col-12"
+                style={{ width: "88px", height: "88px" }}
+                />
+            </div>
             <h3 className="h3-bold crops-farming-environment-title col-12">
               Open Field
             </h3>
@@ -91,11 +93,13 @@ const SelectFarmingEnvironment: React.FC = () => {
             className="crops-farming-environment col-8 col-md-4 offset-md-2"
             onClick={() => updateEnvironment(FarmEnvironmentType.CONTROLLED)}
           >
-            <img
-              src="/assets/images/controlled-environment.svg"
-              className="environment-icon col-12"
-              style={{ width: "88px", height: "88px" }}
-            />
+            <div className="col-12 d-flex justify-content-center">
+                <img
+                src="/assets/images/controlled-environment.svg"
+                className="environment-icon col-12"
+                style={{ width: "88px", height: "88px" }}
+                />
+            </div>
             <h3 className="h3-bold crops-farming-environment-title col-12">
               Controlled Environment
             </h3>

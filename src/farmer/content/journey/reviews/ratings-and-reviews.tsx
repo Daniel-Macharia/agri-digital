@@ -13,7 +13,7 @@ const RatingAndReviews:React.FC = () => {
     const totalRating: number = 5;
     const basisOfRating: string = "Lorem, ipsum dolor";
 
-    let projectReviews: ProjectReviewProps[] = loadProjectReviews( 3 );
+    let projectReviews: ProjectReviewProps[] = loadProjectReviews( "3" );
     if( projectReviews.length > 3 )
         projectReviews = projectReviews.slice(0, 3);
 

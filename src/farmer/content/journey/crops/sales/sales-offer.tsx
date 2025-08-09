@@ -31,7 +31,7 @@ const SalesOffer: React.FC<SalesOfferProps> = (sale: SalesOfferProps) => {
 
     
     return (<>
-    <div className="col-12 p-1" >
+    <div className="col-12 card p-3 px-2" >
 
         <div className="row py-0">
             <div className="col-2 py-0">
@@ -111,11 +111,11 @@ const SalesOffer: React.FC<SalesOfferProps> = (sale: SalesOfferProps) => {
         </div>
 
         {sale.negotiationStatus ? "" : (<div className="col-12" >
-                    <div className="row">
+                    <div className="row mt-2">
                         <div className="col-12 col-md-6">
                             <button
                             type="button"
-                            className="col-12 mx-0 crops-accept-button"
+                            className="col-12 m-0 px-1 crops-accept-button"
                             onClick={handleAcceptAction}
                             >
                                 Accept
@@ -125,7 +125,7 @@ const SalesOffer: React.FC<SalesOfferProps> = (sale: SalesOfferProps) => {
                         <div className="col-12 col-md-6 mt-2 mt-md-0">
                             <button
                             type="button"
-                            className="col-12 other-button mx-0 crops-other-button"
+                            className="col-12 other-button m-0 px-1 crops-other-button"
                             onClick={handleNegotiateAction}
                             >
                                 Negotiate

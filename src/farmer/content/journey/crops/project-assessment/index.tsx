@@ -171,7 +171,7 @@ const ProjectAssessment: React.FC = () => {
               </div>
             </div>
 
-            <div className="col-12 card">
+            <div className="col-12 card mt-3">
               <div className="col-12">
                 <div className="row ">
                   <div className="col-12">
@@ -209,7 +209,7 @@ const ProjectAssessment: React.FC = () => {
                             (item, index) => (
                               <div key={index} className="row mb-2">
                                 <div className="col-12 col-md-3 my-1">
-                                  <div className="form-group mt-3">
+                                  <div className="form-group mt-3" >
                                     <label>Expense</label>
                                     <Select
                                       {...formik.getFieldProps(
@@ -225,7 +225,7 @@ const ProjectAssessment: React.FC = () => {
                                         )
                                       }
                                       styles={customSelectStyles}
-                                      className="text-capitalize"
+                                      className="text-capitalize p-0 py-2"
                                     />
                                     <div className="fv-plugins-message-container text-danger">
                                       <ExpenseErrorMessageArray

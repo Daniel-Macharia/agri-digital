@@ -106,24 +106,20 @@ const DisplayCropDetails: React.FC = () => {
                 <div className="row m-0">
                   <div className="col-11 col-md-10">
                     <div className="row justify-content-start">
-                      <div className="col-2 ">
-                        <div className="row justify-content-start">
-                          <img
-                            src="/assets/images/plant_green.svg"
-                            style={{ width: "48px" }}
-                          />
-                        </div>
+                      <div className="col-2 col-md-1 d-flex justify-content-end">
+                        <img
+                        src="/assets/images/plant_green.svg"
+                        style={{ maxWidth: "48px" }}
+                        />
                       </div>
-                      <div className="col-10">
-                        <div className="row justify-content-start align-items-center py-0 my-0">
-                          <h3 className="h3-bold primary-text col-12 crops-start-aligned-text my-0">
-                            {crop.crop.name}
-                          </h3>
-                        </div>
+                      <div className="col-10 d-flex justify-content-start">
+                        <h3 className="h3-bold primary-text col-12 text-start my-0">
+                        {crop.crop.name}
+                        </h3>
                       </div>
                     </div>
                   </div>
-                  <div className="col-1 col-md-2 p-0 ">
+                  <div className="col-1 col-md-2 d-flex justify-content-end p-0 ">
                     <img
                       src="/assets/images/edit.svg"
                       style={{ width: "24px" }}
@@ -142,7 +138,7 @@ const DisplayCropDetails: React.FC = () => {
                           backgroundColor: "var(--Light-Blue, #E1EEFF)",
                         }}
                       >
-                        <div className="col-2 col-md-1 p-1">
+                        <div className="col-2 d-flex col-md-1 p-1 justify-content-center align-items-center">
                           <img
                             src="/assets/images/clock.svg"
                             className="col-12 m-0"
@@ -169,7 +165,7 @@ const DisplayCropDetails: React.FC = () => {
                         className="row mx-0 my-1 crops-container"
                         style={{ backgroundColor: "var(--light-red, #FFF1E9)" }}
                       >
-                        <div className="col-2 col-md-1 p-1">
+                        <div className="col-2 d-flex col-md-1 p-1 justify-content-center align-items-center">
                           <img
                             src="/assets/images/sun.svg"
                             className="col-12 m-0"
@@ -199,8 +195,8 @@ const DisplayCropDetails: React.FC = () => {
                       borderRadius: "4px",
                     }}
                   >
-                    <div className="col-12">
-                      <div className="row">
+                    <div className="col-12 ">
+                      <div className="row m-0 p-0">
                         <div className="col-6 py-0">
                           <h3
                             className="small-bold col-12 my-0"
