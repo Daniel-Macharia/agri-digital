@@ -6,8 +6,6 @@ interface AuthContextProps {
   setCurrentLoginView: (loginView: LoginView) => void;
   username?: string;
   setUsername: (username?: string) => void;
-  //   password?: string;
-  //   setPassword: (password?: string) => void;
   mfaAccessToken?: string;
   setMfaAccessToken: (mfaAccessToken?: string) => void;
 }
@@ -27,7 +25,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     LoginView.LOGIN
   );
   const [username, setUsername] = useState<string>();
-  //   const [password, setPassword] = useState<string>();
   const [mfaAccessToken, setMfaAccessToken] = useState<string>();
 
   return (
@@ -39,8 +36,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUsername,
         mfaAccessToken,
         setMfaAccessToken,
-        // password,
-        // setPassword,
       }}
     >
       {children}

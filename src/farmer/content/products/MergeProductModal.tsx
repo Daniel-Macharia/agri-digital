@@ -1,47 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
 import { MergeProductFormData, FormErrors, Product, MergeProductModalProps } from './index';
-// Type definitions
-/*interface Product {
-    id: number;
-    name: string;
-    price: number;
-    quantity: number;
-    quality: string | null;
-    image: string | null;
-    status: string;
-    unit: string;
-    createdAt?: string;
-    projectName?: string;
-    type?: 'livestock' | 'crop';
-    livestockType?: string;
-    isMergedProduct?: boolean;
-    componentProduct1?: string;
-    componentProduct2?: string;
-    product1?: string;
-    product2?: string;
-}
-
-interface MergeProductFormData {
-    name: string;
-    product1: string;
-    product2: string;
-    quantity: string;
-    unit: string;
-    quality: string;
-    image: File | null;
-    price: string;
-}
-
-interface FormErrors {
-    [key: string]: string;
-}
-
-interface MergeProductModalProps {
-    show: boolean;
-    handleClose: () => void;
-    onSave: (product: Omit<Product, 'id'>) => Promise<void>;
-    products: Product[];
-}*/
 
 const MergeProductModal: React.FC<MergeProductModalProps> = ({ 
     show, 

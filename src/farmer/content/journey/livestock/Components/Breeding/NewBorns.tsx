@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-// import Saved from "../../Shared/Saved"; // Uncomment if you want to show a saved modal
-// import { useNavigate } from "react-router-dom";  // Uncomment if you want to navigate after save
+import Saved from "../../Shared/Saved";
+import Popup from 'reactjs-popup';
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
   identification: Yup.string().required("Identification is required"),
@@ -37,8 +38,8 @@ const initialValues = {
 };
 
 const NewBorns = () => {
-  const [, setShowSaved] = useState(false);
-  // const navigate = useNavigate();
+  const [showSaved, setShowSaved] = useState(false);
+  const navigate = useNavigate();
 
   // Dummy options for Identification dropdown
   const identificationOptions = [
@@ -48,7 +49,25 @@ const NewBorns = () => {
   ];
 
   return (
-    <div className="w-100 rounded-4 bg-white border mt-3 p-4">
+    <>
+      <Popup
+        open={showSaved}
+        modal
+        closeOnDocumentClick={false}
+        onClose={() => setShowSaved(false)}
+        contentStyle={{ borderRadius: '1rem', padding: 0, maxWidth: 400 }}
+      >
+        <div className="d-flex flex-column align-items-center justify-content-center p-4">
+          <button
+            type="button"
+            className="btn-close align-self-end mb-2"
+            aria-label="Close"
+            onClick={() => setShowSaved(false)}
+          ></button>
+          <Saved onDone={() => navigate("/farmer/projects/livestock/breeding/results")} />
+        </div>
+      </Popup>
+      <div className="w-100 rounded-4 bg-white border mt-3 p-4">
       <h5 className="mb-4 text-start" style={{ color: "#333" }}>
         New Borns
       </h5>
@@ -216,7 +235,8 @@ const NewBorns = () => {
           </Form>
         )}
       </Formik>
-    </div>
+      </div>
+    </>
   );
 };
 

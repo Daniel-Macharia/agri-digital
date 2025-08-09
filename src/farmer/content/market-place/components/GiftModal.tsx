@@ -49,7 +49,7 @@ const GiftModal: React.FC<GiftModalProps> = ({ show, onHide, product, onSendGift
     // Kenyan phone number validation
     const validateKenyanPhoneNumber = (phone: string): boolean => {
         // Remove spaces, hyphens, and parentheses
-        const cleanPhone = phone.replace(/[\s\-\(\)]/g, '');
+        const cleanPhone = phone.replace(/[\s\-()]/g, '');
         
         // Kenyan phone number patterns:
         // +254XXXXXXXXX (international format)

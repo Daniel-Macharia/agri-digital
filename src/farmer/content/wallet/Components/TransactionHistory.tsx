@@ -142,6 +142,7 @@ const TransactionHistory: React.FC = () => {
               <button
                 className="d-inline-flex align-items-start btn bg-white caption-bold text-black"
                 style={{ color: "black" }}
+                onClick={() => navigate("vouchers")}
               >
                 Manage
               </button>

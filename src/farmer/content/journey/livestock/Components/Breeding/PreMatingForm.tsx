@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import Saved from '../../Shared/Saved';
+import { useNavigate } from 'react-router-dom';
 
 const identificationOptions = [
   { value: '', label: 'Select the Livestock identification' },
@@ -27,40 +27,18 @@ const initialValues = {
   notes: '',
 };
 
-interface Props {
-  onSaved: () => void;
-}
-
-const PreMatingForm: React.FC<Props> = ({ onSaved }) => {
-  const [showSaved, setShowSaved] = useState(false);
+const PreMatingForm: React.FC = () => {
+  const navigate = useNavigate();
 
   return (
     <>
-      {showSaved && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'rgba(0,0,0,0.2)',
-            zIndex: 9999,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Saved onDone={() => { setShowSaved(false); onSaved(); }} />
-        </div>
-      )}
       <div className="w-100 rounded-4 bg-white border mt-3 p-4">
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(_, { setSubmitting, resetForm }) => {
             setTimeout(() => {
-              setShowSaved(true);
+              navigate('/farmer/projects/livestock/breeding/new');
               setSubmitting(false);
               resetForm();
             }, 400);

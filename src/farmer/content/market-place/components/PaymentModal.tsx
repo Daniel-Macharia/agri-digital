@@ -1,21 +1,55 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { PaymentData } from '../types';
+// import { useNavigate } from 'react-router-dom'; // Commented out to avoid dependency issues
+
+// Define proper types
+export interface PaymentData {
+  paymentMethod: string;
+  mpesaPhone?: string;
+  cardNumber?: string;
+  cardholderName?: string;
+  expiryDate?: string;
+  cvv?: string;
+  barterDescription?: string;
+}
+
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  seller?: string;
+  image?: string;
+}
+
+interface GiftData {
+  recipient: string;
+  message: string;
+  senderName: string;
+}
+
+interface OrderData {
+  cartItems: CartItem[];
+  deliveryMethod: string;
+  deliveryDate: string;
+  tipAmount: string | number;
+  isGift?: boolean;
+  giftData?: GiftData;
+}
 
 interface PaymentModalProps {
-    show: boolean;
-    onHide: () => void;
-    onPaymentSuccess: (paymentData: PaymentData) => void;
-    total: number;
-    // Add these props to get order details
-    orderData?: {
-        cartItems: any[];
-        deliveryMethod: string;
-        deliveryDate: string;
-        tipAmount: string | number;
-        isGift?: boolean;
-        giftData?: any;
-    };
+  show: boolean;
+  onHide: () => void;
+  onPaymentSuccess: (paymentData: PaymentData) => void;
+  total: number;
+  // Add these props to get order details
+  orderData?: OrderData;
+}
+
+interface CardDetails {
+  cardNumber: string;
+  cardholderName: string;
+  expiryDate: string;
+  cvv: string;
 }
 
 const PaymentModal: React.FC<PaymentModalProps> = ({ 
@@ -25,10 +59,10 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
     total,
     orderData 
 }) => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate(); // Commented out to avoid dependency issues
     const [selectedPayment, setSelectedPayment] = useState('');
     const [mpesaPhone, setMpesaPhone] = useState('');
-    const [cardDetails, setCardDetails] = useState({
+    const [cardDetails, setCardDetails] = useState<CardDetails>({
         cardNumber: '',
         cardholderName: '',
         expiryDate: '',
@@ -167,13 +201,14 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
             ? `Gift sent successfully to ${orderData.giftData?.recipient}!` 
             : "Order placed successfully!";
         
-        // Navigate to track order page with complete order data
+        // Navigate to track order page with complete order data (commented out to avoid dependency issues)
         setTimeout(() => {
             alert(message);
-            navigate('../track-order', { 
-                state: { order: completeOrder },
-                replace: true 
-            });
+            console.log('Order details:', completeOrder);
+            // navigate('../track-order', { 
+            //     state: { order: completeOrder },
+            //     replace: true 
+            // });
         }, 100);
     };
 
@@ -324,7 +359,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
             `}</style>
             
             <div className="pm-modal-wrapper">
-                <div className="pm-modal-dialog bg-white p-4 ">
+                <div className="pm-modal-dialog bg-white p-4">
                     <div className="modal-content">
                         <div className="modal-header border-0 pb-0">
                             <h5 className="modal-title text-success fw-bold">Choose Payment Method</h5>
@@ -513,24 +548,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
                                                 className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
                                                 style={{ 
                                                     width: '40px', 
-                                                    height: '40px', 
-                                                    backgroundColor: '#25D366', 
-                                                    color: 'white', 
-                                                    border: 'none' 
-                                                }}
-                                            >
-                                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.531 3.542"/>
-                                                </svg>
-                                            </div>
-                                            <small className="d-block text-muted">WhatsApp</small>
-                                        </div>
-                                        <div className="text-center">
-                                            <div 
-                                                className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
-                                                style={{ 
-                                                    width: '40px', 
-                                                    height: '40px', 
+                                                    height: '40px',
                                                     backgroundColor: '#0084FF', 
                                                     color: 'white', 
                                                     border: 'none' 
@@ -547,7 +565,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
                                                 className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
                                                 style={{ 
                                                     width: '40px', 
-                                                    height: '40px', 
+                                                    height: '40px',
                                                     backgroundColor: '#34B7F1', 
                                                     color: 'white', 
                                                     border: 'none' 
@@ -564,7 +582,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
                                                 className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
                                                 style={{ 
                                                     width: '40px', 
-                                                    height: '40px', 
+                                                    height: '40px',
                                                     backgroundColor: '#6c757d', 
                                                     color: 'white', 
                                                     border: 'none' 
@@ -572,46 +590,45 @@ const PaymentModal: React.FC<PaymentModalProps> = ({
                                             >
                                                 <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-                                            </svg>
+                                                </svg>
+                                            </div>
+                                            <small className="d-block text-muted">Copy link</small>
                                         </div>
-                                        <small className="d-block text-muted">Copy link</small>
-                                    </div>
-                                    <div className="text-center">
-                                        <div 
-                                            className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
-                                            style={{ 
-                                                width: '40px', 
-                                                height: '40px', 
-                                                backgroundColor: '#28a745', 
-                                                color: 'white', 
-                                                border: 'none' 
-                                            }}
-                                        >
-                                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
-                                            </svg>
+                                        <div className="text-center">
+                                            <div 
+                                                className="btn btn-sm rounded-circle mb-1 d-flex align-items-center justify-content-center" 
+                                                style={{ 
+                                                    width: '40px', 
+                                                    height: '40px',
+                                                    backgroundColor: '#28a745', 
+                                                    color: 'white', 
+                                                    border: 'none' 
+                                                }}
+                                            >
+                                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                                                </svg>
+                                            </div>
+                                            <small className="d-block text-muted">More</small>
                                         </div>
-                                        <small className="d-block text-muted">More</small>
                                     </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
 
-                        {/* Place Order button when a payment method is selected */}
-                        {selectedPayment && (
-                            <div className="d-grid mt-4">
-                                <button 
-                                    className="btn btn-success w-100 fw-bold py-3"
-                                    onClick={handleSubmit}
-                                >
-                                    Place Order
-                                </button>
-                            </div>
-                        )}
+                            {selectedPayment && (
+                                <div className="d-grid mt-4">
+                                    <button 
+                                        className="btn btn-success w-100 fw-bold py-3"
+                                        onClick={handleSubmit}
+                                    >
+                                        Place Order
+                                    </button>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </>
     );
 };

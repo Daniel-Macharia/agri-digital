@@ -1,26 +1,63 @@
-import { useNavigate } from "react-router-dom";
-
-import { useState } from "react";
-import AddNewCropModal from "./add-new-crop-modal";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { ApiClient } from "../../../../../lib/api/ApiClient";
+import { useCropJourney } from "../../../../../lib/context/CropJourneyContext";
+import { CropPayload } from "../../../../../lib/model/CropJourneyModel";
+import { ListApiResponse } from "../../../../../lib/model/Model";
+import { API_ROUTES } from "../../../../../lib/Routes";
+import { extractErrorMessage } from "../../../../../lib/utils/Helpers";
 import CropsNotification from "../crops-notification/crops-notification";
-import { JOURNEY_ROUTES } from "../../journey-routes";
-import { CROP_ROUTES } from "../crop-routes";
+import AddNewCropModal from "./add-new-crop-modal";
+const apiClient = new ApiClient();
 
-const Planting: React.FC = ()=>{
+const Planting: React.FC = () => {
+  const navigate = useNavigate();
+  const { transactionId } = useParams();
+  const { cropJourneySummary, setTransactionId, setCrops, crops } =
+    useCropJourney();
+  const [show, setShow] = useState<boolean>(false);
 
-    
+  const handleRequestForService = useCallback(() => {
+    // navigate(`..${CROP_ROUTES.CROP_REQUEST_FOR_SERVICE}`, {
+    //   state: `..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_PLANTING}`,
+    // });
+    console.log("Request service here");
+  }, []);
 
-    const [show, setShow] = useState<boolean>(false);
+  const fetchCrops = useCallback(async () => {
+    try {
+      if (!cropJourneySummary) return;
 
-    const navigate = useNavigate();
+      const cropResponse = await apiClient.get<ListApiResponse<CropPayload>>({
+        url: API_ROUTES.CROP_JOURNEY.CROP.replace(
+          ":transactionId",
+          cropJourneySummary.transactionId
+        ),
+      });
+      setCrops(cropResponse.list);
+    } catch (err) {
+      extractErrorMessage(err);
+    }
+  }, [cropJourneySummary, setCrops]);
 
-    
+  useEffect(() => {
+    if (transactionId) {
+      setTransactionId(transactionId);
+    }
+  }, [transactionId]);
 
-    const handleRequestForService = ()=>{
-        navigate(`..${CROP_ROUTES.CROP_REQUEST_FOR_SERVICE}`, {state:`..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_PLANTING}`});
-    };
+  useEffect(() => {
+    fetchCrops();
+  }, [fetchCrops]);
 
-    
+  useEffect(() => {
+    if (cropJourneySummary && crops && crops.length > 0) {
+      navigate(
+        "/farmer/projects/crops/display-crop-details/" +
+          cropJourneySummary.transactionId
+      );
+    }
+  }, [cropJourneySummary, crops]);
 
     return (<>
     <div className="col-12 mb-4">
@@ -32,19 +69,18 @@ const Planting: React.FC = ()=>{
         </div>
 
         <div className="col-12 crops-container">
-            <div className="col-12">
-                <div className="row my-2 px-0 px-md-2 justify-content-end">
-                    <button
-                    className="col-12 col-md-4 crops-accept-button"
-                    onClick={handleRequestForService}
-                    >
-                        Request Services
-                    </button>
-                </div>
+          <div className="col-12">
+            <div className="row my-2 px-0 px-md-2 justify-content-end">
+              <button
+                className="col-12 col-md-4 crops-accept-button"
+                onClick={handleRequestForService}
+              >
+                Request Services | Coming Soon...
+              </button>
             </div>
-            <div className="col-12 ">
-                <div className="row justify-content-center">
-
+          </div>
+          <div className="col-12 ">
+            <div className="row justify-content-center">
                     <div className="col-12 col-md-8 crops-container bg-white p-4">
                         <div className="col-sm-12">
                             <div className="col-12 d-flex justify-content-center">
@@ -75,14 +111,14 @@ const Planting: React.FC = ()=>{
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
+      </div>
 
-    <AddNewCropModal show={show} setShow={setShow} />
-    </>);
-}
+      <AddNewCropModal show={show} setShow={(status) => setShow(status)} />
+    </>
+  );
+};
 
 export default Planting;

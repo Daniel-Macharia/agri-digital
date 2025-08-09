@@ -4,7 +4,6 @@ import Ventilation from "./Ventilation"
 import WasteManagement from "./WasteManagement"
 import Space from "./Space"
 import LivestockProtection from "./LivestocckProtection"
-
 import NavBar from "./NavBar"
 import Results from "./Results"
 import { HOUSING_ROUTES } from "./Housing.Route"
@@ -28,9 +27,6 @@ const Housing = () => {
       <Route path={HOUSING_ROUTES.RESULTS} element={<Results />} />
       <Route path={HOUSING_ROUTES.SPACE} element={WithNavBar(Space)} />
       <Route path={HOUSING_ROUTES.PROTECTION} element={WithNavBar(LivestockProtection)} /> 
-
-
-
       
     </Routes> 
   )

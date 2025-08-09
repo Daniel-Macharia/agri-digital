@@ -1,326 +1,341 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import { useNavigate } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  ErrorMessage,
+  Field,
+  FieldArray,
+  Form,
+  FormikProvider,
+  useFormik,
+} from "formik";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Select from "react-select";
 
+import { useEffect, useMemo } from "react";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
-import { CROP_ROUTES } from "../crop-routes";
+import { ApiClient } from "../../../../../lib/api/ApiClient";
+import { useCropJourney } from "../../../../../lib/context/CropJourneyContext";
+import {
+  CropJourneyInitFormPayload,
+  CropJourneySummaryPayload,
+} from "../../../../../lib/model/CropJourneyModel";
+import {
+  SystemWideSelectString,
+  TOASTIFY_AUTO_CLOSE_TIMEOUT,
+} from "../../../../../lib/model/Model";
+import { API_ROUTES } from "../../../../../lib/Routes";
+import {
+  customSelectStyles,
+  extractErrorMessage,
+  parseFormDatav3,
+} from "../../../../../lib/utils/Helpers";
 import { JOURNEY_ROUTES } from "../../journey-routes";
+import ExpenseErrorMessageArray from "../common/ExpenseErrorMessageArray";
+import { CROP_ROUTES } from "../crop-routes";
+const apiClient = new ApiClient();
 
-const ProjectAssessment: React.FC = ()=>{
+const validationSchema = Yup.object()
+  .shape({
+    name: Yup.string().trim().required().label("Project Name"),
+    revenueEstimate: Yup.number().min(0).required().label("Expected Revenue"),
+    expenseEstimate: Yup.number().min(0).required().label("Expected Expense"),
+    cropExpenseEstimates: Yup.array()
+      .of(
+        Yup.object().shape({
+          expense: Yup.object()
+            .shape({
+              label: Yup.string().required(),
+              value: Yup.string().required(),
+            })
+            .required()
+            .label("Expense"),
+          amount: Yup.number().min(0).required().label("Amount"),
+          description: Yup.string().optional().trim().label("Description"),
+        })
+      )
+      .min(1, "At least one expense is required"),
+  })
+  .test(
+    "amounts-match-expenseEstimate",
+    "Total of cropExpenseEstimates.amount must equal Expected Expense",
+    function (values) {
+      const { expenseEstimate, cropExpenseEstimates } = values || {};
+      if (!Array.isArray(cropExpenseEstimates)) return true;
 
-    const initialValues = {
-        expectedRevenue: '',
-        expectedExpenditure: '',
-        seedCost: '',
-        seedCostDescription: '',
-        laborCost: '',
-        laborCostDescription: '',
-        fertilizerCost: '',
-        fertilizerCostDescription: '',
-        equipmentCost: '',
-        equipmentCostDescription: '',
-        otherCost: '',
-        otherCostDescription: ''
-    };
+      const total = cropExpenseEstimates.reduce(
+        (sum, item) => sum + (Number(item.amount) || 0),
+        0
+      );
+      return total === expenseEstimate;
+    }
+  );
 
-    const validationSchema = Yup.object({
-        expectedRevenue: Yup.number().moreThan(0).required("required").typeError("expected revenue must be a number"),
-        expectedExpenditure: Yup.number().moreThan(0).required("Required").typeError("expected expenditure must be a number"),
-        seedCost: Yup.number().moreThan(0).required("Required").typeError("seed cost must be a number"),
-        seedCostDescription: Yup.string(),
-        laborCost: Yup.number().moreThan(0).required("Required").typeError("labor cost must be a number"),
-        laborCostDescription: Yup.string(),
-        fertilizerCost: Yup.number().moreThan(0).required("Required").typeError("fertilizer cost must be a number"),
-        fertilizerCostDescription: Yup.string(),
-        equipmentCost: Yup.number().moreThan(0).required("Required").typeError("equipment cost must be a number"),
-        equipmentCostDescription: Yup.string(),
-        otherCost: Yup.number().moreThan(0).required("Required").typeError("other cost must be a number"),
-        otherCostDescription: Yup.string()
-    });
+const ProjectAssessment: React.FC = () => {
+  const { transactionId } = useParams();
+  const searchParams = new URLSearchParams(location.search);
+  const projectName = searchParams.get("name");
+  const navigate = useNavigate();
+  const { setTransactionId, cropsExpenseList, setCropJourneySummary } =
+    useCropJourney();
 
-    const navigate = useNavigate();
+  const formik = useFormik<CropJourneyInitFormPayload>({
+    initialValues: {
+      name: projectName || "",
+      revenueEstimate: 0,
+      expenseEstimate: 0,
+      location: {
+        latitude: 0,
+        longitude: 0,
+      },
+      cropExpenseEstimates: [{ expense: null, amount: 0, description: "" }],
+    },
+    validationSchema,
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        const payload = parseFormDatav3(values);
+        setSubmitting(true);
 
-    const handleProjectAssessment = (data: typeof initialValues) => {
-        console.log('assessing project..');
-        console.log(data);
-        navigate(`..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_SOIL_TESTING}`);
-    };
+        const cropJourneySummary = await apiClient.post<
+          CropJourneySummaryPayload,
+          any
+        >({
+          url: API_ROUTES.CROP_JOURNEY.INIT,
+          data: payload,
+        });
 
-    const handleBackButton = () => {
-        navigate(`..`);
-        console.log("navigating back..");
-    };
+        setCropJourneySummary(cropJourneySummary);
 
-    return (<>
-        <div className="crops-container bg-white col-12 p-4 ">
-            <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handleProjectAssessment}
-            >
-                {()=>(
-                    <Form className="col-12 ">
-                        <div className="col-12">
-                            <p className="h3-semibold primary-text col-12 crops-start-aligned-text">
-                                Project Assessment
-                            </p>
-                            <p className="body-regular col-12 crops-start-aligned-text secondary-text" >
-                                Let's assess the financial aspects of your project.
-                            </p>
-                        </div>
+        navigate(
+          `..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_SOIL_TESTING}`.replace(
+            ":transactionId",
+            cropJourneySummary.transactionId
+          )
+        );
+      } catch (err) {
+        const errorMessage = extractErrorMessage(err);
+        toast.error(errorMessage || "Expense & revenue estimate failed", {
+          autoClose: TOASTIFY_AUTO_CLOSE_TIMEOUT,
+        });
+      } finally {
+        setSubmitting(false);
+      }
+    },
+  });
 
-                        
-                        <div className="col-12 card">
+  const expensesList: SystemWideSelectString[] = useMemo(() => {
+    if (!cropsExpenseList || cropsExpenseList.length === 0) return [];
+    return cropsExpenseList.map((item) => ({
+      value: item.id,
+      label: item.name,
+    }));
+  }, [cropsExpenseList]);
 
-                            <div className="row " >
-                                <div className="col-12 col-md-4">
-                                    <label className="col-12 body-regular primary-text crops-start-aligned-text">
-                                        Expected revenue
-                                    </label>
-                                </div>
-                                <div className="col-12">
-                                    <Field
-                                    className="form-control body-regular my-0 col-12"
-                                    type="text"
-                                    name="expectedRevenue"
+  useEffect(() => {
+    if (transactionId) {
+      setTransactionId(transactionId);
+    }
+  }, [transactionId]);
 
-                                    placeholder="ksh 250,000.00"
+  return (
+    <>
+      <div className="crops-container bg-white col-12 p-4 ">
+        <FormikProvider value={formik}>
+          <Form className="col-12 ">
+            <div className="col-12">
+              <p className="h3-semibold primary-text col-12 crops-start-aligned-text">
+                Project Assessment
+              </p>
+              <p className="body-regular col-12 crops-start-aligned-text secondary-text">
+                Let's assess the financial aspects of your project.
+              </p>
+            </div>
 
+            <div className="col-12 card">
+              <div className="row ">
+                <div className="col-12 col-md-4">
+                  <label className="col-12 body-regular primary-text crops-start-aligned-text">
+                    Expected revenue
+                  </label>
+                </div>
+                <div className="col-12">
+                  <Field
+                    className="form-control body-regular my-0 col-12"
+                    type="text"
+                    name="revenueEstimate"
+                    placeholder="ksh 250,000.00"
+                  />
+                  <div className="text-danger small crops-start-aligned-text col-sm-12">
+                    <ErrorMessage name="revenueEstimate" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-12 card">
+              <div className="col-12">
+                <div className="row ">
+                  <div className="col-12">
+                    <label className="crops-start-aligned-text primary-text body-regular col-12">
+                      Total Expected expenses
+                    </label>
+                  </div>
+                  <div className="col-12 ">
+                    <Field
+                      type="text"
+                      name="expenseEstimate"
+                      className="form-control body-regular my-0 "
+                      placeholder="ksh 250,000.00"
+                    />
+                    <div className="text-danger small col-sm-12 crops-start-aligned-text">
+                      <ErrorMessage name="expenseEstimate" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-12 mt-2">
+                <div className="row px-1 ">
+                  <label className="col-12 mx-0 mb-1 mt-3 body-regular primary-text crops-start-aligned-text">
+                    Expense breakdown
+                  </label>
+                </div>
+
+                <div className="col-md-12">
+                  <FieldArray name="cropExpenseEstimates">
+                    {({ push, remove }) => (
+                      <div className="row">
+                        <div className="col-md-12">
+                          {formik.values.cropExpenseEstimates.map(
+                            (item, index) => (
+                              <div key={index} className="row mb-2">
+                                <div className="col-12 col-md-3 my-1">
+                                  <div className="form-group mt-3">
+                                    <label>Expense</label>
+                                    <Select
+                                      {...formik.getFieldProps(
+                                        `cropExpenseEstimates[${index}].expense`
+                                      )}
+                                      placeholder="Expense"
+                                      options={expensesList}
+                                      value={item.expense}
+                                      onChange={(option) =>
+                                        formik.setFieldValue(
+                                          `cropExpenseEstimates[${index}].expense`,
+                                          option
+                                        )
+                                      }
+                                      styles={customSelectStyles}
+                                      className="text-capitalize"
                                     />
-                                    <div className="text-danger small crops-start-aligned-text col-sm-12">
-                                        <ErrorMessage name="expectedRevenue"/>
+                                    <div className="fv-plugins-message-container text-danger">
+                                      <ExpenseErrorMessageArray
+                                        fieldName="expense"
+                                        index={index}
+                                      />
                                     </div>
+                                  </div>
                                 </div>
-                            </div>
-                            
+
+                                <div className="col-12 col-md-3 my-1">
+                                  <div className="form-group mt-3">
+                                    <label>Amount</label>
+                                    <input
+                                      {...formik.getFieldProps(
+                                        `cropExpenseEstimates[${index}].amount`
+                                      )}
+                                      value={item.amount || 0}
+                                      className=" form-control body-regular my-0"
+                                      autoComplete="off"
+                                      type="text"
+                                    />
+                                    <div className="fv-plugins-message-container text-danger">
+                                      <ExpenseErrorMessageArray
+                                        fieldName="amount"
+                                        index={index}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="col-12 col-md-4 my-1">
+                                  <div className="form-group mt-3">
+                                    <label>Description</label>
+                                    <input
+                                      {...formik.getFieldProps(
+                                        `cropExpenseEstimates[${index}].description`
+                                      )}
+                                      value={item.description || ""}
+                                      className=" form-control body-regular my-0"
+                                      autoComplete="off"
+                                      type="text"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="col-12 col-md-2 my-1">
+                                  <div className="form-group mt-3">
+                                    <label>&nbsp;</label>
+                                    <br />
+                                    <Link
+                                      to="#"
+                                      onClick={() => remove(index)}
+                                      className="text-danger"
+                                    >
+                                      Remove
+                                    </Link>
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          )}
                         </div>
-
-                        <div className="col-12 card">
-                            <div className="col-12">
-                                <div className="row ">
-                                    <div className="col-12">
-                                        <label className="crops-start-aligned-text primary-text body-regular col-12">
-                                            Total Expected expenses
-                                        </label>
-                                    </div>
-                                    <div className="col-12 " >
-                                        <Field
-                                        type="text"
-                                        name="expectedExpenditure"
-
-                                        className="form-control body-regular my-0 "
-
-                                        placeholder="ksh 250,000.00"
-
-                                        />
-                                        <div className="text-danger small col-sm-12 crops-start-aligned-text">
-                                            <ErrorMessage name="expectedExpenditure"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-12 mt-2" >
-                                <div className="row px-1 ">
-                                    <label className="col-12 mx-0 mb-1 mt-3 body-regular primary-text crops-start-aligned-text">
-                                        Expense breakdown
-                                    </label>
-                                </div>
-                                
-                                <div className="col-sm-12">
-
-                                    <div className="row mb-2">
-                                        <div className="col-12 col-md-3 py-1 " >
-                                            <label className="crops-start-aligned-text body-regular primary-text col-12 my-1 ">
-                                                Seeds
-                                            </label>
-                                        </div>
-                                        <div className="col-12 col-md-9">
-                                            <div className="row">
-                                                <div className="col-12 col-md-4 my-1">
-                                                    <Field
-                                                        className=" form-control body-regular my-0"
-                                                        type="text"
-                                                        name="seedCost"
-                                                        placeholder="ksh 250,000.00"
-                                                    />
-                                                    <div className="text-danger small crops-start-aligned-text">
-                                                        <ErrorMessage name="seedCost"/>
-                                                    </div>
-                                                </div>
-                                                <div className="col-12 col-md-8 my-1">
-                                                    <Field
-                                                        className="form-control body-regular my-0"
-                                                        type="text"
-                                                        name="seedCostDescription"
-                                                        placeholder="Description(optional)"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="row mb-2">
-                                        <div className="col-12 col-md-3 py-1 " >
-                                            <label className="crops-start-aligned-text body-regular primary-text col-12 my-1 ">
-                                                Labor Cost
-                                            </label>
-                                        </div>
-                                        <div className="col-12 col-md-9">
-                                            <div className="row">
-                                                <div className="col-12 col-md-4 my-1">
-                                                    <Field
-                                                        className=" form-control body-regular my-0"
-                                                        type="text"
-                                                        name="laborCost"
-                                                        placeholder="ksh 250,000.00"
-                                                    />
-                                                    <div className="text-danger small crops-start-aligned-text">
-                                                        <ErrorMessage name="laborCost"/>
-                                                    </div>
-                                                </div>
-                                                <div className="col-12 col-md-8 my-1">
-                                                    <Field
-                                                        className="form-control body-regular my-0"
-                                                        type="text"
-                                                        name="laborCostDescription"
-                                                        placeholder="Description(optional)"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="row mb-2">
-                                        <div className="col-12 col-md-3 py-1 " >
-                                            <label className="crops-start-aligned-text body-regular primary-text col-12 my-1 ">
-                                                Fertilizer
-                                            </label>
-                                        </div>
-                                        <div className="col-12 col-md-9">
-                                            <div className="row">
-                                                <div className="col-12 col-md-4 my-1">
-                                                    <Field
-                                                        className=" form-control body-regular my-0"
-                                                        type="text"
-                                                        name="fertilizerCost"
-                                                        placeholder="ksh 250,000.00"
-                                                    />
-                                                    <div className="text-danger small crops-start-aligned-text">
-                                                        <ErrorMessage name="fertilizerCost"/>
-                                                    </div>
-                                                </div>
-                                                <div className="col-12 col-md-8 my-1">
-                                                    <Field
-                                                        className="form-control body-regular my-0"
-                                                        type="text"
-                                                        name="fertilizerCostDescription"
-                                                        placeholder="Description(optional)"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="row mb-2">
-                                        <div className="col-12 col-md-3 py-1 " >
-                                            <label className="crops-start-aligned-text body-regular primary-text col-12 my-1 ">
-                                                Equipment
-                                            </label>
-                                        </div>
-                                        <div className="col-12 col-md-9">
-                                            <div className="row">
-                                                <div className="col-12 col-md-4 my-1">
-                                                    <Field
-                                                        className=" form-control body-regular my-0"
-                                                        type="text"
-                                                        name="equipmentCost"
-                                                        placeholder="ksh 250,000.00"
-                                                    />
-                                                    <div className="text-danger small crops-start-aligned-text">
-                                                        <ErrorMessage name="equipmentCost"/>
-                                                    </div>
-                                                </div>
-                                                <div className="col-12 col-md-8 my-1">
-                                                    <Field
-                                                        className="form-control body-regular my-0"
-                                                        type="text"
-                                                        name="equipmentCostDescription"
-                                                        placeholder="Description(optional)"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="row mb-2">
-                                        <div className="col-12 col-md-3 py-1 " >
-                                            <label className="crops-start-aligned-text body-regular primary-text col-12 my-1 ">
-                                                Other
-                                            </label>
-                                        </div>
-                                        <div className="col-12 col-md-9">
-                                            <div className="row">
-                                                <div className="col-12 col-md-4 my-1">
-                                                    <Field
-                                                        className=" form-control body-regular my-0"
-                                                        type="text"
-                                                        name="otherCost"
-                                                        placeholder="ksh 250,000.00"
-                                                    />
-                                                    <div className="text-danger small crops-start-aligned-text">
-                                                        <ErrorMessage name="otherCost"/>
-                                                    </div>
-                                                </div>
-                                                <div className="col-12 col-md-8 my-1">
-                                                    <Field
-                                                        className="form-control body-regular my-0"
-                                                        type="text"
-                                                        name="otherCostDescription"
-                                                        placeholder="Description(optional)"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className="col-md-12 mt-3">
+                          <button
+                            type="button"
+                            className="btn btn-sm btn-info"
+                            onClick={() => push({})}
+                          >
+                            Add Expense
+                          </button>
                         </div>
+                      </div>
+                    )}
+                  </FieldArray>
+                </div>
+                <div className="col-md-12 mt-3">
+                  {formik.errors &&
+                    typeof formik.errors.cropExpenseEstimates === "string" && (
+                      <div className="fv-plugins-message-container text-danger fw-bold">
+                        <ErrorMessage name="cropExpenseEstimates" />
+                      </div>
+                    )}
+                </div>
+              </div>
+            </div>
 
-                        <div className="col-12"
-                        >
-                            <div className="row px-2">
-                                <div className="col-12 col-md-6 mt-2 " >
-                                    <div className="row justify-content-start">
-                                        <button
-                                        onClick={handleBackButton}
-                                        className="crops-other-button col-12 mx-0 col-md-8 "
-                                        >
-                                            Back
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="col-12 col-md-6 mt-2">
-                                    <div className="row justify-content-end ">
-                                        <button
-                                        type="submit"
-                                        name="start"
-                                        className="col-12 col-md-8 mx-0 crops-accept-button"
-                                        >
-                                            Start Journey
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </Form>
-                )}
-            </Formik>
-        </div>
-    </>);
-}
+            <div className="col-12">
+              <div className="row px-2">
+                <div className="col-12 col-md-6 mt-2 ">
+                  <div className="row justify-content-start"></div>
+                </div>
+                <div className="col-12 col-md-6 mt-2">
+                  <div className="row justify-content-end ">
+                    <button
+                      type="submit"
+                      name="start"
+                      className="col-12 col-md-8 mx-0 crops-accept-button"
+                    >
+                      Start Journey
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Form>
+        </FormikProvider>
+      </div>
+    </>
+  );
+};
 
 export default ProjectAssessment;
