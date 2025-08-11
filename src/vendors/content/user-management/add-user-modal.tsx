@@ -1,6 +1,5 @@
 import { Modal } from "react-bootstrap";
 import { AddUserProps, ModalProps } from "./user-management-models";
-import { UserRole } from "./user-management-enums";
 
 import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";

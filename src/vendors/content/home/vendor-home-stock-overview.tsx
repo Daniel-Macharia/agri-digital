@@ -3,6 +3,7 @@ import { VendorStockItemProps } from "./vendor-home-models";
 import OverviewHeader from "../../../farmer/content/home/overview/overview-header";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { KeyValuePair } from "../../../farmer/content/journey/crops/crops-models";
+import { VENDOR_HOME_ROUTES } from "./vendor-home-routes";
 
 
 const VendorStockBarGraph: React.FC = () => {
@@ -213,7 +214,7 @@ const VendorStockItem: React.FC<VendorStockItemProps> = (data: VendorStockItemPr
     </>);
 };
 
-const VendorHomeStockSalesAndLevel: React.FC = () => {
+const VendorHomeStockSalesAndLevelOverview: React.FC = () => {
 
     const columnLabels: string[] = [
         "Product Name", "Quantity", "Selling Price", "Buying Price", "Expiry Date"
@@ -261,7 +262,7 @@ const VendorHomeStockSalesAndLevel: React.FC = () => {
     <div className="col-12">
          <OverviewHeader
          overviewTitle="Stock Sales & Level"
-         viewMoreUrl="#"
+         viewMoreUrl={VENDOR_HOME_ROUTES.FULL.VENDOR_HOME_STOCK_SALES_FULL}
          />
 
         <VendorStockBarGraph />
@@ -311,4 +312,4 @@ const VendorHomeStockSalesAndLevel: React.FC = () => {
     </>);
 };
 
-export default VendorHomeStockSalesAndLevel;
+export default VendorHomeStockSalesAndLevelOverview;

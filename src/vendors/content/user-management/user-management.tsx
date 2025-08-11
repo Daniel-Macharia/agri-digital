@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { VENDOR_ROUTES } from "../vendor-routes";
+import { VENDOR_ROUTES } from "../../vendor-routes";
 import { useNavigate } from "react-router-dom";
 import { UserItemProps } from "./user-management-models";
 import { toast } from "react-toastify";
@@ -119,7 +119,7 @@ const VendorManageUsers: React.FC = () => {
                     name: `user ${i + 1 }`,
                     role: `role ${i + 1 }`,
                     joinedDate: new Date(),
-                    status: `${(i % 3 === 0) ? UserStatus.ACTIVE : (i % 3 === 1) ? UserStatus.INACTIVE : UserStatus.DELETED}`,
+                    status: (i % 3 === 0) ? UserStatus.ACTIVE : (i % 3 === 1) ? UserStatus.INACTIVE : UserStatus.DELETED,
                     email: `email${i + 1}@shambabot.com`
                 }
             )

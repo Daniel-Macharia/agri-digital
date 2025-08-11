@@ -156,7 +156,7 @@ const HomeAdvertChain: React.FC = () => {
         }
         <button
         type="button"
-        className="translate-middle-y position-absolute top-20 me-2 end-0 btn btn-sm secondary-text"
+        className="translate-middle-y position-sticky  m-4 end-0 btn btn-sm secondary-text"
         onClick={() => setShowAdverts(false) }
         style={{zIndex: 2}}
         >

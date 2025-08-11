@@ -87,11 +87,11 @@ const HomeOrderItem: React.FC<HomeOrderItemProps> = (data: HomeOrderItemProps) =
 };
 
 
-const HomeOrders: React.FC = () => {
+const HomeOrderss: React.FC = () => {
 
     const navigate = useNavigate();
 
-    let pendingOrders: HomeOrderItemProps[] = [];
+    const pendingOrders: HomeOrderItemProps[] = [];
 
     for( let i = 0; i < 22; i++ )
     {
@@ -108,7 +108,7 @@ const HomeOrders: React.FC = () => {
     );
     }
 
-    let completedOrders: HomeOrderItemProps[] = [];
+    const completedOrders: HomeOrderItemProps[] = [];
 
     for( let i = 0; i < 28; i++ )
     {
@@ -145,7 +145,7 @@ const HomeOrders: React.FC = () => {
         pendingOrdersNumberOfPages = pendingOrdersNumberOfPages + 1;
 
     console.log(pendingOrdersNumberOfPages);
-    let pendingOrdersPages: number[] = [];
+    const pendingOrdersPages: number[] = [];
 
     for( let count = 1; count <= pendingOrdersNumberOfPages; count++ )
     {
@@ -184,8 +184,8 @@ const HomeOrders: React.FC = () => {
     }
 
     useEffect( () => {
-        let startIndex: number = Math.trunc( pendingOrdersCurrentPage * pendingOrdersPageSize) - pendingOrdersPageSize;
-        let endIndex: number = Math.trunc(pendingOrdersCurrentPage * pendingOrdersPageSize);
+        const startIndex: number = Math.trunc( pendingOrdersCurrentPage * pendingOrdersPageSize) - pendingOrdersPageSize;
+        const endIndex: number = Math.trunc(pendingOrdersCurrentPage * pendingOrdersPageSize);
 
         setPendingOrdersCurrentStartIndex(startIndex);
 
@@ -213,7 +213,7 @@ const HomeOrders: React.FC = () => {
         completedOrdersNumberOfPages = completedOrdersNumberOfPages + 1;
 
     console.log(completedOrdersNumberOfPages);
-    let completedOrdersPages: number[] = [];
+    const completedOrdersPages: number[] = [];
 
     for( let count = 1; count <= completedOrdersNumberOfPages; count++ )
     {
@@ -252,8 +252,8 @@ const HomeOrders: React.FC = () => {
     }
 
     useEffect( () => {
-        let startIndex: number = Math.trunc( completedOrdersCurrentPage * completedOrdersPageSize) - completedOrdersPageSize;
-        let endIndex: number = Math.trunc(completedOrdersCurrentPage * completedOrdersPageSize);
+        const startIndex: number = Math.trunc( completedOrdersCurrentPage * completedOrdersPageSize) - completedOrdersPageSize;
+        const endIndex: number = Math.trunc(completedOrdersCurrentPage * completedOrdersPageSize);
 
         setCompletedOrdersCurrentStartIndex(startIndex);
 
@@ -489,4 +489,4 @@ const HomeOrders: React.FC = () => {
     </>)
 };
 
-export default HomeOrders;
+export default HomeOrderss;

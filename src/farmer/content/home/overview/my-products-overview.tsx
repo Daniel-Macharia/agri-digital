@@ -53,7 +53,7 @@ export function HomeProductItem(data: HomeProductItemProps) {
 };
 
 const MyProductsOverview: React.FC = () => {
-    let myProducts: HomeProductItemProps[] = [
+    const myProducts: HomeProductItemProps[] = [
         {productName: "Tomatoes", 
             productQuantity: 3500, 
             productPrice: 56, 

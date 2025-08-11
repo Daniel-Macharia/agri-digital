@@ -56,7 +56,7 @@ export const HomeNotificationItem: React.FC<HomeNotificationItemProps> = (data: 
 };
 
 const HomeNotificationOverview: React.FC = () => {
-    let notifications: HomeNotificationItemProps[] = [
+    const notifications: HomeNotificationItemProps[] = [
         {
             notificationTitle: "AgriFamers",
             notificationDesc: "Wants to buy 500Kg of tomatoes at KES 150/Kg",

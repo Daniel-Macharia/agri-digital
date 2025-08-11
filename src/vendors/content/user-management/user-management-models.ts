@@ -1,4 +1,4 @@
-import { UserRole, UserStatus } from "./user-management-enums";
+import { UserStatus } from "./user-management-enums";
 
 export interface UserItemProps{
     name: string,
@@ -10,7 +10,7 @@ export interface UserItemProps{
 
 export interface ModalProps{
     show: boolean,
-    setShow: Function
+    setShow: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface AddUserProps{

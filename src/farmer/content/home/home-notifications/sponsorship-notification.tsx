@@ -6,6 +6,7 @@ function SponsorshipNotificationItem({data}: {data: SponsorshipNotificationItemP
     const handleViewDetailsAction = () => {
         console.log("showing more details..");
     };
+    
     return (<>
     <div className="col-12 farmer-home-container bg-white my-4">
         <div className="row">

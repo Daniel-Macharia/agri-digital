@@ -42,7 +42,7 @@ const HomeTasks: React.FC = () => {
 
     const navigate = useNavigate();
     
-    let tasks: TaskItemProps[] = [
+    const tasks: TaskItemProps[] = [
         {
             taskDate: new Date( 2025, 8, 1, 2, 44), 
             taskTitle: "Name of Task", 
@@ -91,7 +91,7 @@ const HomeTasks: React.FC = () => {
         numberOfPages = numberOfPages + 1;
 
     console.log(numberOfPages);
-    let pages: number[] = [];
+    const pages: number[] = [];
 
     for( let count = 1; count <= numberOfPages; count++ )
     {
@@ -117,8 +117,8 @@ const HomeTasks: React.FC = () => {
     }
 
     useEffect( () => {
-        let startIndex: number = Math.trunc( currentPage * pageSize) - pageSize;
-        let endIndex: number = Math.trunc(currentPage * pageSize);
+        const startIndex: number = Math.trunc( currentPage * pageSize) - pageSize;
+        const endIndex: number = Math.trunc(currentPage * pageSize);
 
         setCurrentStartIndex(startIndex);
 

@@ -5,7 +5,7 @@ import VendorHomeMarketplace from "./vendor-home-market-place";
 import VendorHomeMyProducts from "./vendor-home-my-products";
 import VendorHomeMyServices from "./vendor-home-my-services";
 import VendorHomeNotifications from "./vendor-home-notification";
-import VendorHomeStockSalesAndLevel from "./vendor-home-stock";
+import VendorHomeStockSalesAndLevelOverview from "./vendor-home-stock-overview";
 import VendorHomeSummaries from "./vendor-home-summaries";
 import VendorHomeTraining from "./vendor-home-training";
 
@@ -22,7 +22,7 @@ const VendorHome: React.FC = () => {
         </div>
 
         <div className="row p-0 m-0 mt-3">
-            <div className="col-12 col-md-8 p-0 pe-md-2" >
+            <div className="col-12 col-md-8 p-0 pe-md-2 m-0" >
                 <div className="col-12 vendor-item-container bg-white p-3">
                     <VendorHomeMyProducts />
                 </div>
@@ -36,11 +36,11 @@ const VendorHome: React.FC = () => {
                 </div>
 
                 <div className="col-12 mt-3 vendor-item-container bg-white p-3">
-                    <VendorHomeStockSalesAndLevel />
+                    <VendorHomeStockSalesAndLevelOverview />
                 </div>
             </div>
 
-            <div className="col-12 col-md-4 p-0 ps-md-2">
+            <div className="col-12 col-md-4 p-0 ps-md-2 m-0">
                 <div className="col-12 mt-3 mt-md-0 vendor-item-container bg-white p-3">
                     <VendorHomeCalendar />
                 </div>

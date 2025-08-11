@@ -1,7 +1,6 @@
 import TopBar from "../farmer/top-bar";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import VendorHome from "./content/home/vendor-home";
 import NotFound from "../common/exceptions/NotFound";
 import VendorMyServices from "./content/my-services/my-services";
 import VendorMyProducts from "./content/my-products/my-products";
@@ -9,7 +8,8 @@ import { VENDOR_ROUTES } from "./vendor-routes";
 import VendorSideBar from "./vendor-side-bar";
 
 import "./vendor-style.css";
-import VendorManageUsers from "./user-management/user-management";
+import VendorManageUsers from "./content/user-management/user-management";
+import VendorHomeRouter from "./content/home/vendor-home-router";
 
 
 const VendorRouter: React.FC = () => {    
@@ -46,14 +46,14 @@ const VendorRouter: React.FC = () => {
                     )}
     
                     {/* Main content area */}
-                    <div className="col-12 col-lg-9 col-xl-10 d-flex flex-column flex-grow-1 px-0"
+                    <div className=" overflow-auto col-12 col-lg-9 col-xl-10 d-flex flex-column flex-grow-1 px-0"
                     style={{height: "100vh"}}>
                         
                         <TopBar toggleSidebar={toggleSidebar} />
     
-                        <div className="overflow-auto col-12 m-0 p-3 m-0">
+                        <div className="col-12 px-4 m-0 ">
                             <Routes>
-                                <Route path={VENDOR_ROUTES.VENDOR_HOME} element={<VendorHome />} />
+                                <Route path={VENDOR_ROUTES.VENDOR_HOME} element={<VendorHomeRouter />} />
                                 <Route path={VENDOR_ROUTES.VENDOR_MY_PRODUCTS} element={<VendorMyProducts />} />
                                 <Route path={VENDOR_ROUTES.VENDOR_MY_SERVICES} element={<VendorMyServices />} />
 

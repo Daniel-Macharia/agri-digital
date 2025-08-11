@@ -61,7 +61,7 @@ const HomeArticleItem: React.FC<HomeArticleItemProps> = (data: HomeArticleItemPr
 
 const HomeArticlesOverview: React.FC = () => {
 
-    let articles: HomeArticleItemProps[] = [
+    const articles: HomeArticleItemProps[] = [
         {
             articleId: 1, 
             articleImageUrl: "/assets/images/home/home_farming_article.svg", 

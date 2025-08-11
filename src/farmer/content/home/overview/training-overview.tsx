@@ -28,7 +28,7 @@ const HomeTrainingItem: React.FC<HomeTrainingItemProps> = (data: HomeTrainingIte
 
 const HomeTrainingOverview: React.FC = () => {
 
-    let trainings: HomeTrainingItemProps[] = [
+    const trainings: HomeTrainingItemProps[] = [
         {trainingDate: "September 1, 2025 9:00 AM", trainingTitle: "Lorem ipsum dolor sit amet consectetur"},
         {trainingDate: "September 1, 2025 9:00 AM", trainingTitle: "Lorem ipsum dolor sit amet consectetur"},
         {trainingDate: "September 1, 2025 9:00 AM", trainingTitle: "Lorem ipsum dolor sit amet consectetur"}

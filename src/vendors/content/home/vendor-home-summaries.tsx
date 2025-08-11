@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import { VendorHomeSummaryItemProps, VendorProfitItemProps } from "./vendor-home-models";
+import { VENDOR_HOME_ROUTES } from "./vendor-home-routes";
 
 
 
@@ -7,6 +9,7 @@ const VendorHomeSummaryItem: React.FC<VendorHomeSummaryItemProps> = ( data: Vend
     return (<>
     <div className="col-12 p-3 vendor-item-container bg-white "
     style={{height: "100%"}}
+    onClick={() => data.navigate(data.detailsUrl)}
     >
 
         <h1 className="body-semibold secondary-text my-0">
@@ -27,14 +30,10 @@ const VendorProfitSummaryItem: React.FC<VendorProfitItemProps> = (profitSummary:
 {
     const profitFilterOptions: string[] = ["March"];
 
-    const handleShowProfitsDetail = () => {
-        console.log("profits..");
-    };
-
     return (<>
         <div className="col-12 p-3 vendor-item-container bg-white "
         style={{height: "100%"}}
-        onClick={handleShowProfitsDetail}
+        onClick={() => profitSummary.navigate(profitSummary.detailsUrl)}
         >
             <div className="row m-0 p-0" >
                 <h1 className="col-8 body-semibold secondary-text m-0 p-0">
@@ -85,11 +84,15 @@ const VendorProfitSummaryItem: React.FC<VendorProfitItemProps> = (profitSummary:
 };
 
 const VendorHomeSummaries: React.FC = () => {
+    const navigate = useNavigate();
+
+
     const profitSummary: VendorProfitItemProps = {
         totalProfit: 200000,
         percentageDifference: 12,
         differenceIndicator: "/assets/images/vendor/home/up_arrow.svg",
-        detailsUrl: "#"
+        detailsUrl: `${VENDOR_HOME_ROUTES.FULL.VENDOR_HOME_STOCK_SALES_FULL}`,
+        navigate: navigate
     };
 
     const summaryItems: VendorHomeSummaryItemProps[] = [
@@ -97,19 +100,22 @@ const VendorHomeSummaries: React.FC = () => {
             itemTitle: "Pending Orders",
             itemCount: 2,
             itemDesc: "You pending orders awaiting",
-            detailsUrl: "#"
+            detailsUrl: "#",
+            navigate: navigate
         },
         {
             itemTitle: "Order Tracking",
             itemCount: 4,
             itemDesc: "You have four orders in transit",
-            detailsUrl: "#"
+            detailsUrl: `${VENDOR_HOME_ROUTES.FULL.VENDOR_HOME_TRACK_ORDER_FULL}`,
+            navigate: navigate
         },
         {
             itemTitle: "Quality Score",
             itemCount: 4.8,
             itemDesc: "Your rating is average. Improve to grow business",
-            detailsUrl: "#"
+            detailsUrl: "#",
+            navigate: navigate
         }
     ];
 
@@ -125,6 +131,7 @@ const VendorHomeSummaries: React.FC = () => {
             percentageDifference={profitSummary.percentageDifference}
             differenceIndicator={profitSummary.differenceIndicator}
             detailsUrl={profitSummary.detailsUrl}
+            navigate={profitSummary.navigate}
             />
             </div>}
             <div key={index} 
@@ -133,7 +140,9 @@ const VendorHomeSummaries: React.FC = () => {
                 itemTitle={summaryItem.itemTitle} 
                 itemCount={summaryItem.itemCount} 
                 itemDesc={summaryItem.itemDesc} 
-                detailsUrl={summaryItem.detailsUrl} />
+                detailsUrl={summaryItem.detailsUrl}
+                navigate={summaryItem.navigate}
+                />
             </div>
             
         </>)

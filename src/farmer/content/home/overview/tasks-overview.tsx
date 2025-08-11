@@ -21,7 +21,7 @@ const columns = [
 
 const HomeTasksOverview: React.FC = () => {
 
-    let tasks: HomeTaskItemProps[] = [
+    const tasks: HomeTaskItemProps[] = [
         {
             title: "Soil testing", 
             stage: "Soil testing", 

@@ -30,7 +30,7 @@ const HomeSummaryItem: React.FC<HomeSummaryItemProps> = ( data: HomeSummaryItemP
 
 
 const SummariesOverview: React.FC = () => {
-    let homeSummaries: HomeSummaryItemProps[] = [
+    const homeSummaries: HomeSummaryItemProps[] = [
         {
             itemTitle: "Pending orders", 
             itemCount: 2, 

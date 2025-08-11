@@ -14,7 +14,7 @@ const HomeNotifications: React.FC = () => {
 
     type NotificationItem = SponsorshipNotificationItemProps | OrdertNotificationItemProps | GeneralNotificationProps;
 
-    let notifications: NotificationItem[] = [];
+    const notifications: NotificationItem[] = [];
 
     for( let i = 0; i < 25; i++ )
     {
@@ -70,7 +70,7 @@ const HomeNotifications: React.FC = () => {
         numberOfPages = numberOfPages + 1;
 
     console.log(numberOfPages);
-    let pages: number[] = [];
+    const pages: number[] = [];
 
     for( let count = 1; count <= numberOfPages; count++ )
     {
@@ -117,8 +117,8 @@ const HomeNotifications: React.FC = () => {
     }
 
     useEffect( () => {
-        let startIndex: number = Math.trunc( currentPage * pageSize) - pageSize;
-        let endIndex: number = Math.trunc(currentPage * pageSize);
+        const startIndex: number = Math.trunc( currentPage * pageSize) - pageSize;
+        const endIndex: number = Math.trunc(currentPage * pageSize);
 
         setCurrentStartIndex(startIndex);
 
