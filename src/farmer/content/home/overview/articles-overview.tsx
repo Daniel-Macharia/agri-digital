@@ -84,8 +84,9 @@ const HomeArticlesOverview: React.FC = () => {
 
         <div className="col-12">
             {
-                articles.map((article, index: number) => <div className="col-12" >
+                articles.map((article, index: number) => <div key={index} className="col-12" >
                     <HomeArticleItem 
+                    key={index}
                     articleId={article.articleId} 
                     articleImageUrl={article.articleImageUrl} 
                     articleTitle={article.articleTitle} 

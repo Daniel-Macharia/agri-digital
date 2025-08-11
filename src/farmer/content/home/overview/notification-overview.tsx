@@ -79,14 +79,15 @@ const HomeNotificationOverview: React.FC = () => {
 
         <div className="col-12">
             {
-                notifications.map((notification, index: number) => <><HomeNotificationItem 
+                notifications.map((notification, index: number) => <div key={index}><HomeNotificationItem 
+                key={index}
                 notificationTitle={notification.notificationTitle} 
                 notificationDesc={notification.notificationDesc} 
                 receivedAt={notification.receivedAt} 
                 />
 
                 {(index < (notifications.length - 1)) ? <hr/> : ""}
-                </>)
+                </div>)
             }
         </div>
     </div>);

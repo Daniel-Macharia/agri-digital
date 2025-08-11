@@ -84,8 +84,9 @@ const MyProductsOverview: React.FC = () => {
         <div className="col-12">
             <div className="row">
                 {
-                    myProducts.map((product) => <div className="col-12 col-md-4">
+                    myProducts.map((product, index) => <div key={index} className="col-12 col-md-4">
                         <HomeProductItem 
+                        key={index}
                         productImageUrl={product.productImageUrl} 
                         productName={product.productName} 
                         productQuantity={product.productQuantity} 

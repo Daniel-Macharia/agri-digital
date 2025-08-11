@@ -147,7 +147,8 @@ const HomeAdvertChain: React.FC = () => {
         backgroundColor: "var(--Accent, #DAFFE7)"
     }}>
         {
-            adverts.map((advert) => <HomeAdvertItem 
+            adverts.map((advert, index: number) => <HomeAdvertItem 
+            key={index}
             imageUrl={advert.imageUrl} 
             itemName={advert.itemName} 
             itemDescription={advert.itemDescription} 

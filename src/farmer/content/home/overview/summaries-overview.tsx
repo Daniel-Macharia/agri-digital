@@ -55,8 +55,10 @@ const SummariesOverview: React.FC = () => {
         <div className="row p-0 m-0">
             {
                 homeSummaries.map( (summary, index: number) => <div 
+                key={index}
                 className={`col-12 col-md-4 mt-2 mt-md-0 px-0 ${ (index == 0 ? "ps-0" : "ps-0 ps-md-1") } ${ ( index == 2) ? "pe-0" : "pe-0 pe-md-1"}`}>
                     <HomeSummaryItem 
+                    key={index}
                     itemTitle={summary.itemTitle} 
                     itemCount={summary.itemCount} 
                     itemDesc={summary.itemDesc}

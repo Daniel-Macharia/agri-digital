@@ -40,12 +40,13 @@ const HomeTrainingOverview: React.FC = () => {
 
         <div className="col-12 m-0 p-0">
             {
-                trainings.map( (training, index: number) => <><HomeTrainingItem 
+                trainings.map( (training, index: number) => <div key={index}><HomeTrainingItem 
+                key={index}
                 trainingDate={training.trainingDate}
                 trainingTitle={training.trainingTitle}
                 />
                 {( index < (trainings.length - 1) ) ? <hr/> : ""}
-            </>)
+            </div>)
             }
         </div>
     </div>
