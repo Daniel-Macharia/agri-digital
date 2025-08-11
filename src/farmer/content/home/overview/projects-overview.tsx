@@ -118,7 +118,11 @@ export default function ProjectsOverview(data: ProjectsOverviewProps) {
               >
                 {getCurrentStageName(data.currentProjectStage)}
               </p>
-              <ProgressBar max={100} value={currentProgress} />
+              <ProgressBar max={100} 
+              value={currentProgress} 
+              fillColor="var(--Primary, #457900)" 
+              backColor="var(--cards-form-bg, #FFF)"
+              />
             </div>
 
             <div

@@ -4,14 +4,14 @@ import { CropProjectSummaryProps, LivestockProjectSummaryProps, ProjectProps, Pr
 export function loadProjects() : ProjectProps[] {
     try{
         const projects: ProjectProps[] = [
-            { projectId: "1", projectName: "Maize", projectDuration: 12, overallScore: 42, completionDate: "25/06/2025", currentStage: 5, projectType: "crop"},
-            { projectId: "2", projectName: "Rabbits", projectDuration: 10, overallScore: 38, completionDate: "25/06/2025", currentStage: 7, projectType: "livestock"},
-            { projectId: "3", projectName: "Potatoes", projectDuration: 16, overallScore: 93, completionDate: "25/06/2025", currentStage: 6, projectType: "crop"},
-            { projectId: "4", projectName: "Kales", projectDuration: 8, overallScore: 57, completionDate: "25/06/2025", currentStage: 6, projectType: "crop"},
-            { projectId: "5", projectName: "Poultry", projectDuration: 16, overallScore: 94, completionDate: "25/06/2025", currentStage: 6, projectType: "livestock"},
-            { projectId: "6", projectName: "Maize 2", projectDuration: 16, overallScore: 94, completionDate: "25/06/2025", currentStage: 6, projectType: "crop"},
-            { projectId: "7", projectName: "Rabbits 3", projectDuration: 16, overallScore: 94, completionDate: "25/06/2025", currentStage: 6, projectType: "livestock"},
-            { projectId: "8", projectName: "Poultry", projectDuration: 16, overallScore: 94, completionDate: "25/06/2025", currentStage: 6, projectType: "livestock"}
+            { projectId: "1", projectName: "Maize", projectDuration: 12, overallScore: 42, completionDate: new Date("06/25/2025"), currentStage: 5, projectType: "crop"},
+            { projectId: "2", projectName: "Rabbits", projectDuration: 10, overallScore: 38, completionDate: new Date("06/25/2025"), currentStage: 7, projectType: "livestock"},
+            { projectId: "3", projectName: "Potatoes", projectDuration: 16, overallScore: 93, completionDate: new Date("06/25/2025"), currentStage: 6, projectType: "crop"},
+            { projectId: "4", projectName: "Kales", projectDuration: 8, overallScore: 57, completionDate: new Date("06/25/2025"), currentStage: 6, projectType: "crop"},
+            { projectId: "5", projectName: "Poultry", projectDuration: 16, overallScore: 94, completionDate: new Date("06/25/2025"), currentStage: 6, projectType: "livestock"},
+            { projectId: "6", projectName: "Maize 2", projectDuration: 16, overallScore: 94, completionDate: new Date("06/25/2025"), currentStage: 6, projectType: "crop"},
+            { projectId: "7", projectName: "Rabbits 3", projectDuration: 16, overallScore: 94, completionDate: new Date("06/25/2025"), currentStage: 6, projectType: "livestock"},
+            { projectId: "8", projectName: "Poultry", projectDuration: 16, overallScore: 94, completionDate: new Date("06/25/2025"), currentStage: 6, projectType: "livestock"}
         ];
 
         return projects;
