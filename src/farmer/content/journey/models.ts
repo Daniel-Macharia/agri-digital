@@ -3,7 +3,7 @@ export interface ProjectProps {
   projectName: string;
   projectDuration: number;
   overallScore: number;
-  completionDate: string;
+  completionDate: Date;
   currentStage: number;
   projectType: string;
 }

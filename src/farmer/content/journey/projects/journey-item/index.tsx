@@ -73,7 +73,7 @@ const JourneyItem: React.FC<ProjectProps> = (journeyItemData: ProjectProps) =>{
         <div className="small-regular secondary-text crops-start-aligned-text">
             <p>
                 { ( isProjectCompleted() ) ? "Completed: " : "Last Updated: " }
-                {journeyItemData.completionDate}
+                {journeyItemData.completionDate.toDateString()}
             </p>
 
             <div className="col-12">

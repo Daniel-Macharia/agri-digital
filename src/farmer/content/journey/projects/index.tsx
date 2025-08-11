@@ -193,8 +193,8 @@ export default function Projects() {
                     projectName={project.name}
                     projectDuration={10}
                     overallScore={30}
-                    completionDate={Date.now().toString()}
-                    currentStage={49}
+                    completionDate={new Date()}
+                    currentStage={(index % 6) + 1 } //must be between 1 and six for crop projects and upto 7 for livestock projects
                     projectType={project.farmEnvironmentType}
                   />
                 ))}
