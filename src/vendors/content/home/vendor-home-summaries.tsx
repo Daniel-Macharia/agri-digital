@@ -122,10 +122,10 @@ const VendorHomeSummaries: React.FC = () => {
     return (<>
     <div className="row m-0 p-0">
         {summaryItems.map((summaryItem, index) => 
-        <>
+        <div className="col-12 col-md-3 d-flex m-0 p-0"  key={index}>
             {(index !== 2) ? <></> : 
-            <div key={index} 
-            className={`col-12 col-md-3 m-0 vendor-item-container mt-3 mt-md-0 px-0 px-md-2`} >
+            <div
+            className={`col-12  m-0 vendor-item-container mt-3 mt-md-0 px-0 px-md-2`} >
             <VendorProfitSummaryItem 
             totalProfit={profitSummary.totalProfit}
             percentageDifference={profitSummary.percentageDifference}
@@ -134,9 +134,9 @@ const VendorHomeSummaries: React.FC = () => {
             navigate={profitSummary.navigate}
             />
             </div>}
-            <div key={index} 
-            className={`col-12 col-md-3 m-0 vendor-item-container mt-3 mt-md-0 px-0 ${(index === 0) ? "ps-0" : ( (index === 2) ? "pe-0" : "ps-md-2")} `} >
-                <VendorHomeSummaryItem 
+            <div 
+            className={`col-12 m-0 vendor-item-container mt-3 mt-md-0 px-0 ${(index === 0) ? "ps-0" : ( (index === 2) ? "pe-0" : "ps-md-2")} `} >
+                <VendorHomeSummaryItem
                 itemTitle={summaryItem.itemTitle} 
                 itemCount={summaryItem.itemCount} 
                 itemDesc={summaryItem.itemDesc} 
@@ -145,7 +145,7 @@ const VendorHomeSummaries: React.FC = () => {
                 />
             </div>
             
-        </>)
+        </div>)
         }
     </div>
     </>);

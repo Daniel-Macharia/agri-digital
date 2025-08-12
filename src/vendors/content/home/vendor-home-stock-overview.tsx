@@ -126,8 +126,9 @@ const VendorStockBarGraph: React.FC = () => {
                     }}
                     >
                         {
-                            (stockItems).map((item) =>
+                            (stockItems).map((item, index) =>
                             <option 
+                            key={index}
                             className="caption-medium col-12 m-0 p-0" 
                             value={item}
                             style={{
@@ -276,7 +277,9 @@ const VendorHomeStockSalesAndLevelOverview: React.FC = () => {
                 <div className="d-flex m-0"
                 style={{width: "max-content"}}>
                     { 
-                        columnLabels.map((label) => <p className="col-2 p-0 m-0"
+                        columnLabels.map((label, index) => <p 
+                        key={index}
+                        className="col-2 p-0 m-0"
                         style={{ minWidth: "120px"}}>
                             {label}
                         </p>)
@@ -288,6 +291,7 @@ const VendorHomeStockSalesAndLevelOverview: React.FC = () => {
                 style={{minWidth: "max-content"}}>
                     {
                         stockItems.map((item, index) => <div 
+                        key={index}
                         className="mt-2 p-2"
                         style={{
                             backgroundColor: `${(index % 2 == 0) ? "var(--Background, #F5F5F5)" : "rgba(245, 245, 245, 0.50)"}`,

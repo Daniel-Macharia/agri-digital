@@ -102,7 +102,9 @@ const VendorHomeMyServices: React.FC = () => {
         <div className="col-12">
             <div className="row">
                 {
-                    myServices.map((service) => <div className="col-12 col-md-4">
+                    myServices.map((service, index) => <div 
+                        key={index}
+                        className="col-12 col-md-4">
                         <VendorServiceItem
                         serviceImageUrl={service.serviceImageUrl} 
                         serviceName={service.serviceName} 

@@ -180,7 +180,7 @@ const VendorTrackOrder: React.FC = () => {
 
                         <div className="col-12">
                             {
-                                activeOrderItems.map((orderItem, index) => <div className="col-12 m-0 p-0"
+                                activeOrderItems.map((orderItem, index) => <div key={index} className="col-12 m-0 p-0"
                                 onClick={ () => setSelectedOrderItemIndex(index)}>
                                     <VendorOrderItem 
                                     buyerName={orderItem.buyerName} 

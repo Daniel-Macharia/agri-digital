@@ -273,7 +273,7 @@ const VendorManageUsers: React.FC = () => {
                 <div className="d-flex m-0"
                 style={{width: "max-content"}}>
                     { 
-                        columnLabels.map((label) => <p className="col-2 p-0 m-0"
+                        columnLabels.map((label, index) => <p key={index} className="col-2 p-0 m-0"
                         style={{ minWidth: "120px", textAlign: "center"}}>
                             {label}
                         </p>)
@@ -285,7 +285,7 @@ const VendorManageUsers: React.FC = () => {
                 <div className="col-12">
                     {
                         listData.map((user, index) => 
-                            <div className="col-12 p-2 mt-2"
+                            <div key={index} className="col-12 p-2 mt-2"
                             style={{
                                 backgroundColor: `${(index % 2 == 0) ? "var(--Background, #F5F5F5)" : "rgba(245, 245, 245, 0.50)"}`,
                                 borderStyle: "none",
@@ -310,7 +310,7 @@ const VendorManageUsers: React.FC = () => {
             <div className="row m-0 p-0 justify-content-center">
                 {
                     pages.map( (pageNumber, index) => 
-                        <div className=" body-medium p-2 m-2 text-align-center"
+                        <div key={index} className=" body-medium p-2 m-2 text-align-center"
                         style={{color: " var(--Primary, #457900)", 
                         backgroundColor: ( (index + 1) == currentPage ) ? "var(--Accent, #DAFFE7)" : "#ffffff",
                         borderStyle: "none",

@@ -37,7 +37,9 @@ const VendorHomeMyProducts: React.FC= () => {
         <div className="col-12">
             <div className="row">
                 {
-                    myProducts.map((product) => <div className="col-12 col-md-4" style={{height: "100%"}}>
+                    myProducts.map((product, index) => <div
+                        key={index}
+                        className="col-12 col-md-4" style={{height: "100%"}}>
                         <HomeProductItem
                         productImageUrl={product.productImageUrl} 
                         productName={product.productName} 
