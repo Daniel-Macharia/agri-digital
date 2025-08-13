@@ -28,7 +28,7 @@ function App() {
   return (
     <BrowserRouter basename={baseUrl}>
       <Routes>
-        <Route path={APP_ROUTES.HOMEPAGE} element={<HomePageLayout />} />
+        <Route path={APP_ROUTES.HOMEPAGE} element={<HomePageLayout />} />        
         <Route path={APP_ROUTES.AUTH.ROOT} element={<AuthLayout />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

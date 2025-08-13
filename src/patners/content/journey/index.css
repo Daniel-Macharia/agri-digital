@@ -1,0 +1,18 @@
+
+.project-container{
+    border-radius: 8px;
+    border-style: none;
+}
+
+
+.project-end-aligned-text{
+    text-align: end;
+}
+
+.project-start-aligned-text{
+    text-align: start;
+}
+
+.project-center-aligned-text{
+    text-align: center;
+}

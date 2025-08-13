@@ -1,0 +1,16 @@
+.weather-container{
+    border-style: none;
+    border-radius: 8px;
+};
+
+.weather-start-aligned-text{
+    text-align: start
+};
+
+.weather-center-aligned-text{
+    text-align: center
+};
+
+.weather-end-aligned-text{
+    text-align: end
+};
