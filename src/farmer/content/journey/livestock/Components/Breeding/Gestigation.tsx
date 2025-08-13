@@ -15,7 +15,7 @@ const Gestation = () => {
           className={`btn ${activeTab === 'pre' ? 'btn-success' : 'btn-outline-success'} me-2`}
           onClick={() => setActiveTab('pre')}
         >
-          Pre-Mating
+          PreMating
         </button>
         <button
           type="button"
