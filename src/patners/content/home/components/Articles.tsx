@@ -1,14 +1,15 @@
 const Articles = () => {
   const articles = [
+   
     {
       title: 'How Skillss Sans is Revolutionizing Agricultural Employment',
       excerpt: 'A deep-dive into the Agri work feature and how it is connecting farm owners with skilled laborers to improve efficiency and productivity.',
-      image: '/assets/images/home/article1.png',
+      image: '/assets/images/home/livestockarticle.png', 
     },
     {
       title: 'How Skillss Sans is Revolutionizing Agricultural Employment',
       excerpt: 'A deep-dive into the Agri work feature and how it is connecting farm owners with skilled laborers to improve efficiency and productivity.',
-      image: '/assets/images/home/article2.png',
+      image: '/assets/images/home/articles.png',
     },
   ];
 
