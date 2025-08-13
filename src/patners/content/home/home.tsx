@@ -12,6 +12,8 @@ import HomeTrainingOverview from "./overview/training-overview";
 import HomeNotificationOverview from "./overview/notification-overview";
 
 
+
+
 export default function PatnerHome(){
     let projectsOverview: ProjectsOverviewProps = {projectName: "Maize", currentProjectStage: 4, projectType: "crop"};
 
@@ -20,6 +22,7 @@ export default function PatnerHome(){
     <div className="col-12 farmer-home-container">
         <div className="row ">
             <div className="col-12 col-md-8 px-0 pe-md-2">
+              
                 <div className="farmer-home-container bg-white col-12 p-4" >
                     <p className="col-12 h3-semibold primary-text">Project</p>
                     <ProjectsOverview 

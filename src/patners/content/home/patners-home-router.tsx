@@ -6,6 +6,8 @@ import HomeTasks from "./home-tasks";
 import HomeOrders from "./home-orders";
 import HomeNotifications from "./home-notifications/home-notifications";
 import PatnerHome from "./home";
+import PatnersHome from "./patners-home";
+
 
 
 
@@ -17,6 +19,7 @@ const PatnersHomeRouter: React.FC = () => {
         <Route path={PATNERS_HOME_ROUTES.HOME_NOTIFICATIONS} element={<HomeNotifications />} />
         <Route path={PATNERS_HOME_ROUTES.HOME_ORDERS} element={<HomeOrders />} />
         <Route path={PATNERS_HOME_ROUTES.HOME} element={<PatnerHome />} />
+        <Route path={PATNERS_HOME_ROUTES.HOME_TRIAL} element={<PatnersHome />} />
     </Routes>
     </>)
 };
