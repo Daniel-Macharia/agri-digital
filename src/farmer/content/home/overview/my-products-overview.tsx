@@ -1,6 +1,7 @@
 import React from "react";
 import { HomeProductItemProps } from "../home-model";
 import OverviewHeader from "./overview-header";
+import { FARMER_ROUTES } from "../../../farmer-routes";
 
 
 export function HomeProductItem(data: HomeProductItemProps) {
@@ -78,7 +79,7 @@ const MyProductsOverview: React.FC = () => {
 
         <OverviewHeader
         overviewTitle="My Products"
-        viewMoreUrl="/farmer/products"
+        viewMoreUrl={FARMER_ROUTES.PRODUCTS}
         />
 
         <div className="col-12">

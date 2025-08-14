@@ -131,10 +131,12 @@ const GrowthAnalysisForm: React.FC<Props> = ({
       <Form>
         <Row>
           <Col md={12}>
-            <label>Date</label>
+            <label className="m-0 p-0 body-regular primary-text">
+              Date
+            </label>
             <br />
             <DatePicker
-              className="form-control body-regular mb-0"
+              className="form-control body-regular m-0"
               name="date"
               placeholderText="Date"
               selected={formik.getFieldProps("date").value}
@@ -144,12 +146,19 @@ const GrowthAnalysisForm: React.FC<Props> = ({
               showDateSelect
               autoComplete="off"
             />
+            <br/>
+            <div className="fv-plugins-message-container text-danger small m-0">
+              <ErrorMessage name="growthStage" />
+            </div>
           </Col>
           <Col md={12}>
             <div className="form-group mt-3">
-              <label className="mb-1">Growth Stage</label>
+              <label className="m-0 p-0 body-regular primary-text">
+                Growth Stage
+              </label>
               <Select
                 name="growthStage"
+                className="body-regular m-0"
                 options={growthStageDropdown}
                 value={formik.values.growthStage}
                 onChange={(selected) =>
@@ -158,33 +167,38 @@ const GrowthAnalysisForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("growthStage", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="growthStage" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Height</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Height
+              </label>
               <input
                 {...formik.getFieldProps("height")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="height"
                 autoComplete="off"
                 type="number"
                 step="1"
                 pattern="\d*"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="height" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Height Measurement Unit</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Height Measurement Unit
+              </label>
               <Select
                 name="heightMeasurementUnit"
+                className="body-regular m-0"
                 options={measurementUnitDropdown}
                 value={formik.values.heightMeasurementUnit}
                 onChange={(selected) =>
@@ -195,31 +209,36 @@ const GrowthAnalysisForm: React.FC<Props> = ({
                 }
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="heightMeasurementUnit" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Expected Yield</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Expected Yield
+              </label>
               <input
                 {...formik.getFieldProps("expectedYield")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="expectedYield"
                 autoComplete="off"
                 type="text"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="expectedYield" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Expected Yield Unit</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Expected Yield Unit
+              </label>
               <Select
                 name="expectedYieldUnit"
+                className="body-regular m-0"
                 options={measurementUnitDropdown}
                 value={formik.values.expectedYieldUnit}
                 onChange={(selected) =>
@@ -228,22 +247,24 @@ const GrowthAnalysisForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("expectedYieldUnit", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="expectedYieldUnit" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Current Unit Price</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Current Unit Price
+              </label>
               <input
                 {...formik.getFieldProps("currentUnitPrice")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="currentUnitPrice"
                 autoComplete="off"
                 type="text"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="currentUnitPrice" />
               </div>
             </div>
@@ -253,7 +274,7 @@ const GrowthAnalysisForm: React.FC<Props> = ({
           <div className="d-flex justify-content-start mt-5">
             {!formik.isSubmitting && (
               <button
-                className="btn btn-sm btn-light-custom me-3 mt-5  mt-5"
+                className="btn btn-sm btn-light-custom me-3 mt-5 crops-other-button"
                 type="button"
                 onClick={() => onCancel()}
               >
@@ -261,7 +282,7 @@ const GrowthAnalysisForm: React.FC<Props> = ({
               </button>
             )}
             <button
-              className="btn btn-sm btn-warning-custom ps-pe-42 mt-5"
+              className="btn btn-sm btn-warning-custom ps-pe-42 mt-5 crops-accept-button"
               type="submit"
               disabled={formik.isSubmitting}
             >

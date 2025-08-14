@@ -135,57 +135,66 @@ const CropTransportForm: React.FC<Props> = ({
       <Form>
         <Row>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Pickup Location</label>
+            <div className="form-group">
+              <label className="m-0 p-0 body-regular primary-text">
+                Pickup Location
+              </label>
               <input
                 {...formik.getFieldProps("pickupLocation")}
-                className="form-control bg-transparent"
+                className="form-control body-regular bg-transparent m-0"
                 name="pickupLocation"
                 autoComplete="off"
                 type="text"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="pickupLocation" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Destination</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text m-0 p-0">
+                Destination
+              </label>
               <input
                 {...formik.getFieldProps("destination")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="destination"
                 autoComplete="off"
                 type="text"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="destination" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Estimated Cost</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Estimated Cost
+              </label>
               <input
                 {...formik.getFieldProps("estimatedCost")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="estimatedCost"
                 autoComplete="off"
                 type="number"
                 step="1"
                 pattern="\d*"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="estimatedCost" />
               </div>
             </div>
           </Col>
           <Col md={12}>
             <div className="form-group mt-3">
-              <label className="mb-1">Transport Method</label>
+              <label className="m-0 p-0 body-regular primary-text">
+                Transport Method
+              </label>
               <Select
                 name="transportMethod"
+                className="body-regular m-0"
                 options={transportMethodDropdown}
                 value={formik.values.transportMethod}
                 onChange={(selected) =>
@@ -194,16 +203,19 @@ const CropTransportForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("transportMethod", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="transportMethod" />
               </div>
             </div>
           </Col>
           <Col md={12}>
             <div className="form-group mt-3">
-              <label className="mb-1">Vehicle Type</label>
+              <label className="m-0 p-0 body-regular primary-text">
+                Vehicle Type
+              </label>
               <Select
                 name="vehicleType"
+                className="body-regular m-0"
                 options={vehicleTypeDropdown}
                 value={formik.values.vehicleType}
                 onChange={(selected) =>
@@ -212,16 +224,19 @@ const CropTransportForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("vehicleType", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="vehicleType" />
               </div>
             </div>
           </Col>
           <Col md={12}>
             <div className="form-group mt-3">
-              <label className="mb-1">Transport Status</label>
+              <label className="m-0 p-0 body-regular primary-text">
+                Transport Status
+              </label>
               <Select
                 name="transportStatus"
+                className="body-regular m-0"
                 options={transportationStatusDropdown}
                 value={formik.values.transportStatus}
                 onChange={(selected) =>
@@ -230,7 +245,7 @@ const CropTransportForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("transportStatus", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="transportStatus" />
               </div>
             </div>
@@ -240,7 +255,7 @@ const CropTransportForm: React.FC<Props> = ({
           <div className="d-flex justify-content-start mt-5">
             {!formik.isSubmitting && (
               <button
-                className="btn btn-sm btn-light-custom me-3 mt-5  mt-5"
+                className="btn btn-sm btn-light-custom me-3 mt-5 crops-other-button"
                 type="button"
                 onClick={() => onCancel()}
               >
@@ -248,7 +263,7 @@ const CropTransportForm: React.FC<Props> = ({
               </button>
             )}
             <button
-              className="btn btn-sm btn-warning-custom ps-pe-42 mt-5"
+              className="btn btn-sm btn-warning-custom ps-pe-42 mt-5 crops-accept-button"
               type="submit"
               disabled={formik.isSubmitting}
             >

@@ -15,5 +15,21 @@ export const FARMER_ROUTES = {
     INVITE: "/invite/*",
     OTHER: "*",
 
-    FULL: "/farmer/"
+    FULL: {
+        HOME_FULL: "/farmer/home",
+        PROJECTS_FULL: "/farmer/projects",
+        PRODUCTS_FULL: "/farmer/products",
+        MARKET_PLACE_FULL: "/farmer/market-place",
+        BANKS_FULL: "/farmer/banks",
+        INSURANCE_FULL: "/farmer/insurance",
+        SPONSORS_FULL: "/farmer/sponsors",
+        WALLET_FULL: "/farmer/wallet",
+        PACKAGE_FULL: "/farmer/packages",
+        QUALITY_SCORE_FULL: "/farmer/quality-score",
+        WEATHER_FULL: "/farmer/weather",
+        RESOURCES_FULL: "/farmer/resources",
+        SETTINGS_FULL: "/farmer/settings",
+        INVITE_FULL: "/farmer/invite",
+        OTHER_FULL: "/farmer/other",
+    }
 };

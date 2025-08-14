@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ErrorMessage, Field, Form, FormikProvider, useFormik } from "formik";
-import { useNavigate, useParams } from "react-router-dom";
+ import { useNavigate, useParams } from "react-router-dom";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Col, Modal, Row } from "react-bootstrap";
@@ -208,7 +208,7 @@ const SoilTesting: React.FC = () => {
 
     console.log("continuing with the journey");
     navigate(
-      `..${CROP_ROUTES.CROP_SELECT_FARMING_ENVIRONMENT}`.replace(
+      `${CROP_ROUTES.FULL.CROP_SELECT_FARMING_ENVIRONMENT_FULL}`.replace(
         ":transactionId",
         cropJourneySummary.transactionId
       )

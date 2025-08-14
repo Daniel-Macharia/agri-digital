@@ -1,3 +1,4 @@
+import { FARMER_ROUTES } from "../../../farmer-routes";
 import { HomeArticleItemProps } from "../home-model";
 import OverviewHeader from "./overview-header";
 
@@ -80,7 +81,7 @@ const HomeArticlesOverview: React.FC = () => {
 
     return (<>
     <div className="col-12">
-        <OverviewHeader overviewTitle="Articles" viewMoreUrl="/farmer/resources" />
+        <OverviewHeader overviewTitle="Articles" viewMoreUrl={FARMER_ROUTES.RESOURCES} />
 
         <div className="col-12">
             {

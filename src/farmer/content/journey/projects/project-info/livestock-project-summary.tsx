@@ -7,7 +7,7 @@ const LivestockProjectSummary: React.FC<LivestockProjectSummaryProps> = (data: L
     const navigate = useNavigate();
     const handleViewMore = () => {
         console.log(`livestock ID: ${data.livestockId}`);
-        navigate(`..${PROJECTS_ROUTES.LIVESTOCK_PROJECT_MORE_INFO}`, {state: data.livestockId});
+        navigate(`${PROJECTS_ROUTES.FULL.LIVESTOCK_PROJECT_MORE_INFO_FULL}`, {state: data.livestockId});
     };
     
     return (<>

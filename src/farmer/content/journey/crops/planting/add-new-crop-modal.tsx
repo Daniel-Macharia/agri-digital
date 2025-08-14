@@ -25,6 +25,7 @@ import {
   extractErrorMessage,
   parseFormDatav3,
 } from "../../../../../lib/utils/Helpers";
+import { CROP_ROUTES } from "../crop-routes";
 const apiClient = new ApiClient();
 
 interface AddNewCropModalProps {
@@ -129,8 +130,7 @@ const AddNewCropModal: React.FC<AddNewCropModalProps> = (
         setCrops(cropResponse.list);
         props.setShow(false);
         navigate(
-          "/farmer/projects/crops/display-crop-details/" +
-            cropJourneySummary.transactionId
+          `${CROP_ROUTES.FULL.CROP_DISPLAY_CROP_DETAILS_FULL}/${cropJourneySummary.transactionId}`
         );
       } catch (err) {
         const errorMessage = extractErrorMessage(err);

@@ -63,7 +63,7 @@ const RequestForTesting: React.FC = () => {
   const jumpToFarmEnvironment = useCallback(() => {
     if (!cropJourneySummary) return;
     navigate(
-      `..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_SELECT_FARMING_ENVIRONMENT}`.replace(
+      `${CROP_ROUTES.FULL.CROP_SELECT_FARMING_ENVIRONMENT_FULL}`.replace(
         ":transactionId",
         cropJourneySummary.transactionId
       )

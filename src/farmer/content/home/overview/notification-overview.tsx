@@ -1,4 +1,5 @@
 import { HomeNotificationItemProps } from "../home-model";
+import { FARMER_HOME_ROUTES } from "../home-routes";
 import OverviewHeader from "./overview-header";
 
 
@@ -75,7 +76,7 @@ const HomeNotificationOverview: React.FC = () => {
     ];
 
     return (<div className="col-12">
-        <OverviewHeader overviewTitle="Notifications" viewMoreUrl="/farmer/home/notifications" />
+        <OverviewHeader overviewTitle="Notifications" viewMoreUrl={FARMER_HOME_ROUTES.FULL.HOME_NOTIFICATIONS_FULL} />
 
         <div className="col-12">
             {

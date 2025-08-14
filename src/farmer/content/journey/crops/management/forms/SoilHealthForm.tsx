@@ -115,10 +115,12 @@ const SoilHealthForm: React.FC<Props> = ({
       <Form>
         <Row>
           <Col md={12}>
-            <label>Date</label>
+            <label className="m-0 p-0 body-regular primary-text">
+              Date
+            </label>
             <br />
             <DatePicker
-              className="form-control body-regular mb-0"
+              className="form-control body-regular m-0"
               name="date"
               placeholderText="Date"
               selected={formik.getFieldProps("date").value}
@@ -128,42 +130,53 @@ const SoilHealthForm: React.FC<Props> = ({
               showDateSelect
               autoComplete="off"
             />
+            <br/>
+            <div className="fv-plugins-message-container text-danger small m-0">
+              <ErrorMessage name="ph" />
+            </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>PH</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                PH
+              </label>
               <input
                 {...formik.getFieldProps("ph")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="ph"
                 autoComplete="off"
                 type="text"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="ph" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Moisture</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Moisture
+              </label>
               <input
                 {...formik.getFieldProps("moisture")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="moisture"
                 autoComplete="off"
                 type="text"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="moisture" />
               </div>
             </div>
           </Col>
           <Col md={12}>
             <div className="form-group mt-3">
-              <label className="mb-1">Nitrogen</label>
+              <label className="m-0 p-0 body-regular primary-text">
+                Nitrogen
+              </label>
               <Select
                 name="nitrogen"
+                className="body-regular m-0"
                 options={npkLevelList}
                 value={formik.values.nitrogen}
                 onChange={(selected) =>
@@ -172,16 +185,19 @@ const SoilHealthForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("nitrogen", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="nitrogen" />
               </div>
             </div>
           </Col>
           <Col md={12}>
             <div className="form-group mt-3">
-              <label className="mb-1">Phosphorus</label>
+              <label className="m-0 p-0 body-regular primary-text">
+                Phosphorus
+              </label>
               <Select
                 name="phosphorus"
+                className="body-regular m-0"
                 options={npkLevelList}
                 value={formik.values.phosphorus}
                 onChange={(selected) =>
@@ -190,16 +206,19 @@ const SoilHealthForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("phosphorus", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="phosphorus" />
               </div>
             </div>
           </Col>
           <Col md={12}>
             <div className="form-group mt-3">
-              <label className="mb-1">Potassium</label>
+              <label className="m-0 p-0 body-regular primary-text">
+                Potassium
+              </label>
               <Select
                 name="potassium"
+                className="body-regular m-0"
                 options={npkLevelList}
                 value={formik.values.potassium}
                 onChange={(selected) =>
@@ -208,7 +227,7 @@ const SoilHealthForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("potassium", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="potassium" />
               </div>
             </div>
@@ -218,7 +237,7 @@ const SoilHealthForm: React.FC<Props> = ({
           <div className="d-flex justify-content-start mt-5">
             {!formik.isSubmitting && (
               <button
-                className="btn btn-sm btn-light-custom me-3 mt-5  mt-5"
+                className="btn btn-sm btn-light-custom me-3 mt-5 crops-other-button"
                 type="button"
                 onClick={() => onCancel()}
               >
@@ -226,7 +245,7 @@ const SoilHealthForm: React.FC<Props> = ({
               </button>
             )}
             <button
-              className="btn btn-sm btn-warning-custom ps-pe-42 mt-5"
+              className="btn btn-sm btn-warning-custom ps-pe-42 mt-5 crops-accept-button"
               type="submit"
               disabled={formik.isSubmitting}
             >

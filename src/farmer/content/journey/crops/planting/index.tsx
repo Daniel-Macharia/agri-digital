@@ -8,6 +8,7 @@ import { API_ROUTES } from "../../../../../lib/Routes";
 import { extractErrorMessage } from "../../../../../lib/utils/Helpers";
 import CropsNotification from "../crops-notification/crops-notification";
 import AddNewCropModal from "./add-new-crop-modal";
+import { CROP_ROUTES } from "../crop-routes";
 const apiClient = new ApiClient();
 
 const Planting: React.FC = () => {
@@ -53,8 +54,7 @@ const Planting: React.FC = () => {
   useEffect(() => {
     if (cropJourneySummary && crops && crops.length > 0) {
       navigate(
-        "/farmer/projects/crops/display-crop-details/" +
-          cropJourneySummary.transactionId
+        `${CROP_ROUTES.FULL.CROP_DISPLAY_CROP_DETAILS_FULL}/${cropJourneySummary.transactionId}`
       );
     }
   }, [cropJourneySummary, crops]);

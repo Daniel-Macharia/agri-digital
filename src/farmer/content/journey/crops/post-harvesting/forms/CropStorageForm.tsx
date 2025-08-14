@@ -173,10 +173,12 @@ const CropStorageForm: React.FC<Props> = ({
       <Form>
         <Row>
           <Col md={12}>
-            <label>Date</label>
+            <label className="m-0 p-0 body-regular primary-text">
+              Date
+            </label>
             <br />
             <DatePicker
-              className="form-control body-regular mb-0"
+              className="form-control body-regular m-0"
               name="date"
               placeholderText="Date"
               selected={formik.getFieldProps("date").value}
@@ -186,12 +188,19 @@ const CropStorageForm: React.FC<Props> = ({
               showDateSelect
               autoComplete="off"
             />
+            <br/>
+            <div className="fv-plugins-message-container text-danger small m-0">
+              <ErrorMessage name="date" />
+            </div>
           </Col>
           <Col md={12}>
             <div className="form-group mt-3">
-              <label className="mb-1">Storage Type</label>
+              <label className="m-0 p-0 body-regular primary-text">
+                Storage Type
+              </label>
               <Select
                 name="storageType"
+                className="body-regular m-0"
                 options={storageTypeDropdown}
                 value={formik.values.storageType}
                 onChange={(selected) =>
@@ -200,50 +209,57 @@ const CropStorageForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("storageType", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="storageType" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Humidity</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Humidity
+              </label>
               <input
                 {...formik.getFieldProps("humidity")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="humidity"
                 autoComplete="off"
                 type="number"
                 step="1"
                 pattern="\d*"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small">
                 <ErrorMessage name="humidity" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Temperature</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Temperature
+              </label>
               <input
                 {...formik.getFieldProps("temperature")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="temperature"
                 autoComplete="off"
                 type="number"
                 step="1"
                 pattern="\d*"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="temperature" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Temperature Unit</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Temperature Unit
+              </label>
               <Select
                 name="temperatureUnit"
+                className="body-regular m-0"
                 options={measurementUnitDropdown}
                 value={formik.values.temperatureUnit}
                 onChange={(selected) =>
@@ -252,33 +268,38 @@ const CropStorageForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("temperatureUnit", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="temperatureUnit" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Inventory Level</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Inventory Level
+              </label>
               <input
                 {...formik.getFieldProps("inventoryLevel")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="inventoryLevel"
                 autoComplete="off"
                 type="number"
                 step="1"
                 pattern="\d*"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="inventoryLevel" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Inventory Level Unit</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Inventory Level Unit
+              </label>
               <Select
                 name="inventoryLevelUnit"
+                className="body-regular m-0"
                 options={measurementUnitDropdown}
                 value={formik.values.inventoryLevelUnit}
                 onChange={(selected) =>
@@ -289,33 +310,38 @@ const CropStorageForm: React.FC<Props> = ({
                 }
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="inventoryLevelUnit" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Storage Duration Amount</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Storage Duration Amount
+              </label>
               <input
                 {...formik.getFieldProps("storageDurationAmount")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="storageDurationAmount"
                 autoComplete="off"
                 type="number"
                 step="1"
                 pattern="\d*"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="storageDurationAmount" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Inventory Level Unit</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Inventory Level Unit
+              </label>
               <Select
                 name="storageDuration"
+                className="body-regular m-0"
                 options={storageDurationDropdown}
                 value={formik.values.storageDuration}
                 onChange={(selected) =>
@@ -324,33 +350,38 @@ const CropStorageForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("storageDuration", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="storageDuration" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Storage Fee</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Storage Fee
+              </label>
               <input
                 {...formik.getFieldProps("storageFee")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="storageFee"
                 autoComplete="off"
                 type="number"
                 step="1"
                 pattern="\d*"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="storageFee" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Storage Fee Cycle</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular m-0">
+                Storage Fee Cycle
+              </label>
               <Select
                 name="storageFeeCycle"
+                className="body-regular m-0"
                 options={pricingCycleDropdown}
                 value={formik.values.storageFeeCycle}
                 onChange={(selected) =>
@@ -359,17 +390,17 @@ const CropStorageForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("storageFeeCycle", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="storageFeeCycle" />
               </div>
             </div>
           </Col>
         </Row>
         <Row>
-          <div className="d-flex justify-content-start mt-5">
+          <div className="d-flex justify-content-start mt-3">
             {!formik.isSubmitting && (
               <button
-                className="btn btn-sm btn-light-custom me-3 mt-5  mt-5"
+                className="btn btn-sm btn-light-custom me-3 mt-5 crops-other-button"
                 type="button"
                 onClick={() => onCancel()}
               >
@@ -377,7 +408,7 @@ const CropStorageForm: React.FC<Props> = ({
               </button>
             )}
             <button
-              className="btn btn-sm btn-warning-custom ps-pe-42 mt-5"
+              className="btn btn-sm btn-warning-custom ps-pe-42 mt-5 crops-accept-button"
               type="submit"
               disabled={formik.isSubmitting}
             >

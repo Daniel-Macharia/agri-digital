@@ -146,7 +146,7 @@ const PostHarvesting: React.FC = () => {
   // };
 
   const handleContinueAction = () => {
-    navigate(`..${CROP_ROUTES.CROP_SALES}`);
+    navigate(`${CROP_ROUTES.FULL.CROP_SALES_FULL}`);
   };
 
   const fetchPostHarvestDetails = useCallback(async () => {

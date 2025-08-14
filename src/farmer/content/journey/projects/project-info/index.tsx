@@ -7,6 +7,7 @@ import CropProjectSummary from "./crop-project-summary";
 import ProgressBar from "../journey-item/progress-bar";
 import ProjectReview from "../../reviews/project-review";
 import { PROJECTS_ROUTES } from "../projects-routes";
+import { JOURNEY_ROUTES } from "../../journey-routes";
 
 
 const ProjectInformation: React.FC = () => {
@@ -31,7 +32,7 @@ const ProjectInformation: React.FC = () => {
 
 
     const handleViewMoreReviews = () => {
-        navigate(`..${PROJECTS_ROUTES.MORE_PROJECT_REVIEWS}`)
+        navigate(`${PROJECTS_ROUTES.FULL.MORE_PROJECT_REVIEWS_FULL}`)
     };
 
     return (<>
@@ -42,7 +43,7 @@ const ProjectInformation: React.FC = () => {
                 src="/assets/images/back-icon.svg" 
                 className="col-12 col-sm-6"
                 onClick={() => {
-                    navigate("/farmer/projects");
+                    navigate(`${JOURNEY_ROUTES.FULL.HOME_FULL}`);
                 } }
                 />
             </div>
@@ -57,7 +58,7 @@ const ProjectInformation: React.FC = () => {
                         </p>
                         <p className="crops-start-aligned-text small-regular secondary-text my-1">
                             { ( isCompleted() ? "Completed " : "Last Updated " )}
-                            {data.completionDate}
+                            {data.completionDate.toDateString()}
                         </p>
                     </div>
 

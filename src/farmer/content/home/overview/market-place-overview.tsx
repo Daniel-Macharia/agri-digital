@@ -1,6 +1,7 @@
 import React from "react";
 import { HomeMarketplaceItemProps } from "../home-model";
 import OverviewHeader from "./overview-header";
+import { FARMER_ROUTES } from "../../../farmer-routes";
 
 
 const HomeMarketProductItem: React.FC<HomeMarketplaceItemProps> = (data: HomeMarketplaceItemProps) => {
@@ -79,7 +80,7 @@ const MarketPlaceOverview: React.FC = () => {
 
     return (<>
     <div className="col-12">
-        <OverviewHeader overviewTitle="Market Place" viewMoreUrl="/farmer/market-place" />
+        <OverviewHeader overviewTitle="Market Place" viewMoreUrl={FARMER_ROUTES.MARKET_PLACE} />
 
         <div className="col-12">
             <div className="row">

@@ -49,7 +49,7 @@ const HomeNotifications: React.FC = () => {
     }
 
     const handleGoBackHome = () => {
-        navigate(`${FARMER_HOME_ROUTES.HOME_FULL}`);
+        navigate(`${FARMER_HOME_ROUTES.FULL.HOME_FULL}`);
     };
 
 

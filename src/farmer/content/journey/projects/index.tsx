@@ -17,6 +17,9 @@ import ProjectSelectionModal from "../../products/ProjectSelectionModal";
 // import { ProjectProps } from "../models";
 // import { loadProjects } from "../utils/load-project-data";
 import JourneyItem from "./journey-item";
+import { JOURNEY_ROUTES } from "../journey-routes";
+import { LIVESTOCK_ROUTES } from "../livestock/Livestock.Route";
+import { CROP_ROUTES } from "../crops/crop-routes";
 const apiClient = new ApiClient();
 
 export default function Projects() {
@@ -58,7 +61,7 @@ export default function Projects() {
 
   const handleLivestockSubmit = (formData: LivestockFormData): void => {
     console.log("Livestock Project Data:", formData);
-    navigate("/farmer/projects/livestock/typebreed");
+    navigate(`${JOURNEY_ROUTES.FULL.LIVESTOCK_FULL}/${LIVESTOCK_ROUTES.TYPE_BREED}`);
 
     setShowLivestockModal(false);
   };
@@ -71,12 +74,12 @@ export default function Projects() {
   // };
   const handleCropSubmit = (formData: CropFormData): void => {
     console.log("Crop Project Data:", formData);
-    navigate("/farmer/projects/crops/assessment?name=" + formData.projectName);
+    navigate(`${CROP_ROUTES.FULL.CROP_ASSESSMENT_FULL}?name=${formData.projectName}`);
 
     setShowCropModal(false);
   };
 
-  //const journeyItems: ProjectProps[] | null = loadProjects();
+  // const journeyItems: ProjectProps[] | null = loadProjects();
   const [fetching, setFetching] = useState<boolean>(false);
   const [projects, setProjects] = useState<CropJourneySummaryPayload[]>([]);
 

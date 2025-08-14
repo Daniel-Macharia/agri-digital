@@ -119,10 +119,12 @@ const WeatherConditionForm: React.FC<Props> = ({
       <Form>
         <Row>
           <Col md={12}>
-            <label>Date</label>
+            <label className="m-0 p-0 body-regular primary-text">
+              Date
+            </label>
             <br />
             <DatePicker
-              className="form-control body-regular mb-0"
+              className="form-control body-regular m-0"
               name="date"
               placeholderText="Date"
               selected={formik.getFieldProps("date").value}
@@ -132,42 +134,53 @@ const WeatherConditionForm: React.FC<Props> = ({
               showDateSelect
               autoComplete="off"
             />
+            <br/>
+            <div className="fv-plugins-message-container text-danger small m-0">
+              <ErrorMessage name="date" />
+            </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Humidity</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Humidity
+              </label>
               <input
                 {...formik.getFieldProps("humidity")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="humidity"
                 autoComplete="off"
                 type="text"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="humidity" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Rainfall Amount</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Rainfall Amount
+              </label>
               <input
                 {...formik.getFieldProps("rainfallAmount")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="rainfallAmount"
                 autoComplete="off"
                 type="text"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="rainfallAmount" />
               </div>
             </div>
           </Col>
           <Col md={12}>
             <div className="form-group mt-3">
-              <label className="mb-1">Rainfall Amount Unit</label>
+              <label className="m-0 p-0 body-regular primary-text">
+                Rainfall Amount Unit
+              </label>
               <Select
                 name="rainfallAmountUnit"
+                className="body-regular m-0"
                 options={measurementUnitDropdown}
                 value={formik.values.rainfallAmountUnit}
                 onChange={(selected) =>
@@ -178,31 +191,36 @@ const WeatherConditionForm: React.FC<Props> = ({
                 }
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="rainfallAmountUnit" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Temperature</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Temperature
+              </label>
               <input
                 {...formik.getFieldProps("temperature")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="temperature"
                 autoComplete="off"
                 type="text"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="temperature" />
               </div>
             </div>
           </Col>
           <Col md={12}>
             <div className="form-group mt-3">
-              <label className="mb-1">Temperature Unit</label>
+              <label className="m-0 p-0 body-regular primary-text">
+                Temperature Unit
+              </label>
               <Select
                 name="temperatureUnit"
+                className="body-regular m-0"
                 options={measurementUnitDropdown}
                 value={formik.values.temperatureUnit}
                 onChange={(selected) =>
@@ -211,31 +229,36 @@ const WeatherConditionForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("temperatureUnit", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="temperatureUnit" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>WindSpeed</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                WindSpeed
+              </label>
               <input
                 {...formik.getFieldProps("windSpeed")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="windSpeed"
                 autoComplete="off"
                 type="text"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="windSpeed" />
               </div>
             </div>
           </Col>
           <Col md={12}>
             <div className="form-group mt-3">
-              <label className="mb-1">Wind Speed Unit</label>
+              <label className="m-0 body-regular primary-text">
+                Wind Speed Unit
+              </label>
               <Select
                 name="windSpeedUnit"
+                className="body-regular m-0"
                 options={measurementUnitDropdown}
                 value={formik.values.windSpeedUnit}
                 onChange={(selected) =>
@@ -244,7 +267,7 @@ const WeatherConditionForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("windSpeedUnit", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="windSpeedUnit" />
               </div>
             </div>
@@ -254,7 +277,7 @@ const WeatherConditionForm: React.FC<Props> = ({
           <div className="d-flex justify-content-start mt-5">
             {!formik.isSubmitting && (
               <button
-                className="btn btn-sm btn-light-custom me-3 mt-5  mt-5"
+                className="btn btn-sm btn-light-custom me-3 mt-5 crops-other-button"
                 type="button"
                 onClick={() => onCancel()}
               >
@@ -262,7 +285,7 @@ const WeatherConditionForm: React.FC<Props> = ({
               </button>
             )}
             <button
-              className="btn btn-sm btn-warning-custom ps-pe-42 mt-5"
+              className="btn btn-sm btn-warning-custom ps-pe-42 mt-5 crops-accept-button"
               type="submit"
               disabled={formik.isSubmitting}
             >
