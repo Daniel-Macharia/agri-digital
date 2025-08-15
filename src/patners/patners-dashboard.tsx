@@ -65,10 +65,9 @@ export default function PatnersDashboard() {
                     <div className="overflow-auto">
                     <Content> 
                         <Routes>
-                            <Route path={PATNERS_ROUTES.HOME} element={<PatnersHomeRouter />} />
-                            
-                            <Route path={PATNERS_ROUTES.JOURNEY} element={<Journey />} />
-                            <Route path={PATNERS_ROUTES.PRODUCTS} element={<Products />} />
+                            <Route path={PATNERS_ROUTES.HOME} element={<PatnersHomeRouter />} />                         
+                           
+                            <Route path={PATNERS_ROUTES.PROGRAMS} element={<Products />} />
                             <Route path={PATNERS_ROUTES.MARKET_PLACE} element={<MarketPlaceRouter />} />
                             <Route path={PATNERS_ROUTES.BANKS} element={<Banks />} />
                             <Route path={PATNERS_ROUTES.INSURANCE} element={<Insurance />} />

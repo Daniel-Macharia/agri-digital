@@ -33,7 +33,7 @@ export default function PatnerHome(){
                 </div>
 
                 <div className="col-12 p-4 farmer-home-container bg-white mt-4">
-                    <WeatherOverview />
+                    <WeatherOverview /> 
                 </div>
 
                 <div className="col-12 p-0 farmer-home-container mt-4 " >

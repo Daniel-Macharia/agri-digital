@@ -19,11 +19,9 @@ export default function SideBarItem({name, iconUrl, contentUrl} : SideBarItemDet
             >   
                 {({isActive}) => (
                     <div id="side-bar-item-container" >
-                        <div id="side-bar-item">
-                            
+                        <div id="side-bar-item">                            
                             <img src={iconUrl} className={isActive ? "selected-item-icon item-logo" : "item-logo disselected-item-icon"} />
-                            <p className={isActive ? "item-name-selected" : "item-name"}>{name}</p>
-                            
+                            <p className={isActive ? "item-name-selected" : "item-name"}>{name}</p>                            
                         </div>
                         <div className="indicator-container">
                             <img src="/assets/images/active.svg" className={isActive ? "selected-item-indicator-bar" : "disselected-item-indicator-bar"} />

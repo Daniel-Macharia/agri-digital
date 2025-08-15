@@ -20,7 +20,7 @@ const PatnersHome: React.FC = () => {
 
       <div className="row g-4">
         {/* Left Column */}
-        <div className="col-lg-8">
+        <div className="col-lg-8"> 
           <MyPrograms />
           <Beneficiaries />
           <MarketPlace />

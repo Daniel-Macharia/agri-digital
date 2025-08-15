@@ -56,7 +56,7 @@ const HomeMarketProductItem: React.FC<HomeMarketplaceItemProps> = (data: HomeMar
     </>);
 };
 
-const MarketPlaceOverview: React.FC = () => {
+const MarketPlaceOverview: React.FC = () => { 
     let myProducts: HomeMarketplaceItemProps[] = [
         {productName: "Organic Tomatoes", 
             productSeller: "Agri Farmers", 
