@@ -4,19 +4,19 @@ const MarketPlace = () => {
       name: 'Organic Tomatoes',
       seller: 'Sold by Agri Farmers',
       price: 'KES 150 per kg',
-      image: '/assets/images/home/tomatoes.png',
+      image: '/assets/images/home/m1.png',
     },
     {
       name: 'Manure',
       seller: 'Sold by Agri Farmers',
       price: 'KES 150 per kg',
-      image: '/assets/images/home/manure.png',
+      image: '/assets/images/home/m2.png',
     },
     {
       name: 'Seeds',
       seller: 'Sold by Agri Farmers',
       price: 'KES 150 per kg',
-      image: '/assets/images/home/seeds.png',
+      image: '/assets/images/home/m3.png',
     },
   ];
 
