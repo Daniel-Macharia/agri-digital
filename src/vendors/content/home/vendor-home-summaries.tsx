@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { VendorHomeSummaryItemProps, VendorProfitItemProps } from "./vendor-home-models";
 import { VENDOR_HOME_ROUTES } from "./vendor-home-routes";
+import { VENDOR_ROUTES } from "../../vendor-routes";
 
 
 
@@ -9,7 +10,7 @@ const VendorHomeSummaryItem: React.FC<VendorHomeSummaryItemProps> = ( data: Vend
     return (<>
     <div className="col-12 p-3 vendor-item-container bg-white "
     style={{height: "100%"}}
-    onClick={() => data.navigate(data.detailsUrl)}
+    onClick={() => data.navigate(data.detailsUrl, {state: data.backUrl})}
     >
 
         <h1 className="body-semibold secondary-text my-0">
@@ -100,7 +101,8 @@ const VendorHomeSummaries: React.FC = () => {
             itemTitle: "Pending Orders",
             itemCount: 2,
             itemDesc: "You pending orders awaiting",
-            detailsUrl: "#",
+            backUrl: VENDOR_HOME_ROUTES.FULL.HOME_FULL,
+            detailsUrl: VENDOR_HOME_ROUTES.FULL.VENDOR_HOME_ORDERS_FULL,
             navigate: navigate
         },
         {
@@ -108,13 +110,15 @@ const VendorHomeSummaries: React.FC = () => {
             itemCount: 4,
             itemDesc: "You have four orders in transit",
             detailsUrl: `${VENDOR_HOME_ROUTES.FULL.VENDOR_HOME_TRACK_ORDER_FULL}`,
+            backUrl: VENDOR_HOME_ROUTES.FULL.HOME_FULL,
             navigate: navigate
         },
         {
             itemTitle: "Quality Score",
             itemCount: 4.8,
             itemDesc: "Your rating is average. Improve to grow business",
-            detailsUrl: "#",
+            detailsUrl: VENDOR_ROUTES.FULL.VENDOR_QUALITY_SCORE_FULL,
+            backUrl: VENDOR_HOME_ROUTES.FULL.HOME_FULL,
             navigate: navigate
         }
     ];
@@ -122,7 +126,7 @@ const VendorHomeSummaries: React.FC = () => {
     return (<>
     <div className="row m-0 p-0">
         {summaryItems.map((summaryItem, index) => 
-        <div className="col-12 col-md-3 d-flex m-0 p-0"  key={index}>
+        <div className="col-12 col-md-3 d-md-flex m-0 p-0"  key={index}>
             {(index !== 2) ? <></> : 
             <div
             className={`col-12  m-0 vendor-item-container mt-3 mt-md-0 px-0 px-md-2`} >
@@ -142,6 +146,7 @@ const VendorHomeSummaries: React.FC = () => {
                 itemDesc={summaryItem.itemDesc} 
                 detailsUrl={summaryItem.detailsUrl}
                 navigate={summaryItem.navigate}
+                backUrl={summaryItem.backUrl}
                 />
             </div>
             

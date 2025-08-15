@@ -1,6 +1,6 @@
 import HomeAdvertChain from "../../../farmer/content/home/home-advert-chain";
 import VendorHomeArticles from "./vendor-home-articles";
-import VendorHomeCalendar from "./vendor-home-calendar";
+import VendorHomeCalendar from "./vendor-home-calendar-overview";
 import VendorHomeMarketplace from "./vendor-home-market-place";
 import VendorHomeMyProducts from "./vendor-home-my-products";
 import VendorHomeMyServices from "./vendor-home-my-services";

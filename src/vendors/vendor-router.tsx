@@ -10,6 +10,7 @@ import VendorSideBar from "./vendor-side-bar";
 import "./vendor-style.css";
 import VendorManageUsers from "./content/user-management/user-management";
 import VendorHomeRouter from "./content/home/vendor-home-router";
+import QualityScore from "../farmer/content/quality-score";
 
 
 const VendorRouter: React.FC = () => {    
@@ -56,6 +57,8 @@ const VendorRouter: React.FC = () => {
                                 <Route path={VENDOR_ROUTES.VENDOR_HOME} element={<VendorHomeRouter />} />
                                 <Route path={VENDOR_ROUTES.VENDOR_MY_PRODUCTS} element={<VendorMyProducts />} />
                                 <Route path={VENDOR_ROUTES.VENDOR_MY_SERVICES} element={<VendorMyServices />} />
+
+                                <Route path={VENDOR_ROUTES.VENDOR_QUALITY_SCORE} element={<QualityScore />} />
 
                                 <Route path={VENDOR_ROUTES.VENDOR_MANAGE_USERS} element={<VendorManageUsers />} />
                                 

@@ -4,6 +4,7 @@ export const VENDOR_ROUTES = {
     VENDOR_MY_SERVICES: "/my-services/*",
     VENDOR_MARKET_PLACE: "/market-place/*",
     VENDOR_MANAGE_USERS: "/manage-users",
+    VENDOR_QUALITY_SCORE: "/quality-score",
 
     VENDOR_OTHER: "*",
 
@@ -14,5 +15,6 @@ export const VENDOR_ROUTES = {
         VENDOR_MY_SERVICES_FULL: "/vendor/my-services",
         VENDOR_MARKET_PLACE_FULL: "/vendor/market-place",
         VENDOR_MANAGE_USERS_FULL: "/vendor/manage-users",
+        VENDOR_QUALITY_SCORE_FULL: "/vendor/quality-score",
     }
 }

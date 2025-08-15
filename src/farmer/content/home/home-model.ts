@@ -20,7 +20,8 @@ export interface HomeSummaryItemProps{
     itemTitle: string,
     itemCount: number,
     itemDesc: string,
-    detailsUrl: string
+    detailsUrl: string,
+    backUrl: string
 };
 
 export interface HomeProductItemProps{

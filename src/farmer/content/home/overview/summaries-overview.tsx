@@ -10,7 +10,7 @@ const HomeSummaryItem: React.FC<HomeSummaryItemProps> = ( data: HomeSummaryItemP
     return (<>
     <div className="col-12 farmer-home-container bg-white "
     style={{height: "100%"}}
-    onClick={() => navigate(`.${data.detailsUrl}`)}
+    onClick={() => navigate(`.${data.detailsUrl}`, {state: data.backUrl})}
     >
 
         <h1 className="body-semibold secondary-text my-0">
@@ -35,19 +35,22 @@ const SummariesOverview: React.FC = () => {
             itemTitle: "Pending orders", 
             itemCount: 2, 
             itemDesc: "You have pendinig orders awaiting your actions",
-            detailsUrl: FARMER_HOME_ROUTES.HOME_ORDERS
+            detailsUrl: FARMER_HOME_ROUTES.HOME_ORDERS,
+            backUrl: FARMER_HOME_ROUTES.FULL.HOME_FULL
         },
         {
             itemTitle: "Tasks due", 
             itemCount: 3, 
             itemDesc: "Pending activities",
-            detailsUrl: FARMER_HOME_ROUTES.HOME_TASKS
+            detailsUrl: FARMER_HOME_ROUTES.HOME_TASKS,
+            backUrl: FARMER_HOME_ROUTES.FULL.HOME_FULL
         },
         {
             itemTitle: "Quality score", 
             itemCount: 4.8, 
             itemDesc: "Your rating is average. Improve to grow business.",
-            detailsUrl: `.${FARMER_ROUTES.QUALITY_SCORE}`
+            detailsUrl: `.${FARMER_ROUTES.QUALITY_SCORE}`,
+            backUrl: FARMER_HOME_ROUTES.FULL.HOME_FULL
         },
     ];
     return (<>
@@ -63,6 +66,7 @@ const SummariesOverview: React.FC = () => {
                     itemCount={summary.itemCount} 
                     itemDesc={summary.itemDesc}
                     detailsUrl={summary.detailsUrl}
+                    backUrl={summary.backUrl}
                     />
                 </div>)
             }

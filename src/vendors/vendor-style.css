@@ -14,60 +14,18 @@
     display: none;
 }
 
-
-
-/* Override styles for react-big-calendar with custom ones */
-
-/* Center the date number text */
-.rbc-date-cell {
-  text-align: center;
-  vertical-align: top;
-  font-weight: 500;
-  padding-top: 5px;
-}
-
-/* Optional: force full cell content centering */
-.rbc-month-view .rbc-date-cell {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start; /* use center for full vertical centering */
-  height: 100%;
-}
-
-/* Remove cell borders */
-.rbc-month-view .rbc-day-bg,
-.rbc-month-row + .rbc-month-row,
-.rbc-header {
-  border: none !important;
-}
-
-/* Optional: remove header border */
-.rbc-header {
-  border-bottom: none !important;
-}
-
-/* Remove border inside cells */
-.rbc-day-slot .rbc-time-slot {
-  border-top: none !important;
-}
-
-/* Optional: remove event borders */
-.rbc-event {
-  border: none;
-  display: none;
-}
-
-
 .vendor-tab-button{
     border-style: none;
     background-color: #FFFFFF;
 }
 
 .vendor-selected-tab-button{
-  border-style: "solid";
+  background-color: #FFFFFF;
+  border-style: none;
   border-width: "0px";
+  border-bottom-style: solid;
   border-bottom-width: "2px";
-  border-color: "red";
+  border-color: var(--Primary, #457900);
 }
 
 .user-status-label{
@@ -78,8 +36,19 @@
 }
 
 .vendor-accept-button{
-  border-style: none;
+  border-style: solid;
   border-radius: 8px;
   color: var(--cards-form-bg, #FFF);
   background-color: var(--Primary, #457900);
+  border-color: var(--Primary, #457900);
+  border-width: 1px;
+}
+
+.vendor-other-button{
+  border-style: solid;
+  border-radius: 8px;
+  color: var(--Secondary, #FF9800);
+  background-color: var(--cards-form-bg, #FFF);
+  border-color: var(--Secondary, #FF9800);
+  border-width: 1px;
 }

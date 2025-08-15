@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FARMER_ROUTES } from "../../farmer-routes";
 import "./quality-score.css";
 
@@ -7,13 +7,14 @@ import { QualityScoreCertificationItemProps, QualityScoreTrainingItemProps } fro
 import QualityScoreCertificationItem from "./quality-score-certification-item";
 import QualityScoreTrainingItem from "./quality-score-training-item";
 import QualityScoreBarChart from "./quality-score-bar-chart";
-import { FARMER_HOME_ROUTES } from "../home/home-routes";
 
 export default function QualityScore()
 {
     const navigate = useNavigate();
-    let yearsOfExperience: number = 12;
-    let averageTrainingScore = 91;
+
+    const backUrl: string = useLocation().state;
+    const yearsOfExperience: number = 12;
+    const averageTrainingScore = 91;
 
     let certifications: QualityScoreCertificationItemProps[] = [
         {
@@ -78,7 +79,7 @@ export default function QualityScore()
         trainings = trainings.slice(0, 3);
 
     const handleGoBackHome = () => {
-        navigate(`${FARMER_HOME_ROUTES.HOME_FULL}`);
+        navigate(backUrl);
     };
 
     return (<>
