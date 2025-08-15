@@ -1,0 +1,54 @@
+
+/* Override styles for react-big-calendar with custom ones */
+
+/* Center the date number text */
+.calendarDetailsStylesWrapper{
+  height: 100vh;
+}
+
+.calendarDetailsStylesWrapper :global(.rbc-date-cell) {
+  text-align: center;
+  vertical-align: top;
+  font-weight: 500;
+  padding-top: 5px;
+}
+.calendarDetailsStylesWrapper :global(.rbc-date-cell:hover) {
+    background-color: rgba(33, 150, 243, 0.1) !important;
+}
+/* Optional: force full cell content centering */
+.calendarDetailsStylesWrapper :global(.rbc-month-view .rbc-date-cell) {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* use center for full vertical centering */
+  height: 100%;
+}
+
+/* .calendarDetailsStylesWrapper :global(.rbc-month-view){
+  border: none !important;
+} */
+/* Remove cell borders */
+/* .calendarDetailsStylesWrapper :global(.rbc-day-bg) {
+  border: none !important;
+} */
+
+/* .calendarDetailsStylesWrapper :global(.rbc-month-row) {
+  border: none !important;
+} */
+/* Optional: remove header border */
+/* .calendarDetailsStylesWrapper :global(.rbc-header) {
+  border: none !important;
+} */
+
+/* Remove border inside cells */
+/* .calendarDetailsStylesWrapper :global(.rbc-day-slot) {
+  border-top: none !important;
+} */
+
+/* .calendarDetailsStylesWrapper :global(.rbc-time-slot) {
+  border-top: none !important;
+} */
+
+/* Optional: remove event borders */
+.calendarDetailsStylesWrapper :global(.rbc-event) {
+  border: none;
+}
