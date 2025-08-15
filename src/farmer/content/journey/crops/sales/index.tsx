@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { SalesNotificationItemProps, SalesOfferProps } from "../crops-models";
 import CropsNotification from "../crops-notification/crops-notification";
 import SalesOffer from "./sales-offer";
@@ -229,12 +229,19 @@ const Sales: React.FC = ()=>{
                                                         }
                                                     }}
                                                     />
+
+                                                    { 
+                                                        previewUrl && (<Fragment>
+                                                        <img 
+                                                        className="w-50 m-0 img-fluid img-thumbnail mb-5"
+                                                        src={previewUrl}
+                                                        />
+                                                        </Fragment>)
+                                                    }
+
                                                     <div className="col-12 d-flex justify-content-center">
-                                                        <img src={previewUrl || "/assets/images/upload_photo.svg"} 
-                                                        className={previewUrl ? "col-12" : "col-sm-1"}
-                                                        style={{
-                                                            maxWidth: previewUrl ? "40%" : "10%"
-                                                        }}
+                                                        <img src="/assets/images/upload_photo.svg" 
+                                                        className="w-10 m-0"
                                                         />
                                                     </div>
                                                     <p className="body-regular secondary-text text-center" >
