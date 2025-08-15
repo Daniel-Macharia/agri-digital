@@ -1,45 +1,44 @@
 import { useEffect, useState } from "react";
 import { VENDOR_ROUTES } from "../../vendor-routes";
 import { useNavigate } from "react-router-dom";
-import { UserItemProps } from "./user-management-models";
+import { AddUserProps, UserItemInputData, UserItemProps } from "./user-management-models";
 import { toast } from "react-toastify";
-import { UserStatus } from "./user-management-enums";
-import AddUserModal from "./add-user-modal";
+import { UserFormMode, UserRole, UserStatus } from "./user-management-enums";
+import AddUserModal from "./user-management-modals";
 
-const UserItem: React.FC<UserItemProps> = (data: UserItemProps) => {
-
+const UserItem: React.FC<UserItemInputData> = (inputData: UserItemInputData) => {
 
     return (<>
     <div className="col-12 d-flex">
-        <p className="col-2 p-0 py-2 m-0 small-regular secondary-text"
+        <p className="col-2 p-0 py-2 m-0 small-regular secondary-text text-nowrap overflow-auto vendor-hidden-scrollbar"
         style={{ minWidth: "120px"}}>
-            {data.name}
+            {inputData.userData.name}
         </p>
 
         
-        <p className="col-2 p-0 py-2 m-0 small-regular secondary-text"
+        <p className="col-2 p-0 py-2 m-0 small-regular secondary-text text-nowrap overflow-auto vendor-hidden-scrollbar"
         style={{ minWidth: "120px"}}>
-            {data.email}
+            {inputData.userData.email}
         </p>
 
-        <p className="col-2 p-0 py-2 m-0 small-regular secondary-text"
+        <p className="col-2 p-0 py-2 m-0 small-regular secondary-text text-nowrap text-center overflow-auto vendor-hidden-scrollbar"
         style={{ minWidth: "120px"}}>
-            {`${data.role}`}
+            {`${inputData.userData.role}`}
         </p>
 
-        <p className="col-2 p-0 py-2 m-0 small-regular secondary-text"
+        <p className="col-2 p-0 py-2 m-0 small-regular secondary-text text-nowrap text-center overflow-auto vendor-hidden-scrollbar"
         style={{ minWidth: "120px"}}>
-            {`${data.joinedDate.toDateString()}`}
+            {`${inputData.userData.joinedDate.toDateString()}`}
         </p>
 
-        <div className="col-2 d-flex justify-content-center m-0 p-0"
+        <div className="col-2 d-flex justify-content-center m-0 p-0 text-nowrap overflow-auto vendor-hidden-scrollbar"
         style={{ minWidth: "120px"}}>
             <label className="col-10 p-0 m-0 user-status-label small-medium py-2"
             style={{
-                backgroundColor: `${(data.status.toString() === UserStatus.ACTIVE.toString()) ? "var(--Primary, #457900)" : (data.status.toString() === UserStatus.INACTIVE.toString()) ? "var(--Secondary, #FF9800)" : "var(--red, #F25C5E)"}`
+                backgroundColor: `${(inputData.userData.status.toString() === UserStatus.ACTIVE.toString()) ? "var(--Primary, #457900)" : (inputData.userData.status.toString() === UserStatus.INACTIVE.toString()) ? "var(--Secondary, #FF9800)" : "var(--red, #F25C5E)"}`
             }}
             >
-                {`${(data.status.toString() === UserStatus.ACTIVE.toString()) ? "ACTIVE" : (data.status.toString() === UserStatus.INACTIVE.toString()) ? "INACTIVE" : "DELETED"}`}
+                {`${(inputData.userData.status.toString() === UserStatus.ACTIVE.toString()) ? "ACTIVE" : (inputData.userData.status.toString() === UserStatus.INACTIVE.toString()) ? "INACTIVE" : "DELETED"}`}
             </label>
         </div>
 
@@ -49,7 +48,10 @@ const UserItem: React.FC<UserItemProps> = (data: UserItemProps) => {
             <button
             className=" m-0 p-0 pe-1"
             onClick={() => {
-                toast.info("editing user");
+                toast.info("editing user data");
+                inputData.setCurrentMode(UserFormMode.EDIT);
+                inputData.setSelectedUserData({name: inputData.userData.name, email: inputData.userData.email, role: inputData.userData.role})
+                inputData.setShowUserForm(true);
             }}
             style={{
                 borderStyle: "none"
@@ -69,6 +71,7 @@ const UserItem: React.FC<UserItemProps> = (data: UserItemProps) => {
             className="m-0 p-0 ps-1"
             onClick={() => {
                 toast.error("deleting user");
+                //inputData.setUsers([...inputData.users])
             }}
             style={{
                 borderStyle: "none"
@@ -94,10 +97,11 @@ const VendorManageUsers: React.FC = () => {
     const navigate = useNavigate();
 
     
-    const [showAddUserModal, setShowAddUserModal] = useState<boolean>(false);
+    const [showUserFormModal, setShowUserFormModal] = useState<boolean>(false);
 
     const handleAddUser = () => {
-        setShowAddUserModal(true);
+        setShowUserFormModal(true);
+        setCurrentMode(UserFormMode.ADD);
     };
 
     const handleGoBackHome = () => {
@@ -112,12 +116,15 @@ const VendorManageUsers: React.FC = () => {
         const [currentPage, setCurrentPage] = useState<number>(1);
         const [currentStartIndex, setCurrentStartIndex] = useState<number>(0);
 
+        const [selectedUserData, setSelectedUserData] = useState<AddUserProps|null>(null);
+        const [currentMode, setCurrentMode] = useState<UserFormMode>(UserFormMode.ADD);
+
         for( let i = 0; i < 25; i++ )
         {
             users.push(
                 {
-                    name: `user ${i + 1 }`,
-                    role: `role ${i + 1 }`,
+                    name: `userikljklklllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll ${i + 1}`,
+                    role: (i % 2 === 0) ? UserRole.EMPLOYEE : UserRole.MANAGER,
                     joinedDate: new Date(),
                     status: (i % 3 === 0) ? UserStatus.ACTIVE : (i % 3 === 1) ? UserStatus.INACTIVE : UserStatus.DELETED,
                     email: `email${i + 1}@shambabot.com`
@@ -218,10 +225,7 @@ const VendorManageUsers: React.FC = () => {
         </div>
 
 
-        <div className="col-12 p-3 bg-white"
-        style={{
-            borderRadius: "8px"
-        }}>
+        <div className="col-12 p-3 bg-white vendor-item-container">
             <div className="row m-0 p-2 justify-content-end align-items-center">
                 <p className="m-0 p-0 body-regular"
                 style={{width: "max-content"}}>
@@ -236,7 +240,7 @@ const VendorManageUsers: React.FC = () => {
                             Sort by: 
                         </p>
                         <select 
-                        className="m-0 p-0 body-bold"
+                        className="m-0 p-0 body-bold bg-white"
                         onChange={(event) => {
                             const value = event.target?.value;
                             //toast.info(`Selected: ${value}`);
@@ -268,13 +272,15 @@ const VendorManageUsers: React.FC = () => {
                 </div>
             </div>
 
-            <div className="col-12">
+            <div className="col-12 overflow-auto">
 
-                <div className="d-flex m-0"
-                style={{width: "max-content"}}>
+                <div className="d-flex m-0 col-12"
+                style={{minWidth: "max-content"}}>
                     { 
-                        columnLabels.map((label, index) => <p key={index} className="col-2 p-0 m-0"
-                        style={{ minWidth: "120px", textAlign: "center"}}>
+                        columnLabels.map((label, index) => <p 
+                        key={index} 
+                        className={`col-2 p-0 m-0 ${ (index === 0 || index === 1) ? "text-start" : (index === (columnLabels.length - 1)) ? "text-end" : "text-center"}`}
+                        style={{ minWidth: "120px"}}>
                             {label}
                         </p>)
                     }
@@ -290,15 +296,15 @@ const VendorManageUsers: React.FC = () => {
                                 backgroundColor: `${(index % 2 == 0) ? "var(--Background, #F5F5F5)" : "rgba(245, 245, 245, 0.50)"}`,
                                 borderStyle: "none",
                                 borderRadius: "6px",
-                                width: "100%"
+                                minWidth: "max-content"
                             }}>
                                 <UserItem
-                                name={user.name} 
-                                email={user.email} 
-                                role={user.role} 
-                                joinedDate={user.joinedDate} 
-                                status={user.status} 
-                                />
+                                    setCurrentMode={setCurrentMode}
+                                    setShowUserForm={setShowUserFormModal}
+                                    setSelectedUserData={setSelectedUserData} 
+                                    userData={user} 
+                                    users={listData} 
+                                    setUsers={setListData}                                />
                             </div>
                         )
                     
@@ -348,7 +354,11 @@ const VendorManageUsers: React.FC = () => {
     </div>
 
 
-    <AddUserModal show={showAddUserModal} setShow={setShowAddUserModal} />
+    <AddUserModal 
+    show={showUserFormModal} 
+    setShow={setShowUserFormModal} 
+    mode={currentMode} 
+    userData={selectedUserData} />
     </>);
 };
 

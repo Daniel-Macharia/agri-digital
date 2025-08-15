@@ -7,6 +7,11 @@ export enum UserStatus{
 };
 
 export enum UserRole{
-    EMPLOYEE = 1,
-    MANAGER = 2
-}
+    EMPLOYEE = "Employee",
+    MANAGER = "Manager"
+};
+
+export enum UserFormMode{
+    ADD = "Add User",
+    EDIT = "Edit"
+};
