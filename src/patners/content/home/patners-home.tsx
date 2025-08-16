@@ -13,7 +13,7 @@ import Notifications from './components/Notifications';
 const PatnersHome: React.FC = () => {
   return (
     <div className="container-fluid p-4" style={{backgroundColor: '#F9FAFB'}}>
-      <AdBanner />
+      <AdBanner /> 
      
 
       <KeyMetrics />
