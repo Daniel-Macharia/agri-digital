@@ -1,6 +1,6 @@
 export const PATNERS_ROUTES = {
-    HOME: "/home/*",
-    PROGRAMS: "/programs",
+    HOME: "/home/",
+    PROGRAMS: "/programs/*",
     PRODUCTS: "/products",
     MARKET_PLACE: "/market-place/*",
     BANKS: "/banks",

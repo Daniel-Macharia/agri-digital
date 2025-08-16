@@ -6,6 +6,7 @@ import SideBar from "./side-bar/index.tsx";
 import Content from "./content/index.tsx";
 import MarketPlaceRouter from "./content/market-place/index.tsx";
 import Products from "./content/products/index.tsx";
+import Programs from "./content/programs/index.tsx";
 import Banks from "./content/banks/index.tsx";
 import Insurance from "./content/insurance/index.tsx";
 import Sponsors from "./content/sponsors/index.tsx";
@@ -67,7 +68,7 @@ export default function PatnersDashboard() {
                         <Routes>
                            
                             <Route path={PATNERS_ROUTES.HOME} element={<PatnersHome />} />                       
-                            <Route path={PATNERS_ROUTES.PROGRAMS} element={<Products />} />
+                            <Route path={PATNERS_ROUTES.PROGRAMS} element={<Programs />} />
                             <Route path={PATNERS_ROUTES.MARKET_PLACE} element={<MarketPlaceRouter />} />
                             <Route path={PATNERS_ROUTES.BANKS} element={<Banks />} />
                             <Route path={PATNERS_ROUTES.INSURANCE} element={<Insurance />} />

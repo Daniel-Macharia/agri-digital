@@ -1,24 +1,5 @@
-import { Route, Routes } from "react-router-dom";
+import PatnersProgramsRouter from "./programs-router";
+import { PATNERS_PROGRAMS_ROUTES } from "./programs-routes";
 
-import { BREED_ROUTES } from "./Breed.Route";
-
-// Helper to wrap pages with NavBar
-const WithNavBar = (Component: React.FC) => (
-  <>
-    <NavBar />
-    <Component />
-  </>
-);
-
-const Breeding = () => {
-  return (
-    <Routes>
-      <Route path={BREED_ROUTES.LANDING} element={<LandingPage />} />
-      
-      <Route path={BREED_ROUTES.RESULTS} element={<Results />} />
-    </Routes> 
-  );
-};
-
-export default Breeding;
- 
+export { PATNERS_PROGRAMS_ROUTES };
+export default PatnersProgramsRouter;
