@@ -16,7 +16,7 @@ const HomePageLayout: React.FC = () => {
     </div>
   );
 };
-export default HomePageLayout;
+export default HomePageLayout; 
 
 
 

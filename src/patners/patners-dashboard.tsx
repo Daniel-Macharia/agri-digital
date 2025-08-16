@@ -4,8 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import TopBar from "./top-bar/index.tsx";
 import SideBar from "./side-bar/index.tsx";
 import Content from "./content/index.tsx";
-
-import Journey from "./content/journey/index.tsx";
 import MarketPlaceRouter from "./content/market-place/index.tsx";
 import Products from "./content/products/index.tsx";
 import Banks from "./content/banks/index.tsx";
@@ -19,8 +17,10 @@ import Weather from "./content/weather/index.tsx";
 import Settings from "./content/settings/index.tsx";
 import Invite from "./content/invite/index.tsx";
 import NotFound from "../common/exceptions/NotFound.tsx";
+import PatnersHome from "./content/home/patners-home.tsx";
 import { PATNERS_ROUTES } from "./patners-routes.ts";
-import PatnersHomeRouter from "./content/home/patners-home-router.tsx";
+
+
 
 
 export default function PatnersDashboard() {
@@ -65,8 +65,8 @@ export default function PatnersDashboard() {
                     <div className="overflow-auto">
                     <Content> 
                         <Routes>
-                            <Route path={PATNERS_ROUTES.HOME} element={<PatnersHomeRouter />} />                         
                            
+                            <Route path={PATNERS_ROUTES.HOME} element={<PatnersHome />} />                       
                             <Route path={PATNERS_ROUTES.PROGRAMS} element={<Products />} />
                             <Route path={PATNERS_ROUTES.MARKET_PLACE} element={<MarketPlaceRouter />} />
                             <Route path={PATNERS_ROUTES.BANKS} element={<Banks />} />
