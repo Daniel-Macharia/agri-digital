@@ -11,11 +11,11 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { useCallback, useState } from 'react';
 import { VendorCalendarEvent, VendorHomeOrderItemProps } from './vendor-home-models';
 import OverviewHeader from '../../../farmer/content/home/overview/overview-header';
-import { VENDOR_HOME_ROUTES } from './vendor-home-routes';
 
 import styles from "./vendor-home-calendar-overview.module.css";
 import { AddCalendarEventModal } from './vendor-home-calendar-details';
 import { toast } from 'react-toastify';
+import { HomeOverviewNavigation } from '../../../farmer/content/home/home-model';
 
 const locales = {
   'en-US': enUS,//import('date-fns/locale/en-US'),
@@ -75,7 +75,7 @@ export function CustomToolBar(toolbar: ToolbarProps<VendorCalendarEvent, object>
     </>);
 };
 
-const VendorHomeCalendar: React.FC = () => {
+const VendorHomeCalendar: React.FC<HomeOverviewNavigation> = (overviewNavigation: HomeOverviewNavigation) => {
 
     const [showAddOrder, setShowAddOrder] = useState<boolean>(false);
     const [events, setEvents] = useState<VendorCalendarEvent[]>([
@@ -145,7 +145,8 @@ const VendorHomeCalendar: React.FC = () => {
     <div className="col-12">
     <OverviewHeader
         overviewTitle="Calendar"
-        viewMoreUrl={VENDOR_HOME_ROUTES.FULL.VENDOR_HOME_CALENDAR_FULL}
+        viewMoreUrl={overviewNavigation.viewMoreUrl}
+        backUrl={overviewNavigation.backUrl}
         />
     <div className={styles.calendarStylesWrapper}>
         {/* <div className={styles.calendarStylesWrapper}> */}

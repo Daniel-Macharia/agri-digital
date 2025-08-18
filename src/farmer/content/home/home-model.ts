@@ -73,7 +73,8 @@ export interface HomeNotificationItemProps{
 
 export interface OverviewHeaderProps{
     overviewTitle: string,
-    viewMoreUrl: string
+    viewMoreUrl: string,
+    backUrl: string
 };
 
 export interface HomeOrderItemProps{
@@ -84,4 +85,9 @@ export interface HomeOrderItemProps{
     itemCost: number,
     customerName: string,
     orderStatus: string
+};
+
+export interface HomeOverviewNavigation{
+    viewMoreUrl: string,
+    backUrl: string
 };

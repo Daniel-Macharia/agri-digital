@@ -1,7 +1,6 @@
 import React from "react";
-import { HomeProductItemProps } from "../home-model";
+import { HomeOverviewNavigation, HomeProductItemProps } from "../home-model";
 import OverviewHeader from "./overview-header";
-import { FARMER_ROUTES } from "../../../farmer-routes";
 
 
 export function HomeProductItem(data: HomeProductItemProps) {
@@ -53,7 +52,7 @@ export function HomeProductItem(data: HomeProductItemProps) {
     </>);
 };
 
-const MyProductsOverview: React.FC = () => {
+const MyProductsOverview: React.FC<HomeOverviewNavigation> = (overviewNavigation: HomeOverviewNavigation) => {
     const myProducts: HomeProductItemProps[] = [
         {productName: "Tomatoes", 
             productQuantity: 3500, 
@@ -79,7 +78,8 @@ const MyProductsOverview: React.FC = () => {
 
         <OverviewHeader
         overviewTitle="My Products"
-        viewMoreUrl={FARMER_ROUTES.PRODUCTS}
+        viewMoreUrl={overviewNavigation.viewMoreUrl}
+        backUrl={overviewNavigation.backUrl}
         />
 
         <div className="col-12">

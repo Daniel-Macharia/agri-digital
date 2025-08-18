@@ -11,6 +11,8 @@ import "./vendor-style.css";
 import VendorManageUsers from "./content/user-management/user-management";
 import VendorHomeRouter from "./content/home/vendor-home-router";
 import QualityScore from "../farmer/content/quality-score";
+import VendorMarketplace from "./content/market-place/vendor-market-place";
+import VendorArticlesAndResources from "./content/articles-and-resources/vendor-articles-and-resources";
 
 
 const VendorRouter: React.FC = () => {    
@@ -57,10 +59,13 @@ const VendorRouter: React.FC = () => {
                                 <Route path={VENDOR_ROUTES.VENDOR_HOME} element={<VendorHomeRouter />} />
                                 <Route path={VENDOR_ROUTES.VENDOR_MY_PRODUCTS} element={<VendorMyProducts />} />
                                 <Route path={VENDOR_ROUTES.VENDOR_MY_SERVICES} element={<VendorMyServices />} />
+                                <Route path={VENDOR_ROUTES.VENDOR_MARKET_PLACE} element={<VendorMarketplace />} />
 
                                 <Route path={VENDOR_ROUTES.VENDOR_QUALITY_SCORE} element={<QualityScore />} />
 
                                 <Route path={VENDOR_ROUTES.VENDOR_MANAGE_USERS} element={<VendorManageUsers />} />
+
+                                <Route path={VENDOR_ROUTES.VENDOR_RESOURCES} element={<VendorArticlesAndResources />} />
                                 
                                 <Route path={VENDOR_ROUTES.VENDOR_OTHER} element={<NotFound />} />
                             </Routes>

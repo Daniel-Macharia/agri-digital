@@ -1,5 +1,4 @@
-import { HomeNotificationItemProps } from "../home-model";
-import { FARMER_HOME_ROUTES } from "../home-routes";
+import { HomeNotificationItemProps, HomeOverviewNavigation } from "../home-model";
 import OverviewHeader from "./overview-header";
 
 
@@ -56,7 +55,7 @@ export const HomeNotificationItem: React.FC<HomeNotificationItemProps> = (data: 
     );
 };
 
-const HomeNotificationOverview: React.FC = () => {
+const HomeNotificationOverview: React.FC<HomeOverviewNavigation> = (overviewNavigation: HomeOverviewNavigation) => {
     const notifications: HomeNotificationItemProps[] = [
         {
             notificationTitle: "AgriFamers",
@@ -76,7 +75,7 @@ const HomeNotificationOverview: React.FC = () => {
     ];
 
     return (<div className="col-12">
-        <OverviewHeader overviewTitle="Notifications" viewMoreUrl={FARMER_HOME_ROUTES.FULL.HOME_NOTIFICATIONS_FULL} />
+        <OverviewHeader overviewTitle="Notifications" viewMoreUrl={overviewNavigation.viewMoreUrl} backUrl={overviewNavigation.backUrl} />
 
         <div className="col-12">
             {

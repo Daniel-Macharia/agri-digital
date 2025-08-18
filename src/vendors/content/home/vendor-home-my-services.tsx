@@ -1,3 +1,4 @@
+import { HomeOverviewNavigation } from "../../../farmer/content/home/home-model";
 import OverviewHeader from "../../../farmer/content/home/overview/overview-header";
 import { VendorServiceItemProps } from "./vendor-home-models";
 
@@ -66,7 +67,7 @@ export function VendorServiceItem(data: VendorServiceItemProps) {
     </>);
 };
 
-const VendorHomeMyServices: React.FC = () => {
+const VendorHomeMyServices: React.FC<HomeOverviewNavigation> = (overviewNavigation: HomeOverviewNavigation) => {
 
     const myServices: VendorServiceItemProps[] = [
         {
@@ -96,7 +97,8 @@ const VendorHomeMyServices: React.FC = () => {
 
         <OverviewHeader
         overviewTitle="My Services"
-        viewMoreUrl="/vendor/my-services"
+        viewMoreUrl={overviewNavigation.viewMoreUrl}
+        backUrl={overviewNavigation.backUrl}
         />
 
         <div className="col-12">

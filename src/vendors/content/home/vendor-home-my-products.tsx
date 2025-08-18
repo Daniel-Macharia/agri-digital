@@ -32,6 +32,7 @@ const VendorHomeMyProducts: React.FC= () => {
         <OverviewHeader
         overviewTitle="My Products"
         viewMoreUrl="/vendor/my-products"
+        backUrl="#"
         />
 
         <div className="col-12">

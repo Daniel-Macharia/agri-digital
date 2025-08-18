@@ -15,7 +15,7 @@ const OverviewHeader: React.FC<OverviewHeaderProps> = (data: OverviewHeaderProps
                 <button
                 className="body-regular bg-white mb-0"
                 style={{borderStyle: "none", color: "var(--Primary, #457900)"}}
-                onClick={() => navigate(data.viewMoreUrl)}
+                onClick={() => navigate(data.viewMoreUrl, {state: data.backUrl})}
                 >
                     View More
                 </button>
