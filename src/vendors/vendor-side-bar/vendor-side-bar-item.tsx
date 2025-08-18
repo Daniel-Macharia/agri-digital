@@ -1,22 +1,27 @@
 import "./vendor-side-bar-item.css";
 import "/src/index.css";
 
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export interface SideBarItemDetailProps{
     name: string,
     iconUrl: string,
-    contentUrl: string
+    contentUrl: string,
+    backUrl: string
 }
 
-export default function VendorSideBarItem({name, iconUrl, contentUrl} : SideBarItemDetailProps)
+export default function VendorSideBarItem({name, iconUrl, contentUrl, backUrl} : SideBarItemDetailProps)
 {
+    const isActive = false;
+    const navigate = useNavigate();
     return (<>
-        <NavLink
-        to={contentUrl}
+        <div
         className={"nav-link side-bar-nav-link"}
+        onClick={() => {
+            navigate(contentUrl, {state: backUrl})
+        }}
         >   
-            {({isActive}) => (
+            {/* {({isActive}) => ( */}
                 <div id="side-bar-item-container" >
                     <div id="side-bar-item">
                         
@@ -28,7 +33,7 @@ export default function VendorSideBarItem({name, iconUrl, contentUrl} : SideBarI
                         <img src="/assets/images/active.svg" className={isActive ? "selected-item-indicator-bar" : "disselected-item-indicator-bar"} />
                     </div>
                 </div>
-            )}
-        </NavLink>
+            {/* )} */}
+        </div>
     </>);
 }

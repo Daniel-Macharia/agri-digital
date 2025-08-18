@@ -52,3 +52,7 @@
   border-color: var(--Secondary, #FF9800);
   border-width: 1px;
 }
+
+.vendor-cursor-pointer{
+  cursor: pointer;
+}
