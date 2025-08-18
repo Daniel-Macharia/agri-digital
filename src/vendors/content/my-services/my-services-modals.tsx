@@ -96,6 +96,9 @@ const VendorMyServicesAddServiceModal: React.FC<VendorMyServicesModalProps> = (d
                                         setFieldValue( "currency", val);
                                     }}
                                     >
+                                        <option value={''}>
+                                            {`curr`}
+                                        </option>
                                         <option value={VendorCurrency.KES}>
                                             {VendorCurrency.KES}
                                         </option>
@@ -133,7 +136,7 @@ const VendorMyServicesAddServiceModal: React.FC<VendorMyServicesModalProps> = (d
                                 <Field
                                 name="serviceDuration"
                                 className="form-control body-regular m-0"
-                                placeholder="service duration ..."
+                                placeholder="service duration(hours)"
                                 />
                                 <div className="text-danger small m-0">
                                     <ErrorMessage name="serviceDuration"/>

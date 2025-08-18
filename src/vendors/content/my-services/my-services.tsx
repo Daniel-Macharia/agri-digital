@@ -62,10 +62,11 @@ const AddServiceCard: React.FC<VendorMyServicesModalProps> = (data: VendorMyServ
 
     return (<>
     <div 
-    className="col-12 m-0 p-0 border-1 border border-dark
+    className="col-12 m-0 p-0 border-1 border border-dark 
     vendor-my-service-item-container 
-    justify-content-center align-content-center
-    p-3 h-100"
+    justify-content-center align-content-center 
+    p-3 h-100 
+    vendor-cursor-pointer"
     onClick={() => data.setShow(true)}
     >
         <div className="col-12 d-flex justify-content-center">
@@ -113,11 +114,11 @@ const ServiceItem: React.FC<ServiceItemProps> = ( data: ServiceItemProps ) => {
     };
 
     return (<>
-    <div className="col-12 vendor-my-service-item-container card bg-white p-0 border-0">
+    <div className="col-12 vendor-my-service-item-container card bg-white p-0 border-0 h-100">
         <div className="col-12 p-0">
             <img
             src={data.serviceImageUrl}
-            className="w-100 m-0 "
+            className="w-100 m-0"
             alt="service"
             />
             
@@ -155,7 +156,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ( data: ServiceItemProps ) => {
                         </div>
                     </div>
                     
-                    <div className="col-12 m-0 my-1 p-0 d-flex justify-content-start align-content-center">
+                    <div className="col-12 m-0 my-1 p-0 d-flex justify-content-start align-items-center">
                         <img 
                         src="/assets/images/vendor/my-services/clock.svg"
                         className="vendor-my-services-icon"/>
@@ -165,12 +166,12 @@ const ServiceItem: React.FC<ServiceItemProps> = ( data: ServiceItemProps ) => {
                         </p>
                     </div>
 
-                    <div className="col-12 m-0 my-1 p-0 d-flex justify-content-start align-content-center">
+                    <div className="col-12 m-0 my-1 p-0 d-flex justify-content-start align-items-center">
                         <img 
                         src="/assets/images/vendor/my-services/tag.svg"
                         className="vendor-my-services-larger-icon"/>
 
-                        <p className="col-8 h2-bold m-0 primary-text">
+                        <p className="col-8 ps-2 h2-bold m-0 primary-text">
                             {`${data.currency} ${data.serviceCost}`}
                         </p>
                     </div>
@@ -379,11 +380,12 @@ const VendorMyServices: React.FC = () => {
             src="/assets/images/back-icon.svg"
             style={{width: "24px"}} 
             onClick={handleGoBackHome}
+            className="vendor-cursor-pointer"
             />
         </div>
 
-        <div className="row m-0 p-0 mt-3">
-            <div className="col-12 col-md-4 p-0 m-0 mt-2 pe-md-2">
+        <div className="row m-0 p-0 my-3">
+            <div className="col-12 col-md-4 p-0 m-0 pt-3 px-md-2">
                 <AddServiceCard 
                 show={showAddServiceModal} 
                 setShow={setShowAddServiceModal} 
@@ -392,7 +394,7 @@ const VendorMyServices: React.FC = () => {
 
             {
                 (listData !== undefined) && listData.map((service, index) => <div 
-                className={`col-12 col-md-4 m-0 mt -2 p-0 ${((index + 1) % 3 === 2) ? "pe-md-0 ps-md-2" : "px-2"}`}>
+                className={`col-12 col-md-4 m-0 p-0 pt-3 ${((index) % 3 === 1) ? "pe-md-0 ps-md-2" : "px-md-2"}`}>
                     <ServiceItem 
                     serviceName={service.serviceName} 
                     serviceDuration={service.serviceDuration} 
