@@ -34,9 +34,8 @@ export default function SideBar({ toggleSidebar }: { toggleSidebar: () => void }
 
             {/* Sidebar Items */}
             <div className="w-100 d-flex flex-column">
-                <SideBarItem name="Home" iconUrl="/assets/images/home.svg" contentUrl="/farmer/home" />
-                <SideBarItem name="My Programs" iconUrl="/assets/images/Services.svg" contentUrl="/patners/programs" />
-                <SideBarItem name="My Products" iconUrl="/assets/images/group.svg" contentUrl="/farmer/products" />
+                <SideBarItem name="Home" iconUrl="/assets/images/home.svg" contentUrl="/patners/home" />
+                <SideBarItem name="My Programs" iconUrl="/assets/images/Services.svg" contentUrl="/patners/programs" />         
                 <SideBarItem name="Market Place" iconUrl="/assets/images/marketplace.svg" contentUrl="/farmer/market-place" />
                 <SideBarItem name="Banks" iconUrl="/assets/images/bank.svg" contentUrl="/farmer/banks" />
                 <SideBarItem name="Insurance" iconUrl="/assets/images/bank.svg" contentUrl="/farmer/insurance" />
