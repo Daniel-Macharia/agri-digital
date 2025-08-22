@@ -8,7 +8,7 @@ interface ProductDetailsPageProps {
   products?: Product[];
 }
 
-// Mock product data for demonstration
+// Mock product data 
 const mockProducts: Product[] = [
   { id: 1, name: 'Bulls', seller: 'Peter Bloom', price: 80000, unit: 'per Bull', rating: 4, image: 'https://images.unsplash.com/photo-1516640000-9951e17c051d?w=600&auto=format&fit=crop', category: 'livestock' },
   { id: 2, name: 'Planting Laborer', seller: 'Peter Bloom', price: 250, unit: 'per hr', rating: 4, image: 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop', category: 'services' },
@@ -138,24 +138,6 @@ const ProductDetailsPage: React.FC<ProductDetailsPageProps> = ({ products = mock
                     e.currentTarget.src = 'https://via.placeholder.com/600x300?text=No+Image';
                   }}
                 />
-                
-                {/* Action Buttons Overlay 
-                <div className="position-absolute top-0 end-0 m-3 d-flex flex-column gap-2">
-                  <Button 
-                    variant="light" 
-                    className="rounded-circle d-flex align-items-center justify-content-center"
-                    style={{ width: '40px', height: '40px' }}
-                  >
-                    <FiShoppingCart size={18} />
-                  </Button>
-                  <Button 
-                    variant="light" 
-                    className="rounded-circle d-flex align-items-center justify-content-center"
-                    style={{ width: '40px', height: '40px' }}
-                  >
-                    <FiShare2 size={18} />
-                  </Button>
-                </div>*/}
               </div>
 
               <Card.Body className="p-4">
