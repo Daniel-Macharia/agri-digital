@@ -29,7 +29,6 @@ import {
   extractErrorMessage,
   parseFormDatav3,
 } from "../../../../../lib/utils/Helpers";
-import { JOURNEY_ROUTES } from "../../journey-routes";
 import ExpenseErrorMessageArray from "../common/ExpenseErrorMessageArray";
 import { CROP_ROUTES } from "../crop-routes";
 const apiClient = new ApiClient();
@@ -106,7 +105,7 @@ const ProjectAssessment: React.FC = () => {
         setCropJourneySummary(cropJourneySummary);
 
         navigate(
-          `..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_SOIL_TESTING}`.replace(
+          `${CROP_ROUTES.FULL.CROP_SOIL_TESTING_FULL}`.replace(
             ":transactionId",
             cropJourneySummary.transactionId
           )

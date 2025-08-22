@@ -11,7 +11,6 @@ import {
 import { TOASTIFY_AUTO_CLOSE_TIMEOUT } from "../../../../../lib/model/Model";
 import { API_ROUTES } from "../../../../../lib/Routes";
 import { extractErrorMessage } from "../../../../../lib/utils/Helpers";
-import { JOURNEY_ROUTES } from "../../journey-routes";
 import { CROP_ROUTES } from "../crop-routes";
 const apiClient = new ApiClient();
 
@@ -38,7 +37,7 @@ const SelectFarmingEnvironment: React.FC = () => {
         setCropJourneySummary(cropJourneySummaryResponse);
 
         navigate(
-          `..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_PLANTING}`.replace(
+          `${CROP_ROUTES.FULL.CROP_PLANTING_FULL}`.replace(
             ":transactionId",
             cropJourneySummary.transactionId
           )

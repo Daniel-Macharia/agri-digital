@@ -22,6 +22,9 @@ const CropsTopBarItem: React.FC<CropsTopBarItemProps> = ({iconUrl, itemName, pag
     <div
     className="nav-link col-12 p-1"
     onClick={handleClickItem} 
+    style={{
+        cursor: "pointer"
+    }}
     >
         <div className="col m-0 justify-content-center" 
         >

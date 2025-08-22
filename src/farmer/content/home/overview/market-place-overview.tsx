@@ -1,5 +1,5 @@
 import React from "react";
-import { HomeMarketplaceItemProps } from "../home-model";
+import { HomeMarketplaceItemProps, HomeOverviewNavigation } from "../home-model";
 import OverviewHeader from "./overview-header";
 
 
@@ -56,7 +56,7 @@ const HomeMarketProductItem: React.FC<HomeMarketplaceItemProps> = (data: HomeMar
     </>);
 };
 
-const MarketPlaceOverview: React.FC = () => {
+const MarketPlaceOverview: React.FC<HomeOverviewNavigation> = (overviewNavigation: HomeOverviewNavigation) => {
     const myProducts: HomeMarketplaceItemProps[] = [
         {productName: "Organic Tomatoes", 
             productSeller: "Agri Farmers", 
@@ -79,7 +79,7 @@ const MarketPlaceOverview: React.FC = () => {
 
     return (<>
     <div className="col-12">
-        <OverviewHeader overviewTitle="Market Place" viewMoreUrl="/farmer/market-place" />
+        <OverviewHeader overviewTitle="Market Place" viewMoreUrl={overviewNavigation.viewMoreUrl} backUrl={overviewNavigation.backUrl} />
 
         <div className="col-12">
             <div className="row">

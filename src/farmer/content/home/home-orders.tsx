@@ -1,8 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { HomeOrderItemProps } from "./home-model";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { FARMER_HOME_ROUTES } from "./home-routes";
 
 
 const HomeOrderItem: React.FC<HomeOrderItemProps> = (data: HomeOrderItemProps) => {
@@ -87,9 +86,10 @@ const HomeOrderItem: React.FC<HomeOrderItemProps> = (data: HomeOrderItemProps) =
 };
 
 
-const HomeOrderss: React.FC = () => {
+const HomeOrders: React.FC = () => {
 
     const navigate = useNavigate();
+    const backUrl: string = useLocation().state;
 
     const pendingOrders: HomeOrderItemProps[] = [];
 
@@ -124,7 +124,7 @@ const HomeOrderss: React.FC = () => {
     }
 
     const handleGoBackHome = () => {
-        navigate(`${FARMER_HOME_ROUTES.HOME_FULL}`);
+        navigate(backUrl);
     };
 
     /* ------------------------- set effects and states for pending orders pagination ------------------------------- */
@@ -489,4 +489,4 @@ const HomeOrderss: React.FC = () => {
     </>)
 };
 
-export default HomeOrderss;
+export default HomeOrders;

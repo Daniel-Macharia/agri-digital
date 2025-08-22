@@ -95,27 +95,32 @@ const PackagingForm: React.FC<Props> = ({
       <Form>
         <Row>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Packaging Cost</label>
+            <div className="form-group ">
+              <label className="m-0 p-0 body-regular primary-text">
+                Packaging Cost
+              </label>
               <input
                 {...formik.getFieldProps("packagingCost")}
-                className="form-control bg-transparent"
+                className="form-control body-regular m-0 bg-transparent"
                 name="packagingCost"
                 autoComplete="off"
                 type="number"
                 step="1"
                 pattern="\d*"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0 ">
                 <ErrorMessage name="packagingCost" />
               </div>
             </div>
           </Col>
           <Col md={12}>
             <div className="form-group mt-3">
-              <label className="mb-1">Packaging Method</label>
+              <label className="m-0 body-regular primary-text">
+                Packaging Method
+              </label>
               <Select
                 name="packagingMethod"
+                className="m-0 body-regular"
                 options={packagingDropdown}
                 value={formik.values.packagingMethod}
                 onChange={(selected) =>
@@ -124,17 +129,17 @@ const PackagingForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("packagingMethod", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="packagingMethod" />
               </div>
             </div>
           </Col>
         </Row>
         <Row>
-          <div className="d-flex justify-content-start mt-5">
+          <div className="d-flex justify-content-start mt-3">
             {!formik.isSubmitting && (
               <button
-                className="btn btn-sm btn-light-custom me-3 mt-5  mt-5"
+                className="btn btn-sm btn-light-custom me-3 mt-5 crops-other-button"
                 type="button"
                 onClick={() => onCancel()}
               >
@@ -142,7 +147,7 @@ const PackagingForm: React.FC<Props> = ({
               </button>
             )}
             <button
-              className="btn btn-sm btn-warning-custom ps-pe-42 mt-5"
+              className="btn btn-sm btn-warning-custom ps-pe-42 mt-5 crops-accept-button"
               type="submit"
               disabled={formik.isSubmitting}
             >

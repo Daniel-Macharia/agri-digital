@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CropsNotification from "../../journey/crops/crops-notification/crops-notification";
 import { GeneralNotificationProps, OrdertNotificationItemProps, SponsorshipNotificationItemProps } from "./home-notifications-models";
 import SponsorshipNotificationItem from "./sponsorship-notification";
@@ -6,11 +6,11 @@ import OrderNotificationItem from "./order-notification";
 import GeneralNotificationItem from "./general-notification";
 import { useEffect, useState } from "react";
 import { HomeNotificationType } from "./home-enums";
-import { FARMER_HOME_ROUTES } from "../home-routes";
 
 
 const HomeNotifications: React.FC = () => {
     const navigate = useNavigate();
+    const backUrl = useLocation().state;
 
     type NotificationItem = SponsorshipNotificationItemProps | OrdertNotificationItemProps | GeneralNotificationProps;
 
@@ -49,7 +49,7 @@ const HomeNotifications: React.FC = () => {
     }
 
     const handleGoBackHome = () => {
-        navigate(`${FARMER_HOME_ROUTES.HOME_FULL}`);
+        navigate(backUrl);
     };
 
 

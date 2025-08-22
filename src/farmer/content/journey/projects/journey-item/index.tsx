@@ -39,6 +39,7 @@ const JourneyItem: React.FC<ProjectProps> = (journeyItemData: ProjectProps) =>{
     };
 
     const handleShowMoreInfo = () => {
+        console.log(journeyItemData);
         navigate("/farmer/projects/info", { state: journeyItemData } );
     };
 

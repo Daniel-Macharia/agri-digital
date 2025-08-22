@@ -1,3 +1,4 @@
+import { VENDOR_HOME_ROUTES } from "../content/home/vendor-home-routes";
 import VendorSideBarItem from "./vendor-side-bar-item";
 
 export default function VendorSideBar({ toggleSidebar }: { toggleSidebar: () => void }) {
@@ -34,23 +35,25 @@ export default function VendorSideBar({ toggleSidebar }: { toggleSidebar: () => 
 
             {/* Sidebar Items */}
             <div className="w-100 d-flex flex-column">
-                <VendorSideBarItem name="Home" iconUrl="/assets/images/home.svg" contentUrl="/vendor/home" />
-                <VendorSideBarItem name="My Products" iconUrl="/assets/images/group.svg" contentUrl="/vendor/my-products" />
-                <VendorSideBarItem name="My Services" iconUrl="/assets/images/journey.svg" contentUrl="/vendor/my-services" />
-                <VendorSideBarItem name="Market Place" iconUrl="/assets/images/marketplace.svg" contentUrl="/vendor/market-place" />
-                <VendorSideBarItem name="Banks" iconUrl="/assets/images/bank.svg" contentUrl="/vendor/banks" />
-                <VendorSideBarItem name="Insurance" iconUrl="/assets/images/bank.svg" contentUrl="/vendor/insurance" />
-                <VendorSideBarItem name="Sponsors" iconUrl="/assets/images/success.svg" contentUrl="/vendor/sponsors" />
-                <VendorSideBarItem name="Wallets" iconUrl="/assets/images/wallet.svg" contentUrl="/vendor/wallet" />
-                <VendorSideBarItem name="Packages" iconUrl="/assets/images/package.svg" contentUrl="/vendor/package" />
-                <VendorSideBarItem name="Quality Score" iconUrl="/assets/images/quality_score.svg" contentUrl="/vendor/quality-score" />
-                <VendorSideBarItem name="Weather" iconUrl="/assets/images/sunny.svg" contentUrl="/vendor/weather" />
-                <VendorSideBarItem name="Training & Resources" iconUrl="/assets/images/articles.svg" contentUrl="/vendor/resources" />
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Home" iconUrl="/assets/images/home.svg" contentUrl="/vendor/home" />
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="My Products" iconUrl="/assets/images/group.svg" contentUrl="/vendor/my-products" />
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="My Services" iconUrl="/assets/images/journey.svg" contentUrl="/vendor/my-services" />
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Market Place" iconUrl="/assets/images/marketplace.svg" contentUrl="/vendor/market-place" />
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Banks" iconUrl="/assets/images/bank.svg" contentUrl="/vendor/banks" />
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Insurance" iconUrl="/assets/images/bank.svg" contentUrl="/vendor/insurance" />
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Sponsors" iconUrl="/assets/images/success.svg" contentUrl="/vendor/sponsors" />
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Wallets" iconUrl="/assets/images/wallet.svg" contentUrl="/vendor/wallets" />
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Packages" iconUrl="/assets/images/package.svg" contentUrl="/vendor/packages" />
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Quality Score" iconUrl="/assets/images/quality_score.svg" contentUrl="/vendor/quality-score" />
+
+                {/* <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Weather" iconUrl="/assets/images/sunny.svg" contentUrl="/vendor/weather" /> */}
+
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Training & Resources" iconUrl="/assets/images/articles.svg" contentUrl="/vendor/resources" />
                 
-                <VendorSideBarItem name="Manage Users" iconUrl="/assets/images/vendor/user.svg" contentUrl="/vendor/manage-users" />
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Manage Users" iconUrl="/assets/images/vendor/user.svg" contentUrl="/vendor/manage-users" />
                 
-                <VendorSideBarItem name="Settings" iconUrl="/assets/images/settings.svg" contentUrl="/vendor/settings" />
-                <VendorSideBarItem name="Invite a Friend" iconUrl="/assets/images/invite.svg" contentUrl="/vendor/invite" />
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Settings" iconUrl="/assets/images/settings.svg" contentUrl="/vendor/settings" />
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Invite a Friend" iconUrl="/assets/images/invite.svg" contentUrl="/vendor/invite" />
             </div>
 
             {/* Assistance Section */}

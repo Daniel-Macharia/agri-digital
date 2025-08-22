@@ -38,6 +38,7 @@ import {
   extractErrorMessage,
   parseFormDatav3,
 } from "../../../../../lib/utils/Helpers";
+import { CROP_ROUTES } from "../crop-routes";
 const apiClient = new ApiClient();
 
 interface Props {
@@ -170,7 +171,7 @@ const YieldForm: React.FC<Props> = ({
 
   const handleContinue = useCallback(() => {
     console.log("continuing");
-    navigate("/farmer/projects/crops/post-harvesting/" + transactionId);
+    navigate(`${CROP_ROUTES.FULL.CROP_POST_HARVESTING_FULL}/${transactionId}`);
   }, [transactionId]);
 
   useEffect(() => {
@@ -230,7 +231,7 @@ const YieldForm: React.FC<Props> = ({
             <Row>
               <Col md={6}>
                 <Field
-                  className="form-control body-regular mb-0"
+                  className="form-control body-regular m-0"
                   name="quantity"
                   type="text"
                   placeholder="80Kg"
@@ -242,6 +243,7 @@ const YieldForm: React.FC<Props> = ({
               <Col md={6}>
                 <Select
                   name="quantityUnit"
+                  className="body-regular m-0"
                   options={measurementUnitDropdown}
                   value={formik.values.quantityUnit}
                   onChange={(selected) =>
@@ -250,7 +252,7 @@ const YieldForm: React.FC<Props> = ({
                   onBlur={() => formik.setFieldTouched("quantityUnit", true)}
                   styles={customSelectStyles}
                 />
-                <div className="fv-plugins-message-container text-danger">
+                <div className="fv-plugins-message-container text-danger m-0">
                   <ErrorMessage name="quantityUnit" />
                 </div>
               </Col>
@@ -262,7 +264,7 @@ const YieldForm: React.FC<Props> = ({
           <div className="col-12 col-md-2">
             <label
               htmlFor="gradeQuality"
-              className="crops-start-aligned-text col-12 m-0 body-regular primary-text"
+              className="text-start m-0 body-regular primary-text"
             >
               Quality Grade
             </label>
@@ -271,6 +273,7 @@ const YieldForm: React.FC<Props> = ({
           <div className="col-12 col-md-10">
             <Select
               name="gradeQuality"
+              className="body-regular m-0"
               options={cropGradeDropdown}
               value={formik.values.gradeQuality}
               onChange={(selected) =>
@@ -291,7 +294,7 @@ const YieldForm: React.FC<Props> = ({
               <div className="col-12 col-md-4">
                 <label
                   htmlFor="harvestDate"
-                  className="crops-start-aligned-text col-12 m-0 body-regular primary-text"
+                  className="text-start col-12 m-0 body-regular primary-text"
                 >
                   Harvesting Date
                 </label>
@@ -310,7 +313,7 @@ const YieldForm: React.FC<Props> = ({
                   autoComplete="off"
                 />
 
-                <div className="col-sm-12 text-danger small crops-start-aligned-text">
+                <div className="col-sm-12 text-danger small text-start m-0">
                   <ErrorMessage name="harvestDate" />
                 </div>
               </div>
@@ -322,7 +325,7 @@ const YieldForm: React.FC<Props> = ({
               <div className="col-12 col-md-4">
                 <label
                   htmlFor="harvestingTime"
-                  className="crops-start-aligned-text col-12 body-regular primary-text"
+                  className="text-start col-12 body-regular primary-text m-0"
                 >
                   Harvesting Time
                 </label>
@@ -330,7 +333,7 @@ const YieldForm: React.FC<Props> = ({
 
               <div className="col-12 col-md-6">
                 <TimePicker
-                  className="form-control body-regular col-12 mb-0"
+                  className="form-control body-regular mb-0"
                   name="activityTime"
                   value={selectedTime}
                   onChange={(time) => {
@@ -349,7 +352,7 @@ const YieldForm: React.FC<Props> = ({
             <div className="col-12 col-md-2">
               <label
                 htmlFor="uploadCrop"
-                className="crops-start-aligned-text col-12 m-0  body-regular primary-text"
+                className="text-start col-12 m-0  body-regular primary-text"
               >
                 Upload Crop
               </label>
@@ -412,7 +415,7 @@ const YieldForm: React.FC<Props> = ({
           <div className="col-12 col-md-2">
             <label
               htmlFor="notes"
-              className="crops-start-aligned-text col-12 m-0 body-regular primary-text"
+              className="text-start col-12 m-0 body-regular primary-text"
             >
               Additional Notes
             </label>
@@ -420,15 +423,14 @@ const YieldForm: React.FC<Props> = ({
 
           <div className="col-12 col-md-10">
             <textarea
-              className="form-control body-regular mb-0"
+              className="form-control body-regular m-0"
               {...formik.getFieldProps("notes")}
               name="notes"
               placeholder="additional notes"
               style={{ height: "88px" }}
             />
             <div
-              className="text-danger small harvesting-input-label col-sm-12"
-              style={{ margin: "0px" }}
+              className="text-danger small harvesting-input-label col-sm-12 m-0"
             >
               <ErrorMessage name="notes" />
             </div>

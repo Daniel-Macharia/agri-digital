@@ -1,4 +1,4 @@
-import { HomeArticleItemProps } from "../home-model";
+import { HomeArticleItemProps, HomeOverviewNavigation } from "../home-model";
 import OverviewHeader from "./overview-header";
 
 
@@ -59,7 +59,7 @@ const HomeArticleItem: React.FC<HomeArticleItemProps> = (data: HomeArticleItemPr
     </>);
 };
 
-const HomeArticlesOverview: React.FC = () => {
+const HomeArticlesOverview: React.FC<HomeOverviewNavigation> = (overviewNavigation: HomeOverviewNavigation) => {
 
     const articles: HomeArticleItemProps[] = [
         {
@@ -80,7 +80,7 @@ const HomeArticlesOverview: React.FC = () => {
 
     return (<>
     <div className="col-12">
-        <OverviewHeader overviewTitle="Articles" viewMoreUrl="/farmer/resources" />
+        <OverviewHeader overviewTitle="Articles" viewMoreUrl={overviewNavigation.viewMoreUrl} backUrl={overviewNavigation.backUrl}/>
 
         <div className="col-12">
             {

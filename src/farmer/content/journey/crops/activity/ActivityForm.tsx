@@ -293,19 +293,17 @@ const ActivityForm: React.FC<Props> = ({
                   }}
                 />
 
-                <img src="/assets/images/upload_photo.svg" className="col-4" />
                 {formik.values.file && (
                   <Fragment>
                     <br />
                     <img
-                      className="img-fluid img-thumbnail mb-5"
+                      className="img-fluid img-thumbnail mb-5 w-50"
                       src={URL.createObjectURL(formik.values.file)}
                       alt="Thumbnail preview"
-                      width={128}
-                      height={128}
                     />
                   </Fragment>
                 )}
+                <img src="/assets/images/upload_photo.svg" style={{width: "24px"}} className="col-4" />
                 <p>
                   Upload Photo of the Product
                   <br />

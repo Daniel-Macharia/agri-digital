@@ -1,0 +1,20 @@
+
+
+.vendor-my-service-item-container{
+    border-radius: 20px;
+}
+
+.vendor-my-services-icon{
+    width: 16px;
+    height: 16px;
+}
+
+.vendor-my-services-larger-icon{
+    width: 20px;
+    height: 20px;
+}
+
+.vendor-my-services-badge{
+    background-color: var(--Secondary, #FF9800);
+    color: var(--cards-form-bg, #FFF);
+}

@@ -118,10 +118,12 @@ const SortingAndGradingForm: React.FC<Props> = ({
       <Form>
         <Row>
           <Col md={12}>
-            <label>HarvestDate</label>
+            <label className="m-0 p-0 body-regular primary-text">
+              HarvestDate
+            </label>
             <br />
             <DatePicker
-              className="form-control body-regular mb-0"
+              className="form-control body-regular m-0"
               name="harvestDate"
               placeholderText="Date"
               selected={formik.getFieldProps("harvestDate").value}
@@ -132,14 +134,17 @@ const SortingAndGradingForm: React.FC<Props> = ({
               autoComplete="off"
             />
             <br />
-            <div className="fv-plugins-message-container text-danger">
+            <div className="fv-plugins-message-container text-danger small m-0">
               <ErrorMessage name="harvestDate" />
             </div>
           </Col>
-          <Col md={12}>
+          <Col md={12} >
             <div className="form-group mt-3">
-              <label className="mb-1">Grade</label>
+              <label className="m-0 p-0 body-regular primary-text">
+                Grade
+              </label>
               <Select
+              className="body-regular m-0"
                 name="grade"
                 options={cropGradeQualityDropdown}
                 value={formik.values.grade}
@@ -147,33 +152,38 @@ const SortingAndGradingForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("grade", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="grade" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Quantity</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Quantity
+              </label>
               <input
                 {...formik.getFieldProps("quantity")}
-                className="form-control bg-transparent"
+                className="form-control body-regular m-0 bg-transparent"
                 name="quantity"
                 autoComplete="off"
                 type="number"
                 step="1"
                 pattern="\d*"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="quantity" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Quantity Unit</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Quantity Unit
+              </label>
               <Select
                 name="quantityUnit"
+                className="m-0 body-regular"
                 options={measurementUnitDropdown}
                 value={formik.values.quantityUnit}
                 onChange={(selected) =>
@@ -182,15 +192,15 @@ const SortingAndGradingForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("quantityUnit", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="quantityUnit" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
+            <div className="form-group mt-3">
               <textarea
-                className="form-control body-regular col-12"
+                className="form-control body-regular col-12 m-0"
                 {...formik.getFieldProps("notes")}
                 name="notes"
                 style={{ height: "88px" }}
@@ -210,7 +220,7 @@ const SortingAndGradingForm: React.FC<Props> = ({
           <div className="d-flex justify-content-start mt-5">
             {!formik.isSubmitting && (
               <button
-                className="btn btn-sm btn-light-custom me-3 mt-5  mt-5"
+                className="btn btn-sm btn-light-custom crops-other-button me-3 mt-5  mt-5"
                 type="button"
                 onClick={() => onCancel()}
               >
@@ -218,7 +228,7 @@ const SortingAndGradingForm: React.FC<Props> = ({
               </button>
             )}
             <button
-              className="btn btn-sm btn-warning-custom ps-pe-42 mt-5"
+              className="btn btn-sm btn-warning-custom crops-accept-button ps-pe-42 mt-5"
               type="submit"
               disabled={formik.isSubmitting}
             >

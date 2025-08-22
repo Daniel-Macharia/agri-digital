@@ -1,5 +1,6 @@
 import { NavigateFunction } from "react-router-dom"
-import { VendorOrderStatus } from "./vendor-home-enums"
+import { ProductQuality, VendorOrderStatus } from "./vendor-home-enums"
+import React from "react"
 
 
 export interface VendorHomeSummaryItemProps{
@@ -7,6 +8,7 @@ export interface VendorHomeSummaryItemProps{
     itemCount: number,
     itemDesc: string,
     detailsUrl: string,
+    backUrl: string,
     navigate: NavigateFunction
 };
 
@@ -31,7 +33,9 @@ export interface VendorStockItemProps{
     itemQuantity: number,
     itemBuyingPrice:  number,
     itemSellingPrice: number,
-    itemExpiryDate: Date
+    itemExpiryDate: Date,
+    manufacturingDate: Date,
+    quality: ProductQuality
 };
 
 
@@ -50,4 +54,30 @@ export interface VendorKeyValuePair{
 export interface VendorOrderStatusViewProps{
     orderStatus: VendorOrderStatus,
     dateChanged: Date,
+};
+
+export interface VendorCalendarEvent {
+  title: string,
+  start: Date,
+  end: Date,
+};
+
+export interface VendorHomeOrderItemProps{
+    buyerName: string,
+    phoneNumber: string,
+    productName: string,
+    time: string,
+    amount: number,
+    location: string,
+    orderDate: Date
+};
+
+export interface AddCalendarEventModalProps{
+    eventDate: Date
+    show: boolean,
+    setShow: React.Dispatch<React.SetStateAction<boolean>>,
+    events: VendorCalendarEvent[],
+    setEvents: React.Dispatch<React.SetStateAction<VendorCalendarEvent[]>>,
+    orders: VendorHomeOrderItemProps[],
+    setOrders: React.Dispatch<React.SetStateAction<VendorHomeOrderItemProps[]>>
 }

@@ -103,10 +103,13 @@ const CropValueAdditionForm: React.FC<Props> = ({
       <Form>
         <Row>
           <Col md={12}>
-            <div className="form-group mt-3">
-              <label className="mb-1">Processing Method</label>
+            <div className="form-group ">
+              <label className="m-0 p-0 body-regular primary-text">
+                Processing Method
+              </label>
               <Select
                 name="processingMethod"
+                className="body-regular m-0"
                 options={processingMethodDropdown}
                 value={formik.values.processingMethod}
                 onChange={(selected) =>
@@ -115,76 +118,80 @@ const CropValueAdditionForm: React.FC<Props> = ({
                 onBlur={() => formik.setFieldTouched("processingMethod", true)}
                 styles={customSelectStyles}
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="processingMethod" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Processing Cost</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Processing Cost
+              </label>
               <input
                 {...formik.getFieldProps("processingCost")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="processingCost"
                 autoComplete="off"
                 type="number"
                 step="1"
                 pattern="\d*"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="processingCost" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Market Price</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Market Price
+              </label>
               <input
                 {...formik.getFieldProps("marketPrice")}
-                className="form-control bg-transparent"
+                className="form-control bg-transparent body-regular m-0"
                 name="marketPrice"
                 autoComplete="off"
                 type="number"
                 step="1"
                 pattern="\d*"
               />
-              <div className="fv-plugins-message-container text-danger">
+              <div className="fv-plugins-message-container text-danger small m-0">
                 <ErrorMessage name="marketPrice" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
-              <label>Final Product</label>
+            <div className="form-group mt-3">
+              <label className="m-0 p-0 body-regular primary-text">
+                Final Product
+              </label>
               <textarea
-                className="form-control body-regular col-12"
+                className="form-control body-regular col-12 m-0"
                 {...formik.getFieldProps("finalProduct")}
                 name="finalProduct"
                 style={{ height: "88px" }}
                 autoComplete="off"
               />
               <div
-                className="col-12 text-danger small m-0"
-                style={{ textAlign: "start" }}
+                className="col-12 text-danger small m-0 text-start"
               >
                 <ErrorMessage name="finalProduct" />
               </div>
             </div>
           </Col>
           <Col md={12}>
-            <div className="form-group mt-5">
+            <div className="form-group mt-3">
               <label>Profitability Analysis</label>
               <textarea
-                className="form-control body-regular col-12"
+                className="form-control body-regular m-0"
                 {...formik.getFieldProps("profitabilityAnalysis")}
                 name="profitabilityAnalysis"
                 style={{ height: "88px" }}
                 autoComplete="off"
               />
               <div
-                className="col-12 text-danger small m-0"
-                style={{ textAlign: "start" }}
+                className="col-12 text-danger small m-0 text-start"
               >
                 <ErrorMessage name="profitabilityAnalysis" />
               </div>
@@ -192,10 +199,10 @@ const CropValueAdditionForm: React.FC<Props> = ({
           </Col>
         </Row>
         <Row>
-          <div className="d-flex justify-content-start mt-5">
+          <div className="d-flex justify-content-start mt-3">
             {!formik.isSubmitting && (
               <button
-                className="btn btn-sm btn-light-custom me-3 mt-5  mt-5"
+                className="btn btn-sm btn-light-custom me-3 mt-5 crops-other-button"
                 type="button"
                 onClick={() => onCancel()}
               >
@@ -203,7 +210,7 @@ const CropValueAdditionForm: React.FC<Props> = ({
               </button>
             )}
             <button
-              className="btn btn-sm btn-warning-custom ps-pe-42 mt-5"
+              className="btn btn-sm btn-warning-custom ps-pe-42 mt-5 crops-accept-button"
               type="submit"
               disabled={formik.isSubmitting}
             >

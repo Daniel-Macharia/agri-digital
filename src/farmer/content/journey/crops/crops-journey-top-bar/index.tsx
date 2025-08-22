@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { JOURNEY_ROUTES } from "../../journey-routes";
 import { CROP_ROUTES } from "../crop-routes";
 import CropsTopBarItem from "./top-bar-item";
 import { useCropJourney } from "../../../../../lib/context/CropJourneyContext";
@@ -21,7 +20,7 @@ const CropsTopBar: React.FC = () => {
         iconUrl: "/assets/images/soil-testing.svg",
         itemName: "Soil Testing",
         pageUrl:
-          `..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_SOIL_TESTING}`.replace(
+          `${CROP_ROUTES.FULL.CROP_SOIL_TESTING_FULL}`.replace(
             ":transactionId",
             transactionId || ""
           ),
@@ -30,7 +29,7 @@ const CropsTopBar: React.FC = () => {
         iconUrl: "/assets/images/planting.svg",
         itemName: "Planting",
         pageUrl:
-          `..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_PLANTING}`.replace(
+          `${CROP_ROUTES.FULL.CROP_PLANTING_FULL}`.replace(
             ":transactionId",
             transactionId || ""
           ),
@@ -39,7 +38,7 @@ const CropsTopBar: React.FC = () => {
         iconUrl: "/assets/images/management.svg",
         itemName: "Management",
         pageUrl:
-          `..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_MANAGEMENT}`.replace(
+          `${CROP_ROUTES.FULL.CROP_MANAGEMENT_FULL}`.replace(
             ":transactionId",
             transactionId || ""
           ),
@@ -47,7 +46,7 @@ const CropsTopBar: React.FC = () => {
       {
         iconUrl: "/assets/images/harvest.svg",
         itemName: "Harvesting",
-        pageUrl: `..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_HARVEST}`.replace(
+        pageUrl: `${CROP_ROUTES.FULL.CROP_HARVEST_FULL}`.replace(
           ":transactionId",
           transactionId || ""
         ),
@@ -56,7 +55,7 @@ const CropsTopBar: React.FC = () => {
         iconUrl: "/assets/images/post-harvest.svg",
         itemName: "Post Harvesting",
         pageUrl:
-          `..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_POST_HARVESTING}`.replace(
+          `${CROP_ROUTES.FULL.CROP_POST_HARVESTING_FULL}`.replace(
             ":transactionId",
             transactionId || ""
           ),
@@ -64,7 +63,7 @@ const CropsTopBar: React.FC = () => {
       {
         iconUrl: "/assets/images/sale.svg",
         itemName: "Sales",
-        pageUrl: `..${JOURNEY_ROUTES.CROPS}${CROP_ROUTES.CROP_SALES}`.replace(
+        pageUrl: `${CROP_ROUTES.FULL.CROP_SALES_FULL}`.replace(
           ":transactionId",
           transactionId || ""
         ),

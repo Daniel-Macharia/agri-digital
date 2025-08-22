@@ -4,7 +4,6 @@ import { loadProjectReviews } from "../utils/load-project-data";
 import { PROJECTS_ROUTES } from "../projects/projects-routes";
 import ProjectReview from "./project-review";
 import { FaStar } from "react-icons/fa";
-import { FARMER_ROUTES } from "../../../farmer-routes";
 import { ReactNode } from "react";
 
 
@@ -35,7 +34,7 @@ const RatingAndReviews:React.FC = () => {
     const navigate = useNavigate();
 
     const handleViewMoreReviews = () => {
-        navigate(`..${FARMER_ROUTES.JOURNEY.replace("/*", "")}${PROJECTS_ROUTES.MORE_PROJECT_REVIEWS}`)
+        navigate(`${PROJECTS_ROUTES.FULL.MORE_PROJECT_REVIEWS_FULL}`)
     };
 
     return (<>

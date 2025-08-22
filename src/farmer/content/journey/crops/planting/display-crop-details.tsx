@@ -28,6 +28,7 @@ import {
 } from "../../../../../lib/utils/Helpers";
 import { storageDelete } from "../../../../utils/StorageUtils";
 import AddNewCropModal from "./add-new-crop-modal";
+import { CROP_ROUTES } from "../crop-routes";
 const apiClient = new ApiClient();
 
 const DisplayCropDetails: React.FC = () => {
@@ -52,7 +53,7 @@ const DisplayCropDetails: React.FC = () => {
     if (!cropJourneySummary) return;
 
     navigate(
-      "/farmer/projects/crops/management/" + cropJourneySummary.transactionId
+      `${CROP_ROUTES.FULL.CROP_MANAGEMENT_FULL}/${cropJourneySummary.transactionId}`
     );
     storageDelete("plantingActivity");
   }, [cropJourneySummary]);
