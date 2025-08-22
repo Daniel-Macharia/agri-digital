@@ -42,10 +42,12 @@ export default function VendorSideBar({ toggleSidebar }: { toggleSidebar: () => 
                 <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Banks" iconUrl="/assets/images/bank.svg" contentUrl="/vendor/banks" />
                 <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Insurance" iconUrl="/assets/images/bank.svg" contentUrl="/vendor/insurance" />
                 <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Sponsors" iconUrl="/assets/images/success.svg" contentUrl="/vendor/sponsors" />
-                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Wallets" iconUrl="/assets/images/wallet.svg" contentUrl="/vendor/wallet" />
-                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Packages" iconUrl="/assets/images/package.svg" contentUrl="/vendor/package" />
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Wallets" iconUrl="/assets/images/wallet.svg" contentUrl="/vendor/wallets" />
+                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Packages" iconUrl="/assets/images/package.svg" contentUrl="/vendor/packages" />
                 <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Quality Score" iconUrl="/assets/images/quality_score.svg" contentUrl="/vendor/quality-score" />
-                <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Weather" iconUrl="/assets/images/sunny.svg" contentUrl="/vendor/weather" />
+
+                {/* <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Weather" iconUrl="/assets/images/sunny.svg" contentUrl="/vendor/weather" /> */}
+
                 <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Training & Resources" iconUrl="/assets/images/articles.svg" contentUrl="/vendor/resources" />
                 
                 <VendorSideBarItem backUrl={VENDOR_HOME_ROUTES.FULL.HOME_FULL} name="Manage Users" iconUrl="/assets/images/vendor/user.svg" contentUrl="/vendor/manage-users" />

@@ -123,7 +123,7 @@ const VendorManageUsers: React.FC = () => {
         {
             users.push(
                 {
-                    name: `userikljklklllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll ${i + 1}`,
+                    name: `user ${i + 1}`,
                     role: (i % 2 === 0) ? UserRole.EMPLOYEE : UserRole.MANAGER,
                     joinedDate: new Date(),
                     status: (i % 3 === 0) ? UserStatus.ACTIVE : (i % 3 === 1) ? UserStatus.INACTIVE : UserStatus.DELETED,

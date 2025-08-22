@@ -13,6 +13,13 @@ import VendorHomeRouter from "./content/home/vendor-home-router";
 import QualityScore from "../farmer/content/quality-score";
 import VendorMarketplace from "./content/market-place/vendor-market-place";
 import VendorArticlesAndResources from "./content/articles-and-resources/vendor-articles-and-resources";
+import VendorInsurance from "./content/insurance/insurance";
+import VendorBanks from "./content/banks/banks";
+import VendorSponsors from "./content/sponsors/sponsors";
+import VendorSettings from "./content/settings/settings";
+import VendorWallets from "./content/wallets/wallets";
+import VendorPackages from "./content/packages/packages";
+import VendorInvite from "./content/invite/invite";
 
 
 const VendorRouter: React.FC = () => {    
@@ -66,6 +73,15 @@ const VendorRouter: React.FC = () => {
                                 <Route path={VENDOR_ROUTES.VENDOR_MANAGE_USERS} element={<VendorManageUsers />} />
 
                                 <Route path={VENDOR_ROUTES.VENDOR_RESOURCES} element={<VendorArticlesAndResources />} />
+
+                                <Route path={VENDOR_ROUTES.VENDOR_INSURANCE} element={<VendorInsurance />} />
+                                <Route path={VENDOR_ROUTES.VENDOR_BANKS} element={<VendorBanks />} />
+                                <Route path={VENDOR_ROUTES.VENDOR_SPONSORS} element={<VendorSponsors />} />
+
+                                <Route path={VENDOR_ROUTES.VENDOR_SETTINGS} element={<VendorSettings />} />
+                                <Route path={VENDOR_ROUTES.VENDOR_WALLETS} element={<VendorWallets />} />
+                                <Route path={VENDOR_ROUTES.VENDOR_PACKAGES} element={<VendorPackages />} />
+                                <Route path={VENDOR_ROUTES.VENDOR_INVITE} element={<VendorInvite />} />
                                 
                                 <Route path={VENDOR_ROUTES.VENDOR_OTHER} element={<NotFound />} />
                             </Routes>
