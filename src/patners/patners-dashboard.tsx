@@ -65,7 +65,7 @@ export default function PatnersDashboard() {
 
                     <div className="overflow-auto">
                     <Content> 
-                        <Routes>
+                        <Routes> 
                            
                             <Route path={PATNERS_ROUTES.HOME} element={<PatnersHome />} />                       
                             <Route path={PATNERS_ROUTES.PROGRAMS} element={<Programs />} />
