@@ -73,20 +73,22 @@ const VendorHomeStockSalesAndLevelDetails: React.FC = () => {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [currentStartIndex, setCurrentStartIndex] = useState<number>(0);
 
-    for( let i = 0; i < 45; i++ )
-    {
-        stockItems.push(
-            {
-            itemName: `Stock Item ${i + 1}`,
-            itemQuantity: 223,
-            itemBuyingPrice: 300,
-            itemSellingPrice: 400,
-            itemExpiryDate: new Date(),
-            manufacturingDate: new Date(),
-            quality: ProductQuality.GRADE_1
-            }
-        )
-    }
+    useEffect( () => {
+        for( let i = 0; i < 45; i++ )
+        {
+            stockItems.push(
+                {
+                itemName: `Stock Item ${i + 1}`,
+                itemQuantity: 223,
+                itemBuyingPrice: 300,
+                itemSellingPrice: 400,
+                itemExpiryDate: new Date(),
+                manufacturingDate: new Date(),
+                quality: ProductQuality.GRADE_1
+                }
+            )
+        }
+    }, []);
 
     let dataSize: number = stockItems.length;
     let pageSize: number = dataSize >= 10 ? 10 : dataSize;

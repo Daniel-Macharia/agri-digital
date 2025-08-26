@@ -119,18 +119,20 @@ const VendorManageUsers: React.FC = () => {
         const [selectedUserData, setSelectedUserData] = useState<AddUserProps|null>(null);
         const [currentMode, setCurrentMode] = useState<UserFormMode>(UserFormMode.ADD);
 
-        for( let i = 0; i < 25; i++ )
-        {
-            users.push(
-                {
-                    name: `user ${i + 1}`,
-                    role: (i % 2 === 0) ? UserRole.EMPLOYEE : UserRole.MANAGER,
-                    joinedDate: new Date(),
-                    status: (i % 3 === 0) ? UserStatus.ACTIVE : (i % 3 === 1) ? UserStatus.INACTIVE : UserStatus.DELETED,
-                    email: `email${i + 1}@shambabot.com`
-                }
-            )
-        }
+        useEffect(() => {
+            for( let i = 0; i < 25; i++ )
+            {
+                users.push(
+                    {
+                        name: `user ${i + 1}`,
+                        role: (i % 2 === 0) ? UserRole.EMPLOYEE : UserRole.MANAGER,
+                        joinedDate: new Date(),
+                        status: (i % 3 === 0) ? UserStatus.ACTIVE : (i % 3 === 1) ? UserStatus.INACTIVE : UserStatus.DELETED,
+                        email: `email${i + 1}@shambabot.com`
+                    }
+                )
+            }
+        }, []);
         
         let dataSize: number = users.length;
         let pageSize: number = dataSize >= 10 ? 10 : dataSize;

@@ -16,37 +16,39 @@ const HomeNotifications: React.FC = () => {
 
     const notifications: NotificationItem[] = [];
 
-    for( let i = 0; i < 25; i++ )
-    {
-        notifications.push({
-            username: `Millicent ${i + 1}`,
-            receivedAt: new Date(2025, 11, 24, 5, 28),
-            orderItemName: "organic tomatoes",
-            notificationDesc: "Looking for fresh organic tomatoes for a local restaurant. Need regular supply.",
-            orderBudget: 300,
-            orderUnitCount: 10,
-            orderUnitName: "Kg",
-            orderStatus: "rejected",
-            notificationType: HomeNotificationType.ORDER_NOTIFICATION,
-        });
+    useEffect( () => {
+        for( let i = 0; i < 25; i++ )
+        {
+            notifications.push({
+                username: `Millicent ${i + 1}`,
+                receivedAt: new Date(2025, 11, 24, 5, 28),
+                orderItemName: "organic tomatoes",
+                notificationDesc: "Looking for fresh organic tomatoes for a local restaurant. Need regular supply.",
+                orderBudget: 300,
+                orderUnitCount: 10,
+                orderUnitName: "Kg",
+                orderStatus: "rejected",
+                notificationType: HomeNotificationType.ORDER_NOTIFICATION,
+            });
 
-    notifications.push({
-        bankName: `AgriGrow Foundation ${i + 1}`,
-        notificationTitle: "Inrtervention Name",
-        notificationDesc: "Your sponsorship request has been accepted! We’re excited to support you.",
-        sponsorshipAmount: 25000,
-        receivedAt: new Date(2025, 11, 25, 4, 50),
-        sponsorshipStatus: "accepted",
-        notificationType: HomeNotificationType.SPONSORSHIP_NOTIFICATION,
-        sponsorshipType: "voucher"
-    });
+            notifications.push({
+                bankName: `AgriGrow Foundation ${i + 1}`,
+                notificationTitle: "Inrtervention Name",
+                notificationDesc: "Your sponsorship request has been accepted! We’re excited to support you.",
+                sponsorshipAmount: 25000,
+                receivedAt: new Date(2025, 11, 25, 4, 50),
+                sponsorshipStatus: "accepted",
+                notificationType: HomeNotificationType.SPONSORSHIP_NOTIFICATION,
+                sponsorshipType: "voucher"
+            });
 
-    notifications.push({
-        notificationDesc: `This is a new notification type ${i + 1}`,
-        receivedAt: new Date(2025, 11, 24, 6, 38),
-        notificationType: HomeNotificationType.GENERAL_NOTIFICATION
-    });
-    }
+            notifications.push({
+                notificationDesc: `This is a new notification type ${i + 1}`,
+                receivedAt: new Date(2025, 11, 24, 6, 38),
+                notificationType: HomeNotificationType.GENERAL_NOTIFICATION
+            });
+        }
+    }, []);
 
     const handleGoBackHome = () => {
         navigate(backUrl);

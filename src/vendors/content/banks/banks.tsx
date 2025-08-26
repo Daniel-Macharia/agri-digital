@@ -8,12 +8,13 @@ const VendorBanks: React.FC = () => {
     <div className="col-12">
         <BankPage 
         onViewMore={function (loanData?: LoanData): void {
-                throw new Error("Function not implemented.");
+                console.log("Function not implemented.", loanData);
             } } 
+
             activeTab={""} 
 
             onTabChange={function (tab: string): void {
-                throw new Error("Function not implemented.");
+                console.log("Function not implemented.", tab);
             } } />
     </div>
     </>);

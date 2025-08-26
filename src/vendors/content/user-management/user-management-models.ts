@@ -29,3 +29,8 @@ export interface AddUserProps{
     email: string,
     role: string
 };
+
+export interface UserManagementModalProps{
+    show: boolean,
+    setShow: React.Dispatch<React.SetStateAction<boolean>>
+}
