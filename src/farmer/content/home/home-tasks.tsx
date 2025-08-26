@@ -60,17 +60,19 @@ const HomeTasks: React.FC = () => {
         },
     ];
 
-    for( let i = 0; i < 22; i++ )
-    {
-        tasks.push({
-        taskDate: new Date( 2025, 8, 1, 4, 44), 
-        taskTitle: `Task ${i + 1}`, 
-        taskDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam architecto illum iusto excepturi? Animi pariatur quod at sequi officia ipsa aperiam totam tenetur id rerum!"
-    });
-    }
+    useEffect( () => {
+        for( let i = 0; i < 22; i++ )
+        {
+            tasks.push({
+            taskDate: new Date( 2025, 8, 1, 4, 44), 
+            taskTitle: `Task ${i + 1}`, 
+            taskDesc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam architecto illum iusto excepturi? Animi pariatur quod at sequi officia ipsa aperiam totam tenetur id rerum!"
+        });
+        }
+    }, []);
 
     const handleGoBackHome = () => {
-        navigate(`${FARMER_HOME_ROUTES.HOME_FULL}`);
+        navigate(`${FARMER_HOME_ROUTES.FULL.HOME_FULL}`);
     };
 
 
@@ -92,7 +94,7 @@ const HomeTasks: React.FC = () => {
 
     console.log(numberOfPages);
     const pages: number[] = [];
-
+    
     for( let count = 1; count <= numberOfPages; count++ )
     {
         pages.push(count);

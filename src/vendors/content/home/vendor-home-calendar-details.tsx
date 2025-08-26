@@ -16,7 +16,7 @@ import { CustomToolBar } from './vendor-home-calendar-overview';
 
 import styles from "./vendor-home-calendar-details.module.css";
 import TimePicker from 'react-time-picker';
-import { ModalProps } from '../user-management/user-management-models';
+import { UserManagementModalProps } from '../user-management/user-management-models';
 import { toast } from 'react-toastify';
 
 const locales = {
@@ -284,7 +284,7 @@ export const AddCalendarEventModal: React.FC<AddCalendarEventModalProps> = (moda
 
 interface ShowEventDetailsModalProps{
     data: VendorHomeOrderItemProps,
-    modalData: ModalProps
+    modalData: UserManagementModalProps
 }
 const ShowEventDetailsModal: React.FC<ShowEventDetailsModalProps> = (
     props: ShowEventDetailsModalProps
@@ -383,7 +383,7 @@ const VendorHomeDetailedCalendar: React.FC = () => {
         }
     );
 
-    const showEventDetailsModalProps: ModalProps = {
+    const showEventDetailsModalProps: UserManagementModalProps = {
         show: showEventDetails,
         setShow: setShowEventDetails
     };

@@ -93,35 +93,37 @@ const HomeOrders: React.FC = () => {
 
     const pendingOrders: HomeOrderItemProps[] = [];
 
-    for( let i = 0; i < 22; i++ )
-    {
-        pendingOrders.push(
-        {
-            customerName: ( i % 2 === 0) ? "Kiambu Wholesalers" : "New Traders",
-            itemName: ( i % 2 === 0 ) ? "Coffee Seeds" : "Milk Powder",
-            itemUnitCount: 150,
-            itemUnitName: "Kg",
-            orderStatus: "pending",
-            itemCost: 8000,
-            itemImageUrl: "/assets/images/home/order_image.svg"
-        }
-    );
-    }
-
     const completedOrders: HomeOrderItemProps[] = [];
 
-    for( let i = 0; i < 28; i++ )
-    {
-        completedOrders.push({
-            customerName: (i % 2 == 0) ? `Shop ${i + 1 }` : `Shop ${i + 1 }`,
-            itemName: (i % 2 == 0) ? "Milk" : "Butter",
-            itemUnitCount: 50,
-            itemUnitName: "Ltr",
-            orderStatus: "complete",
-            itemCost: 11960,
-            itemImageUrl: "/assets/images/home/order_image.svg"
-        });
-    }
+   useEffect(() => {
+        for( let i = 0; i < 22; i++ )
+        {
+            pendingOrders.push(
+            {
+                customerName: ( i % 2 === 0) ? "Kiambu Wholesalers" : "New Traders",
+                itemName: ( i % 2 === 0 ) ? "Coffee Seeds" : "Milk Powder",
+                itemUnitCount: 150,
+                itemUnitName: "Kg",
+                orderStatus: "pending",
+                itemCost: 8000,
+                itemImageUrl: "/assets/images/home/order_image.svg"
+            }
+        );
+        }
+
+        for( let i = 0; i < 28; i++ )
+        {
+            completedOrders.push({
+                customerName: (i % 2 == 0) ? `Shop ${i + 1 }` : `Shop ${i + 1 }`,
+                itemName: (i % 2 == 0) ? "Milk" : "Butter",
+                itemUnitCount: 50,
+                itemUnitName: "Ltr",
+                orderStatus: "complete",
+                itemCost: 11960,
+                itemImageUrl: "/assets/images/home/order_image.svg"
+            });
+        }
+   }, []);
 
     const handleGoBackHome = () => {
         navigate(backUrl);
